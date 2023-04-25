@@ -127,6 +127,18 @@
 
 <article class="first-entry"> 
   <header class="entry-header">
+    <h2>go语言记录
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>http参数传递 path路径参数 // 路径参数直接拼接 queryParam参数传递 func main() { uri := &#34;http://localhost:8080/test&#34; request, err := http.NewRequest(http.MethodGet, uri, nil) if err != nil { fmt.Println(&#34;构造请求报错!!&#34;) } // 设置header参数 request.Header.Add(&#34;Cookie&#34;, &#34;CookieStr&#34;) // 设置路径中的查询参数 queryParam := url.Values{} queryParam.Add(&#34;name&#34;, &#34;张三&#34;) queryParam.Add(&#34;age&#34;, &#34;12&#34;) // 将参数编码后添加到请求中 request.URL.RawQuery = queryParam.Encode() client := http.Client{} resp, err := client.Do(request) if err != nil { fmt.Println(&#34;请求接口报错!!&#34;) } defer resp.Body.Close() } header参数传递 func main() { uri := &#34;http://localhost:8080/test&#34; // 设置请求的方式，uri地址，body参数 request, err := http....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to go语言记录" href="http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Test
     </h2>
   </header>
