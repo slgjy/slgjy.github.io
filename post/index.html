@@ -137,7 +137,21 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>测试</p>
+    <p>hugo hugo是由go语言实现的静态网站生成器。
+hugo下载 下载地址
+https://github.com/gohugoio/hugo/releases
+下载后解压
+hugo常用命令 新建站点
+hugo new site myblog 启动
+hugo server -D 设置主题
+# 地址 https://github.com/gohugoio/hugo/releases 在生成站点的目录下的themes下克隆
+采用PaperMod主题
+使用指定主题启动
+#修改配置hugo的配置文件 #hugo部署站点(github仓库) baseURL = &#39;http://slgjy.github.io&#39; languageCode = &#39;en-us&#39; #博客名称 title = &#39;小石头博客&#39; #主题信息 theme = &#39;hugo-PaperMod&#39; hugo部署到github 新建github仓库
+仓库名称必须是xxx.github.io，xxx替换为自己的github名称
+将该地址设置到站点配置文件
+同步public的文件到仓库地址
+cd public git init git add . git commit -m &#39;init&#39; git remote add origin &lt;仓库地址&gt; git push -u origin master 测试一下</p>
   </div>
   <footer class="entry-footer"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Test" href="http://slgjy.github.io/post/test/"></a>
