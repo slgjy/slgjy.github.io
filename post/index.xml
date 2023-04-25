@@ -6,7 +6,27 @@
     <description>Recent content in Posts on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Apr 2023 17:15:51 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Apr 2023 16:31:59 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tools</title>
+      <link>http://slgjy.github.io/post/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Tue, 25 Apr 2023 16:31:59 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</guid>
+      <description>开发工具 jetbrains系列 Idea 1.常用配置 配置mavne
+修改为自己的mavne信息
+配置git
+配置代码模板
+添加自定义的模板分组
+设置模板
+忽略指定文件/目录
+修改背景图片
+2.常用插件 Alibaba Java Coding Guidelines 编码规范 CodeGlance 代码地图 mybatisx FindBugs 查找bug Mybatis Log Free SonarLint 代码质量检测 PyCharm GoLand VsCode 1.常用配置 设置代码模板
+引用地址
+https://blog.csdn.net/sinat_36359516/article/details/128042359
+2.常用插件 Vetur live server ESLint GitLens Vue Prettier background </description>
+    </item>
+    
     <item>
       <title>go语言记录</title>
       <link>http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</link>
@@ -17,7 +37,7 @@
     </item>
     
     <item>
-      <title>Test</title>
+      <title>Tools</title>
       <link>http://slgjy.github.io/post/test/</link>
       <pubDate>Mon, 24 Apr 2023 17:15:51 +0800</pubDate>
       
