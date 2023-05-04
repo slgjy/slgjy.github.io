@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>go语言记录 | 小石头博客</title>
+<title>go发送http请求传参 | 小石头博客</title>
 <meta name="keywords" content="go">
 <meta name="description" content="http参数传递 path路径参数 // 路径参数直接拼接 queryParam参数传递 func main() { uri := &#34;http://localhost:8080/test&#34; request, err := http.NewRequest(http.MethodGet, uri, nil) if err != nil { fmt.Println(&#34;构造请求报错!!&#34;) } // 设置header参数 request.Header.Add(&#34;Cookie&#34;, &#34;CookieStr&#34;) // 设置路径中的查询参数 queryParam := url.Values{} queryParam.Add(&#34;name&#34;, &#34;张三&#34;) queryParam.Add(&#34;age&#34;, &#34;12&#34;) // 将参数编码后添加到请求中 request.URL.RawQuery = queryParam.Encode() client := http.Client{} resp, err := client.Do(request) if err !">
 <meta name="author" content="">
@@ -56,7 +56,7 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="go语言记录" />
+</noscript><meta property="og:title" content="go发送http请求传参" />
 <meta property="og:description" content="http参数传递 path路径参数 // 路径参数直接拼接 queryParam参数传递 func main() { uri := &#34;http://localhost:8080/test&#34; request, err := http.NewRequest(http.MethodGet, uri, nil) if err != nil { fmt.Println(&#34;构造请求报错!!&#34;) } // 设置header参数 request.Header.Add(&#34;Cookie&#34;, &#34;CookieStr&#34;) // 设置路径中的查询参数 queryParam := url.Values{} queryParam.Add(&#34;name&#34;, &#34;张三&#34;) queryParam.Add(&#34;age&#34;, &#34;12&#34;) // 将参数编码后添加到请求中 request.URL.RawQuery = queryParam.Encode() client := http.Client{} resp, err := client.Do(request) if err !" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/" /><meta property="article:section" content="post" />
@@ -64,7 +64,7 @@
 <meta property="article:modified_time" content="2023-04-24T17:15:51+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="go语言记录"/>
+<meta name="twitter:title" content="go发送http请求传参"/>
 <meta name="twitter:description" content="http参数传递 path路径参数 // 路径参数直接拼接 queryParam参数传递 func main() { uri := &#34;http://localhost:8080/test&#34; request, err := http.NewRequest(http.MethodGet, uri, nil) if err != nil { fmt.Println(&#34;构造请求报错!!&#34;) } // 设置header参数 request.Header.Add(&#34;Cookie&#34;, &#34;CookieStr&#34;) // 设置路径中的查询参数 queryParam := url.Values{} queryParam.Add(&#34;name&#34;, &#34;张三&#34;) queryParam.Add(&#34;age&#34;, &#34;12&#34;) // 将参数编码后添加到请求中 request.URL.RawQuery = queryParam.Encode() client := http.Client{} resp, err := client.Do(request) if err !"/>
 
 
@@ -82,7 +82,7 @@
     {
       "@type": "ListItem",
       "position":  3 ,
-      "name": "go语言记录",
+      "name": "go发送http请求传参",
       "item": "http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"
     }
   ]
@@ -92,8 +92,8 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "go语言记录",
-  "name": "go语言记录",
+  "headline": "go发送http请求传参",
+  "name": "go发送http请求传参",
   "description": "http参数传递 path路径参数 // 路径参数直接拼接 queryParam参数传递 func main() { uri := \u0026#34;http://localhost:8080/test\u0026#34; request, err := http.NewRequest(http.MethodGet, uri, nil) if err != nil { fmt.Println(\u0026#34;构造请求报错!!\u0026#34;) } // 设置header参数 request.Header.Add(\u0026#34;Cookie\u0026#34;, \u0026#34;CookieStr\u0026#34;) // 设置路径中的查询参数 queryParam := url.Values{} queryParam.Add(\u0026#34;name\u0026#34;, \u0026#34;张三\u0026#34;) queryParam.Add(\u0026#34;age\u0026#34;, \u0026#34;12\u0026#34;) // 将参数编码后添加到请求中 request.URL.RawQuery = queryParam.Encode() client := http.Client{} resp, err := client.Do(request) if err !",
   "keywords": [
     "go"
@@ -178,7 +178,7 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      go语言记录
+      go发送http请求传参
     </h1>
     <div class="post-meta"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span>
 

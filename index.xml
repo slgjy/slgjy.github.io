@@ -50,7 +50,7 @@ background.customImages 添加图片文件可以是多张
     </item>
     
     <item>
-      <title>go语言记录</title>
+      <title>go发送http请求传参</title>
       <link>http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</link>
       <pubDate>Mon, 24 Apr 2023 17:15:51 +0800</pubDate>
       
