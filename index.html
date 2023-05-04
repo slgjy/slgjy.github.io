@@ -127,6 +127,24 @@
 
 <article class="first-entry"> 
   <header class="entry-header">
+    <h2>Go单元测试
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>go单元测试 go test工具 go test命令是一个执行测试代码的go程序，在包目录内，所有以*_test.go为后缀的源码文件，不会被go build编译到最终的可执行文件。
+示例代码 目录结构
+源码
+func checkName(name string) { if name != &#34;admin&#34; { panic(errors.New(&#34;用户名不正确！！&#34;)) } } package main import &#34;testing&#34; // 函数测试必须是Test开头接收*testing.T参数 func TestCheckName(t *testing.T) { nameStr := &#34;userName&#34; // 被测试的函数可以是小写开头 checkName(nameStr) } // 文档类型测试 func ExampleCheckName() { } // 基准测试(性能测试)以Benchmark开头接收*testing.B参数 func BenchmarkCheckName(t *testing.B) { } go test常用命令 执行单个*_test.go文件下的所有方法
+go test -v demo_test.go demo.go 执行单个*_test.go文件下的指定方法
+go test -v -test.run TestDemoMethod 测试覆盖率
+go test -cover // 将数据输出到指定文件 go test -cover -coverprofile=c....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-04 10:46:17 +0800 CST'>May 4, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Go单元测试" href="http://slgjy.github.io/post/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Tools
     </h2>
   </header>
@@ -187,14 +205,15 @@ hugo server -D 设置主题
 # 地址 https://github.com/gohugoio/hugo/releases 在生成站点的目录下的themes下克隆
 采用PaperMod主题
 使用指定主题启动
-#修改配置hugo的配置文件 #hugo部署站点(github仓库) baseURL = &#39;http://slgjy.github.io&#39; languageCode = &#39;en-us&#39; #博客名称 title = &#39;小石头博客&#39; #主题信息 theme = &#39;hugo-PaperMod&#39; hugo部署到github 新建github仓库
+#修改配置hugo的配置文件 #hugo部署站点(github仓库) baseURL = &#39;http://slgjy.github.io&#39; languageCode = &#39;en-us&#39; #博客名称 title = &#39;小石头博客&#39; #主题信息 theme = &#39;hugo-PaperMod&#39; 创建博客文档
+#其会在博客目录content 生成post/文档名 hugo new post/go单元测试.md hugo部署到github 新建github仓库
 仓库名称必须是xxx.github.io，xxx替换为自己的github名称
 将该地址设置到站点配置文件
 同步public的文件到仓库地址
 cd public git init git add . git commit -m &#39;init&#39; git remote add origin &lt;仓库地址&gt; git push -u origin master 测试一下</p>
   </div>
   <footer class="entry-footer"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Tools" href="http://slgjy.github.io/post/test/"></a>
+  <a class="entry-link" aria-label="post link to Tools" href="http://slgjy.github.io/post/hugo/"></a>
 </article>
     </main>
     

@@ -6,7 +6,22 @@
     <description>Recent content in Posts on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Apr 2023 16:31:59 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 May 2023 10:46:17 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go单元测试</title>
+      <link>http://slgjy.github.io/post/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Thu, 04 May 2023 10:46:17 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</guid>
+      <description>go单元测试 go test工具 go test命令是一个执行测试代码的go程序，在包目录内，所有以*_test.go为后缀的源码文件，不会被go build编译到最终的可执行文件。
+示例代码 目录结构
+源码
+func checkName(name string) { if name != &amp;#34;admin&amp;#34; { panic(errors.New(&amp;#34;用户名不正确！！&amp;#34;)) } } package main import &amp;#34;testing&amp;#34; // 函数测试必须是Test开头接收*testing.T参数 func TestCheckName(t *testing.T) { nameStr := &amp;#34;userName&amp;#34; // 被测试的函数可以是小写开头 checkName(nameStr) } // 文档类型测试 func ExampleCheckName() { } // 基准测试(性能测试)以Benchmark开头接收*testing.B参数 func BenchmarkCheckName(t *testing.B) { } go test常用命令 执行单个*_test.go文件下的所有方法
+go test -v demo_test.go demo.go 执行单个*_test.go文件下的指定方法
+go test -v -test.run TestDemoMethod 测试覆盖率
+go test -cover // 将数据输出到指定文件 go test -cover -coverprofile=c.</description>
+    </item>
+    
     <item>
       <title>Tools</title>
       <link>http://slgjy.github.io/post/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</link>
@@ -49,10 +64,10 @@ background.customImages 添加图片文件可以是多张
     
     <item>
       <title>Tools</title>
-      <link>http://slgjy.github.io/post/test/</link>
+      <link>http://slgjy.github.io/post/hugo/</link>
       <pubDate>Mon, 24 Apr 2023 17:15:51 +0800</pubDate>
       
-      <guid>http://slgjy.github.io/post/test/</guid>
+      <guid>http://slgjy.github.io/post/hugo/</guid>
       <description>hugo hugo是由go语言实现的静态网站生成器。
 hugo下载 下载地址
 https://github.com/gohugoio/hugo/releases
@@ -63,7 +78,8 @@ hugo server -D 设置主题
 # 地址 https://github.com/gohugoio/hugo/releases 在生成站点的目录下的themes下克隆
 采用PaperMod主题
 使用指定主题启动
-#修改配置hugo的配置文件 #hugo部署站点(github仓库) baseURL = &amp;#39;http://slgjy.github.io&amp;#39; languageCode = &amp;#39;en-us&amp;#39; #博客名称 title = &amp;#39;小石头博客&amp;#39; #主题信息 theme = &amp;#39;hugo-PaperMod&amp;#39; hugo部署到github 新建github仓库
+#修改配置hugo的配置文件 #hugo部署站点(github仓库) baseURL = &amp;#39;http://slgjy.github.io&amp;#39; languageCode = &amp;#39;en-us&amp;#39; #博客名称 title = &amp;#39;小石头博客&amp;#39; #主题信息 theme = &amp;#39;hugo-PaperMod&amp;#39; 创建博客文档
+#其会在博客目录content 生成post/文档名 hugo new post/go单元测试.md hugo部署到github 新建github仓库
 仓库名称必须是xxx.github.io，xxx替换为自己的github名称
 将该地址设置到站点配置文件
 同步public的文件到仓库地址
