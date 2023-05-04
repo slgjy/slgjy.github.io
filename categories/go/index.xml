@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>go on 小石头博客</title>
+    <link>http://slgjy.github.io/categories/go/</link>
+    <description>Recent content in go on 小石头博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 04 May 2023 10:46:17 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go单元测试</title>
+      <link>http://slgjy.github.io/post/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Thu, 04 May 2023 10:46:17 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</guid>
+      <description>go单元测试 go test工具 go test命令是一个执行测试代码的go程序，在包目录内，所有以*_test.go为后缀的源码文件，不会被go build编译到最终的可执行文件。
+示例代码 目录结构
+源码
+func checkName(name string) { if name != &amp;#34;admin&amp;#34; { panic(errors.New(&amp;#34;用户名不正确！！&amp;#34;)) } } package main import &amp;#34;testing&amp;#34; // 函数测试必须是Test开头接收*testing.T参数 func TestCheckName(t *testing.T) { nameStr := &amp;#34;userName&amp;#34; // 被测试的函数可以是小写开头 checkName(nameStr) } // 文档类型测试 func ExampleCheckName() { } // 基准测试(性能测试)以Benchmark开头接收*testing.B参数 func BenchmarkCheckName(t *testing.B) { } go test常用命令 执行单个*_test.</description>
+    </item>
+    
+    <item>
+      <title>go语言记录</title>
+      <link>http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</link>
+      <pubDate>Mon, 24 Apr 2023 17:15:51 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</guid>
+      <description>http参数传递 path路径参数 // 路径参数直接拼接 queryParam参数传递 func main() { uri := &amp;#34;http://localhost:8080/test&amp;#34; request, err := http.NewRequest(http.MethodGet, uri, nil) if err != nil { fmt.Println(&amp;#34;构造请求报错!!&amp;#34;) } // 设置header参数 request.Header.Add(&amp;#34;Cookie&amp;#34;, &amp;#34;CookieStr&amp;#34;) // 设置路径中的查询参数 queryParam := url.Values{} queryParam.Add(&amp;#34;name&amp;#34;, &amp;#34;张三&amp;#34;) queryParam.Add(&amp;#34;age&amp;#34;, &amp;#34;12&amp;#34;) // 将参数编码后添加到请求中 request.URL.RawQuery = queryParam.Encode() client := http.Client{} resp, err := client.Do(request) if err !</description>
+    </item>
+    
+  </channel>
+</rss>
