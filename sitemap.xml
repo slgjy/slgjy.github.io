@@ -2,8 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://slgjy.github.io/post/cloudnative/</loc>
+    <lastmod>2023-05-06T17:21:19+08:00</lastmod>
+  </url><url>
     <loc>http://slgjy.github.io/post/</loc>
-    <lastmod>2023-05-06T13:08:26+08:00</lastmod>
+    <lastmod>2023-05-06T17:21:19+08:00</lastmod>
+  </url><url>
+    <loc>http://slgjy.github.io/tags/</loc>
+    <lastmod>2023-05-06T17:21:19+08:00</lastmod>
+  </url><url>
+    <loc>http://slgjy.github.io/tags/tools/</loc>
+    <lastmod>2023-05-06T17:21:19+08:00</lastmod>
+  </url><url>
+    <loc>http://slgjy.github.io/</loc>
+    <lastmod>2023-05-06T17:21:19+08:00</lastmod>
   </url><url>
     <loc>http://slgjy.github.io/tags/springcloud/</loc>
     <lastmod>2023-05-06T13:08:26+08:00</lastmod>
@@ -11,16 +23,7 @@
     <loc>http://slgjy.github.io/post/springcloud/</loc>
     <lastmod>2023-05-06T13:08:26+08:00</lastmod>
   </url><url>
-    <loc>http://slgjy.github.io/tags/</loc>
-    <lastmod>2023-05-06T13:08:26+08:00</lastmod>
-  </url><url>
-    <loc>http://slgjy.github.io/</loc>
-    <lastmod>2023-05-06T13:08:26+08:00</lastmod>
-  </url><url>
     <loc>http://slgjy.github.io/post/nacos/</loc>
-    <lastmod>2023-05-06T11:08:52+08:00</lastmod>
-  </url><url>
-    <loc>http://slgjy.github.io/tags/tools/</loc>
     <lastmod>2023-05-06T11:08:52+08:00</lastmod>
   </url><url>
     <loc>http://slgjy.github.io/categories/</loc>
