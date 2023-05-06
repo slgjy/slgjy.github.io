@@ -137,6 +137,21 @@
 
 <article class="first-entry"> 
   <header class="entry-header">
+    <h2>SpringCloud
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>SpringCloud SpringBoot SpringCloud 实践记录 多环境配置 Spring2.4版本spring:profiles被弃用了
+使用---来分组配置
+修改成新的配置方式
+spring: config: activate: on-profile: prod server: port: 9000 spring: profiles: active: prod --- #开发环境 spring: application: name: hello-world config: activate: on-profile: dev cloud: nacos: discovery: # 服务注册地址 server-addr: ip:8848 config: # 配置中心地址 server-addr: ip:8848 # 配置文件格式 file-extension: yml # 命名空间 namespace: e09a1b28-1fe3-429c-83dd-69f8b030180f # 共享配置 shared-configs: - application-${spring....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-06 13:08:26 +0800 CST'>May 6, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to SpringCloud" href="http://slgjy.github.io/post/springcloud/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Nacos
     </h2>
   </header>
@@ -211,31 +226,12 @@ background.customImages 添加图片文件可以是多张
   <footer class="entry-footer"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span></footer>
   <a class="entry-link" aria-label="post link to go发送http请求传参" href="http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>hugo博客搭建
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>hugo hugo是由go语言实现的静态网站生成器。
-hugo下载 下载地址
-https://github.com/gohugoio/hugo/releases
-下载后解压
-hugo常用命令 新建站点
-hugo new site myblog 启动
-hugo server -D 设置主题
-# 地址 https://github.com/gohugoio/hugo/releases 在生成站点的目录下的themes下克隆
-采用PaperMod主题
-使用指定主题启动
-#修改配置hugo的配置文件 #hugo部署站点(github仓库) baseURL = &#39;http://slgjy.github.io&#39; languageCode = &#39;en-us&#39; #博客名称 title = &#39;小石头博客&#39; #主题信息 theme = &#39;hugo-PaperMod&#39; 创建博客文档
-#其会在博客目录content 生成post/文档名 hugo new post/go单元测试.md markdown图片引入问题
-在static目录下创建文件夹images（自定义，可以创建多个） 引入方式![]/images/xxx.jpg 修改配置文件
-baseURL: &#39;http://slgjy....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to hugo博客搭建" href="http://slgjy.github.io/post/hugo/"></a>
-</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="http://slgjy.github.io/page/2/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

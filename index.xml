@@ -6,7 +6,19 @@
     <description>Recent content on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 May 2023 11:08:52 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 May 2023 13:08:26 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SpringCloud</title>
+      <link>http://slgjy.github.io/post/springcloud/</link>
+      <pubDate>Sat, 06 May 2023 13:08:26 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/springcloud/</guid>
+      <description>SpringCloud SpringBoot SpringCloud 实践记录 多环境配置 Spring2.4版本spring:profiles被弃用了
+使用---来分组配置
+修改成新的配置方式
+spring: config: activate: on-profile: prod server: port: 9000 spring: profiles: active: prod --- #开发环境 spring: application: name: hello-world config: activate: on-profile: dev cloud: nacos: discovery: # 服务注册地址 server-addr: ip:8848 config: # 配置中心地址 server-addr: ip:8848 # 配置文件格式 file-extension: yml # 命名空间 namespace: e09a1b28-1fe3-429c-83dd-69f8b030180f # 共享配置 shared-configs: - application-${spring.</description>
+    </item>
+    
     <item>
       <title>Nacos</title>
       <link>http://slgjy.github.io/post/nacos/</link>
