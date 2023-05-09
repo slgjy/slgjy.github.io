@@ -143,6 +143,27 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Mysql
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>安装 linux机器安装 下载安装包（地址）
+选择合适的架构包
+https://dev.mysql.com/downloads/mysql/8.0.html
+上传到系统后解压
+安装mysql包（依次安装）
+# 使用自己解压后的的版本rpm包 rpm -ivh mysql-community-common-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-client-plugins-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-libs-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-client-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-icu-data-files-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-server-8.0.33-1.el8.x86_64.rpm 初始化mysql
+#简单初始化 mysqld --initialize --user=mysql 启动mysql
+# 开机启动 systemctl enable mysqld # 启动服务 systemctl start mysqld 修改默认的密码
+查看默认密码
+grep &#39;temporary password&#39; /var/log/mysqld.log 使用默认密码登录...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-09 14:21:07 +0800 CST'>May 9, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Mysql" href="http://slgjy.github.io/post/mysql/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>CloudNative
     </h2>
   </header>
@@ -198,40 +219,6 @@ func checkName(name string) { if name != &#34;admin&#34; { panic(errors.New(&#34
   </div>
   <footer class="entry-footer"><span title='2023-05-04 10:46:17 +0800 CST'>May 4, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Go单元测试" href="http://slgjy.github.io/post/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>开发工具使用记录
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>开发工具 jetbrains系列 Idea 1.常用配置 配置mavne
-修改为自己的mavne信息
-配置git
-配置代码模板
-添加自定义的模板分组
-设置模板
-忽略指定文件/目录
-修改背景图片
-忽略大小写
-自动导入和防止导包展示为*
-2.常用插件 Alibaba Java Coding Guidelines 编码规范 CodeGlance 代码地图 mybatisx FindBugs 查找bug Mybatis Log Free SonarLint 代码质量检测 PyCharm GoLand VsCode 1.常用配置 设置代码模板
-引用地址
-https://blog.csdn.net/sinat_36359516/article/details/128042359
-设置git工具
-快捷键ctrl&#43;,打开设置
-搜索git配置
-设置git路径(根据自己路径)
-设置背景图片
-下载插件background
-打开插件设置
-通过配置文件修改
-background.customImages 添加图片文件可以是多张
-“background.useDefault”: false 不使用默认的背景...</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-04-25 16:31:59 +0800 CST'>April 25, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to 开发工具使用记录" href="http://slgjy.github.io/post/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -128,6 +128,27 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Mysql
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>安装 linux机器安装 下载安装包（地址）
+选择合适的架构包
+https://dev.mysql.com/downloads/mysql/8.0.html
+上传到系统后解压
+安装mysql包（依次安装）
+# 使用自己解压后的的版本rpm包 rpm -ivh mysql-community-common-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-client-plugins-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-libs-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-client-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-icu-data-files-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-server-8.0.33-1.el8.x86_64.rpm 初始化mysql
+#简单初始化 mysqld --initialize --user=mysql 启动mysql
+# 开机启动 systemctl enable mysqld # 启动服务 systemctl start mysqld 修改默认的密码
+查看默认密码
+grep &#39;temporary password&#39; /var/log/mysqld.log 使用默认密码登录...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-09 14:21:07 +0800 CST'>May 9, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Mysql" href="http://slgjy.github.io/post/mysql/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>CloudNative
     </h2>
   </header>

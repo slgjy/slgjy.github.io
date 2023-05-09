@@ -6,7 +6,25 @@
     <description>Recent content in Posts on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 May 2023 17:21:19 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 May 2023 14:21:07 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mysql</title>
+      <link>http://slgjy.github.io/post/mysql/</link>
+      <pubDate>Tue, 09 May 2023 14:21:07 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/mysql/</guid>
+      <description>安装 linux机器安装 下载安装包（地址）
+选择合适的架构包
+https://dev.mysql.com/downloads/mysql/8.0.html
+上传到系统后解压
+安装mysql包（依次安装）
+# 使用自己解压后的的版本rpm包 rpm -ivh mysql-community-common-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-client-plugins-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-libs-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-client-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-icu-data-files-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-server-8.0.33-1.el8.x86_64.rpm 初始化mysql
+#简单初始化 mysqld --initialize --user=mysql 启动mysql
+# 开机启动 systemctl enable mysqld # 启动服务 systemctl start mysqld 修改默认的密码
+查看默认密码
+grep &amp;#39;temporary password&amp;#39; /var/log/mysqld.log 使用默认密码登录</description>
+    </item>
+    
     <item>
       <title>CloudNative</title>
       <link>http://slgjy.github.io/post/cloudnative/</link>
