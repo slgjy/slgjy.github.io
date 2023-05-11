@@ -6,7 +6,20 @@
     <description>Recent content on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 May 2023 14:21:07 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 May 2023 11:01:40 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jasypt加密操作</title>
+      <link>http://slgjy.github.io/post/jasypt/</link>
+      <pubDate>Thu, 11 May 2023 11:01:40 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/jasypt/</guid>
+      <description>概述 Jasypt是一个加密库，使用敏感信息数据的加密。比如springboot项目中配置文件的明文密码数据；数据信息中的敏感数据加密。
+使用 依赖引入 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.github.ulisesbocchio&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;jasypt-spring-boot-starter&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.0.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 简单加密 加密口令 ==秘钥安全：==
+为了安全设置，通常采用启动时添加启动参数(环境变量)的方式来配置秘钥
+-Djasypt.encryptor.password=test
+jasypt: encryptor: # 配置的秘钥(加盐) password: test # 指定界面算法，需要和加密使用的一致 algorithm: PBEWithMD5AndDES # 指定initialization vector类型 iv-generator-classname: org.jasypt.iv.RandomIvGenerator # 配置前后缀默认是&amp;#34;ENC()&amp;#34; property: prefix: &amp;#34;ENC(&amp;#34; suffix: &amp;#34;)&amp;#34; 测试(获取密文) @SpringBootTest @RunWith(SpringRunner.class) public class MainAppTest { @Autowired private StringEncryptor stringEncryptor; @Test public void testJasypt() { // password需要加密的明文密码 String enpassword = stringEncryptor.</description>
+    </item>
+    
     <item>
       <title>Mysql</title>
       <link>http://slgjy.github.io/post/mysql/</link>
