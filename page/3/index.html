@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head>
+	<meta name="generator" content="Hugo 0.111.3"><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Posts | 小石头博客</title>
-<meta name="keywords" content="">
-<meta name="description" content="Posts - 小石头博客">
+<title>小石头博客</title>
+
+<meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="http://slgjy.github.io/post/">
+<link rel="canonical" href="http://slgjy.github.io/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://slgjy.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
@@ -18,7 +19,7 @@
 <link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/post/index.xml">
+<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,27 +56,25 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Posts" />
+</noscript><meta property="og:title" content="小石头博客" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://slgjy.github.io/post/" />
+<meta property="og:url" content="http://slgjy.github.io/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="小石头博客"/>
 <meta name="twitter:description" content=""/>
-
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Posts",
-      "item": "http://slgjy.github.io/post/"
-    }
+  "@type": "Organization",
+  "name": "小石头博客",
+  "url": "http://slgjy.github.io",
+  "description": "",
+  "thumbnailUrl": "http://slgjy.github.io/favicon.ico",
+  "sameAs": [
+      
   ]
 }
 </script>
@@ -128,107 +127,42 @@
             </li>
             <li>
                 <a href="http://slgjy.github.io/" title="首页">
-                    <span>首页</span>
+                    <span class="active">首页</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header">
-  <h1>
-    Posts
-  </h1>
-</header>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>SpringHttpClient
+    <h2>hugo博客搭建
     </h2>
   </header>
   <div class="entry-content">
-    <p>RestTemplate RestTemplate是一款Spring内置的http客户端，和Spring框架整合度较高，提供了访问HTTP
-接口统一方式，允许不通的实现，比如HttpURLConnection HttpClient OkHttp等底层实现。
-RestTemplate实例化 public RestTemplate() { ... } public RestTemplate(ClientHttpRequestFactory requestFactory) { this(); this.setRequestFactory(requestFactory); } public RestTemplate(List&lt;HttpMessageConverter&lt;?&gt;&gt; messageConverters) { this.messageConverters = new ArrayList(); this.errorHandler = new DefaultResponseErrorHandler(); this.headersExtractor = new HeadersExtractor(); this.validateConverters(messageConverters); this.messageConverters.addAll(messageConverters); this.uriTemplateHandler = initUriTemplateHandler(); } 自定义客户端 通过RestTemplate的构造方法传递不同的ClientHttpRequestFactory 工厂来切换底层实现
-基于OkHttp 依赖引入
-&lt;!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp --&gt; &lt;dependency&gt; &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt; &lt;artifactId&gt;okhttp&lt;/artifactId&gt; &lt;version&gt;4....</p>
+    <p>hugo hugo是由go语言实现的静态网站生成器。
+hugo下载 下载地址
+https://github.com/gohugoio/hugo/releases
+下载后解压
+hugo常用命令 新建站点
+hugo new site myblog 启动
+hugo server -D 设置主题
+# 地址 https://github.com/gohugoio/hugo/releases 在生成站点的目录下的themes下克隆
+采用PaperMod主题
+使用指定主题启动
+#修改配置hugo的配置文件 #hugo部署站点(github仓库) baseURL = &#39;http://slgjy.github.io&#39; languageCode = &#39;en-us&#39; #博客名称 title = &#39;小石头博客&#39; #主题信息 theme = &#39;hugo-PaperMod&#39; 创建博客文档
+#其会在博客目录content 生成post/文档名 hugo new post/go单元测试.md markdown图片引入问题
+在static目录下创建文件夹images（自定义，可以创建多个） 引入方式![]/images/xxx.jpg 修改配置文件
+baseURL: &#39;http://slgjy....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-05-19 17:01:37 +0800 CST'>May 19, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to SpringHttpClient" href="http://slgjy.github.io/post/springhttpclient/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>docker镜像
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>构建镜像 DockerFile编写 镜像构建 .dockerignore文件 类似于git中的.gitignore忽略某些文件
-docker是CS架构。客户端是docker-cli服务端docker daemon组成，docker build时，客户端会将context中的文件全部发送到服务端，.dockeringore减少文件传输数量，提升build效率
-匹配规则 符号 作用 # 注释 * 匹配0或多个非/的字符 ? 匹配1个非/的字符 ** 0个或多个目录 ! 除…外，需结合上下文语义 实例
-# 忽略node_modules node_modules Dockerfile .git .gitignore 实践操作 构建镜像 docker build -t imageName:tag
-**注意：**镜像的名称全小写。
-发送Daemon内容过大 Sending build context to Docker daemon 4.276GB
-该问题由于docker client默认将Dockerfile同级文件中所有文件发送给docker Deamon
-解决方案
-使用.dockerignore文件添加黑名单 将dockerfile文件迁移到启动目录中执行 将不需要文件删除 添加....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-15 15:28:59 +0800 CST'>May 15, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to docker镜像" href="http://slgjy.github.io/post/docker01/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Jasypt加密操作
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>概述 Jasypt是一个加密库，使用敏感信息数据的加密。比如springboot项目中配置文件的明文密码数据；数据信息中的敏感数据加密。
-使用 依赖引入 &lt;dependency&gt; &lt;groupId&gt;com.github.ulisesbocchio&lt;/groupId&gt; &lt;artifactId&gt;jasypt-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;3.0.5&lt;/version&gt; &lt;/dependency&gt; 简单加密 加密口令 ==秘钥安全：==
-为了安全设置，通常采用启动时添加启动参数(环境变量)的方式来配置秘钥
--Djasypt.encryptor.password=test
-jasypt: encryptor: # 配置的秘钥(加盐) password: test # 指定界面算法，需要和加密使用的一致 algorithm: PBEWithMD5AndDES # 指定initialization vector类型 iv-generator-classname: org.jasypt.iv.RandomIvGenerator # 配置前后缀默认是&#34;ENC()&#34; property: prefix: &#34;ENC(&#34; suffix: &#34;)&#34; 测试(获取密文) @SpringBootTest @RunWith(SpringRunner.class) public class MainAppTest { @Autowired private StringEncryptor stringEncryptor; @Test public void testJasypt() { // password需要加密的明文密码 String enpassword = stringEncryptor....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-11 11:01:40 +0800 CST'>May 11, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Jasypt加密操作" href="http://slgjy.github.io/post/jasypt/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Mysql
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>安装 linux机器安装 下载安装包（地址）
-选择合适的架构包
-https://dev.mysql.com/downloads/mysql/8.0.html
-上传到系统后解压
-安装mysql包（依次安装）
-# 使用自己解压后的的版本rpm包 rpm -ivh mysql-community-common-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-client-plugins-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-libs-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-client-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-icu-data-files-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-server-8.0.33-1.el8.x86_64.rpm 初始化mysql
-#简单初始化 mysqld --initialize --user=mysql 启动mysql
-# 开机启动 systemctl enable mysqld # 启动服务 systemctl start mysqld 修改默认的密码
-查看默认密码
-grep &#39;temporary password&#39; /var/log/mysqld.log 使用默认密码登录...</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-09 14:21:07 +0800 CST'>May 9, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Mysql" href="http://slgjy.github.io/post/mysql/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>CloudNative
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Cloud Native 阿里云 云概念 安全组 给云服务器配置了安全组，添加规则，暴露端口协议,外网才能访问到。
-专有网络 网络隔离作用，一个VPC下的子网是可以互通的，不同VPC下不能互通(即使网段一致)，它们是物理隔离的。</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-06 17:21:19 +0800 CST'>May 6, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to CloudNative" href="http://slgjy.github.io/post/cloudnative/"></a>
+  <footer class="entry-footer"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to hugo博客搭建" href="http://slgjy.github.io/post/hugo/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="next" href="http://slgjy.github.io/post/page/2/">Next&nbsp;&nbsp;»
+    <a class="prev" href="http://slgjy.github.io/page/2/">
+      «&nbsp;Prev&nbsp;
     </a>
   </nav>
 </footer>

@@ -6,7 +6,20 @@
     <description>Recent content in Posts on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 May 2023 15:28:59 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 May 2023 17:01:37 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SpringHttpClient</title>
+      <link>http://slgjy.github.io/post/springhttpclient/</link>
+      <pubDate>Fri, 19 May 2023 17:01:37 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/springhttpclient/</guid>
+      <description>RestTemplate RestTemplate是一款Spring内置的http客户端，和Spring框架整合度较高，提供了访问HTTP
+接口统一方式，允许不通的实现，比如HttpURLConnection HttpClient OkHttp等底层实现。
+RestTemplate实例化 public RestTemplate() { ... } public RestTemplate(ClientHttpRequestFactory requestFactory) { this(); this.setRequestFactory(requestFactory); } public RestTemplate(List&amp;lt;HttpMessageConverter&amp;lt;?&amp;gt;&amp;gt; messageConverters) { this.messageConverters = new ArrayList(); this.errorHandler = new DefaultResponseErrorHandler(); this.headersExtractor = new HeadersExtractor(); this.validateConverters(messageConverters); this.messageConverters.addAll(messageConverters); this.uriTemplateHandler = initUriTemplateHandler(); } 自定义客户端 通过RestTemplate的构造方法传递不同的ClientHttpRequestFactory 工厂来切换底层实现
+基于OkHttp 依赖引入
+&amp;lt;!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.squareup.okhttp3&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;okhttp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.</description>
+    </item>
+    
     <item>
       <title>docker镜像</title>
       <link>http://slgjy.github.io/post/docker01/</link>

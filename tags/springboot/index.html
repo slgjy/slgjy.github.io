@@ -128,6 +128,22 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>SpringHttpClient
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>RestTemplate RestTemplate是一款Spring内置的http客户端，和Spring框架整合度较高，提供了访问HTTP
+接口统一方式，允许不通的实现，比如HttpURLConnection HttpClient OkHttp等底层实现。
+RestTemplate实例化 public RestTemplate() { ... } public RestTemplate(ClientHttpRequestFactory requestFactory) { this(); this.setRequestFactory(requestFactory); } public RestTemplate(List&lt;HttpMessageConverter&lt;?&gt;&gt; messageConverters) { this.messageConverters = new ArrayList(); this.errorHandler = new DefaultResponseErrorHandler(); this.headersExtractor = new HeadersExtractor(); this.validateConverters(messageConverters); this.messageConverters.addAll(messageConverters); this.uriTemplateHandler = initUriTemplateHandler(); } 自定义客户端 通过RestTemplate的构造方法传递不同的ClientHttpRequestFactory 工厂来切换底层实现
+基于OkHttp 依赖引入
+&lt;!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp --&gt; &lt;dependency&gt; &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt; &lt;artifactId&gt;okhttp&lt;/artifactId&gt; &lt;version&gt;4....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-19 17:01:37 +0800 CST'>May 19, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to SpringHttpClient" href="http://slgjy.github.io/post/springhttpclient/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Jasypt加密操作
     </h2>
   </header>
