@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>go | 小石头博客</title>
+<title>k8s | 小石头博客</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="http://slgjy.github.io/tags/go/">
+<link rel="canonical" href="http://slgjy.github.io/tags/k8s/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://slgjy.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/tags/go/index.xml">
+<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/tags/k8s/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,13 +55,13 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="go" />
+</noscript><meta property="og:title" content="k8s" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://slgjy.github.io/tags/go/" />
+<meta property="og:url" content="http://slgjy.github.io/tags/k8s/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="go"/>
+<meta name="twitter:title" content="k8s"/>
 <meta name="twitter:description" content=""/>
 
 </head>
@@ -122,68 +122,23 @@
 <main class="main"> 
 <header class="page-header">
   <h1>
-    go
+    k8s
   </h1>
 </header>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>go打包配置文件和静态文件
+    <h2>K8s部署实践
     </h2>
   </header>
   <div class="entry-content">
-    <p>Go打包静态资源和配置文件 场景： 需要将配置文件打包类似和java的application.yml配置文件打包到最终的jar包内。
-打包工具go-bindata 下载 下载
-# 这种下载方式可以使用，go get 方式不行 go install github.com/go-bindata/go-bindata/go-bindata@latest 测试
-go-bindata 常用操作 打包配置文件 测试项目目录层级
-需求：打包storeInfo.yml配置文件
-go-bindata .\config\storeinfo.yml # 修改默认生成的文件名和包名，必须有双引号 go-bindata -o=&#34;.\asset\asset.go&#34; -pkg=&#34;asset&#34; .\config\storeinfo.yml 读取文件
-# 读取文件修改为如下方式 asset.Asset(&#34;config/storeInfo.yml&#34;) 生成的文件的核心方法
-打包工具go-bindata-assetfs 打包静态资源例如css js html</p>
+    <p>K8s部署实践 准备工作 K8s环境已具备 Docker引擎已部署 容器镜像仓库已存在(私有库harbor) 部署服务 创建命名空间 # 以下的部署都基于该命名空间 kubectl create namespace app-storage 后端项目 依赖mysql数据库
+部署Mysql服务 创建pv PersistentVolume(简称pv)持久卷，也是一种集群资源，他的声明周期和使用他的pod项目独立
+新建mysql-pv.yaml
+apiVersion: v1 kind: PersistentVolume metadata: namespace: app-storage name: mysql-pv labels: pv: mysql-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain hostPath: path: /root/data # 创建PV kubectl create -f mysql-pv.yaml # 检验 kubectl get pv 创建pvc PersistentVolumeClaim（持久卷声明，简称PVC）是用户的一种存储请求。它和Pod类似，Pod消耗Node资源，而PVC消耗PV资源。Pod能够请求特定的资源（如CPU和内存）。PVC能够请求指定的大小和访问的模式（可以被映射为一次读写或者多次只读）。...</p>
   </div>
-  <footer class="entry-footer"><span title='2023-06-01 15:31:01 +0800 CST'>June 1, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to go打包配置文件和静态文件" href="http://slgjy.github.io/post/go-bindata/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Go代码后台运行
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Go代码后台运行 运行go的可执行文件的时候，会出现终端界面，需要后台运行来规避。
-Windows平台 方式一 #采用该命令 -o重命名编译后的文件 go build -ldflags &#34;-H=windowsgui&#34; -o DistributedStorage.exe .\main.go 双击执行：可以在后台进程找到
-Linux平台 </p>
-  </div>
-  <footer class="entry-footer"><span title='2023-06-01 15:25:27 +0800 CST'>June 1, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Go代码后台运行" href="http://slgjy.github.io/post/go%E4%BB%A3%E7%A0%81%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Go单元测试
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>go单元测试 go test工具 go test命令是一个执行测试代码的go程序，在包目录内，所有以*_test.go为后缀的源码文件，不会被go build编译到最终的可执行文件。
-示例代码 目录结构
-源码
-func checkName(name string) { if name != &#34;admin&#34; { panic(errors.New(&#34;用户名不正确！！&#34;)) } } package main import &#34;testing&#34; // 函数测试必须是Test开头接收*testing.T参数 func TestCheckName(t *testing.T) { nameStr := &#34;userName&#34; // 被测试的函数可以是小写开头 checkName(nameStr) } // 文档类型测试 func ExampleCheckName() { } // 基准测试(性能测试)以Benchmark开头接收*testing.B参数 func BenchmarkCheckName(t *testing.B) { } go test常用命令 执行单个*_test....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-04 10:46:17 +0800 CST'>May 4, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Go单元测试" href="http://slgjy.github.io/post/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>go发送http请求传参
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>http参数传递 path路径参数 // 路径参数直接拼接 queryParam参数传递 func main() { uri := &#34;http://localhost:8080/test&#34; request, err := http.NewRequest(http.MethodGet, uri, nil) if err != nil { fmt.Println(&#34;构造请求报错!!&#34;) } // 设置header参数 request.Header.Add(&#34;Cookie&#34;, &#34;CookieStr&#34;) // 设置路径中的查询参数 queryParam := url.Values{} queryParam.Add(&#34;name&#34;, &#34;张三&#34;) queryParam.Add(&#34;age&#34;, &#34;12&#34;) // 将参数编码后添加到请求中 request.URL.RawQuery = queryParam.Encode() client := http.Client{} resp, err := client.Do(request) if err !...</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to go发送http请求传参" href="http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"></a>
+  <footer class="entry-footer"><span title='2023-06-01 15:36:45 +0800 CST'>June 1, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to K8s部署实践" href="http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/"></a>
 </article>
     </main>
     

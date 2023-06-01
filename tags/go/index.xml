@@ -6,7 +6,23 @@
     <description>Recent content in go on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Jun 2023 15:25:27 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Jun 2023 15:31:01 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go打包配置文件和静态文件</title>
+      <link>http://slgjy.github.io/post/go-bindata/</link>
+      <pubDate>Thu, 01 Jun 2023 15:31:01 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/go-bindata/</guid>
+      <description>Go打包静态资源和配置文件 场景： 需要将配置文件打包类似和java的application.yml配置文件打包到最终的jar包内。
+打包工具go-bindata 下载 下载
+# 这种下载方式可以使用，go get 方式不行 go install github.com/go-bindata/go-bindata/go-bindata@latest 测试
+go-bindata 常用操作 打包配置文件 测试项目目录层级
+需求：打包storeInfo.yml配置文件
+go-bindata .\config\storeinfo.yml # 修改默认生成的文件名和包名，必须有双引号 go-bindata -o=&amp;#34;.\asset\asset.go&amp;#34; -pkg=&amp;#34;asset&amp;#34; .\config\storeinfo.yml 读取文件
+# 读取文件修改为如下方式 asset.Asset(&amp;#34;config/storeInfo.yml&amp;#34;) 生成的文件的核心方法
+打包工具go-bindata-assetfs 打包静态资源例如css js html</description>
+    </item>
+    
     <item>
       <title>Go代码后台运行</title>
       <link>http://slgjy.github.io/post/go%E4%BB%A3%E7%A0%81%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
