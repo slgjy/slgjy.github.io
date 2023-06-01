@@ -137,6 +137,56 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Jasypt加密操作
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>概述 Jasypt是一个加密库，使用敏感信息数据的加密。比如springboot项目中配置文件的明文密码数据；数据信息中的敏感数据加密。
+使用 依赖引入 &lt;dependency&gt; &lt;groupId&gt;com.github.ulisesbocchio&lt;/groupId&gt; &lt;artifactId&gt;jasypt-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;3.0.5&lt;/version&gt; &lt;/dependency&gt; 简单加密 加密口令 ==秘钥安全：==
+为了安全设置，通常采用启动时添加启动参数(环境变量)的方式来配置秘钥
+-Djasypt.encryptor.password=test
+jasypt: encryptor: # 配置的秘钥(加盐) password: test # 指定界面算法，需要和加密使用的一致 algorithm: PBEWithMD5AndDES # 指定initialization vector类型 iv-generator-classname: org.jasypt.iv.RandomIvGenerator # 配置前后缀默认是&#34;ENC()&#34; property: prefix: &#34;ENC(&#34; suffix: &#34;)&#34; 测试(获取密文) @SpringBootTest @RunWith(SpringRunner.class) public class MainAppTest { @Autowired private StringEncryptor stringEncryptor; @Test public void testJasypt() { // password需要加密的明文密码 String enpassword = stringEncryptor....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-11 11:01:40 +0800 CST'>May 11, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Jasypt加密操作" href="http://slgjy.github.io/post/jasypt/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Mysql
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>安装 linux机器安装 下载安装包（地址）
+选择合适的架构包
+https://dev.mysql.com/downloads/mysql/8.0.html
+上传到系统后解压
+安装mysql包（依次安装）
+# 使用自己解压后的的版本rpm包 rpm -ivh mysql-community-common-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-client-plugins-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-libs-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-client-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-icu-data-files-8.0.33-1.el8.x86_64.rpm rpm -ivh mysql-community-server-8.0.33-1.el8.x86_64.rpm 初始化mysql
+#简单初始化 mysqld --initialize --user=mysql 启动mysql
+# 开机启动 systemctl enable mysqld # 启动服务 systemctl start mysqld 修改默认的密码
+查看默认密码
+grep &#39;temporary password&#39; /var/log/mysqld.log 使用默认密码登录...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-09 14:21:07 +0800 CST'>May 9, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Mysql" href="http://slgjy.github.io/post/mysql/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>CloudNative
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Cloud Native 阿里云 云概念 安全组 给云服务器配置了安全组，添加规则，暴露端口协议,外网才能访问到。
+专有网络 网络隔离作用，一个VPC下的子网是可以互通的，不同VPC下不能互通(即使网段一致)，它们是物理隔离的。</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-06 17:21:19 +0800 CST'>May 6, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to CloudNative" href="http://slgjy.github.io/post/cloudnative/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>SpringCloud
     </h2>
   </header>
@@ -164,60 +214,6 @@ docker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \-e MODE=standalone \-e PRE
   </div>
   <footer class="entry-footer"><span title='2023-05-06 11:08:52 +0800 CST'>May 6, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Nacos" href="http://slgjy.github.io/post/nacos/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Go单元测试
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>go单元测试 go test工具 go test命令是一个执行测试代码的go程序，在包目录内，所有以*_test.go为后缀的源码文件，不会被go build编译到最终的可执行文件。
-示例代码 目录结构
-源码
-func checkName(name string) { if name != &#34;admin&#34; { panic(errors.New(&#34;用户名不正确！！&#34;)) } } package main import &#34;testing&#34; // 函数测试必须是Test开头接收*testing.T参数 func TestCheckName(t *testing.T) { nameStr := &#34;userName&#34; // 被测试的函数可以是小写开头 checkName(nameStr) } // 文档类型测试 func ExampleCheckName() { } // 基准测试(性能测试)以Benchmark开头接收*testing.B参数 func BenchmarkCheckName(t *testing.B) { } go test常用命令 执行单个*_test....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-04 10:46:17 +0800 CST'>May 4, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Go单元测试" href="http://slgjy.github.io/post/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>开发工具使用记录
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>开发工具 jetbrains系列 Idea 1.常用配置 配置mavne
-修改为自己的mavne信息
-配置git
-配置代码模板
-添加自定义的模板分组
-设置模板
-忽略指定文件/目录
-修改背景图片
-忽略大小写
-自动导入和防止导包展示为*
-链接数据库
-因为网路问题安装驱动失败，采用本地安装的形式处理 选择本地安装的mysql驱动包(这里使用本地mavne目录中的)
-2.常用插件 Alibaba Java Coding Guidelines 编码规范 CodeGlance 代码地图 mybatisx FindBugs 查找bug Mybatis Log Free SonarLint 代码质量检测 Mybatisx使用 链接上数据库
-操作如下
-PyCharm Python环境搭建 Pip配置 设置国内镜像地址（提高下载速度）
-#常用的国内镜像地址 # 清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/ # 阿里云 http://mirrors.aliyun.com/pypi/simple/ # 中科大 http://pypi.mirrors.ustc.edu.cn/simple/ # 单独一次下载软件 pip install markdown -i https://pypi....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-04-25 16:31:59 +0800 CST'>April 25, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to 开发工具使用记录" href="http://slgjy.github.io/post/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>go发送http请求传参
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>http参数传递 path路径参数 // 路径参数直接拼接 queryParam参数传递 func main() { uri := &#34;http://localhost:8080/test&#34; request, err := http.NewRequest(http.MethodGet, uri, nil) if err != nil { fmt.Println(&#34;构造请求报错!!&#34;) } // 设置header参数 request.Header.Add(&#34;Cookie&#34;, &#34;CookieStr&#34;) // 设置路径中的查询参数 queryParam := url.Values{} queryParam.Add(&#34;name&#34;, &#34;张三&#34;) queryParam.Add(&#34;age&#34;, &#34;12&#34;) // 将参数编码后添加到请求中 request.URL.RawQuery = queryParam.Encode() client := http.Client{} resp, err := client.Do(request) if err !...</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to go发送http请求传参" href="http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

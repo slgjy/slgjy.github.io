@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>K8s部署实践 | 小石头博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="K8s部署实践 准备工作 K8s环境已具备 Docker引擎已部署 容器镜像仓库已存在(私有库harbor) 部署服务 创建命名空间 # 以下的部署都基于该命名空间 kubectl create namespace app-storage 后端项目 依赖mysql数据库
+部署Mysql服务 创建pv PersistentVolume(简称pv)持久卷，也是一种集群资源，他的声明周期和使用他的pod项目独立
+新建mysql-pv.yaml
+apiVersion: v1 kind: PersistentVolume metadata: namespace: app-storage name: mysql-pv labels: pv: mysql-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain hostPath: path: /root/data # 创建PV kubectl create -f mysql-pv.yaml # 检验 kubectl get pv 创建pvc PersistentVolumeClaim（持久卷声明，简称PVC）是用户的一种存储请求。它和Pod类似，Pod消耗Node资源，而PVC消耗PV资源。Pod能够请求特定的资源（如CPU和内存）。PVC能够请求指定的大小和访问的模式（可以被映射为一次读写或者多次只读）。">
+<meta name="author" content="">
+<link rel="canonical" href="http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://slgjy.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://slgjy.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://slgjy.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="K8s部署实践" />
+<meta property="og:description" content="K8s部署实践 准备工作 K8s环境已具备 Docker引擎已部署 容器镜像仓库已存在(私有库harbor) 部署服务 创建命名空间 # 以下的部署都基于该命名空间 kubectl create namespace app-storage 后端项目 依赖mysql数据库
+部署Mysql服务 创建pv PersistentVolume(简称pv)持久卷，也是一种集群资源，他的声明周期和使用他的pod项目独立
+新建mysql-pv.yaml
+apiVersion: v1 kind: PersistentVolume metadata: namespace: app-storage name: mysql-pv labels: pv: mysql-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain hostPath: path: /root/data # 创建PV kubectl create -f mysql-pv.yaml # 检验 kubectl get pv 创建pvc PersistentVolumeClaim（持久卷声明，简称PVC）是用户的一种存储请求。它和Pod类似，Pod消耗Node资源，而PVC消耗PV资源。Pod能够请求特定的资源（如CPU和内存）。PVC能够请求指定的大小和访问的模式（可以被映射为一次读写或者多次只读）。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-01T15:36:45+08:00" />
+<meta property="article:modified_time" content="2023-06-01T15:36:45+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="K8s部署实践"/>
+<meta name="twitter:description" content="K8s部署实践 准备工作 K8s环境已具备 Docker引擎已部署 容器镜像仓库已存在(私有库harbor) 部署服务 创建命名空间 # 以下的部署都基于该命名空间 kubectl create namespace app-storage 后端项目 依赖mysql数据库
+部署Mysql服务 创建pv PersistentVolume(简称pv)持久卷，也是一种集群资源，他的声明周期和使用他的pod项目独立
+新建mysql-pv.yaml
+apiVersion: v1 kind: PersistentVolume metadata: namespace: app-storage name: mysql-pv labels: pv: mysql-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain hostPath: path: /root/data # 创建PV kubectl create -f mysql-pv.yaml # 检验 kubectl get pv 创建pvc PersistentVolumeClaim（持久卷声明，简称PVC）是用户的一种存储请求。它和Pod类似，Pod消耗Node资源，而PVC消耗PV资源。Pod能够请求特定的资源（如CPU和内存）。PVC能够请求指定的大小和访问的模式（可以被映射为一次读写或者多次只读）。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "http://slgjy.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "K8s部署实践",
+      "item": "http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "K8s部署实践",
+  "name": "K8s部署实践",
+  "description": "K8s部署实践 准备工作 K8s环境已具备 Docker引擎已部署 容器镜像仓库已存在(私有库harbor) 部署服务 创建命名空间 # 以下的部署都基于该命名空间 kubectl create namespace app-storage 后端项目 依赖mysql数据库\n部署Mysql服务 创建pv PersistentVolume(简称pv)持久卷，也是一种集群资源，他的声明周期和使用他的pod项目独立\n新建mysql-pv.yaml\napiVersion: v1 kind: PersistentVolume metadata: namespace: app-storage name: mysql-pv labels: pv: mysql-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain hostPath: path: /root/data # 创建PV kubectl create -f mysql-pv.yaml # 检验 kubectl get pv 创建pvc PersistentVolumeClaim（持久卷声明，简称PVC）是用户的一种存储请求。它和Pod类似，Pod消耗Node资源，而PVC消耗PV资源。Pod能够请求特定的资源（如CPU和内存）。PVC能够请求指定的大小和访问的模式（可以被映射为一次读写或者多次只读）。",
+  "keywords": [
+    
+  ],
+  "articleBody": "K8s部署实践 准备工作 K8s环境已具备 Docker引擎已部署 容器镜像仓库已存在(私有库harbor) 部署服务 创建命名空间 # 以下的部署都基于该命名空间 kubectl create namespace app-storage 后端项目 依赖mysql数据库\n部署Mysql服务 创建pv PersistentVolume(简称pv)持久卷，也是一种集群资源，他的声明周期和使用他的pod项目独立\n新建mysql-pv.yaml\napiVersion: v1 kind: PersistentVolume metadata: namespace: app-storage name: mysql-pv labels: pv: mysql-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain hostPath: path: /root/data # 创建PV kubectl create -f mysql-pv.yaml # 检验 kubectl get pv 创建pvc PersistentVolumeClaim（持久卷声明，简称PVC）是用户的一种存储请求。它和Pod类似，Pod消耗Node资源，而PVC消耗PV资源。Pod能够请求特定的资源（如CPU和内存）。PVC能够请求指定的大小和访问的模式（可以被映射为一次读写或者多次只读）。\n新建mysql-pvc.yaml\napiVersion: v1 kind: PersistentVolumeClaim metadata: name: mysql-pvc namespace: app-storage spec: storageClassName: \"\" accessModes: - ReadWriteOnce resources: requests: storage: 8Gi selector: matchLabels: pv: mysql-pv # 创建 PVC kubectl create -f mysql-pvc.yaml # 校验 kubectl get pvc 创建Deployment 新建mysql-deploy.yaml\napiVersion: apps/v1 kind: Deployment metadata: name: mysql-deploy namespace: app-storage spec: replicas: 1 selector: matchLabels: name: mysql-ops template: metadata: labels: name: mysql-ops spec: containers: # 容器名称 - name: mysql #镜像 这里采用自己的私有仓库ip地址 image: ip:15000/library/mysql:5.7.18 # 镜像拉取规则 imagePullPolicy: IfNotPresent env: - name: MYSQL_ROOT_PASSWORD # 自定义数据库密码(设置为自己的) value: \"xxxxx\" - name: TZ value: Asia/Shanghai ports: - containerPort: 3306 volumeMounts: - name: mysql-persistent-storage mountPath: \"/var/lib/mysql\" #和申请的pvc映射 volumes: - name: mysql-persistent-storage persistentVolumeClaim: claimName: mysql-pvc # 创建 Deployment kubectl create -f mysql-deploy.yaml # 校验 kubectl get deploy 创建 Service 新建mysql-service.yaml文件\napiVersion: v1 kind: Service metadata: name: mysql-svc namespace: app-storage labels: name: mysql-svc spec: type: NodePort ports: - port: 3306 protocol: TCP targetPort: 3306 name: http nodePort: 30306 selector: name: mysql-ops # 创建 Service kubectl create -f mysql-service.yaml # 校验 kubectl get svc 部署后端业务 推送后端代码到私有仓库 后端源码\nDockerfile文件\n构建将本地镜像\n// xxservice自定义镜像名，全小写 sudo docker build -t xxservice:v1 . 登录私有仓库\nsudo docker login ip:port 登录报错提示\n**解决：**修改daemon.json文件添加如信息\n{ \"insecure-registries\": [\"ip:port\"] } #加载配置文件 systemctl daemon-reload #重启docker systemctl restart docker 登录成功\n给本地镜像打tag\n#test:v2 本地镜像，library/test:v1.0私有库的信息，library是harbor私有库的项目,ip:port私有库的信息 sudo docker tag test:v2 ip:port/library/test:v1.0:v1.0 推送镜像\nsudo docker push 10.62.4.92:15000/library/changanstorageweb:v1.0 Harbor界面的信息\n编写deployment.yml\napiVersion: apps/v1 kind: Deployment metadata: name: changan-storage-server labels: app: changan-storage-server spec: replicas: 1 selector: matchLabels: app: changan-storage-server template: metadata: labels: app: changan-storage-server spec: containers: - name: changan-storage-server # 镜像地址 image: 10.62.4.92:15000/library/changanstorage:v1.0 imagePullPolicy: IfNotPresent ports: - containerPort: 8000 编写service.yml\napiVersion: v1 kind: Service metadata: name: changan-storage-server spec: ports: - port: 8000 #项目端口 targetPort: 8000 #pod节点内部服务的端口 protocol: TCP #NOde上的静态端口 nodePort: 31004 type: NodePort selector: app: changan-storage-server 前端项目 依赖nginx组件进行代理。\nnginx配置 server { listen 80; listen [::]:80; server_name localhost; #access_log /var/log/nginx/host.access.log main; location / { root /usr/share/nginx/html; index index.html index.htm; try_files $uri $uri/ /index.html; } #error_page 404 /404.html; # redirect server error pages to the static page /50x.html # error_page 500 502 503 504 /50x.html; location = /50x.html { root /usr/share/nginx/html; } # proxy the PHP scripts to Apache listening on 127.0.0.1:80 # #location ~ \\.php$ { # proxy_pass http://127.0.0.1; #} # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000 # #location ~ \\.php$ { # root html; # fastcgi_pass 127.0.0.1:9000; # fastcgi_index index.php; # fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name; # include fastcgi_params; #} # deny access to .htaccess files, if Apache's document root # concurs with nginx's one # #location ~ /\\.ht { # deny all; #} location /api/ { proxy_http_version 1.1; proxy_set_header Host $http_host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; proxy_set_header X-Nginx-Proxy true; set_real_ip_from 0.0.0.0/0; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection \"upgrade\"; proxy_connect_timeout 600s; proxy_read_timeout 600s; proxy_send_timeout 600s; real_ip_header X-Forwarded-For; rewrite ^/api/(.*)$ /$1 break; proxy_pass http://changan-storage-server:8000/; } } 前端部署 创建deployment.yml\napiVersion: apps/v1 kind: Deployment metadata: name: vue #pod节点名称 namespace: app-storage labels: app: changanstorageweb spec: replicas: 1 selector: matchLabels: app: changanstorageweb # has to match .spec.template.metadata.labels template: metadata: labels: app: changanstorageweb # has to match .spec.selector.matchLabels spec: imagePullSecrets: - name: harbor-secret containers: - name: changanstorageweb image: 10.62.4.92:15000/library/changanstorageweb:v1.0 #pull镜像 imagePullPolicy: Always env: - name: TZ value: Asia/Shanghai ports: - containerPort: 80 #项目端口 name: changanstorageweb resources: requests: memory: 300Mi cpu: 200m limits: memory: 500Mi cpu: 400m 创建service.yml\napiVersion: v1 kind: Service metadata: name: changanstorageweb spec: ports: - port: 80 targetPort: 80 protocol: TCP #Node上的静态端口 nodePort: 31005 type: NodePort selector: app: changanstorageweb 问题记录 nginx代理问题 通过nginx代理前端服务，nginx的后端代理配置如何配置\n前端项目访问路径 前端访问后端的地址如何配置？\n",
+  "wordCount" : "608",
+  "inLanguage": "en",
+  "datePublished": "2023-06-01T15:36:45+08:00",
+  "dateModified": "2023-06-01T15:36:45+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "小石头博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://slgjy.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://slgjy.github.io" accesskey="h" title="小石头博客 (Alt + H)">小石头博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://slgjy.github.io/tags/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://slgjy.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      K8s部署实践
+    </h1>
+    <div class="post-meta"><span title='2023-06-01 15:36:45 +0800 CST'>June 1, 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="k8s部署实践">K8s部署实践<a hidden class="anchor" aria-hidden="true" href="#k8s部署实践">#</a></h1>
+<h2 id="准备工作">准备工作<a hidden class="anchor" aria-hidden="true" href="#准备工作">#</a></h2>
+<ol>
+<li>K8s环境已具备</li>
+<li>Docker引擎已部署</li>
+<li>容器镜像仓库已存在(私有库harbor)</li>
+</ol>
+<h2 id="部署服务">部署服务<a hidden class="anchor" aria-hidden="true" href="#部署服务">#</a></h2>
+<h3 id="创建命名空间">创建命名空间<a hidden class="anchor" aria-hidden="true" href="#创建命名空间">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#75715e"># 以下的部署都基于该命名空间</span>
+</span></span><span style="display:flex;"><span> kubectl create namespace app-storage
+</span></span></code></pre></div><h3 id="后端项目">后端项目<a hidden class="anchor" aria-hidden="true" href="#后端项目">#</a></h3>
+<p>依赖<code>mysql</code>数据库</p>
+<h4 id="部署mysql服务">部署Mysql服务<a hidden class="anchor" aria-hidden="true" href="#部署mysql服务">#</a></h4>
+<h5 id="创建pv">创建pv<a hidden class="anchor" aria-hidden="true" href="#创建pv">#</a></h5>
+<p><code>PersistentVolume</code>(简称pv)持久卷，也是一种集群资源，他的声明周期和使用他的<code>pod</code>项目独立</p>
+<p>新建<code>mysql-pv.yaml</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolume</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">app-storage</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql-pv</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pv</span>: <span style="color:#ae81ff">mysql-pv</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">capacity</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">10Gi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">accessModes</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">ReadWriteOnce</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">persistentVolumeReclaimPolicy</span>: <span style="color:#ae81ff">Retain</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">hostPath</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/root/data</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 创建PV</span>
+</span></span><span style="display:flex;"><span>kubectl create -f mysql-pv.yaml
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验</span>
+</span></span><span style="display:flex;"><span>kubectl get pv
+</span></span></code></pre></div><h5 id="创建pvc">创建pvc<a hidden class="anchor" aria-hidden="true" href="#创建pvc">#</a></h5>
+<p><code>PersistentVolumeClaim</code>（持久卷声明，简称PVC）是用户的一种存储请求。它和Pod类似，Pod消耗Node资源，而PVC消耗PV资源。Pod能够请求特定的资源（如CPU和内存）。PVC能够请求指定的大小和访问的模式（可以被映射为一次读写或者多次只读）。</p>
+<p>新建<code>mysql-pvc.yaml</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolumeClaim</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql-pvc</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">app-storage</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">storageClassName</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">accessModes</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">ReadWriteOnce</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">8Gi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">pv</span>: <span style="color:#ae81ff">mysql-pv</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 创建 PVC</span>
+</span></span><span style="display:flex;"><span>kubectl create -f mysql-pvc.yaml
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 校验</span>
+</span></span><span style="display:flex;"><span>kubectl get pvc
+</span></span></code></pre></div><h5 id="创建deployment">创建Deployment<a hidden class="anchor" aria-hidden="true" href="#创建deployment">#</a></h5>
+<p>新建<code>mysql-deploy.yaml</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql-deploy</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">app-storage</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql-ops</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql-ops</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 容器名称</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">#镜像 这里采用自己的私有仓库ip地址</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ip:15000/library/mysql:5.7.18</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># 镜像拉取规则</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">MYSQL_ROOT_PASSWORD</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 自定义数据库密码(设置为自己的)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;xxxxx&#34;</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">TZ</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">value</span>: <span style="color:#ae81ff">Asia/Shanghai</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">3306</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql-persistent-storage</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">mountPath</span>: <span style="color:#e6db74">&#34;/var/lib/mysql&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#和申请的pvc映射</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql-persistent-storage</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">persistentVolumeClaim</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">claimName</span>: <span style="color:#ae81ff">mysql-pvc</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 创建 Deployment</span>
+</span></span><span style="display:flex;"><span>kubectl create -f mysql-deploy.yaml
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 校验</span>
+</span></span><span style="display:flex;"><span>kubectl get deploy
+</span></span></code></pre></div><h5 id="创建-service">创建 Service<a hidden class="anchor" aria-hidden="true" href="#创建-service">#</a></h5>
+<p>新建<code>mysql-service.yaml</code>文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql-svc</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">app-storage</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql-svc</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">3306</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">3306</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">http</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">nodePort</span>: <span style="color:#ae81ff">30306</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mysql-ops</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 创建 Service</span>
+</span></span><span style="display:flex;"><span>kubectl create -f mysql-service.yaml
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 校验</span>
+</span></span><span style="display:flex;"><span>kubectl get svc
+</span></span></code></pre></div><h4 id="部署后端业务">部署后端业务<a hidden class="anchor" aria-hidden="true" href="#部署后端业务">#</a></h4>
+<h5 id="推送后端代码到私有仓库">推送后端代码到私有仓库<a hidden class="anchor" aria-hidden="true" href="#推送后端代码到私有仓库">#</a></h5>
+<ol>
+<li>
+<p>后端源码</p>
+</li>
+<li>
+<p><code>Dockerfile</code>文件</p>
+</li>
+<li>
+<p>构建将本地镜像</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>// xxservice自定义镜像名，全小写
+</span></span><span style="display:flex;"><span>sudo docker build -t xxservice:v1 .
+</span></span></code></pre></div></li>
+<li>
+<p>登录私有仓库</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo docker login ip:port
+</span></span></code></pre></div><p>登录报错提示</p>
+<p><img loading="lazy" src="/K8s%e9%83%a8%e7%bd%b2%e5%ae%9e%e8%b7%b5.assets/image-20230529124943926.png" alt="image-20230529124943926"  />
+</p>
+<p>**解决：**修改<code>daemon.json</code>文件添加如信息</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;insecure-registries&#34;</span>: [<span style="color:#e6db74">&#34;ip:port&#34;</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#加载配置文件</span>
+</span></span><span style="display:flex;"><span>systemctl daemon-reload
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#重启docker</span>
+</span></span><span style="display:flex;"><span>systemctl restart docker
+</span></span></code></pre></div><p>登录成功</p>
+<p><img loading="lazy" src="/K8s%e9%83%a8%e7%bd%b2%e5%ae%9e%e8%b7%b5.assets/image-20230529130731719.png" alt="image-20230529130731719"  />
+</p>
+<ol start="5">
+<li>
+<p>给本地镜像打<code>tag</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#test:v2 本地镜像，library/test:v1.0私有库的信息，library是harbor私有库的项目,ip:port私有库的信息</span>
+</span></span><span style="display:flex;"><span> sudo docker tag test:v2 ip:port/library/test:v1.0:v1.0
+</span></span></code></pre></div></li>
+<li>
+<p>推送镜像</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo docker push 10.62.4.92:15000/library/changanstorageweb:v1.0
+</span></span></code></pre></div><p><strong>Harbor</strong>界面的信息</p>
+<p><img loading="lazy" src="/K8s%e9%83%a8%e7%bd%b2%e5%ae%9e%e8%b7%b5.assets/image-20230529132809766.png" alt="image-20230529132809766"  />
+</p>
+</li>
+</ol>
+<p>编写<code>deployment.yml</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">changan-storage-server</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">changan-storage-server</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">changan-storage-server</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">changan-storage-server</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">changan-storage-server</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># 镜像地址</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">10.62.4.92</span>:<span style="color:#ae81ff">15000</span><span style="color:#ae81ff">/library/changanstorage:v1.0</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">8000</span>
+</span></span></code></pre></div><p>编写<code>service.yml</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">changan-storage-server</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8000</span> <span style="color:#75715e">#项目端口</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">8000</span> <span style="color:#75715e">#pod节点内部服务的端口</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#NOde上的静态端口</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nodePort</span>: <span style="color:#ae81ff">31004</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">changan-storage-server</span>
+</span></span></code></pre></div><h3 id="前端项目">前端项目<a hidden class="anchor" aria-hidden="true" href="#前端项目">#</a></h3>
+<p>依赖<code>nginx</code>组件进行代理。</p>
+<h4 id="nginx配置">nginx配置<a hidden class="anchor" aria-hidden="true" href="#nginx配置">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">server</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">listen</span>       <span style="color:#960050;background-color:#1e0010">80;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">listen</span>  <span style="color:#960050;background-color:#1e0010">[::]:80;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">server_name</span>  <span style="color:#960050;background-color:#1e0010">localhost;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#access_log</span>  <span style="color:#960050;background-color:#1e0010">/var/log/nginx/host.access.log</span>  <span style="color:#960050;background-color:#1e0010">main;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">location</span> <span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">root</span>   <span style="color:#960050;background-color:#1e0010">/usr/share/nginx/html;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">index</span>  <span style="color:#960050;background-color:#1e0010">index.html</span> <span style="color:#960050;background-color:#1e0010">index.htm;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">try_files</span> <span style="color:#960050;background-color:#1e0010">$uri</span> <span style="color:#960050;background-color:#1e0010">$uri/</span> <span style="color:#960050;background-color:#1e0010">/index.html;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#error_page</span>  <span style="color:#ae81ff">404</span>              <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#ae81ff">404</span><span style="color:#960050;background-color:#1e0010">.html;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">redirect</span> <span style="color:#960050;background-color:#1e0010">server</span> <span style="color:#960050;background-color:#1e0010">error</span> <span style="color:#960050;background-color:#1e0010">pages</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">static</span> <span style="color:#960050;background-color:#1e0010">page</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#ae81ff">50</span><span style="color:#960050;background-color:#1e0010">x.html</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">error_page</span>   <span style="color:#ae81ff">500</span> <span style="color:#ae81ff">502</span> <span style="color:#ae81ff">503</span> <span style="color:#ae81ff">504</span>  <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#ae81ff">50</span><span style="color:#960050;background-color:#1e0010">x.html;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">location</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#ae81ff">50</span><span style="color:#960050;background-color:#1e0010">x.html</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">root</span>   <span style="color:#960050;background-color:#1e0010">/usr/share/nginx/html;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">proxy</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">PHP</span> <span style="color:#960050;background-color:#1e0010">scripts</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">Apache</span> <span style="color:#960050;background-color:#1e0010">listening</span> <span style="color:#960050;background-color:#1e0010">on</span> <span style="color:#ae81ff">127.0</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#ae81ff">0.1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#location</span> <span style="color:#960050;background-color:#1e0010">~</span> <span style="color:#960050;background-color:#1e0010">\.php$</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">proxy_pass</span>   <span style="color:#960050;background-color:#1e0010">http:</span><span style="color:#75715e">//127.0.0.1;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#960050;background-color:#1e0010">#</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">pass</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">PHP</span> <span style="color:#960050;background-color:#1e0010">scripts</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">FastCGI</span> <span style="color:#960050;background-color:#1e0010">server</span> <span style="color:#960050;background-color:#1e0010">listening</span> <span style="color:#960050;background-color:#1e0010">on</span> <span style="color:#ae81ff">127.0</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#ae81ff">0.1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">9000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#location</span> <span style="color:#960050;background-color:#1e0010">~</span> <span style="color:#960050;background-color:#1e0010">\.php$</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">root</span>           <span style="color:#960050;background-color:#1e0010">html;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">fastcgi_pass</span>   <span style="color:#960050;background-color:#1e0010">127.0.0.1:9000;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">fastcgi_index</span>  <span style="color:#960050;background-color:#1e0010">index.php;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">fastcgi_param</span>  <span style="color:#960050;background-color:#1e0010">SCRIPT_FILENAME</span>  <span style="color:#960050;background-color:#1e0010">/scripts$fastcgi_script_name;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">include</span>        <span style="color:#960050;background-color:#1e0010">fastcgi_params;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">deny</span> <span style="color:#960050;background-color:#1e0010">access</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">.htaccess</span> <span style="color:#960050;background-color:#1e0010">files,</span> <span style="color:#960050;background-color:#1e0010">if</span> <span style="color:#960050;background-color:#1e0010">Apache&#39;s</span> <span style="color:#960050;background-color:#1e0010">document</span> <span style="color:#960050;background-color:#1e0010">root</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">concurs</span> <span style="color:#960050;background-color:#1e0010">with</span> <span style="color:#960050;background-color:#1e0010">nginx&#39;s</span> <span style="color:#960050;background-color:#1e0010">one</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#location</span> <span style="color:#960050;background-color:#1e0010">~</span> <span style="color:#960050;background-color:#1e0010">/\.ht</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">deny</span>  <span style="color:#960050;background-color:#1e0010">all;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">location</span> <span style="color:#960050;background-color:#1e0010">/api/</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_http_version</span> <span style="color:#960050;background-color:#1e0010">1.1;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_set_header</span> <span style="color:#960050;background-color:#1e0010">Host</span> <span style="color:#960050;background-color:#1e0010">$http_host;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_set_header</span> <span style="color:#960050;background-color:#1e0010">X-Real-IP</span> <span style="color:#960050;background-color:#1e0010">$remote_addr;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_set_header</span> <span style="color:#960050;background-color:#1e0010">X-Forwarded-For</span> <span style="color:#960050;background-color:#1e0010">$proxy_add_x_forwarded_for;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_set_header</span> <span style="color:#960050;background-color:#1e0010">X-Forwarded-Proto</span> <span style="color:#960050;background-color:#1e0010">$scheme;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_set_header</span> <span style="color:#960050;background-color:#1e0010">X-Nginx-Proxy</span> <span style="color:#960050;background-color:#1e0010">true;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">set_real_ip_from</span> <span style="color:#960050;background-color:#1e0010">0.0.0.0/0;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_set_header</span> <span style="color:#960050;background-color:#1e0010">Upgrade</span> <span style="color:#960050;background-color:#1e0010">$http_upgrade;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_set_header</span> <span style="color:#960050;background-color:#1e0010">Connection</span> <span style="color:#f92672">&#34;upgrade&#34;</span><span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_connect_timeout</span> <span style="color:#ae81ff">600</span><span style="color:#960050;background-color:#1e0010">s;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_read_timeout</span> <span style="color:#ae81ff">600</span><span style="color:#960050;background-color:#1e0010">s;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_send_timeout</span> <span style="color:#ae81ff">600</span><span style="color:#960050;background-color:#1e0010">s;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">real_ip_header</span> <span style="color:#960050;background-color:#1e0010">X-Forwarded-For;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">rewrite</span> <span style="color:#960050;background-color:#1e0010">^/api/(.*)$</span> <span style="color:#960050;background-color:#1e0010">/$</span><span style="color:#ae81ff">1</span> <span style="color:#960050;background-color:#1e0010">break;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">proxy_pass</span> <span style="color:#960050;background-color:#1e0010">http</span>:<span style="color:#75715e">//changan-storage-server:8000/;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>     }
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
+</span></span></code></pre></div><h4 id="前端部署">前端部署<a hidden class="anchor" aria-hidden="true" href="#前端部署">#</a></h4>
+<p>创建<code>deployment.yml</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">vue</span> <span style="color:#75715e">#pod节点名称</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">app-storage</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">changanstorageweb</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">changanstorageweb   </span> <span style="color:#75715e"># has to match .spec.template.metadata.labels</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">changanstorageweb</span> <span style="color:#75715e"># has to match .spec.selector.matchLabels</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">imagePullSecrets</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">harbor-secret</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">changanstorageweb</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">10.62.4.92</span>:<span style="color:#ae81ff">15000</span><span style="color:#ae81ff">/library/changanstorageweb:v1.0</span> <span style="color:#75715e">#pull镜像</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">env</span>: 
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">TZ</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">Asia/Shanghai</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span> <span style="color:#75715e">#项目端口</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">changanstorageweb</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">300Mi</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">200m</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">500Mi</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">400m</span>
+</span></span></code></pre></div><p>创建<code>service.yml</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">changanstorageweb</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#Node上的静态端口</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nodePort</span>: <span style="color:#ae81ff">31005</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">changanstorageweb</span>
+</span></span></code></pre></div><h2 id="问题记录">问题记录<a hidden class="anchor" aria-hidden="true" href="#问题记录">#</a></h2>
+<h3 id="nginx代理问题">nginx代理问题<a hidden class="anchor" aria-hidden="true" href="#nginx代理问题">#</a></h3>
+<p>通过nginx代理前端服务，nginx的后端代理配置如何配置</p>
+<h3 id="前端项目访问路径">前端项目访问路径<a hidden class="anchor" aria-hidden="true" href="#前端项目访问路径">#</a></h3>
+<p>前端访问后端的地址如何配置？</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="http://slgjy.github.io">小石头博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

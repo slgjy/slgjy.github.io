@@ -6,7 +6,16 @@
     <description>Recent content in Tags on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 May 2023 17:01:37 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Jun 2023 15:25:27 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go</title>
+      <link>http://slgjy.github.io/tags/go/</link>
+      <pubDate>Thu, 01 Jun 2023 15:25:27 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>springboot</title>
       <link>http://slgjy.github.io/tags/springboot/</link>
@@ -40,15 +49,6 @@
       <pubDate>Sat, 06 May 2023 13:08:26 +0800</pubDate>
       
       <guid>http://slgjy.github.io/tags/springcloud/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>http://slgjy.github.io/tags/go/</link>
-      <pubDate>Thu, 04 May 2023 10:46:17 +0800</pubDate>
-      
-      <guid>http://slgjy.github.io/tags/go/</guid>
       <description></description>
     </item>
     

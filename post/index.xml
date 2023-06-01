@@ -6,7 +6,46 @@
     <description>Recent content in Posts on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 May 2023 17:01:37 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Jun 2023 15:36:45 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>K8s部署实践</title>
+      <link>http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Thu, 01 Jun 2023 15:36:45 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/</guid>
+      <description>K8s部署实践 准备工作 K8s环境已具备 Docker引擎已部署 容器镜像仓库已存在(私有库harbor) 部署服务 创建命名空间 # 以下的部署都基于该命名空间 kubectl create namespace app-storage 后端项目 依赖mysql数据库
+部署Mysql服务 创建pv PersistentVolume(简称pv)持久卷，也是一种集群资源，他的声明周期和使用他的pod项目独立
+新建mysql-pv.yaml
+apiVersion: v1 kind: PersistentVolume metadata: namespace: app-storage name: mysql-pv labels: pv: mysql-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain hostPath: path: /root/data # 创建PV kubectl create -f mysql-pv.yaml # 检验 kubectl get pv 创建pvc PersistentVolumeClaim（持久卷声明，简称PVC）是用户的一种存储请求。它和Pod类似，Pod消耗Node资源，而PVC消耗PV资源。Pod能够请求特定的资源（如CPU和内存）。PVC能够请求指定的大小和访问的模式（可以被映射为一次读写或者多次只读）。</description>
+    </item>
+    
+    <item>
+      <title>go打包配置文件和静态文件</title>
+      <link>http://slgjy.github.io/post/go-bindata/</link>
+      <pubDate>Thu, 01 Jun 2023 15:31:01 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/go-bindata/</guid>
+      <description>Go打包静态资源和配置文件 场景： 需要将配置文件打包类似和java的application.yml配置文件打包到最终的jar包内。
+打包工具go-bindata 下载 下载
+# 这种下载方式可以使用，go get 方式不行 go install github.com/go-bindata/go-bindata/go-bindata@latest 测试
+go-bindata 常用操作 打包配置文件 测试项目目录层级
+需求：打包storeInfo.yml配置文件
+go-bindata .\config\storeinfo.yml # 修改默认生成的文件名和包名，必须有双引号 go-bindata -o=&amp;#34;.\asset\asset.go&amp;#34; -pkg=&amp;#34;asset&amp;#34; .\config\storeinfo.yml 读取文件
+# 读取文件修改为如下方式 asset.Asset(&amp;#34;config/storeInfo.yml&amp;#34;) 生成的文件的核心方法
+打包工具go-bindata-assetfs 打包静态资源例如css js html</description>
+    </item>
+    
+    <item>
+      <title>Go代码后台运行</title>
+      <link>http://slgjy.github.io/post/go%E4%BB%A3%E7%A0%81%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
+      <pubDate>Thu, 01 Jun 2023 15:25:27 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/go%E4%BB%A3%E7%A0%81%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
+      <description>Go代码后台运行 运行go的可执行文件的时候，会出现终端界面，需要后台运行来规避。
+Windows平台 方式一 #采用该命令 -o重命名编译后的文件 go build -ldflags &amp;#34;-H=windowsgui&amp;#34; -o DistributedStorage.exe .\main.go 双击执行：可以在后台进程找到
+Linux平台 </description>
+    </item>
+    
     <item>
       <title>SpringHttpClient</title>
       <link>http://slgjy.github.io/post/springhttpclient/</link>
