@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head>
-	<meta name="generator" content="Hugo 0.111.3"><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>小石头博客</title>
-
+<title>tools | 小石头博客</title>
+<meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="http://slgjy.github.io/">
+<link rel="canonical" href="http://slgjy.github.io/tags/tools/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://slgjy.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
@@ -19,7 +18,7 @@
 <link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/index.xml">
+<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/tags/tools/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,28 +55,15 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="小石头博客" />
+</noscript><meta property="og:title" content="tools" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://slgjy.github.io/" />
+<meta property="og:url" content="http://slgjy.github.io/tags/tools/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="小石头博客"/>
+<meta name="twitter:title" content="tools"/>
 <meta name="twitter:description" content=""/>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "小石头博客",
-  "url": "http://slgjy.github.io",
-  "description": "",
-  "thumbnailUrl": "http://slgjy.github.io/favicon.ico",
-  "sameAs": [
-      
-  ]
-}
-</script>
 </head>
 
 <body class="list" id="top">
@@ -127,85 +113,20 @@
             </li>
             <li>
                 <a href="http://slgjy.github.io/" title="首页">
-                    <span class="active">首页</span>
+                    <span>首页</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
 <main class="main"> 
+<header class="page-header">
+  <h1>
+    tools
+  </h1>
+</header>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Nacos
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Nacos 简介 官网地址
-安裝 使用 实践记录 连接报错 UNAVAILABLE: io exception com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
-解决方式
-Nacos的2.0版本，需要增加了gRPC通信需要增加两个开放端口（开放9848和9849两个端口）。
-docker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \-e MODE=standalone \-e PREFER_HOST_MODE=hostname \-e SPRING_DATASOURCE_PLATFORM=mysql \-e MYSQL_SERVICE_HOST=192.168.190.129 \-e MYSQL_SERVICE_PORT=3306 \-e MYSQL_SERVICE_DB_NAME=nacos \-e MYSQL_SERVICE_USER=root \-e MYSQL_SERVICE_PASSWORD=root \-e MYSQL_DATABASE_NUM=1 \-v /home/slg/devtools/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties \-v /home/slg/devtools/nacos/logs:/home/nacos/logs \--restart always --name nacos nacos/nacos-server </p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-06 11:08:52 +0800 CST'>May 6, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Nacos" href="http://slgjy.github.io/post/nacos/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Go单元测试
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>go单元测试 go test工具 go test命令是一个执行测试代码的go程序，在包目录内，所有以*_test.go为后缀的源码文件，不会被go build编译到最终的可执行文件。
-示例代码 目录结构
-源码
-func checkName(name string) { if name != &#34;admin&#34; { panic(errors.New(&#34;用户名不正确！！&#34;)) } } package main import &#34;testing&#34; // 函数测试必须是Test开头接收*testing.T参数 func TestCheckName(t *testing.T) { nameStr := &#34;userName&#34; // 被测试的函数可以是小写开头 checkName(nameStr) } // 文档类型测试 func ExampleCheckName() { } // 基准测试(性能测试)以Benchmark开头接收*testing.B参数 func BenchmarkCheckName(t *testing.B) { } go test常用命令 执行单个*_test....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-04 10:46:17 +0800 CST'>May 4, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Go单元测试" href="http://slgjy.github.io/post/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>开发工具使用记录
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>开发工具 jetbrains系列 Idea 1.常用配置 配置mavne
-修改为自己的mavne信息
-配置git
-配置代码模板
-添加自定义的模板分组
-设置模板
-忽略指定文件/目录
-修改背景图片
-忽略大小写
-自动导入和防止导包展示为*
-链接数据库
-因为网路问题安装驱动失败，采用本地安装的形式处理 选择本地安装的mysql驱动包(这里使用本地mavne目录中的)
-2.常用插件 Alibaba Java Coding Guidelines 编码规范 CodeGlance 代码地图 mybatisx FindBugs 查找bug Mybatis Log Free SonarLint 代码质量检测 Mybatisx使用 链接上数据库
-操作如下
-PyCharm Python环境搭建 Pip配置 设置国内镜像地址（提高下载速度）
-#常用的国内镜像地址 # 清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/ # 阿里云 http://mirrors.aliyun.com/pypi/simple/ # 中科大 http://pypi.mirrors.ustc.edu.cn/simple/ # 单独一次下载软件 pip install markdown -i https://pypi....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-04-25 16:31:59 +0800 CST'>April 25, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to 开发工具使用记录" href="http://slgjy.github.io/post/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>go发送http请求传参
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>http参数传递 path路径参数 // 路径参数直接拼接 queryParam参数传递 func main() { uri := &#34;http://localhost:8080/test&#34; request, err := http.NewRequest(http.MethodGet, uri, nil) if err != nil { fmt.Println(&#34;构造请求报错!!&#34;) } // 设置header参数 request.Header.Add(&#34;Cookie&#34;, &#34;CookieStr&#34;) // 设置路径中的查询参数 queryParam := url.Values{} queryParam.Add(&#34;name&#34;, &#34;张三&#34;) queryParam.Add(&#34;age&#34;, &#34;12&#34;) // 将参数编码后添加到请求中 request.URL.RawQuery = queryParam.Encode() client := http.Client{} resp, err := client.Do(request) if err !...</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to go发送http请求传参" href="http://slgjy.github.io/post/http%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"></a>
-</article>
-
-<article class="post-entry"> 
+<article class="post-entry tag-entry"> 
   <header class="entry-header">
     <h2>hugo博客搭建
     </h2>
@@ -231,7 +152,7 @@ baseURL: &#39;http://slgjy....</p>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="prev" href="http://slgjy.github.io/page/2/">
+    <a class="prev" href="http://slgjy.github.io/tags/tools/">
       «&nbsp;Prev&nbsp;
     </a>
   </nav>

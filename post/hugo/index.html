@@ -137,8 +137,8 @@ baseURL: &#39;http://slgjy."/>
   "keywords": [
     "hugo"
   ],
-  "articleBody": "hugo hugo是由go语言实现的静态网站生成器。\nhugo下载 下载地址\nhttps://github.com/gohugoio/hugo/releases\n下载后解压\nhugo常用命令 新建站点\nhugo new site myblog 启动\nhugo server -D 设置主题\n# 地址 https://github.com/gohugoio/hugo/releases 在生成站点的目录下的themes下克隆\n采用PaperMod主题\n使用指定主题启动\n#修改配置hugo的配置文件 #hugo部署站点(github仓库) baseURL = 'http://slgjy.github.io' languageCode = 'en-us' #博客名称 title = '小石头博客' #主题信息 theme = 'hugo-PaperMod' 创建博客文档\n#其会在博客目录content 生成post/文档名 hugo new post/go单元测试.md markdown图片引入问题\n在static目录下创建文件夹images（自定义，可以创建多个） 引入方式![]/images/xxx.jpg 修改配置文件\nbaseURL: 'http://slgjy.github.io' languageCode: 'en-us' title: '小石头博客' theme: 'hugo-PaperMod' # home/category/tag 页面显示文章数量(Default:10) paginate: 5 # home/category/tag 页面摘要的字数(Default:70) summaryLength: 50 #配置菜单 menu: main: - name: 分类 url: tags/ weight: 10 - name: 首页 url: / weight: 10 给文件设置分类\n--- title: \"Tools\" date: 2023-04-24T17:15:51+08:00 draft: false tags: [\"tools\"] categories: [\"tools\"] keywords: [\"hugo\"] --- hugo部署到github 新建github仓库\n仓库名称必须是xxx.github.io，xxx替换为自己的github名称\n将该地址设置到站点配置文件\n同步public的文件到仓库地址\ncd public git init git add . git commit -m 'init' git remote add origin \u003c仓库地址\u003e git push -u origin master 测试一下\n",
-  "wordCount" : "126",
+  "articleBody": "hugo hugo是由go语言实现的静态网站生成器。\nhugo下载 下载地址\nhttps://github.com/gohugoio/hugo/releases\n下载后解压\nhugo常用命令 新建站点\nhugo new site myblog 启动\nhugo server -D 设置主题\n# 地址 https://github.com/gohugoio/hugo/releases 在生成站点的目录下的themes下克隆\n采用PaperMod主题\n使用指定主题启动\n#修改配置hugo的配置文件 #hugo部署站点(github仓库) baseURL = 'http://slgjy.github.io' languageCode = 'en-us' #博客名称 title = '小石头博客' #主题信息 theme = 'hugo-PaperMod' 创建博客文档\n#其会在博客目录content 生成post/文档名 hugo new post/go单元测试.md markdown图片引入问题\n在static目录下创建文件夹images（自定义，可以创建多个） 引入方式![]/images/xxx.jpg 修改配置文件\nbaseURL: 'http://slgjy.github.io' languageCode: 'en-us' title: '小石头博客' theme: 'hugo-PaperMod' # home/category/tag 页面显示文章数量(Default:10) paginate: 5 # home/category/tag 页面摘要的字数(Default:70) summaryLength: 50 #配置菜单 menu: main: - name: 分类 url: tags/ weight: 10 - name: 首页 url: / weight: 10 给文件设置分类\n--- title: \"Tools\" date: 2023-04-24T17:15:51+08:00 draft: false tags: [\"tools\"] categories: [\"tools\"] keywords: [\"hugo\"] --- hugo部署到github 新建github仓库\n仓库名称必须是xxx.github.io，xxx替换为自己的github名称\n将该地址设置到站点配置文件\n发布博客\n#执行该命令可以将文章发布到public目录 hugo 同步public的文件到仓库地址\ncd public git init git add . git commit -m 'init' git remote add origin \u003c仓库地址\u003e git push -u origin master 测试一下\n",
+  "wordCount" : "129",
   "inLanguage": "en",
   "datePublished": "2023-04-24T17:15:51+08:00",
   "dateModified": "2023-04-24T17:15:51+08:00",
@@ -324,6 +324,11 @@ baseURL: &#39;http://slgjy."/>
 <li>
 <p>将该地址设置到站点配置文件</p>
 </li>
+<li>
+<p>发布博客</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#执行该命令可以将文章发布到public目录</span>
+</span></span><span style="display:flex;"><span>hugo
+</span></span></code></pre></div></li>
 <li>
 <p>同步public的文件到仓库地址</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd public

@@ -137,6 +137,24 @@
 
 <article class="first-entry"> 
   <header class="entry-header">
+    <h2>Nexus
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Maven私有仓库 为什么搭建私有库：
+公共仓库下载慢。 项目组之间需要共享包。 Nexus Sonatype Nexus是一个强大的Maven仓库管理器。官网地址
+Nexus当前有Nexus2.x和3.x两大版本，两个版本都在更新迭代，两个版本互不影响都可以使用。
+Nexus分为pro和oss版本，其中oss是开源免费的，pro是收费版本。
+Linux下安装 1.下载包 本次使用3.x版本,下载地址
+2.上传解压 tar -zxvf nexus-3.54.1-01-unix.tar.gz nexus用于实现nexus功能 sonatype-work： 用于存储数据 3.修改配置文件 1.修改Nexus端口 在nexus下的etc目录下的配置文件nexus-default.properties的application-port配置
+4.启动 # bin目录下执行执行 ./nexux start 命令启动。脚本涵盖：./nexus {console | start | stop | restart | status | dump} ./nexus start # 3.x的nexus启动 nohup ./bin/nexus run &gt; logs/nexus.log 2&gt;&amp;1 &amp; 访问：ip&#43;端口...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-06-26 11:49:32 +0800 CST'>June 26, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Nexus" href="http://slgjy.github.io/post/nexus/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>K8s部署实践
     </h2>
   </header>
@@ -197,26 +215,6 @@ RestTemplate实例化 public RestTemplate() { ... } public RestTemplate(ClientHt
   </div>
   <footer class="entry-footer"><span title='2023-05-19 17:01:37 +0800 CST'>May 19, 2023</span></footer>
   <a class="entry-link" aria-label="post link to SpringHttpClient" href="http://slgjy.github.io/post/springhttpclient/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>docker镜像
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>构建镜像 DockerFile编写 镜像构建 .dockerignore文件 类似于git中的.gitignore忽略某些文件
-docker是CS架构。客户端是docker-cli服务端docker daemon组成，docker build时，客户端会将context中的文件全部发送到服务端，.dockeringore减少文件传输数量，提升build效率
-匹配规则 符号 作用 # 注释 * 匹配0或多个非/的字符 ? 匹配1个非/的字符 ** 0个或多个目录 ! 除…外，需结合上下文语义 实例
-# 忽略node_modules node_modules Dockerfile .git .gitignore 实践操作 构建镜像 docker build -t imageName:tag
-**注意：**镜像的名称全小写。
-发送Daemon内容过大 Sending build context to Docker daemon 4.276GB
-该问题由于docker client默认将Dockerfile同级文件中所有文件发送给docker Deamon
-解决方案
-使用.dockerignore文件添加黑名单 将dockerfile文件迁移到启动目录中执行 将不需要文件删除 添加....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-15 15:28:59 +0800 CST'>May 15, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to docker镜像" href="http://slgjy.github.io/post/docker01/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

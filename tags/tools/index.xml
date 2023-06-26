@@ -6,7 +6,22 @@
     <description>Recent content in tools on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 May 2023 14:21:07 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Jun 2023 11:49:32 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nexus</title>
+      <link>http://slgjy.github.io/post/nexus/</link>
+      <pubDate>Mon, 26 Jun 2023 11:49:32 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/nexus/</guid>
+      <description>Maven私有仓库 为什么搭建私有库：
+公共仓库下载慢。 项目组之间需要共享包。 Nexus Sonatype Nexus是一个强大的Maven仓库管理器。官网地址
+Nexus当前有Nexus2.x和3.x两大版本，两个版本都在更新迭代，两个版本互不影响都可以使用。
+Nexus分为pro和oss版本，其中oss是开源免费的，pro是收费版本。
+Linux下安装 1.下载包 本次使用3.x版本,下载地址
+2.上传解压 tar -zxvf nexus-3.54.1-01-unix.tar.gz nexus用于实现nexus功能 sonatype-work： 用于存储数据 3.修改配置文件 1.修改Nexus端口 在nexus下的etc目录下的配置文件nexus-default.properties的application-port配置
+4.启动 # bin目录下执行执行 ./nexux start 命令启动。脚本涵盖：./nexus {console | start | stop | restart | status | dump} ./nexus start # 3.x的nexus启动 nohup ./bin/nexus run &amp;gt; logs/nexus.log 2&amp;gt;&amp;amp;1 &amp;amp; 访问：ip+端口</description>
+    </item>
+    
     <item>
       <title>Mysql</title>
       <link>http://slgjy.github.io/post/mysql/</link>
