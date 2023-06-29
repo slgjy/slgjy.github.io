@@ -188,8 +188,9 @@ grep &#39;temporary password&#39; /var/log/mysqld.log 使用默认密码登录..
 安裝 docker形式部署 环境准备 docker-ce引擎安装
 安装mysql服务，用来配置持久化。
 创建目录
-# 用于nacos容器启动挂载，自定义 # 日志挂载目录 mkdir -p /home/nacos/logs/ # 配置文件挂载目录 mkdir -p /home/nacos/conf/ 获取配置文件 通过启动一个简易nacos容器来获取数据库持久化脚本，和配置文件。
-# 2.0版本以后的nacos需要额外开启9848，9849端口，否则spring代码连接会失败 docker run -itd --name nacos -p 8848:8848 -p 9848:9848 -p 9849:9849 -e MODE=standalone --restart=always nacos/nacos-server # 将模板容器中的配置文件拷贝到宿主机上。 docker cp nacos:/home/nacos/conf /home # 将样例容器删除掉 创建本地配置文件 将获取到的配置文件application.properties拷贝到上边创建的/home/nacos/conf/目录...</p>
+# 日志挂载目录 mkdir -p /home/nacos/logs/ # 配置文件挂载目录 mkdir -p /home/nacos/conf/ 获取配置文件 通过启动一个简易nacos容器来获取数据库持久化脚本，和配置文件。
+# 2.0版本以后的nacos需要额外开启9848，9849端口，否则spring代码连接会失败 docker run -itd --name nacos -p 8848:8848 -p 9848:9848 -p 9849:9849 -e MODE=standalone --restart=always nacos/nacos-server # 将模板容器中的配置文件拷贝到宿主机上。 docker cp nacos:/home/nacos/conf /home # 将样例容器删除掉 创建本地配置文件 将获取到的配置文件application.properties拷贝到上边创建的/home/nacos/conf/目录
+配置db数据源，账号密码 修改application.properties文件...</p>
   </div>
   <footer class="entry-footer"><span title='2023-05-06 11:08:52 +0800 CST'>May 6, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Nacos" href="http://slgjy.github.io/post/nacos/"></a>
