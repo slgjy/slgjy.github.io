@@ -137,6 +137,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>SpringHttpClient
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>RestTemplate RestTemplate是一款Spring内置的http客户端，和Spring框架整合度较高，提供了访问HTTP
+接口统一方式，允许不通的实现，比如HttpURLConnection HttpClient OkHttp等底层实现。
+RestTemplate实例化 public RestTemplate() { ... } public RestTemplate(ClientHttpRequestFactory requestFactory) { this(); this.setRequestFactory(requestFactory); } public RestTemplate(List&lt;HttpMessageConverter&lt;?&gt;&gt; messageConverters) { this.messageConverters = new ArrayList(); this.errorHandler = new DefaultResponseErrorHandler(); this.headersExtractor = new HeadersExtractor(); this.validateConverters(messageConverters); this.messageConverters.addAll(messageConverters); this.uriTemplateHandler = initUriTemplateHandler(); } 自定义客户端 通过RestTemplate的构造方法传递不同的ClientHttpRequestFactory 工厂来切换底层实现
+基于OkHttp 依赖引入
+&lt;!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp --&gt; &lt;dependency&gt; &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt; &lt;artifactId&gt;okhttp&lt;/artifactId&gt; &lt;version&gt;4....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-19 17:01:37 +0800 CST'>May 19, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to SpringHttpClient" href="http://slgjy.github.io/post/springhttpclient/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>docker镜像
     </h2>
   </header>
@@ -203,21 +219,6 @@ grep &#39;temporary password&#39; /var/log/mysqld.log 使用默认密码登录..
   </div>
   <footer class="entry-footer"><span title='2023-05-06 17:21:19 +0800 CST'>May 6, 2023</span></footer>
   <a class="entry-link" aria-label="post link to CloudNative" href="http://slgjy.github.io/post/cloudnative/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>SpringCloud
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>SpringCloud SpringBoot SpringCloud 实践记录 多环境配置 Spring2.4版本spring:profiles被弃用了
-使用---来分组配置
-修改成新的配置方式
-spring: config: activate: on-profile: prod server: port: 9000 spring: profiles: active: prod --- #开发环境 spring: application: name: hello-world config: activate: on-profile: dev cloud: nacos: discovery: # 服务注册地址 server-addr: ip:8848 config: # 配置中心地址 server-addr: ip:8848 # 配置文件格式 file-extension: yml # 命名空间 namespace: e09a1b28-1fe3-429c-83dd-69f8b030180f # 共享配置 shared-configs: - application-${spring....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-06 13:08:26 +0800 CST'>May 6, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to SpringCloud" href="http://slgjy.github.io/post/springcloud/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
