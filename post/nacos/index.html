@@ -8,10 +8,11 @@
 <title>Nacos | 小石头博客</title>
 <meta name="keywords" content="tools">
 <meta name="description" content="Nacos 简介 官网地址
-安裝 使用 实践记录 连接报错 UNAVAILABLE: io exception com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
-解决方式
-Nacos的2.0版本，需要增加了gRPC通信需要增加两个开放端口（开放9848和9849两个端口）。
-docker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \-e MODE=standalone \-e PREFER_HOST_MODE=hostname \-e SPRING_DATASOURCE_PLATFORM=mysql \-e MYSQL_SERVICE_HOST=192.168.190.129 \-e MYSQL_SERVICE_PORT=3306 \-e MYSQL_SERVICE_DB_NAME=nacos \-e MYSQL_SERVICE_USER=root \-e MYSQL_SERVICE_PASSWORD=root \-e MYSQL_DATABASE_NUM=1 \-v /home/slg/devtools/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties \-v /home/slg/devtools/nacos/logs:/home/nacos/logs \--restart always --name nacos nacos/nacos-server ">
+安裝 docker形式部署 环境准备 docker-ce引擎安装
+安装mysql服务，用来配置持久化。
+创建目录
+# 用于nacos容器启动挂载，自定义 # 日志挂载目录 mkdir -p /home/nacos/logs/ # 配置文件挂载目录 mkdir -p /home/nacos/conf/ 获取配置文件 通过启动一个简易nacos容器来获取数据库持久化脚本，和配置文件。
+# 2.0版本以后的nacos需要额外开启9848，9849端口，否则spring代码连接会失败 docker run -itd --name nacos -p 8848:8848 -p 9848:9848 -p 9849:9849 -e MODE=standalone --restart=always nacos/nacos-server # 将模板容器中的配置文件拷贝到宿主机上。 docker cp nacos:/home/nacos/conf /home # 将样例容器删除掉 创建本地配置文件 将获取到的配置文件application.properties拷贝到上边创建的/home/nacos/conf/目录">
 <meta name="author" content="">
 <link rel="canonical" href="http://slgjy.github.io/post/nacos/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
@@ -62,10 +63,11 @@ docker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \-e MODE=standalone \-e PRE
     </style>
 </noscript><meta property="og:title" content="Nacos" />
 <meta property="og:description" content="Nacos 简介 官网地址
-安裝 使用 实践记录 连接报错 UNAVAILABLE: io exception com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
-解决方式
-Nacos的2.0版本，需要增加了gRPC通信需要增加两个开放端口（开放9848和9849两个端口）。
-docker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \-e MODE=standalone \-e PREFER_HOST_MODE=hostname \-e SPRING_DATASOURCE_PLATFORM=mysql \-e MYSQL_SERVICE_HOST=192.168.190.129 \-e MYSQL_SERVICE_PORT=3306 \-e MYSQL_SERVICE_DB_NAME=nacos \-e MYSQL_SERVICE_USER=root \-e MYSQL_SERVICE_PASSWORD=root \-e MYSQL_DATABASE_NUM=1 \-v /home/slg/devtools/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties \-v /home/slg/devtools/nacos/logs:/home/nacos/logs \--restart always --name nacos nacos/nacos-server " />
+安裝 docker形式部署 环境准备 docker-ce引擎安装
+安装mysql服务，用来配置持久化。
+创建目录
+# 用于nacos容器启动挂载，自定义 # 日志挂载目录 mkdir -p /home/nacos/logs/ # 配置文件挂载目录 mkdir -p /home/nacos/conf/ 获取配置文件 通过启动一个简易nacos容器来获取数据库持久化脚本，和配置文件。
+# 2.0版本以后的nacos需要额外开启9848，9849端口，否则spring代码连接会失败 docker run -itd --name nacos -p 8848:8848 -p 9848:9848 -p 9849:9849 -e MODE=standalone --restart=always nacos/nacos-server # 将模板容器中的配置文件拷贝到宿主机上。 docker cp nacos:/home/nacos/conf /home # 将样例容器删除掉 创建本地配置文件 将获取到的配置文件application.properties拷贝到上边创建的/home/nacos/conf/目录" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://slgjy.github.io/post/nacos/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-05-06T11:08:52+08:00" />
@@ -74,10 +76,11 @@ docker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \-e MODE=standalone \-e PRE
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Nacos"/>
 <meta name="twitter:description" content="Nacos 简介 官网地址
-安裝 使用 实践记录 连接报错 UNAVAILABLE: io exception com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
-解决方式
-Nacos的2.0版本，需要增加了gRPC通信需要增加两个开放端口（开放9848和9849两个端口）。
-docker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \-e MODE=standalone \-e PREFER_HOST_MODE=hostname \-e SPRING_DATASOURCE_PLATFORM=mysql \-e MYSQL_SERVICE_HOST=192.168.190.129 \-e MYSQL_SERVICE_PORT=3306 \-e MYSQL_SERVICE_DB_NAME=nacos \-e MYSQL_SERVICE_USER=root \-e MYSQL_SERVICE_PASSWORD=root \-e MYSQL_DATABASE_NUM=1 \-v /home/slg/devtools/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties \-v /home/slg/devtools/nacos/logs:/home/nacos/logs \--restart always --name nacos nacos/nacos-server "/>
+安裝 docker形式部署 环境准备 docker-ce引擎安装
+安装mysql服务，用来配置持久化。
+创建目录
+# 用于nacos容器启动挂载，自定义 # 日志挂载目录 mkdir -p /home/nacos/logs/ # 配置文件挂载目录 mkdir -p /home/nacos/conf/ 获取配置文件 通过启动一个简易nacos容器来获取数据库持久化脚本，和配置文件。
+# 2.0版本以后的nacos需要额外开启9848，9849端口，否则spring代码连接会失败 docker run -itd --name nacos -p 8848:8848 -p 9848:9848 -p 9849:9849 -e MODE=standalone --restart=always nacos/nacos-server # 将模板容器中的配置文件拷贝到宿主机上。 docker cp nacos:/home/nacos/conf /home # 将样例容器删除掉 创建本地配置文件 将获取到的配置文件application.properties拷贝到上边创建的/home/nacos/conf/目录"/>
 
 
 <script type="application/ld+json">
@@ -106,12 +109,12 @@ docker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \-e MODE=standalone \-e PRE
   "@type": "BlogPosting",
   "headline": "Nacos",
   "name": "Nacos",
-  "description": "Nacos 简介 官网地址\n安裝 使用 实践记录 连接报错 UNAVAILABLE: io exception com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception\n解决方式\nNacos的2.0版本，需要增加了gRPC通信需要增加两个开放端口（开放9848和9849两个端口）。\ndocker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \\-e MODE=standalone \\-e PREFER_HOST_MODE=hostname \\-e SPRING_DATASOURCE_PLATFORM=mysql \\-e MYSQL_SERVICE_HOST=192.168.190.129 \\-e MYSQL_SERVICE_PORT=3306 \\-e MYSQL_SERVICE_DB_NAME=nacos \\-e MYSQL_SERVICE_USER=root \\-e MYSQL_SERVICE_PASSWORD=root \\-e MYSQL_DATABASE_NUM=1 \\-v /home/slg/devtools/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties \\-v /home/slg/devtools/nacos/logs:/home/nacos/logs \\--restart always --name nacos nacos/nacos-server ",
+  "description": "Nacos 简介 官网地址\n安裝 docker形式部署 环境准备 docker-ce引擎安装\n安装mysql服务，用来配置持久化。\n创建目录\n# 用于nacos容器启动挂载，自定义 # 日志挂载目录 mkdir -p /home/nacos/logs/ # 配置文件挂载目录 mkdir -p /home/nacos/conf/ 获取配置文件 通过启动一个简易nacos容器来获取数据库持久化脚本，和配置文件。\n# 2.0版本以后的nacos需要额外开启9848，9849端口，否则spring代码连接会失败 docker run -itd --name nacos -p 8848:8848 -p 9848:9848 -p 9849:9849 -e MODE=standalone --restart=always nacos/nacos-server # 将模板容器中的配置文件拷贝到宿主机上。 docker cp nacos:/home/nacos/conf /home # 将样例容器删除掉 创建本地配置文件 将获取到的配置文件application.properties拷贝到上边创建的/home/nacos/conf/目录",
   "keywords": [
     "tools"
   ],
-  "articleBody": "Nacos 简介 官网地址\n安裝 使用 实践记录 连接报错 UNAVAILABLE: io exception com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception\n解决方式\nNacos的2.0版本，需要增加了gRPC通信需要增加两个开放端口（开放9848和9849两个端口）。\ndocker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \\-e MODE=standalone \\-e PREFER_HOST_MODE=hostname \\-e SPRING_DATASOURCE_PLATFORM=mysql \\-e MYSQL_SERVICE_HOST=192.168.190.129 \\-e MYSQL_SERVICE_PORT=3306 \\-e MYSQL_SERVICE_DB_NAME=nacos \\-e MYSQL_SERVICE_USER=root \\-e MYSQL_SERVICE_PASSWORD=root \\-e MYSQL_DATABASE_NUM=1 \\-v /home/slg/devtools/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties \\-v /home/slg/devtools/nacos/logs:/home/nacos/logs \\--restart always --name nacos nacos/nacos-server ",
-  "wordCount" : "52",
+  "articleBody": "Nacos 简介 官网地址\n安裝 docker形式部署 环境准备 docker-ce引擎安装\n安装mysql服务，用来配置持久化。\n创建目录\n# 用于nacos容器启动挂载，自定义 # 日志挂载目录 mkdir -p /home/nacos/logs/ # 配置文件挂载目录 mkdir -p /home/nacos/conf/ 获取配置文件 通过启动一个简易nacos容器来获取数据库持久化脚本，和配置文件。\n# 2.0版本以后的nacos需要额外开启9848，9849端口，否则spring代码连接会失败 docker run -itd --name nacos -p 8848:8848 -p 9848:9848 -p 9849:9849 -e MODE=standalone --restart=always nacos/nacos-server # 将模板容器中的配置文件拷贝到宿主机上。 docker cp nacos:/home/nacos/conf /home # 将样例容器删除掉 创建本地配置文件 将获取到的配置文件application.properties拷贝到上边创建的/home/nacos/conf/目录\n配置db数据源，账号密码 修改application.properties文件\n#核心修改要点 #添加数据类型是mysql spring.datasource.platform=${SPRING_DATASOURCE_PLATFORM:mysql} # 数据库配置 db.url.0=jdbc:mysql://xxxx:3306/nacos_config?characterEncoding=utf8\u0026connectTimeout=1000\u0026socketTimeout=3000\u0026autoReconnect=true\u0026useSSL=false db.user.0=root db.password.0=root #添加如下配置，启动权限校验 nacos.core.auth.enabled=true #设置秘钥 nacos.core.auth.plugin.nacos.token.secret.key=${NACOS_AUTH_TOKEN:SecretKey012345678901234567890123456789012345678901234567890123456789} 创建数据表结构 在配置文件中设置的数据库上执行mysql-schema.sql文件生成表结构。\n启动容器 ldocker run -itd -p 8848:8848 -p 9848:9848 -p 9849:9049 -e Mode=standalone -v /home/nacos/conf/application.properties:/home/nacos/conf/application.properties -v /home/nacos/logs:/home/nacos/logs --restart always --name nacos f151dab7a111 测试 使用 实践记录 连接报错 UNAVAILABLE: io exception com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception\n解决方式\nNacos的2.0版本，需要增加了gRPC通信需要增加两个开放端口（开放9848和9849两个端口）。\ndocker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \\-e MODE=standalone \\-e PREFER_HOST_MODE=hostname \\-e SPRING_DATASOURCE_PLATFORM=mysql \\-e MYSQL_SERVICE_HOST=192.168.190.129 \\-e MYSQL_SERVICE_PORT=3306 \\-e MYSQL_SERVICE_DB_NAME=nacos \\-e MYSQL_SERVICE_USER=root \\-e MYSQL_SERVICE_PASSWORD=root \\-e MYSQL_DATABASE_NUM=1 \\-v /home/slg/devtools/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties \\-v /home/slg/devtools/nacos/logs:/home/nacos/logs \\--restart always --name nacos nacos/nacos-server ",
+  "wordCount" : "136",
   "inLanguage": "en",
   "datePublished": "2023-05-06T11:08:52+08:00",
   "dateModified": "2023-05-06T11:08:52+08:00",
@@ -200,6 +203,63 @@ docker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \-e MODE=standalone \-e PRE
 <h2 id="简介">简介<a hidden class="anchor" aria-hidden="true" href="#简介">#</a></h2>
 <p><a href="https://nacos.io/zh-cn/index.html">官网地址</a></p>
 <h2 id="安裝">安裝<a hidden class="anchor" aria-hidden="true" href="#安裝">#</a></h2>
+<h3 id="docker形式部署">docker形式部署<a hidden class="anchor" aria-hidden="true" href="#docker形式部署">#</a></h3>
+<h4 id="环境准备">环境准备<a hidden class="anchor" aria-hidden="true" href="#环境准备">#</a></h4>
+<ol>
+<li>
+<p>docker-ce引擎安装</p>
+</li>
+<li>
+<p>安装mysql服务，用来配置持久化。</p>
+</li>
+<li>
+<p>创建目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 用于nacos容器启动挂载，自定义</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 日志挂载目录</span>
+</span></span><span style="display:flex;"><span>mkdir -p /home/nacos/logs/
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 配置文件挂载目录</span>
+</span></span><span style="display:flex;"><span>mkdir -p /home/nacos/conf/
+</span></span></code></pre></div></li>
+</ol>
+<h4 id="获取配置文件">获取配置文件<a hidden class="anchor" aria-hidden="true" href="#获取配置文件">#</a></h4>
+<p>通过启动一个简易nacos容器来获取数据库持久化脚本，和配置文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 2.0版本以后的nacos需要额外开启9848，9849端口，否则spring代码连接会失败</span>
+</span></span><span style="display:flex;"><span>docker run -itd --name nacos -p 8848:8848 -p 9848:9848 -p 9849:9849 -e MODE<span style="color:#f92672">=</span>standalone  --restart<span style="color:#f92672">=</span>always nacos/nacos-server
+</span></span></code></pre></div><p><img loading="lazy" src="/nacos.assets/image-20230629101204208.png" alt="image-20230629101204208"  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 将模板容器中的配置文件拷贝到宿主机上。</span>
+</span></span><span style="display:flex;"><span>docker cp nacos:/home/nacos/conf /home
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将样例容器删除掉</span>
+</span></span></code></pre></div><p><img loading="lazy" src="/nacos.assets/image-20230629101602695.png" alt="image-20230629101602695"  />
+</p>
+<h4 id="创建本地配置文件">创建本地配置文件<a hidden class="anchor" aria-hidden="true" href="#创建本地配置文件">#</a></h4>
+<p>将获取到的配置文件<code>application.properties</code>拷贝到上边创建的<code>/home/nacos/conf/</code>目录</p>
+<p><img loading="lazy" src="/nacos.assets/image-20230629102739483.png" alt="image-20230629102739483"  />
+</p>
+<h5 id="配置db数据源账号密码">配置db数据源，账号密码<a hidden class="anchor" aria-hidden="true" href="#配置db数据源账号密码">#</a></h5>
+<p>修改<code>application.properties</code>文件</p>
+<p><img loading="lazy" src="/nacos.assets/image-20230629103551325.png" alt="image-20230629103551325"  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-properties" data-lang="properties"><span style="display:flex;"><span><span style="color:#75715e">#核心修改要点</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#添加数据类型是mysql</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">spring.datasource.platform</span><span style="color:#f92672">=</span><span style="color:#e6db74">${SPRING_DATASOURCE_PLATFORM:mysql}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 数据库配置</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">db.url.0</span><span style="color:#f92672">=</span><span style="color:#e6db74">jdbc:mysql://xxxx:3306/nacos_config?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true&amp;useSSL=false</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">db.user.0</span><span style="color:#f92672">=</span><span style="color:#e6db74">root</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">db.password.0</span><span style="color:#f92672">=</span><span style="color:#e6db74">root</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#添加如下配置，启动权限校验</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">nacos.core.auth.enabled</span><span style="color:#f92672">=</span><span style="color:#e6db74">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#设置秘钥</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">nacos.core.auth.plugin.nacos.token.secret.key</span><span style="color:#f92672">=</span><span style="color:#e6db74">${NACOS_AUTH_TOKEN:SecretKey012345678901234567890123456789012345678901234567890123456789}</span>
+</span></span></code></pre></div><h5 id="创建数据表结构">创建数据表结构<a hidden class="anchor" aria-hidden="true" href="#创建数据表结构">#</a></h5>
+<p>在配置文件中设置的数据库上执行<code>mysql-schema.sql</code>文件生成表结构。</p>
+<p><img loading="lazy" src="/nacos.assets/image-20230629113228412.png" alt="image-20230629113228412"  />
+</p>
+<h4 id="启动容器">启动容器<a hidden class="anchor" aria-hidden="true" href="#启动容器">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ldocker run -itd -p 8848:8848 -p 9848:9848 -p 9849:9049 -e Mode<span style="color:#f92672">=</span>standalone -v /home/nacos/conf/application.properties:/home/nacos/conf/application.properties -v /home/nacos/logs:/home/nacos/logs --restart always --name nacos  f151dab7a111
+</span></span></code></pre></div><h4 id="测试">测试<a hidden class="anchor" aria-hidden="true" href="#测试">#</a></h4>
+<p><img loading="lazy" src="/nacos.assets/image-20230629113430654.png" alt="image-20230629113430654"  />
+</p>
 <h2 id="使用">使用<a hidden class="anchor" aria-hidden="true" href="#使用">#</a></h2>
 <h2 id="实践记录">实践记录<a hidden class="anchor" aria-hidden="true" href="#实践记录">#</a></h2>
 <h3 id="连接报错">连接报错<a hidden class="anchor" aria-hidden="true" href="#连接报错">#</a></h3>
