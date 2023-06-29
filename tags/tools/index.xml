@@ -66,12 +66,10 @@ grep &amp;#39;temporary password&amp;#39; /var/log/mysqld.log 使用默认密码
       
       <guid>http://slgjy.github.io/post/nacos/</guid>
       <description>Nacos 简介 官网地址
-安裝 docker形式部署 环境准备 docker-ce引擎安装
-安装mysql服务，用来配置持久化。
-创建目录
-# 日志挂载目录 mkdir -p /home/nacos/logs/ # 配置文件挂载目录 mkdir -p /home/nacos/conf/ 获取配置文件 通过启动一个简易nacos容器来获取数据库持久化脚本，和配置文件。
-# 2.0版本以后的nacos需要额外开启9848，9849端口，否则spring代码连接会失败 docker run -itd --name nacos -p 8848:8848 -p 9848:9848 -p 9849:9849 -e MODE=standalone --restart=always nacos/nacos-server # 将模板容器中的配置文件拷贝到宿主机上。 docker cp nacos:/home/nacos/conf /home # 将样例容器删除掉 创建本地配置文件 将获取到的配置文件application.properties拷贝到上边创建的/home/nacos/conf/目录
-配置db数据源，账号密码 修改application.properties文件</description>
+安裝 使用 实践记录 连接报错 UNAVAILABLE: io exception com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
+解决方式
+Nacos的2.0版本，需要增加了gRPC通信需要增加两个开放端口（开放9848和9849两个端口）。
+docker run -d -p 8848:8848 -p 9848:9848 -p 9849:9849 \-e MODE=standalone \-e PREFER_HOST_MODE=hostname \-e SPRING_DATASOURCE_PLATFORM=mysql \-e MYSQL_SERVICE_HOST=192.168.190.129 \-e MYSQL_SERVICE_PORT=3306 \-e MYSQL_SERVICE_DB_NAME=nacos \-e MYSQL_SERVICE_USER=root \-e MYSQL_SERVICE_PASSWORD=root \-e MYSQL_DATABASE_NUM=1 \-v /home/slg/devtools/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties \-v /home/slg/devtools/nacos/logs:/home/nacos/logs \--restart always --name nacos nacos/nacos-server z</description>
     </item>
     
     <item>
