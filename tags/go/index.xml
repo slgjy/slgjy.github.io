@@ -6,7 +6,18 @@
     <description>Recent content in go on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Jun 2023 15:31:01 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Jul 2023 14:54:33 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Goland_swag</title>
+      <link>http://slgjy.github.io/post/goland_swag/</link>
+      <pubDate>Fri, 07 Jul 2023 14:54:33 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/goland_swag/</guid>
+      <description>GoLand-Swagger swagger简介 根据代码中自定义注解生成接口文档，在前后端分离项目中通过swagger将接口文档定义好，自动更新，方便维护。
+swagger集成 依赖下载 go install github.com/swaggo/swag/cmd/swag@latest go get -u github.com/swaggo/gin-swagger go get -u github.com/swaggo/files 初始化 #swag初始化 swag init 在项目目录下生成如何目录
+引入生成的包 import ( _ &amp;#34;statistical_data/docs&amp;#34; //就是swag init生成的包 ) // @title 项目api文档 // @version 1.0 // @description API文档 // @host 127.0.0.1:8199 // @BasePath / func main() { .... } 重新初始化</description>
+    </item>
+    
     <item>
       <title>go打包配置文件和静态文件</title>
       <link>http://slgjy.github.io/post/go-bindata/</link>
