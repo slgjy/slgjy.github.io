@@ -137,6 +137,23 @@
 
 <article class="first-entry"> 
   <header class="entry-header">
+    <h2>Cfssl
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Cfssl 官网地址
+CFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。
+Cfssl包括
+一组用于构建自定义的TLS PKI工具 TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。 cfssl程序，命令行操作 multirootca程序，使用多个签名秘钥的证书颁发机构服务器 multirootca程序构建证书池捆绑包 cfssl json程序 安装 下载地址
+##通过wget或者curl命令都可以下载 # curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl # curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson # curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo 移动文件修改权限
+# 移动文件到/usr/local/bin/ [root@k8s-worker1 cfssl]# mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl [root@k8s-worker1 cfssl]# mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo [root@k8s-worker1 cfssl]# mv cfssljson_1....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-07-11 03:33:49 +0800 CST'>July 11, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Cfssl" href="http://slgjy.github.io/post/cfssl/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Cobra
     </h2>
   </header>
@@ -170,7 +187,15 @@ swagger集成 依赖下载 go install github.com/swaggo/swag/cmd/swag@latest go 
     </h2>
   </header>
   <div class="entry-content">
-    <p>testyixai</p>
+    <p>Harbor 官网地址
+Docker Hub的速度比较慢
+使用公有云自带的容器仓库
+构建私有仓库
+docker registry没有操作界面，不直观就使用了Harbor
+Harbor部署 部署方式
+离线安装：资源包带offline包含需要安装的镜像文件，容量比较大，适用生产环境。 在线安装：资源包带online需要保证主机可以联通互联网，适用于搭建私有仓库，用于学习和研究。 Docker-Ce安装 harbor是基于docker环境运行的，所以先安装docker环境
+Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF net.ipv4.ip_forward = 1 net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF sysctl -p net.ipv4.ip_forward = 1: 开启路由转发，不配置该参数，主机重启后，服务状态正常，却无法访问到服务器。
+使用cfssl工具配置Harbor证书 默认的Harbor不附带证书，生产环境为了安全需要使用HTTPS,如果启用Content Trust with Notary 以正确签署所有图像，则必须使用 HTTPS。要配置 HTTPS，必须创建 SSL 证书。您可以使用受信任的第三方 CA 签署的证书，也可以使用自签名证书。本节介绍如何使用cfssl创建 CA，以及如何使用您的 CA 签署服务器证书和客户端证书。官方使用的是openssl工具来生成证书。...</p>
   </div>
   <footer class="entry-footer"><span title='2023-06-29 13:10:04 +0800 CST'>June 29, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Harbor" href="http://slgjy.github.io/post/harbor/"></a>
@@ -192,21 +217,6 @@ Linux下安装 1.下载包 本次使用3.x版本,下载地址
   </div>
   <footer class="entry-footer"><span title='2023-06-26 11:49:32 +0800 CST'>June 26, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Nexus" href="http://slgjy.github.io/post/nexus/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>K8s部署实践
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>K8s部署实践 准备工作 K8s环境已具备 Docker引擎已部署 容器镜像仓库已存在(私有库harbor) 部署服务 创建命名空间 # 以下的部署都基于该命名空间 kubectl create namespace app-storage 后端项目 依赖mysql数据库
-部署Mysql服务 创建pv PersistentVolume(简称pv)持久卷，也是一种集群资源，他的声明周期和使用他的pod项目独立
-新建mysql-pv.yaml
-apiVersion: v1 kind: PersistentVolume metadata: namespace: app-storage name: mysql-pv labels: pv: mysql-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain hostPath: path: /root/data # 创建PV kubectl create -f mysql-pv.yaml # 检验 kubectl get pv 创建pvc PersistentVolumeClaim（持久卷声明，简称PVC）是用户的一种存储请求。它和Pod类似，Pod消耗Node资源，而PVC消耗PV资源。Pod能够请求特定的资源（如CPU和内存）。PVC能够请求指定的大小和访问的模式（可以被映射为一次读写或者多次只读）。...</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-06-01 15:36:45 +0800 CST'>June 1, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to K8s部署实践" href="http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Cfssl | 小石头博客</title>
+<meta name="keywords" content="tools">
+<meta name="description" content="Cfssl 官网地址
+CFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。
+Cfssl包括
+一组用于构建自定义的TLS PKI工具 TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。 cfssl程序，命令行操作 multirootca程序，使用多个签名秘钥的证书颁发机构服务器 multirootca程序构建证书池捆绑包 cfssl json程序 安装 下载地址
+##通过wget或者curl命令都可以下载 # curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl # curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson # curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo 移动文件修改权限
+# 移动文件到/usr/local/bin/ [root@k8s-worker1 cfssl]# mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl [root@k8s-worker1 cfssl]# mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo [root@k8s-worker1 cfssl]# mv cfssljson_1.">
+<meta name="author" content="">
+<link rel="canonical" href="http://slgjy.github.io/post/cfssl/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://slgjy.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://slgjy.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://slgjy.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Cfssl" />
+<meta property="og:description" content="Cfssl 官网地址
+CFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。
+Cfssl包括
+一组用于构建自定义的TLS PKI工具 TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。 cfssl程序，命令行操作 multirootca程序，使用多个签名秘钥的证书颁发机构服务器 multirootca程序构建证书池捆绑包 cfssl json程序 安装 下载地址
+##通过wget或者curl命令都可以下载 # curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl # curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson # curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo 移动文件修改权限
+# 移动文件到/usr/local/bin/ [root@k8s-worker1 cfssl]# mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl [root@k8s-worker1 cfssl]# mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo [root@k8s-worker1 cfssl]# mv cfssljson_1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://slgjy.github.io/post/cfssl/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-11T03:33:49+08:00" />
+<meta property="article:modified_time" content="2023-07-11T03:33:49+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cfssl"/>
+<meta name="twitter:description" content="Cfssl 官网地址
+CFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。
+Cfssl包括
+一组用于构建自定义的TLS PKI工具 TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。 cfssl程序，命令行操作 multirootca程序，使用多个签名秘钥的证书颁发机构服务器 multirootca程序构建证书池捆绑包 cfssl json程序 安装 下载地址
+##通过wget或者curl命令都可以下载 # curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl # curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson # curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo 移动文件修改权限
+# 移动文件到/usr/local/bin/ [root@k8s-worker1 cfssl]# mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl [root@k8s-worker1 cfssl]# mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo [root@k8s-worker1 cfssl]# mv cfssljson_1."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "http://slgjy.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Cfssl",
+      "item": "http://slgjy.github.io/post/cfssl/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cfssl",
+  "name": "Cfssl",
+  "description": "Cfssl 官网地址\nCFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。\nCfssl包括\n一组用于构建自定义的TLS PKI工具 TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。 cfssl程序，命令行操作 multirootca程序，使用多个签名秘钥的证书颁发机构服务器 multirootca程序构建证书池捆绑包 cfssl json程序 安装 下载地址\n##通过wget或者curl命令都可以下载 # curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl # curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson # curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo 移动文件修改权限\n# 移动文件到/usr/local/bin/ [root@k8s-worker1 cfssl]# mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl [root@k8s-worker1 cfssl]# mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo [root@k8s-worker1 cfssl]# mv cfssljson_1.",
+  "keywords": [
+    "tools"
+  ],
+  "articleBody": "Cfssl 官网地址\nCFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。\nCfssl包括\n一组用于构建自定义的TLS PKI工具 TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。 cfssl程序，命令行操作 multirootca程序，使用多个签名秘钥的证书颁发机构服务器 multirootca程序构建证书池捆绑包 cfssl json程序 安装 下载地址\n##通过wget或者curl命令都可以下载 # curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl # curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson # curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo 移动文件修改权限\n# 移动文件到/usr/local/bin/ [root@k8s-worker1 cfssl]# mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl [root@k8s-worker1 cfssl]# mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo [root@k8s-worker1 cfssl]# mv cfssljson_1.6.4_linux_amd64 /usr/local/bin/cfssljson #修改权限 chmod +x /usr/local/bin/cfss* 使用 常用子命令 No command is given. Usage: Available commands: sign:签名一个客户端证书，通过给定的CA和CA密钥，和主机名 gencert：生成新的key(密钥)和签名证书 certinfo：输出给定证书的证书信息， 跟cfssl-certinfo 工具作用一样 ocspsign:为给定的CA、Cert和状态签署OCSP响应。返回一个base64编码的OCSP响应 bundle：创建包含客户端证书的证书包 crl serve：启动一个HTTP API服务 genkey：生成一个key(私钥)和CSR(证书签名请求) gencrl ocspdump： 从cert db 中的所有 OCSP 响应中生成一系列连贯的 OCSP 响应，供 ocspserve 使用 selfsign：生成一个新的自签名密钥和 签名证书 scan：扫描主机问题 print-defaults：打印默认配置，这个默认配置可以用作模板 version gencsr ocsprefresh:用所有已知未过期证书的新OCSP响应刷新ocsp_responses表。 ocspserve:设置一个HTTP服务器，处理来自文件或直接来自数据库的OCSP请求。 info:获取有关远程签名者的信息 revoke：吊销证书 Top-level flags:\n常用命令 cfssl gencert -initca ca-csr.json | cfssljson -bare ca ## 初始化ca cfssl gencert -initca -ca-key key.pem ca-csr.json | cfssljson -bare ca ## 使用现有私钥, 重新生成 cfssl certinfo -cert ca.pem cfssl certinfo -csr ca.csr\nCfssl创建CA认证 创建认证中心(CA) cfssl可以创建获取和操作证书的内部认证中心，运行认证中心需要一个CA证书和响应的CA私钥。任何知道私钥的人都可以充当CA来颁发证书，因此私钥需要保密。\nk8s和harbor都需要证书，这里以k8s所需证书实践\ncfssl print-defaults config \u003e ca-config.json # 默认证书策略配置模板 cfssl print-defaults csr \u003e ca-csr.json #默认csr请求模板\n结合自身需求，修改证书请求文件ca-csr.json，证书有效期10年\n{ \"CN\":\"kubernetes\", \"key\": { \"algo\":\"rsa\", \"size\": 2048 }, \"names\": [ { \"C\":\"CN\", \"ST\":\"BeiJing\", \"L\":\"BeiJing\", \"O\":\"k8s\", \"OU\":\"System\" } ], \"ca\": { \"expiry\":\"87600h\" } } \"CN\"：Common Name，kube-apiserver 从证书中提取该字段作为请求的用户名 (User Name) \"O\"：Organization，kube-apiserver从证书中提取该字段作为请求用户所属的组 (Group) C: Country， 国家 L: Locality，地区，城市 O: Organization Name，组织名称，公司名称 OU: Organization Unit Name，组织单位名称，公司部门 ST: State，州，省 证书配置模板文件ca-config.json\n{ \"signing\": { \"default\": { \"expiry\":\"87600h\" }, \"profiles\": { \"kubernetes\": { \"usages\": [ \"signing\", \"key encipherment\", \"server auth\", \"client auth\" ], \"expiry\":\"87600h\" } } } } 知识点：\nconfig.json：可以定义多个 profiles，分别指定不同的过期时间、使用场景等参数；后续在签名证书时使用某个 profile；此实例只有一个kubernetes模板。 signing：表示该证书可用于签名其它证书；生成的 ca.pem 证书中CA=TRUE server auth：表示client可以用该 CA 对server提供的证书进行验证； client auth：表示server可以用该CA对client提供的证书进行验证； 注意标点符号，最后一个字段一般是没有逗号的。 初始化创建CA认证中心，将会生成ca-key.pem（私钥）和ca.pem（公钥）\ncfssl gencert -initca ca-csr.json | cfssljson -bare ca\n创建k8s证书 创建kubernetes-csr.json证书请求文件\n{ \"CN\":\"kubernetes\", \"hosts\": [ \"127.0.0.1\", \"10.1.20.129\", \"10.1.20.128\", \"10.1.20.126\", \"10.1.20.127\", \"10.254.0.1\", \"*.kubernetes.master\", \"localhost\", \"kubernetes\", \"kubernetes.default\", \"kubernetes.default.svc\", \"kubernetes.default.svc.cluster\", \"kubernetes.default.svc.cluster.local\" ], \"key\": { \"algo\":\"rsa\", \"size\": 2048 }, \"names\": [ { \"C\":\"CN\", \"ST\":\"BeiJing\", \"L\":\"BeiJing\", \"O\":\"k8s\", \"OU\":\"System\" } ] } 这个证书目前专属于 apiserver，加了一个 *.kubernetes.master域名以便内部私有 DNS 解析使用(可删除)；kubernetes 这几个能不能删掉，答案是不可以的；因为当集群创建好后，default namespace 下会创建一个叫 kubenretes 的svc，有一些组件会直接连接这个 svc 来跟 api 通信的，证书如果不包含可能会出现无法连接的情况；其他几个 kubernetes 开头的域名作用相同 hosts包含的是授权范围，不在此范围的的节点或者服务使用此证书就会报证书不匹配错误。10.254.0.1是指kube-apiserver 指定的 service-cluster-ip-range 网段的第一个IP。 生成kubernetes证书和私钥\ncfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kubernetes-csr.json | cfssljson -bare kubernetes\n-config 引用的是模板中的默认配置文件，\n-profiles是指定特定的使用场景，比如config.json中的kubernetes区域\n创建admin证书 创建admin证书请求文件admin-csr.json\n{ \"CN\":\"admin\", \"hosts\": [], \"key\": { \"algo\":\"rsa\", \"size\": 2048 }, \"names\": [ { \"C\":\"CN\", \"ST\":\"BeiJing\", \"L\":\"BeiJing\", \"O\":\"system:masters\", \"OU\":\"System\" } ] } 生成admin证书和私钥\ncfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes admin-csr.json | cfssljson -bare admin\n这个admin 证书，是将来生成管理员用的kubeconfig 配置文件用的，现在一般建议使用RBAC 来对kubernetes 进行角色权限控制， kubernetes 将证书中的CN字段作为User， O 字段作为 Group\n同样，我们也可以按照同样的方式来创建kubernetes中etcd集群的证书。\n其他记录 wget和curl命令 curl curl ",
+  "wordCount" : "369",
+  "inLanguage": "en",
+  "datePublished": "2023-07-11T03:33:49+08:00",
+  "dateModified": "2023-07-11T03:33:49+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://slgjy.github.io/post/cfssl/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "小石头博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://slgjy.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://slgjy.github.io" accesskey="h" title="小石头博客 (Alt + H)">小石头博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://slgjy.github.io/tags/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://slgjy.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Cfssl
+    </h1>
+    <div class="post-meta"><span title='2023-07-11 03:33:49 +0800 CST'>July 11, 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="cfssl">Cfssl<a hidden class="anchor" aria-hidden="true" href="#cfssl">#</a></h1>
+<p><a href="https://github.com/cloudflare/cfssl">官网地址</a></p>
+<p>CFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。</p>
+<p>Cfssl包括</p>
+<ul>
+<li>一组用于构建自定义的TLS PKI工具  TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。</li>
+<li>cfssl程序，命令行操作</li>
+<li>multirootca程序，使用多个签名秘钥的证书颁发机构服务器</li>
+<li>multirootca程序构建证书池捆绑包</li>
+<li>cfssl json程序</li>
+</ul>
+<h2 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h2>
+<p><a href="https://github.com/cloudflare/cfssl/releases">下载地址</a></p>
+<p><img loading="lazy" src="/cfssl.assets/image-20230627104536586.png" alt="image-20230627104536586"  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">##通过wget或者curl命令都可以下载</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo</span>
+</span></span></code></pre></div><p><img loading="lazy" src="/cfssl.assets/image-20230627170454726.png" alt="image-20230627170454726"  />
+</p>
+<p><strong>移动文件修改权限</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 移动文件到/usr/local/bin/</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@k8s-worker1 cfssl<span style="color:#f92672">]</span><span style="color:#75715e"># mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@k8s-worker1 cfssl<span style="color:#f92672">]</span><span style="color:#75715e"># mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@k8s-worker1 cfssl<span style="color:#f92672">]</span><span style="color:#75715e"># mv cfssljson_1.6.4_linux_amd64 /usr/local/bin/cfssljson</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#修改权限</span>
+</span></span><span style="display:flex;"><span>chmod +x /usr/local/bin/cfss*
+</span></span></code></pre></div><p><img loading="lazy" src="/cfssl.assets/image-20230627171942319.png" alt="image-20230627171942319"  />
+</p>
+<h2 id="使用">使用<a hidden class="anchor" aria-hidden="true" href="#使用">#</a></h2>
+<h3 id="常用子命令">常用子命令<a hidden class="anchor" aria-hidden="true" href="#常用子命令">#</a></h3>
+<blockquote>
+<p>No command is given.
+Usage:
+Available commands:
+sign:签名一个客户端证书，通过给定的CA和CA密钥，和主机名
+gencert：生成新的key(密钥)和签名证书
+certinfo：输出给定证书的证书信息， 跟cfssl-certinfo 工具作用一样
+ocspsign:为给定的CA、Cert和状态签署OCSP响应。返回一个base64编码的OCSP响应
+bundle：创建包含客户端证书的证书包
+crl
+serve：启动一个HTTP API服务
+genkey：生成一个key(私钥)和CSR(证书签名请求)
+gencrl
+ocspdump： 从cert db 中的所有 OCSP 响应中生成一系列连贯的 OCSP 响应，供 ocspserve 使用
+selfsign：生成一个新的自签名密钥和 签名证书
+scan：扫描主机问题
+print-defaults：打印默认配置，这个默认配置可以用作模板
+version
+gencsr
+ocsprefresh:用所有已知未过期证书的新OCSP响应刷新ocsp_responses表。
+ocspserve:设置一个HTTP服务器，处理来自文件或直接来自数据库的OCSP请求。
+info:获取有关远程签名者的信息
+revoke：吊销证书
+Top-level flags:</p>
+</blockquote>
+<h3 id="常用命令">常用命令<a hidden class="anchor" aria-hidden="true" href="#常用命令">#</a></h3>
+<blockquote>
+<p>cfssl gencert -initca ca-csr.json | cfssljson -bare ca ## 初始化ca
+cfssl gencert -initca -ca-key key.pem ca-csr.json | cfssljson -bare ca ## 使用现有私钥, 重新生成
+cfssl certinfo -cert ca.pem
+cfssl certinfo -csr ca.csr</p>
+</blockquote>
+<h3 id="cfssl创建ca认证">Cfssl创建CA认证<a hidden class="anchor" aria-hidden="true" href="#cfssl创建ca认证">#</a></h3>
+<h4 id="创建认证中心ca">创建认证中心(CA)<a hidden class="anchor" aria-hidden="true" href="#创建认证中心ca">#</a></h4>
+<p>cfssl可以创建获取和操作证书的内部认证中心，运行认证中心需要一个CA证书和响应的CA私钥。任何知道私钥的人都可以充当CA来颁发证书，因此私钥需要保密。</p>
+<p>k8s和harbor都需要证书，这里以k8s所需证书实践</p>
+<blockquote>
+<p>cfssl print-defaults config &gt; ca-config.json # 默认证书策略配置模板
+cfssl print-defaults csr &gt; ca-csr.json #默认csr请求模板</p>
+</blockquote>
+<p>结合自身需求，修改证书请求文件ca-<code>csr.json</code>，证书有效期10年</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;CN&#34;</span>:<span style="color:#e6db74">&#34;kubernetes&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;key&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;algo&#34;</span>:<span style="color:#e6db74">&#34;rsa&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;names&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;C&#34;</span>:<span style="color:#e6db74">&#34;CN&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ST&#34;</span>:<span style="color:#e6db74">&#34;BeiJing&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;L&#34;</span>:<span style="color:#e6db74">&#34;BeiJing&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;O&#34;</span>:<span style="color:#e6db74">&#34;k8s&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;OU&#34;</span>:<span style="color:#e6db74">&#34;System&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>   ],
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;ca&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;expiry&#34;</span>:<span style="color:#e6db74">&#34;87600h&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>&quot;CN&quot;</code>：Common Name，kube-apiserver 从证书中提取该字段作为请求的用户名 (User Name)</li>
+<li><code>&quot;O&quot;</code>：Organization，kube-apiserver从证书中提取该字段作为请求用户所属的组 (Group)</li>
+<li><code>C</code>: Country， 国家</li>
+<li><code>L</code>: Locality，地区，城市</li>
+<li><code>O</code>: Organization Name，组织名称，公司名称</li>
+<li><code>OU</code>: Organization Unit Name，组织单位名称，公司部门</li>
+<li><code>ST</code>: State，州，省</li>
+</ul>
+<p>证书配置模板文件<code>ca-config.json</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;signing&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;default&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;expiry&#34;</span>:<span style="color:#e6db74">&#34;87600h&#34;</span>
+</span></span><span style="display:flex;"><span>   },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;profiles&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;kubernetes&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;usages&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signing&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;key encipherment&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;server auth&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;client auth&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;expiry&#34;</span>:<span style="color:#e6db74">&#34;87600h&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>知识点：</p>
+<ul>
+<li><code>config.json</code>：可以定义多个 <code>profiles</code>，分别指定不同的过期时间、使用场景等参数；后续在签名证书时使用某个 <code>profile</code>；此实例只有一个kubernetes模板。</li>
+<li><code>signing</code>：表示该证书可用于签名其它证书；生成的 ca.pem 证书中<code>CA=TRUE</code></li>
+<li><code>server auth</code>：表示client可以用该 CA 对server提供的证书进行验证；</li>
+<li><code>client auth</code>：表示server可以用该CA对client提供的证书进行验证；</li>
+<li>注意标点符号，最后一个字段一般是没有<code>逗号</code>的。</li>
+</ul>
+<p>初始化创建CA认证中心，将会生成<code>ca-key.pem</code>（私钥）和<code>ca.pem</code>（公钥）</p>
+<blockquote>
+<p>cfssl gencert -initca ca-csr.json | cfssljson -bare ca</p>
+</blockquote>
+<h4 id="创建k8s证书">创建k8s证书<a hidden class="anchor" aria-hidden="true" href="#创建k8s证书">#</a></h4>
+<p>创建<code>kubernetes-csr.json</code>证书请求文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;CN&#34;</span>:<span style="color:#e6db74">&#34;kubernetes&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;hosts&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;10.1.20.129&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;10.1.20.128&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;10.1.20.126&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;10.1.20.127&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;10.254.0.1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;*.kubernetes.master&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;localhost&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;kubernetes&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;kubernetes.default&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;kubernetes.default.svc&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;kubernetes.default.svc.cluster&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;kubernetes.default.svc.cluster.local&#34;</span>
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;key&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;algo&#34;</span>:<span style="color:#e6db74">&#34;rsa&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;names&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;C&#34;</span>:<span style="color:#e6db74">&#34;CN&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;ST&#34;</span>:<span style="color:#e6db74">&#34;BeiJing&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;L&#34;</span>:<span style="color:#e6db74">&#34;BeiJing&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;O&#34;</span>:<span style="color:#e6db74">&#34;k8s&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;OU&#34;</span>:<span style="color:#e6db74">&#34;System&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>这个证书目前专属于 apiserver，加了一个 <code>*.kubernetes.master</code>域名以便内部私有 DNS 解析使用(可删除)；kubernetes 这几个能不能删掉，答案是<strong>不可以</strong>的；因为当集群创建好后，<code>default namespace</code> 下会创建一个叫 <code>kubenretes</code> 的<code>svc</code>，有一些组件会直接连接这个 svc 来跟 api 通信的，证书如果不包含可能会出现无法连接的情况；其他几个 kubernetes 开头的域名作用相同</li>
+<li><code>hosts</code>包含的是授权范围，不在此范围的的节点或者服务使用此证书就会报证书不匹配错误。<code>10.254.0.1</code>是指kube-apiserver 指定的 service-cluster-ip-range 网段的第一个IP。</li>
+</ul>
+<p>生成kubernetes证书和私钥</p>
+<blockquote>
+<p>cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kubernetes-csr.json | cfssljson -bare kubernetes</p>
+</blockquote>
+<ul>
+<li>
+<p><code>-config</code> 引用的是模板中的默认配置文件，</p>
+</li>
+<li>
+<p><code>-profiles</code>是指定特定的使用场景，比如config.json中的<code>kubernetes</code>区域</p>
+</li>
+</ul>
+<h5 id="创建admin证书">创建admin证书<a hidden class="anchor" aria-hidden="true" href="#创建admin证书">#</a></h5>
+<p>创建admin证书请求文件<code>admin-csr.json</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;CN&#34;</span>:<span style="color:#e6db74">&#34;admin&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;hosts&#34;</span>: [],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;key&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;algo&#34;</span>:<span style="color:#e6db74">&#34;rsa&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;names&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;C&#34;</span>:<span style="color:#e6db74">&#34;CN&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;ST&#34;</span>:<span style="color:#e6db74">&#34;BeiJing&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;L&#34;</span>:<span style="color:#e6db74">&#34;BeiJing&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;O&#34;</span>:<span style="color:#e6db74">&#34;system:masters&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;OU&#34;</span>:<span style="color:#e6db74">&#34;System&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>生成admin证书和私钥</p>
+<blockquote>
+<p>cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes admin-csr.json | cfssljson -bare admin</p>
+</blockquote>
+<p>这个admin 证书，是将来生成管理员用的<code>kubeconfig</code> 配置文件用的，现在一般建议使用RBAC 来对kubernetes 进行角色权限控制， kubernetes 将证书中的CN字段作为User， O 字段作为 Group</p>
+<p>同样，我们也可以按照同样的方式来创建kubernetes中etcd集群的证书。</p>
+<h2 id="其他记录">其他记录<a hidden class="anchor" aria-hidden="true" href="#其他记录">#</a></h2>
+<h3 id="wget和curl命令">wget和curl命令<a hidden class="anchor" aria-hidden="true" href="#wget和curl命令">#</a></h3>
+<h3 id="curl">curl<a hidden class="anchor" aria-hidden="true" href="#curl">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://slgjy.github.io/tags/tools/">tools</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="http://slgjy.github.io">小石头博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
