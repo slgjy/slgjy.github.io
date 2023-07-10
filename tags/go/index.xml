@@ -6,7 +6,19 @@
     <description>Recent content in go on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Jul 2023 14:54:33 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Jul 2023 16:42:14 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cobra</title>
+      <link>http://slgjy.github.io/post/cobra/</link>
+      <pubDate>Mon, 10 Jul 2023 16:42:14 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/cobra/</guid>
+      <description>spf13/cobra库学习 参考引用
+cobra cobra是一个命令行程序库，提供简单的接口来创建CLI接口(Command Line Interface)命令行接口。cobra被应用于很多项目比如k8s,docker,etcd,hugo博客等等
+命令模板 commands argumets flags 例如:
+# server是commands，port是flag hugo server --port=1313 # clone是commands，URL是arguments，brae是flags git clone URL --bare 业务使用 安装 # go库安装 go get github.com/spf13/cobra/cobra@latest # go的命令行脚手架安装 go install github.com/spf13/cobra-cli@latest 创建命令 package cmd import ( &amp;#34;fmt&amp;#34; &amp;#34;github.com/spf13/cobra&amp;#34; &amp;#34;github.com/spf13/cobra/doc&amp;#34; &amp;#34;os&amp;#34; ) var Verbose bool var Source string var Region string var author string var MarkdownDocs bool var rootCmd = &amp;amp;cobra.</description>
+    </item>
+    
     <item>
       <title>Goland_swag</title>
       <link>http://slgjy.github.io/post/goland_swag/</link>
