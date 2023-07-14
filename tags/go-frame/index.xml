@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>go-frame on 小石头博客</title>
+    <link>http://slgjy.github.io/tags/go-frame/</link>
+    <description>Recent content in go-frame on 小石头博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 Jul 2023 17:13:45 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go-frame/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go Zero</title>
+      <link>http://slgjy.github.io/post/go-zero/</link>
+      <pubDate>Fri, 14 Jul 2023 17:13:45 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/go-zero/</guid>
+      <description>zo-zero 基本概念 github地址
+文档地址
+go-zero是一个集成各种工程时间的web和rpc框架。
+go-zero包含极简的API定义和生成工具goctl，可以根据定义的api文件，一键生成Go,IOS,Android,Kotlin,Dart,TypeScript,JavaScript代码，并可以直接运行
+优点：
+轻松获得支撑千万日活服务的稳定性 内建级联超时控制、限流、自适应熔断、自适应降载等微服务治理能力，无需配置和额外代码 微服务治理中间件可无缝集成到其它现有框架使用 极简的 API 描述，一键生成各端代码 自动校验客户端请求参数合法性 大量微服务治理和并发工具包注册 go-zero项目特点
+强大的工具支持，尽可能少的代码编写 极简的接口 完全兼容 net/http 支持中间件，方便扩展 高性能 面向故障编程，弹性设计 内建服务发现、负载均衡 内建限流、熔断、降载，且自动触发，自动恢复 API 参数自动校验 超时级联控制 自动缓存控制 链路跟踪、统计报警等 高并发支撑，稳定保障了疫情期间每天的流量洪峰 zo-zero的架构图
+快速开始 教程地址
+goctl常用命令 goctl api goctl model mysql相关 根据数据库表生成代码
+goctl model mysql datasource -url=&amp;#34;root:root@tcp(192.168.1.115:3306)/slg_test&amp;#34; -table=&amp;#34;user_models&amp;#34; -dir=&amp;#34;./gen_model&amp;#34; --style=go_zero goctl rpc 重点记录 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=&amp;#34;root:root@tcp(192.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,7 +6,35 @@
     <description>Recent content in Posts on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Jul 2023 03:33:49 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Jul 2023 17:13:45 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go Zero</title>
+      <link>http://slgjy.github.io/post/go-zero/</link>
+      <pubDate>Fri, 14 Jul 2023 17:13:45 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/go-zero/</guid>
+      <description>zo-zero 基本概念 github地址
+文档地址
+go-zero是一个集成各种工程时间的web和rpc框架。
+go-zero包含极简的API定义和生成工具goctl，可以根据定义的api文件，一键生成Go,IOS,Android,Kotlin,Dart,TypeScript,JavaScript代码，并可以直接运行
+优点：
+轻松获得支撑千万日活服务的稳定性 内建级联超时控制、限流、自适应熔断、自适应降载等微服务治理能力，无需配置和额外代码 微服务治理中间件可无缝集成到其它现有框架使用 极简的 API 描述，一键生成各端代码 自动校验客户端请求参数合法性 大量微服务治理和并发工具包注册 go-zero项目特点
+强大的工具支持，尽可能少的代码编写 极简的接口 完全兼容 net/http 支持中间件，方便扩展 高性能 面向故障编程，弹性设计 内建服务发现、负载均衡 内建限流、熔断、降载，且自动触发，自动恢复 API 参数自动校验 超时级联控制 自动缓存控制 链路跟踪、统计报警等 高并发支撑，稳定保障了疫情期间每天的流量洪峰 zo-zero的架构图
+快速开始 教程地址
+goctl常用命令 goctl api goctl model mysql相关 根据数据库表生成代码
+goctl model mysql datasource -url=&amp;#34;root:root@tcp(192.168.1.115:3306)/slg_test&amp;#34; -table=&amp;#34;user_models&amp;#34; -dir=&amp;#34;./gen_model&amp;#34; --style=go_zero goctl rpc 重点记录 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=&amp;#34;root:root@tcp(192.</description>
+    </item>
+    
+    <item>
+      <title>Start_containe</title>
+      <link>http://slgjy.github.io/post/start_containe/</link>
+      <pubDate>Fri, 14 Jul 2023 17:13:17 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/start_containe/</guid>
+      <description>Etec容器启动 1.镜像拉取 docker pull bitnami/etcd docker pull evildecay/etcdkeeper 2.单节点启动 创建挂载目录 #自定义容器挂载的路径 mkdir -p /home/slg/etcd/single/data mkdir -p /home/slg/etcd/single/conf 编写配置文件 vim /home/slg/etcd/single/conf/etcd.yml #name 节点的名字,在集群中必须唯一 name: s1 #data-dir 存储数据的路径,注意这是容器内部路径 data-dir: /etcd-data listen-client-urls: http://0.0.0.0:2379 advertise-client-urls: http://0.0.0.0:2379 listen-peer-urls: http://0.0.0.0:2380 initial-advertise-peer-urls: http://0.0.0.0:2380 initial-cluster: s1=http://0.0.0.0:2380 initial-cluster-token: etcd-cluster-token initial-cluster-state: new log-level: info logger: zap log-outputs: stderr 参数介绍
+listen-client-urls：这个参数用于指定 etcd 服务监听客户端请求的地址和端口。客户端（如 etcdctl 命令行工具、其他使用 etcd 客户端库的应用程序）将通过这些地址与 etcd 服务进行通信，以执行各种操作，如读取、写入和修改键值对.</description>
+    </item>
+    
     <item>
       <title>Cfssl</title>
       <link>http://slgjy.github.io/post/cfssl/</link>

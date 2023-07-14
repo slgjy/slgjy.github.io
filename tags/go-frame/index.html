@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Posts | 小石头博客</title>
+<title>go-frame | 小石头博客</title>
 <meta name="keywords" content="">
-<meta name="description" content="Posts - 小石头博客">
+<meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="http://slgjy.github.io/post/">
+<link rel="canonical" href="http://slgjy.github.io/tags/go-frame/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://slgjy.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/post/index.xml">
+<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/tags/go-frame/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,30 +55,15 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Posts" />
+</noscript><meta property="og:title" content="go-frame" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://slgjy.github.io/post/" />
+<meta property="og:url" content="http://slgjy.github.io/tags/go-frame/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="go-frame"/>
 <meta name="twitter:description" content=""/>
 
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Posts",
-      "item": "http://slgjy.github.io/post/"
-    }
-  ]
-}
-</script>
 </head>
 
 <body class="list" id="top">
@@ -137,11 +122,11 @@
 <main class="main"> 
 <header class="page-header">
   <h1>
-    Posts
+    go-frame
   </h1>
 </header>
 
-<article class="post-entry"> 
+<article class="post-entry tag-entry"> 
   <header class="entry-header">
     <h2>Go Zero
     </h2>
@@ -161,71 +146,6 @@ goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_tes
   <footer class="entry-footer"><span title='2023-07-14 17:13:45 +0800 CST'>July 14, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Go Zero" href="http://slgjy.github.io/post/go-zero/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Start_containe
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Etec容器启动 1.镜像拉取 docker pull bitnami/etcd docker pull evildecay/etcdkeeper 2.单节点启动 创建挂载目录 #自定义容器挂载的路径 mkdir -p /home/slg/etcd/single/data mkdir -p /home/slg/etcd/single/conf 编写配置文件 vim /home/slg/etcd/single/conf/etcd.yml #name 节点的名字,在集群中必须唯一 name: s1 #data-dir 存储数据的路径,注意这是容器内部路径 data-dir: /etcd-data listen-client-urls: http://0.0.0.0:2379 advertise-client-urls: http://0.0.0.0:2379 listen-peer-urls: http://0.0.0.0:2380 initial-advertise-peer-urls: http://0.0.0.0:2380 initial-cluster: s1=http://0.0.0.0:2380 initial-cluster-token: etcd-cluster-token initial-cluster-state: new log-level: info logger: zap log-outputs: stderr 参数介绍
-listen-client-urls：这个参数用于指定 etcd 服务监听客户端请求的地址和端口。客户端（如 etcdctl 命令行工具、其他使用 etcd 客户端库的应用程序）将通过这些地址与 etcd 服务进行通信，以执行各种操作，如读取、写入和修改键值对....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-07-14 17:13:17 +0800 CST'>July 14, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Start_containe" href="http://slgjy.github.io/post/start_containe/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cfssl
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Cfssl 官网地址
-CFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。
-Cfssl包括
-一组用于构建自定义的TLS PKI工具 TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。 cfssl程序，命令行操作 multirootca程序，使用多个签名秘钥的证书颁发机构服务器 multirootca程序构建证书池捆绑包 cfssl json程序 安装 下载地址
-##通过wget或者curl命令都可以下载 # curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl # curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson # curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo 移动文件修改权限
-# 移动文件到/usr/local/bin/ [root@k8s-worker1 cfssl]# mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl [root@k8s-worker1 cfssl]# mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo [root@k8s-worker1 cfssl]# mv cfssljson_1....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-07-11 03:33:49 +0800 CST'>July 11, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Cfssl" href="http://slgjy.github.io/post/cfssl/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cobra
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>spf13/cobra库学习 参考引用
-cobra cobra是一个命令行程序库，提供简单的接口来创建CLI接口(Command Line Interface)命令行接口。cobra被应用于很多项目比如k8s,docker,etcd,hugo博客等等
-命令模板 commands argumets flags 例如:
-# server是commands，port是flag hugo server --port=1313 # clone是commands，URL是arguments，brae是flags git clone URL --bare 业务使用 安装 # go库安装 go get github.com/spf13/cobra/cobra@latest # go的命令行脚手架安装 go install github.com/spf13/cobra-cli@latest 创建命令 package cmd import ( &#34;fmt&#34; &#34;github.com/spf13/cobra&#34; &#34;github.com/spf13/cobra/doc&#34; &#34;os&#34; ) var Verbose bool var Source string var Region string var author string var MarkdownDocs bool var rootCmd = &amp;cobra....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-07-10 16:42:14 +0800 CST'>July 10, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Cobra" href="http://slgjy.github.io/post/cobra/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Goland_swag
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>GoLand-Swagger swagger简介 根据代码中自定义注解生成接口文档，在前后端分离项目中通过swagger将接口文档定义好，自动更新，方便维护。
-swagger集成 依赖下载 go install github.com/swaggo/swag/cmd/swag@latest go get -u github.com/swaggo/gin-swagger go get -u github.com/swaggo/files 初始化 #swag初始化 swag init 在项目目录下生成如下目录
-引入生成的包 import ( _ &#34;statistical_data/docs&#34; //就是swag init生成的包 ) // @title 项目api文档 // @version 1.0 // @description API文档 // @host 127.0.0.1:8199 // @BasePath / func main() { .... } 指定相关选项生成...</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-07-07 14:54:33 +0800 CST'>July 7, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Goland_swag" href="http://slgjy.github.io/post/goland_swag/"></a>
-</article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="next" href="http://slgjy.github.io/post/page/2/">Next&nbsp;&nbsp;»
-    </a>
-  </nav>
-</footer>
     </main>
     
 <footer class="footer">

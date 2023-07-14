@@ -143,6 +143,42 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>SpringHttpClient
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>RestTemplate RestTemplate是一款Spring内置的http客户端，和Spring框架整合度较高，提供了访问HTTP
+接口统一方式，允许不通的实现，比如HttpURLConnection HttpClient OkHttp等底层实现。
+RestTemplate实例化 public RestTemplate() { ... } public RestTemplate(ClientHttpRequestFactory requestFactory) { this(); this.setRequestFactory(requestFactory); } public RestTemplate(List&lt;HttpMessageConverter&lt;?&gt;&gt; messageConverters) { this.messageConverters = new ArrayList(); this.errorHandler = new DefaultResponseErrorHandler(); this.headersExtractor = new HeadersExtractor(); this.validateConverters(messageConverters); this.messageConverters.addAll(messageConverters); this.uriTemplateHandler = initUriTemplateHandler(); } 自定义客户端 通过RestTemplate的构造方法传递不同的ClientHttpRequestFactory 工厂来切换底层实现
+基于OkHttp 依赖引入
+&lt;!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp --&gt; &lt;dependency&gt; &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt; &lt;artifactId&gt;okhttp&lt;/artifactId&gt; &lt;version&gt;4....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-19 17:01:37 +0800 CST'>May 19, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to SpringHttpClient" href="http://slgjy.github.io/post/springhttpclient/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>docker镜像
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>构建镜像 DockerFile编写 镜像构建 .dockerignore文件 类似于git中的.gitignore忽略某些文件
+docker是CS架构。客户端是docker-cli服务端docker daemon组成，docker build时，客户端会将context中的文件全部发送到服务端，.dockeringore减少文件传输数量，提升build效率
+匹配规则 符号 作用 # 注释 * 匹配0或多个非/的字符 ? 匹配1个非/的字符 ** 0个或多个目录 ! 除…外，需结合上下文语义 实例
+# 忽略node_modules node_modules Dockerfile .git .gitignore 实践操作 构建镜像 docker build -t imageName:tag
+**注意：**镜像的名称全小写。
+发送Daemon内容过大 Sending build context to Docker daemon 4.276GB
+该问题由于docker client默认将Dockerfile同级文件中所有文件发送给docker Deamon
+解决方案
+使用.dockerignore文件添加黑名单 将dockerfile文件迁移到启动目录中执行 将不需要文件删除 添加....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-15 15:28:59 +0800 CST'>May 15, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to docker镜像" href="http://slgjy.github.io/post/docker01/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Jasypt加密操作
     </h2>
   </header>
@@ -189,38 +225,6 @@ grep &#39;temporary password&#39; /var/log/mysqld.log 使用默认密码登录..
   </div>
   <footer class="entry-footer"><span title='2023-05-06 17:21:19 +0800 CST'>May 6, 2023</span></footer>
   <a class="entry-link" aria-label="post link to CloudNative" href="http://slgjy.github.io/post/cloudnative/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>SpringCloud
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>SpringCloud SpringBoot SpringCloud 实践记录 多环境配置 Spring2.4版本spring:profiles被弃用了
-使用---来分组配置
-修改成新的配置方式
-spring: config: activate: on-profile: prod server: port: 9000 spring: profiles: active: prod --- #开发环境 spring: application: name: hello-world config: activate: on-profile: dev cloud: nacos: discovery: # 服务注册地址 server-addr: ip:8848 config: # 配置中心地址 server-addr: ip:8848 # 配置文件格式 file-extension: yml # 命名空间 namespace: e09a1b28-1fe3-429c-83dd-69f8b030180f # 共享配置 shared-configs: - application-${spring....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-06 13:08:26 +0800 CST'>May 6, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to SpringCloud" href="http://slgjy.github.io/post/springcloud/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Nacos
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Nacos 简介 官网地址
-安裝 docker形式部署 环境准备 docker-ce引擎安装
-安装mysql服务，用来配置持久化。
-创建目录
-# 用于nacos容器启动挂载，自定义 # 日志挂载目录 mkdir -p /home/nacos/logs/ # 配置文件挂载目录 mkdir -p /home/nacos/conf/ 获取配置文件 通过启动一个简易nacos容器来获取数据库持久化脚本，和配置文件。
-# 2.0版本以后的nacos需要额外开启9848，9849端口，否则spring代码连接会失败 docker run -itd --name nacos -p 8848:8848 -p 9848:9848 -p 9849:9849 -e MODE=standalone --restart=always nacos/nacos-server # 将模板容器中的配置文件拷贝到宿主机上。 docker cp nacos:/home/nacos/conf /home # 将样例容器删除掉 创建本地配置文件 将获取到的配置文件application.properties拷贝到上边创建的/home/nacos/conf/目录...</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-06 11:08:52 +0800 CST'>May 6, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Nacos" href="http://slgjy.github.io/post/nacos/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

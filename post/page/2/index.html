@@ -143,6 +143,44 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Harbor
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Harbor 官网地址
+Docker Hub的速度比较慢
+使用公有云自带的容器仓库
+构建私有仓库
+docker registry没有操作界面，不直观就使用了Harbor
+Harbor部署 部署方式
+离线安装：资源包带offline包含需要安装的镜像文件，容量比较大，适用生产环境。 在线安装：资源包带online需要保证主机可以联通互联网，适用于搭建私有仓库，用于学习和研究。 Docker-Ce安装 harbor是基于docker环境运行的，所以先安装docker环境
+Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF net.ipv4.ip_forward = 1 net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF sysctl -p net.ipv4.ip_forward = 1: 开启路由转发，不配置该参数，主机重启后，服务状态正常，却无法访问到服务器。
+使用cfssl工具配置Harbor证书 默认的Harbor不附带证书，生产环境为了安全需要使用HTTPS,如果启用Content Trust with Notary 以正确签署所有图像，则必须使用 HTTPS。要配置 HTTPS，必须创建 SSL 证书。您可以使用受信任的第三方 CA 签署的证书，也可以使用自签名证书。本节介绍如何使用cfssl创建 CA，以及如何使用您的 CA 签署服务器证书和客户端证书。官方使用的是openssl工具来生成证书。...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-06-29 13:10:04 +0800 CST'>June 29, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Harbor" href="http://slgjy.github.io/post/harbor/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Nexus
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Maven私有仓库 为什么搭建私有库：
+公共仓库下载慢。 项目组之间需要共享包。 Nexus Sonatype Nexus是一个强大的Maven仓库管理器。官网地址
+Nexus当前有Nexus2.x和3.x两大版本，两个版本都在更新迭代，两个版本互不影响都可以使用。
+Nexus分为pro和oss版本，其中oss是开源免费的，pro是收费版本。
+Linux下安装 1.下载包 本次使用3.x版本,下载地址
+2.上传解压 tar -zxvf nexus-3.54.1-01-unix.tar.gz nexus用于实现nexus功能 sonatype-work： 用于存储数据 3.修改配置文件 1.修改Nexus端口 在nexus下的etc目录下的配置文件nexus-default.properties的application-port配置
+4.启动 # bin目录下执行执行 ./nexux start 命令启动。脚本涵盖：./nexus {console | start | stop | restart | status | dump} ./nexus start # 3.x的nexus启动 nohup ./bin/nexus run &gt; logs/nexus.log 2&gt;&amp;1 &amp; 访问：ip&#43;端口...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-06-26 11:49:32 +0800 CST'>June 26, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Nexus" href="http://slgjy.github.io/post/nexus/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>K8s部署实践
     </h2>
   </header>
@@ -187,42 +225,6 @@ Linux平台 </p>
   </div>
   <footer class="entry-footer"><span title='2023-06-01 15:25:27 +0800 CST'>June 1, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Go代码后台运行" href="http://slgjy.github.io/post/go%E4%BB%A3%E7%A0%81%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>SpringHttpClient
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>RestTemplate RestTemplate是一款Spring内置的http客户端，和Spring框架整合度较高，提供了访问HTTP
-接口统一方式，允许不通的实现，比如HttpURLConnection HttpClient OkHttp等底层实现。
-RestTemplate实例化 public RestTemplate() { ... } public RestTemplate(ClientHttpRequestFactory requestFactory) { this(); this.setRequestFactory(requestFactory); } public RestTemplate(List&lt;HttpMessageConverter&lt;?&gt;&gt; messageConverters) { this.messageConverters = new ArrayList(); this.errorHandler = new DefaultResponseErrorHandler(); this.headersExtractor = new HeadersExtractor(); this.validateConverters(messageConverters); this.messageConverters.addAll(messageConverters); this.uriTemplateHandler = initUriTemplateHandler(); } 自定义客户端 通过RestTemplate的构造方法传递不同的ClientHttpRequestFactory 工厂来切换底层实现
-基于OkHttp 依赖引入
-&lt;!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp --&gt; &lt;dependency&gt; &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt; &lt;artifactId&gt;okhttp&lt;/artifactId&gt; &lt;version&gt;4....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-19 17:01:37 +0800 CST'>May 19, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to SpringHttpClient" href="http://slgjy.github.io/post/springhttpclient/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>docker镜像
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>构建镜像 DockerFile编写 镜像构建 .dockerignore文件 类似于git中的.gitignore忽略某些文件
-docker是CS架构。客户端是docker-cli服务端docker daemon组成，docker build时，客户端会将context中的文件全部发送到服务端，.dockeringore减少文件传输数量，提升build效率
-匹配规则 符号 作用 # 注释 * 匹配0或多个非/的字符 ? 匹配1个非/的字符 ** 0个或多个目录 ! 除…外，需结合上下文语义 实例
-# 忽略node_modules node_modules Dockerfile .git .gitignore 实践操作 构建镜像 docker build -t imageName:tag
-**注意：**镜像的名称全小写。
-发送Daemon内容过大 Sending build context to Docker daemon 4.276GB
-该问题由于docker client默认将Dockerfile同级文件中所有文件发送给docker Deamon
-解决方案
-使用.dockerignore文件添加黑名单 将dockerfile文件迁移到启动目录中执行 将不需要文件删除 添加....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-15 15:28:59 +0800 CST'>May 15, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to docker镜像" href="http://slgjy.github.io/post/docker01/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

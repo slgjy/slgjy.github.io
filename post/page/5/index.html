@@ -143,86 +143,32 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Go Zero
+    <h2>hugo博客搭建
     </h2>
   </header>
   <div class="entry-content">
-    <p>zo-zero 基本概念 github地址
-文档地址
-go-zero是一个集成各种工程时间的web和rpc框架。
-go-zero包含极简的API定义和生成工具goctl，可以根据定义的api文件，一键生成Go,IOS,Android,Kotlin,Dart,TypeScript,JavaScript代码，并可以直接运行
-优点：
-轻松获得支撑千万日活服务的稳定性 内建级联超时控制、限流、自适应熔断、自适应降载等微服务治理能力，无需配置和额外代码 微服务治理中间件可无缝集成到其它现有框架使用 极简的 API 描述，一键生成各端代码 自动校验客户端请求参数合法性 大量微服务治理和并发工具包注册 go-zero项目特点
-强大的工具支持，尽可能少的代码编写 极简的接口 完全兼容 net/http 支持中间件，方便扩展 高性能 面向故障编程，弹性设计 内建服务发现、负载均衡 内建限流、熔断、降载，且自动触发，自动恢复 API 参数自动校验 超时级联控制 自动缓存控制 链路跟踪、统计报警等 高并发支撑，稳定保障了疫情期间每天的流量洪峰 zo-zero的架构图
-快速开始 教程地址
-goctl常用命令 goctl api goctl model mysql相关 根据数据库表生成代码
-goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_test&#34; -table=&#34;user_models&#34; -dir=&#34;./gen_model&#34; --style=go_zero goctl rpc 重点记录 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=&#34;root:root@tcp(192....</p>
+    <p>hugo hugo是由go语言实现的静态网站生成器。
+hugo下载 下载地址
+https://github.com/gohugoio/hugo/releases
+下载后解压
+hugo常用命令 新建站点
+hugo new site myblog 启动
+hugo server -D 设置主题
+# 地址 https://github.com/gohugoio/hugo/releases 在生成站点的目录下的themes下克隆
+采用PaperMod主题
+使用指定主题启动
+#修改配置hugo的配置文件 #hugo部署站点(github仓库) baseURL = &#39;http://slgjy.github.io&#39; languageCode = &#39;en-us&#39; #博客名称 title = &#39;小石头博客&#39; #主题信息 theme = &#39;hugo-PaperMod&#39; 创建博客文档
+#其会在博客目录content 生成post/文档名 hugo new post/go单元测试.md markdown图片引入问题
+在static目录下创建文件夹images（自定义，可以创建多个） 引入方式![]/images/xxx.jpg 修改配置文件
+baseURL: &#39;http://slgjy....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-07-14 17:13:45 +0800 CST'>July 14, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Go Zero" href="http://slgjy.github.io/post/go-zero/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Start_containe
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Etec容器启动 1.镜像拉取 docker pull bitnami/etcd docker pull evildecay/etcdkeeper 2.单节点启动 创建挂载目录 #自定义容器挂载的路径 mkdir -p /home/slg/etcd/single/data mkdir -p /home/slg/etcd/single/conf 编写配置文件 vim /home/slg/etcd/single/conf/etcd.yml #name 节点的名字,在集群中必须唯一 name: s1 #data-dir 存储数据的路径,注意这是容器内部路径 data-dir: /etcd-data listen-client-urls: http://0.0.0.0:2379 advertise-client-urls: http://0.0.0.0:2379 listen-peer-urls: http://0.0.0.0:2380 initial-advertise-peer-urls: http://0.0.0.0:2380 initial-cluster: s1=http://0.0.0.0:2380 initial-cluster-token: etcd-cluster-token initial-cluster-state: new log-level: info logger: zap log-outputs: stderr 参数介绍
-listen-client-urls：这个参数用于指定 etcd 服务监听客户端请求的地址和端口。客户端（如 etcdctl 命令行工具、其他使用 etcd 客户端库的应用程序）将通过这些地址与 etcd 服务进行通信，以执行各种操作，如读取、写入和修改键值对....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-07-14 17:13:17 +0800 CST'>July 14, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Start_containe" href="http://slgjy.github.io/post/start_containe/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cfssl
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Cfssl 官网地址
-CFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。
-Cfssl包括
-一组用于构建自定义的TLS PKI工具 TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。 cfssl程序，命令行操作 multirootca程序，使用多个签名秘钥的证书颁发机构服务器 multirootca程序构建证书池捆绑包 cfssl json程序 安装 下载地址
-##通过wget或者curl命令都可以下载 # curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl # curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson # curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo 移动文件修改权限
-# 移动文件到/usr/local/bin/ [root@k8s-worker1 cfssl]# mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl [root@k8s-worker1 cfssl]# mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo [root@k8s-worker1 cfssl]# mv cfssljson_1....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-07-11 03:33:49 +0800 CST'>July 11, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Cfssl" href="http://slgjy.github.io/post/cfssl/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cobra
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>spf13/cobra库学习 参考引用
-cobra cobra是一个命令行程序库，提供简单的接口来创建CLI接口(Command Line Interface)命令行接口。cobra被应用于很多项目比如k8s,docker,etcd,hugo博客等等
-命令模板 commands argumets flags 例如:
-# server是commands，port是flag hugo server --port=1313 # clone是commands，URL是arguments，brae是flags git clone URL --bare 业务使用 安装 # go库安装 go get github.com/spf13/cobra/cobra@latest # go的命令行脚手架安装 go install github.com/spf13/cobra-cli@latest 创建命令 package cmd import ( &#34;fmt&#34; &#34;github.com/spf13/cobra&#34; &#34;github.com/spf13/cobra/doc&#34; &#34;os&#34; ) var Verbose bool var Source string var Region string var author string var MarkdownDocs bool var rootCmd = &amp;cobra....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-07-10 16:42:14 +0800 CST'>July 10, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Cobra" href="http://slgjy.github.io/post/cobra/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Goland_swag
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>GoLand-Swagger swagger简介 根据代码中自定义注解生成接口文档，在前后端分离项目中通过swagger将接口文档定义好，自动更新，方便维护。
-swagger集成 依赖下载 go install github.com/swaggo/swag/cmd/swag@latest go get -u github.com/swaggo/gin-swagger go get -u github.com/swaggo/files 初始化 #swag初始化 swag init 在项目目录下生成如下目录
-引入生成的包 import ( _ &#34;statistical_data/docs&#34; //就是swag init生成的包 ) // @title 项目api文档 // @version 1.0 // @description API文档 // @host 127.0.0.1:8199 // @BasePath / func main() { .... } 指定相关选项生成...</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-07-07 14:54:33 +0800 CST'>July 7, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Goland_swag" href="http://slgjy.github.io/post/goland_swag/"></a>
+  <footer class="entry-footer"><span title='2023-04-24 17:15:51 +0800 CST'>April 24, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to hugo博客搭建" href="http://slgjy.github.io/post/hugo/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="next" href="http://slgjy.github.io/post/page/2/">Next&nbsp;&nbsp;»
+    <a class="prev" href="http://slgjy.github.io/post/page/4/">
+      «&nbsp;Prev&nbsp;
     </a>
   </nav>
 </footer>
