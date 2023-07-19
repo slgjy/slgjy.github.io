@@ -16,7 +16,7 @@ go-zero包含极简的API定义和生成工具goctl，可以根据定义的api�
 强大的工具支持，尽可能少的代码编写 极简的接口 完全兼容 net/http 支持中间件，方便扩展 高性能 面向故障编程，弹性设计 内建服务发现、负载均衡 内建限流、熔断、降载，且自动触发，自动恢复 API 参数自动校验 超时级联控制 自动缓存控制 链路跟踪、统计报警等 高并发支撑，稳定保障了疫情期间每天的流量洪峰 zo-zero的架构图
 快速开始 教程地址
 goctl常用命令 goctl api goctl model mysql相关 根据数据库表生成代码
-goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_test&#34; -table=&#34;user_models&#34; -dir=&#34;./gen_model&#34; --style=go_zero goctl rpc 重点记录 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=&#34;root:root@tcp(192.">
+goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_test&#34; -table=&#34;user_models&#34; -dir=&#34;./gen_model&#34; --style=go_zero goctl rpc Rest服务 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=&#34;root:root@tcp(192.">
 <meta name="author" content="">
 <link rel="canonical" href="http://slgjy.github.io/post/go-zero/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
@@ -75,7 +75,7 @@ go-zero包含极简的API定义和生成工具goctl，可以根据定义的api�
 强大的工具支持，尽可能少的代码编写 极简的接口 完全兼容 net/http 支持中间件，方便扩展 高性能 面向故障编程，弹性设计 内建服务发现、负载均衡 内建限流、熔断、降载，且自动触发，自动恢复 API 参数自动校验 超时级联控制 自动缓存控制 链路跟踪、统计报警等 高并发支撑，稳定保障了疫情期间每天的流量洪峰 zo-zero的架构图
 快速开始 教程地址
 goctl常用命令 goctl api goctl model mysql相关 根据数据库表生成代码
-goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_test&#34; -table=&#34;user_models&#34; -dir=&#34;./gen_model&#34; --style=go_zero goctl rpc 重点记录 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=&#34;root:root@tcp(192." />
+goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_test&#34; -table=&#34;user_models&#34; -dir=&#34;./gen_model&#34; --style=go_zero goctl rpc Rest服务 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=&#34;root:root@tcp(192." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://slgjy.github.io/post/go-zero/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-07-14T17:13:45+08:00" />
@@ -92,7 +92,7 @@ go-zero包含极简的API定义和生成工具goctl，可以根据定义的api�
 强大的工具支持，尽可能少的代码编写 极简的接口 完全兼容 net/http 支持中间件，方便扩展 高性能 面向故障编程，弹性设计 内建服务发现、负载均衡 内建限流、熔断、降载，且自动触发，自动恢复 API 参数自动校验 超时级联控制 自动缓存控制 链路跟踪、统计报警等 高并发支撑，稳定保障了疫情期间每天的流量洪峰 zo-zero的架构图
 快速开始 教程地址
 goctl常用命令 goctl api goctl model mysql相关 根据数据库表生成代码
-goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_test&#34; -table=&#34;user_models&#34; -dir=&#34;./gen_model&#34; --style=go_zero goctl rpc 重点记录 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=&#34;root:root@tcp(192."/>
+goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_test&#34; -table=&#34;user_models&#34; -dir=&#34;./gen_model&#34; --style=go_zero goctl rpc Rest服务 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=&#34;root:root@tcp(192."/>
 
 
 <script type="application/ld+json">
@@ -121,12 +121,12 @@ goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_tes
   "@type": "BlogPosting",
   "headline": "Go Zero",
   "name": "Go Zero",
-  "description": "zo-zero 基本概念 github地址\n文档地址\ngo-zero是一个集成各种工程时间的web和rpc框架。\ngo-zero包含极简的API定义和生成工具goctl，可以根据定义的api文件，一键生成Go,IOS,Android,Kotlin,Dart,TypeScript,JavaScript代码，并可以直接运行\n优点：\n轻松获得支撑千万日活服务的稳定性 内建级联超时控制、限流、自适应熔断、自适应降载等微服务治理能力，无需配置和额外代码 微服务治理中间件可无缝集成到其它现有框架使用 极简的 API 描述，一键生成各端代码 自动校验客户端请求参数合法性 大量微服务治理和并发工具包注册 go-zero项目特点\n强大的工具支持，尽可能少的代码编写 极简的接口 完全兼容 net/http 支持中间件，方便扩展 高性能 面向故障编程，弹性设计 内建服务发现、负载均衡 内建限流、熔断、降载，且自动触发，自动恢复 API 参数自动校验 超时级联控制 自动缓存控制 链路跟踪、统计报警等 高并发支撑，稳定保障了疫情期间每天的流量洪峰 zo-zero的架构图\n快速开始 教程地址\ngoctl常用命令 goctl api goctl model mysql相关 根据数据库表生成代码\ngoctl model mysql datasource -url=\u0026#34;root:root@tcp(192.168.1.115:3306)/slg_test\u0026#34; -table=\u0026#34;user_models\u0026#34; -dir=\u0026#34;./gen_model\u0026#34; --style=go_zero goctl rpc 重点记录 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=\u0026#34;root:root@tcp(192.",
+  "description": "zo-zero 基本概念 github地址\n文档地址\ngo-zero是一个集成各种工程时间的web和rpc框架。\ngo-zero包含极简的API定义和生成工具goctl，可以根据定义的api文件，一键生成Go,IOS,Android,Kotlin,Dart,TypeScript,JavaScript代码，并可以直接运行\n优点：\n轻松获得支撑千万日活服务的稳定性 内建级联超时控制、限流、自适应熔断、自适应降载等微服务治理能力，无需配置和额外代码 微服务治理中间件可无缝集成到其它现有框架使用 极简的 API 描述，一键生成各端代码 自动校验客户端请求参数合法性 大量微服务治理和并发工具包注册 go-zero项目特点\n强大的工具支持，尽可能少的代码编写 极简的接口 完全兼容 net/http 支持中间件，方便扩展 高性能 面向故障编程，弹性设计 内建服务发现、负载均衡 内建限流、熔断、降载，且自动触发，自动恢复 API 参数自动校验 超时级联控制 自动缓存控制 链路跟踪、统计报警等 高并发支撑，稳定保障了疫情期间每天的流量洪峰 zo-zero的架构图\n快速开始 教程地址\ngoctl常用命令 goctl api goctl model mysql相关 根据数据库表生成代码\ngoctl model mysql datasource -url=\u0026#34;root:root@tcp(192.168.1.115:3306)/slg_test\u0026#34; -table=\u0026#34;user_models\u0026#34; -dir=\u0026#34;./gen_model\u0026#34; --style=go_zero goctl rpc Rest服务 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=\u0026#34;root:root@tcp(192.",
   "keywords": [
     "go-frame"
   ],
-  "articleBody": "zo-zero 基本概念 github地址\n文档地址\ngo-zero是一个集成各种工程时间的web和rpc框架。\ngo-zero包含极简的API定义和生成工具goctl，可以根据定义的api文件，一键生成Go,IOS,Android,Kotlin,Dart,TypeScript,JavaScript代码，并可以直接运行\n优点：\n轻松获得支撑千万日活服务的稳定性 内建级联超时控制、限流、自适应熔断、自适应降载等微服务治理能力，无需配置和额外代码 微服务治理中间件可无缝集成到其它现有框架使用 极简的 API 描述，一键生成各端代码 自动校验客户端请求参数合法性 大量微服务治理和并发工具包注册 go-zero项目特点\n强大的工具支持，尽可能少的代码编写 极简的接口 完全兼容 net/http 支持中间件，方便扩展 高性能 面向故障编程，弹性设计 内建服务发现、负载均衡 内建限流、熔断、降载，且自动触发，自动恢复 API 参数自动校验 超时级联控制 自动缓存控制 链路跟踪、统计报警等 高并发支撑，稳定保障了疫情期间每天的流量洪峰 zo-zero的架构图\n快速开始 教程地址\ngoctl常用命令 goctl api goctl model mysql相关 根据数据库表生成代码\ngoctl model mysql datasource -url=\"root:root@tcp(192.168.1.115:3306)/slg_test\" -table=\"user_models\" -dir=\"./gen_model\" --style=go_zero goctl rpc 重点记录 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=\"root:root@tcp(192.168.1.115:3306)/slg_test\" -table=\"user\" -dir=\"./gen_model\" -c --style=go_zero goctl model mysql datasource -url=\"root:root@tcp(192.168.1.115:3306)/slg_test\" -table=\"user_data\" -dir=\"./gen_model\" -c --style=go_zero 添加配置 type ServiceContext struct { Config config.Config //这里可以添加全局变量 kafka redis mysql // 添加初始化依赖的地方 UserModel model.UserModel UserDataModel model.UserDataModel } func NewServiceContext(c config.Config) *ServiceContext { return \u0026ServiceContext{ Config: c, // 添加初始化依赖的地方 UserModel: model.NewUserModel(sqlx.NewMysql(c.DB.DataSource), c.Cache), //数据库的配置从哪里获取呢？就是在config UserDataModel: model.NewUserDataModel(sqlx.NewMysql(c.DB.DataSource), c.Cache), } } 定义api // 以新增用户为例子 type ( UserCreateReq { NickName string `json:\"nickName\"` } UserCreateResp { Flag bool `json:\"flag\"` } ) service user-api { @doc \"新增用户信息\" @handler userCreate post /user/create (UserCreateReq) returns (UserCreateResp) } 生成代码\n#-dir 生成代码的目录，根据自己的实际情况处理 goctl api go --api user.api -dir ../ --style=go_zero 逻辑代码编写 // 暴露给logic开启事物,从生成的model中暴露事物方法 func (m *defaultUserDataModel) TransInsert(ctx context.Context, session sqlx.Session, data *UserData) (sql.Result, error) { slgTestUserDataIdKey := fmt.Sprintf(\"%s%v\", cacheSlgTestUserDataIdPrefix, data.Id) slgTestUserDataUserIdKey := fmt.Sprintf(\"%s%v\", cacheSlgTestUserDataUserIdPrefix, data.UserId) ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) { query := fmt.Sprintf(\"insert into %s (%s) values (?, ?)\", m.table, userDataRowsExpectAutoSet) return session.ExecCtx(ctx, query, data.UserId, data.Data) }, slgTestUserDataIdKey, slgTestUserDataUserIdKey) return ret, err } func (l *UserCreateLogic) UserCreate(req *types.UserCreateReq) (resp *types.UserCreateResp, err error) { // 保证两个sql操作共用一个session这样才能管理到事物 if err := l.svcCtx.UserModel.TransCtx(l.ctx, func(ctx context.Context, session sqlx.Session) error { user := \u0026model.User{} user.NickName = req.NickName // 添加user dbResult, err := l.svcCtx.UserModel.TransInsert(ctx, session, user) if err != nil { return err } userId, _ := dbResult.LastInsertId() // 添加userData userData := \u0026model.UserData{} userData.UserId = userId userData.Data = \"xxxxx\" if _, err := l.svcCtx.UserDataModel.TransInsert(ctx, session, userData); err != nil { return nil } return errors.New(\"代码抛出异常,验证事物\") return nil }); err != nil { return nil, errors.New(\"创建用户失败\") } return \u0026types.UserCreateResp{ Flag: true, }, err } ",
-  "wordCount" : "308",
+  "articleBody": "zo-zero 基本概念 github地址\n文档地址\ngo-zero是一个集成各种工程时间的web和rpc框架。\ngo-zero包含极简的API定义和生成工具goctl，可以根据定义的api文件，一键生成Go,IOS,Android,Kotlin,Dart,TypeScript,JavaScript代码，并可以直接运行\n优点：\n轻松获得支撑千万日活服务的稳定性 内建级联超时控制、限流、自适应熔断、自适应降载等微服务治理能力，无需配置和额外代码 微服务治理中间件可无缝集成到其它现有框架使用 极简的 API 描述，一键生成各端代码 自动校验客户端请求参数合法性 大量微服务治理和并发工具包注册 go-zero项目特点\n强大的工具支持，尽可能少的代码编写 极简的接口 完全兼容 net/http 支持中间件，方便扩展 高性能 面向故障编程，弹性设计 内建服务发现、负载均衡 内建限流、熔断、降载，且自动触发，自动恢复 API 参数自动校验 超时级联控制 自动缓存控制 链路跟踪、统计报警等 高并发支撑，稳定保障了疫情期间每天的流量洪峰 zo-zero的架构图\n快速开始 教程地址\ngoctl常用命令 goctl api goctl model mysql相关 根据数据库表生成代码\ngoctl model mysql datasource -url=\"root:root@tcp(192.168.1.115:3306)/slg_test\" -table=\"user_models\" -dir=\"./gen_model\" --style=go_zero goctl rpc Rest服务 本地事物 创建测试表 通过goctl生成代码 #才有生成带有缓存的 goctl model mysql datasource -url=\"root:root@tcp(192.168.1.115:3306)/slg_test\" -table=\"user\" -dir=\"./gen_model\" -c --style=go_zero goctl model mysql datasource -url=\"root:root@tcp(192.168.1.115:3306)/slg_test\" -table=\"user_data\" -dir=\"./gen_model\" -c --style=go_zero 添加配置 type ServiceContext struct { Config config.Config //这里可以添加全局变量 kafka redis mysql // 添加初始化依赖的地方 UserModel model.UserModel UserDataModel model.UserDataModel } func NewServiceContext(c config.Config) *ServiceContext { return \u0026ServiceContext{ Config: c, // 添加初始化依赖的地方 UserModel: model.NewUserModel(sqlx.NewMysql(c.DB.DataSource), c.Cache), //数据库的配置从哪里获取呢？就是在config UserDataModel: model.NewUserDataModel(sqlx.NewMysql(c.DB.DataSource), c.Cache), } } 定义api // 以新增用户为例子 type ( UserCreateReq { NickName string `json:\"nickName\"` } UserCreateResp { Flag bool `json:\"flag\"` } ) service user-api { @doc \"新增用户信息\" @handler userCreate post /user/create (UserCreateReq) returns (UserCreateResp) } 生成代码\n#-dir 生成代码的目录，根据自己的实际情况处理 goctl api go --api user.api -dir ../ --style=go_zero 逻辑代码编写 // 暴露给logic开启事物,从生成的model中暴露事物方法 func (m *defaultUserDataModel) TransInsert(ctx context.Context, session sqlx.Session, data *UserData) (sql.Result, error) { slgTestUserDataIdKey := fmt.Sprintf(\"%s%v\", cacheSlgTestUserDataIdPrefix, data.Id) slgTestUserDataUserIdKey := fmt.Sprintf(\"%s%v\", cacheSlgTestUserDataUserIdPrefix, data.UserId) ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) { query := fmt.Sprintf(\"insert into %s (%s) values (?, ?)\", m.table, userDataRowsExpectAutoSet) return session.ExecCtx(ctx, query, data.UserId, data.Data) }, slgTestUserDataIdKey, slgTestUserDataUserIdKey) return ret, err } func (l *UserCreateLogic) UserCreate(req *types.UserCreateReq) (resp *types.UserCreateResp, err error) { // 保证两个sql操作共用一个session这样才能管理到事物 if err := l.svcCtx.UserModel.TransCtx(l.ctx, func(ctx context.Context, session sqlx.Session) error { user := \u0026model.User{} user.NickName = req.NickName // 添加user dbResult, err := l.svcCtx.UserModel.TransInsert(ctx, session, user) if err != nil { return err } userId, _ := dbResult.LastInsertId() // 添加userData userData := \u0026model.UserData{} userData.UserId = userId userData.Data = \"xxxxx\" if _, err := l.svcCtx.UserDataModel.TransInsert(ctx, session, userData); err != nil { return nil } return errors.New(\"代码抛出异常,验证事物\") return nil }); err != nil { return nil, errors.New(\"创建用户失败\") } return \u0026types.UserCreateResp{ Flag: true, }, err } middleware中间件 类似于java中的过滤器，拦截器，可以做一些校验，鉴权，过滤操作。\n局部中间件 修改api文件 @server( group: user prefix: userapi/v1 // 添加上中间件 middleware: TestMiddleware ) service user-api { @doc \"新增用户信息\" @handler userCreate post /user/create (UserCreateReq) returns (UserCreateResp) @doc \"获取用户信息\" @handler userInfo post /user/info (UserInfoReq) returns (UserInfoResp) } 通过goctl生成新文件 svc中添加中间件配置 type ServiceContext struct { Config config.Config TestMiddleware rest.Middleware UserModel model.UserModel UserDataModel model.UserDataModel } func NewServiceContext(c config.Config) *ServiceContext { return \u0026ServiceContext{ Config: c, TestMiddleware: middleware.NewTestMiddleware().Handle, UserModel: model.NewUserModel(sqlx.NewMysql(c.DB.DataSource), c.Cache), UserDataModel: model.NewUserDataModel(sqlx.NewMysql(c.DB.DataSource), c.Cache), } } 测试 全局中间键 定义全局中间件 一般创建于common包下的\ntype GlobalMiddleWare struct { } func NewGlobalMiddleWare() *GlobalMiddleWare { return \u0026GlobalMiddleWare{} } func (m *GlobalMiddleWare) Handle(next http.HandlerFunc) http.HandlerFunc { return func(w http.ResponseWriter, r *http.Request) { fmt.Println(\"com in GlobalMiddleWare before\") next(w, r) fmt.Println(\"com in GlobalMiddleWare after\") } } 使用全局中间件 func main() { flag.Parse() var c config.Config conf.MustLoad(*configFile, \u0026c) server := rest.MustNewServer(c.RestConf) defer server.Stop() //使用全局中间件 server.Use(middleware.NewGlobalMiddleWare().Handle) ctx := svc.NewServiceContext(c) handler.RegisterHandlers(server, ctx) fmt.Printf(\"Starting server at %s:%d...\\n\", c.Host, c.Port) server.Start() } 测试 日志配置 配置入口 配置属性 type LogConf struct { //服务名 ServiceName string `json:\",optional\"` //输出类型控制台，文件，或者文件系统 Mode string `json:\",default=console,options=[console,file,volume]\"` Encoding string `json:\",default=json,options=[json,plain]\"` TimeFormat string `json:\",optional\"` Path string `json:\",default=logs\"` Level string `json:\",default=info,options=[debug,info,error,severe]\"` MaxContentLength uint32 `json:\",optional\"` Compress bool `json:\",optional\"` Stat bool `json:\",default=true\"` KeepDays int `json:\",optional\"` StackCooldownMillis int `json:\",default=100\"` MaxBackups int `json:\",default=0\"` MaxSize int `json:\",default=0\"` Rotation string `json:\",default=daily,options=[daily,size]\"` } 简单配置 Log: ServiceName: user-api Mode: console #日志界别，自定义 Level: error Encoding: json RPC服务 RPC(Remote Procedure Call Protocol)远程过程调用\n新建rpc服务 新建proto文件 syntax = \"proto3\"; // 协议版本 option go_package = \"./pb\"; //生成go的包路径 package pb; message GetUserInfoReq{ int64 id = 1; } message GetUserInfoResp{ int64 id = 1; string nickName = 2; } //service service userCenter{ rpc GetUserInfo(GetUserInfoReq) returns(GetUserInfoResp); } 生成代码 #生成项目代码 goctl rpc protoc .\\pb\\user.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. 启动 测试grpc服务 postman\n版本可能需要升级并且需要登录\n新建服务\n测试结果\ngrpci\n安装grpcui\ngo install github.com/fullstorydev/grpcui/cmd/grpcui@latest 连接服务\ngrpcui -plaintext 0.0.0.0:8080 func main() { flag.Parse() var c config.Config conf.MustLoad(*configFile, \u0026c) ctx := svc.NewServiceContext(c) s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) { pb.RegisterUserCenterServer(grpcServer, server.NewUserCenterServer(ctx)) if c.Mode == service.DevMode || c.Mode == service.TestMode { // 这里注册了反射，但是没有生效是因为 reflection.Register(grpcServer) } }) defer s.Stop() fmt.Printf(\"Starting rpc server at %s...\\n\", c.ListenOn) s.Start() } go-zero 要开启 dev 或 test 模式， 才会在主方法中注册到反射中 reflection.Register(grpcServer)，否则执行 grpcui 会报错 配置文件下添加 Mode: dev 即可。\nName: user.rpc ListenOn: 0.0.0.0:8080 Etcd: Hosts: - 192.168.1.115:2379 Key: user.rpc Mode: dev api调用rpc rpc服务默认注册在ectd服务中\n添加etcd注册的grpc配置 #UserRpcConf 这个其是自定义的别名 UserRpcConf: Etcd: Hosts: - 192.168.1.115:2379 Key: user.rpc 配置类\ntype Config struct { rest.RestConf // grpc客户端配置 UserRpcConf zrpc.RpcClientConf DB struct { DataSource string } Cache cache.CacheConf } 上下文环境中配置 type ServiceContext struct { Config config.Config TestMiddleware rest.Middleware UserModel model.UserModel UserDataModel model.UserDataModel // rpc客户端 UserRpcClient usercenter.UserCenter } func NewServiceContext(c config.Config) *ServiceContext { return \u0026ServiceContext{ Config: c, TestMiddleware: middleware.NewTestMiddleware().Handle, UserModel: model.NewUserModel(sqlx.NewMysql(c.DB.DataSource), c.Cache), UserDataModel: model.NewUserDataModel(sqlx.NewMysql(c.DB.DataSource), c.Cache), // rpc客户端 UserRpcClient: usercenter.NewUserCenter(zrpc.MustNewClient(c.UserRpcConf)), } } 逻辑代码调用 测试 直连的方式访问 rpc服务不注册到etcd，采用直接启动\nName: user.rpc ListenOn: 0.0.0.0:8080 Mode: dev api服务直连\nUserRpcConf: #Endpoints 采用直连方式 Endpoints: - 127.0.0.1:8080 rpc调用rpc 类似api调用rpc 修改配置文件 将rpc客户端添加到上下文中 逻辑代码编写 ProtoBuf注意点 go-zero中protobuf的注意点\n时间类型 时间类型采用int64类型，通过time.unix（）转换\nany属性 当需要传递类型不确定可以使用该配置\nprotp文件拆分 通过import关键字来导入将其他文件合并到一起\napi与rpc使用k8s服务发现部署 配置文件修改 api服务修改\n# 自定义的名称 UserRpcConf: #go-zero代表的k8s中的命名空间，basic-rpc-svc代表的是k8s部署yml的service名称 Target: k8s://go-zero/basic-rpc-svc:9001 rpc服务\n#只包含服务名信心 Name: user.rpc ListenOn: 0.0.0.0:8080 生成dockerfile文件 goctl 生成镜像推送到仓库 使用goctl生成rpc、api的yml文件 部署 访问 go-zero拦截器 拦截器，可以做日志，认证，限流等操作。\n客户端拦截器 服务端拦截器 不同服务间通过metadata传值 开启https服务 生成证书 openssl生成证书 cfssl生成证书 配置证书 Name: user-api Host: 0.0.0.0 Port: 8888 Timeout: 10000 CertFile: ./crt/harbor.pem KeyFile: ./crt/harbor-key.pem 原理 func (ng *engine) start(router httpx.Router, opts ...StartOption) error { if err := ng.bindRoutes(router); err != nil { return err } opts = append([]StartOption{ng.withTimeout()}, opts...) // 启动的时候根据是否配置证书信息来启动http服务或者https服务 if len(ng.conf.CertFile) == 0 \u0026\u0026 len(ng.conf.KeyFile) == 0 { return internal.StartHttp(ng.conf.Host, ng.conf.Port, router, opts...) } opts = append([]StartOption{ func(svr *http.Server) { if ng.tlsConfig != nil { svr.TLSConfig = ng.tlsConfig } }, }, opts...) return internal.StartHttps(ng.conf.Host, ng.conf.Port, ng.conf.CertFile, ng.conf.KeyFile, router, opts...) } 测试\n",
+  "wordCount" : "865",
   "inLanguage": "en",
   "datePublished": "2023-07-14T17:13:45+08:00",
   "dateModified": "2023-07-14T17:13:45+08:00",
@@ -243,45 +243,45 @@ goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_tes
 <li>高并发支撑，稳定保障了疫情期间每天的流量洪峰</li>
 </ul>
 <p><strong>zo-zero的架构图</strong></p>
-<p><img loading="lazy" src="/zo-zero.assets/1689149610253.png" alt="1689149610253"  />
+<p><img loading="lazy" src="/go-zero.assets/1689149610253.png" alt="1689149610253"  />
 </p>
 <h2 id="快速开始">快速开始<a hidden class="anchor" aria-hidden="true" href="#快速开始">#</a></h2>
 <p><a href="https://go-zero.dev/docs/tasks">教程地址</a></p>
 <h3 id="goctl常用命令">goctl常用命令<a hidden class="anchor" aria-hidden="true" href="#goctl常用命令">#</a></h3>
 <h4 id="goctl-api">goctl api<a hidden class="anchor" aria-hidden="true" href="#goctl-api">#</a></h4>
-<p><img loading="lazy" src="/zo-zero.assets/1689301917830.png" alt="1689301917830"  />
+<p><img loading="lazy" src="/go-zero.assets/1689301917830.png" alt="1689301917830"  />
 </p>
-<p><img loading="lazy" src="/zo-zero.assets/1689301967842.png" alt="1689301967842"  />
+<p><img loading="lazy" src="/go-zero.assets/1689301967842.png" alt="1689301967842"  />
 </p>
-<p><img loading="lazy" src="/zo-zero.assets/1689304890083.png" alt="1689304890083"  />
+<p><img loading="lazy" src="/go-zero.assets/1689304890083.png" alt="1689304890083"  />
 </p>
 <h4 id="goctl-model">goctl model<a hidden class="anchor" aria-hidden="true" href="#goctl-model">#</a></h4>
-<p><img loading="lazy" src="/zo-zero.assets/1689313700777.png" alt="1689313700777"  />
+<p><img loading="lazy" src="/go-zero.assets/1689313700777.png" alt="1689313700777"  />
 </p>
 <h5 id="mysql相关">mysql相关<a hidden class="anchor" aria-hidden="true" href="#mysql相关">#</a></h5>
-<h5 id="1689313739109zo-zeroassets1689313739109png"><img loading="lazy" src="/zo-zero.assets/1689313739109.png" alt="1689313739109"  />
+<h5 id="1689313739109go-zeroassets1689313739109png"><img loading="lazy" src="/go-zero.assets/1689313739109.png" alt="1689313739109"  />
 </h5>
 <ol>
 <li>
 <p>根据数据库表生成代码</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>goctl model mysql datasource -url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;root:root@tcp(192.168.1.115:3306)/slg_test&#34;</span> -table<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;user_models&#34;</span> -dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./gen_model&#34;</span> --style<span style="color:#f92672">=</span>go_zero
-</span></span></code></pre></div><p><img loading="lazy" src="/zo-zero.assets/1689313851408.png" alt="1689313851408"  />
+</span></span></code></pre></div><p><img loading="lazy" src="/go-zero.assets/1689313851408.png" alt="1689313851408"  />
 </p>
 </li>
 </ol>
 <h4 id="goctl-rpc">goctl rpc<a hidden class="anchor" aria-hidden="true" href="#goctl-rpc">#</a></h4>
-<p><img loading="lazy" src="/zo-zero.assets/1689302052861.png" alt="1689302052861"  />
+<p><img loading="lazy" src="/go-zero.assets/1689302052861.png" alt="1689302052861"  />
 </p>
-<h2 id="重点记录">重点记录<a hidden class="anchor" aria-hidden="true" href="#重点记录">#</a></h2>
+<h2 id="rest服务">Rest服务<a hidden class="anchor" aria-hidden="true" href="#rest服务">#</a></h2>
 <h3 id="本地事物">本地事物<a hidden class="anchor" aria-hidden="true" href="#本地事物">#</a></h3>
 <h4 id="创建测试表">创建测试表<a hidden class="anchor" aria-hidden="true" href="#创建测试表">#</a></h4>
-<p><img loading="lazy" src="/zo-zero.assets/1689319353148.png" alt="1689319353148"  />
+<p><img loading="lazy" src="/go-zero.assets/1689319353148.png" alt="1689319353148"  />
 </p>
 <h4 id="通过goctl生成代码">通过goctl生成代码<a hidden class="anchor" aria-hidden="true" href="#通过goctl生成代码">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#才有生成带有缓存的</span>
 </span></span><span style="display:flex;"><span>goctl model mysql datasource -url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;root:root@tcp(192.168.1.115:3306)/slg_test&#34;</span> -table<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;user&#34;</span> -dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./gen_model&#34;</span> -c --style<span style="color:#f92672">=</span>go_zero
 </span></span><span style="display:flex;"><span>goctl model mysql datasource -url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;root:root@tcp(192.168.1.115:3306)/slg_test&#34;</span> -table<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;user_data&#34;</span> -dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./gen_model&#34;</span> -c --style<span style="color:#f92672">=</span>go_zero
-</span></span></code></pre></div><p><img loading="lazy" src="/zo-zero.assets/1689319554653.png" alt="1689319554653"  />
+</span></span></code></pre></div><p><img loading="lazy" src="/go-zero.assets/1689319554653.png" alt="1689319554653"  />
 </p>
 <h4 id="添加配置">添加配置<a hidden class="anchor" aria-hidden="true" href="#添加配置">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ServiceContext</span> <span style="color:#66d9ef">struct</span> {
@@ -356,7 +356,322 @@ goctl model mysql datasource -url=&#34;root:root@tcp(192.168.1.115:3306)/slg_tes
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Flag</span>: <span style="color:#66d9ef">true</span>,
 </span></span><span style="display:flex;"><span>	}, <span style="color:#a6e22e">err</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span></code></pre></div><h3 id="middleware中间件">middleware中间件<a hidden class="anchor" aria-hidden="true" href="#middleware中间件">#</a></h3>
+<p>类似于java中的过滤器，拦截器，可以做一些校验，鉴权，过滤操作。</p>
+<h4 id="局部中间件">局部中间件<a hidden class="anchor" aria-hidden="true" href="#局部中间件">#</a></h4>
+<h5 id="修改api文件">修改api文件<a hidden class="anchor" aria-hidden="true" href="#修改api文件">#</a></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">server</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">group</span>: <span style="color:#a6e22e">user</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">prefix</span>: <span style="color:#a6e22e">userapi</span><span style="color:#f92672">/</span><span style="color:#a6e22e">v1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 添加上中间件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">middleware</span>: <span style="color:#a6e22e">TestMiddleware</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">service</span> <span style="color:#a6e22e">user</span><span style="color:#f92672">-</span><span style="color:#a6e22e">api</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">doc</span> <span style="color:#e6db74">&#34;新增用户信息&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">userCreate</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">post</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">user</span><span style="color:#f92672">/</span><span style="color:#a6e22e">create</span> (<span style="color:#a6e22e">UserCreateReq</span>) <span style="color:#a6e22e">returns</span> (<span style="color:#a6e22e">UserCreateResp</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">doc</span> <span style="color:#e6db74">&#34;获取用户信息&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">userInfo</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">post</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">user</span><span style="color:#f92672">/</span><span style="color:#a6e22e">info</span> (<span style="color:#a6e22e">UserInfoReq</span>) <span style="color:#a6e22e">returns</span> (<span style="color:#a6e22e">UserInfoResp</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="通过goctl生成新文件">通过goctl生成新文件<a hidden class="anchor" aria-hidden="true" href="#通过goctl生成新文件">#</a></h5>
+<p><img loading="lazy" src="/go-zero.assets/1689572840049.png" alt="1689572840049"  />
+</p>
+<h5 id="svc中添加中间件配置">svc中添加中间件配置<a hidden class="anchor" aria-hidden="true" href="#svc中添加中间件配置">#</a></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ServiceContext</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Config</span>         <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">Config</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">TestMiddleware</span> <span style="color:#a6e22e">rest</span>.<span style="color:#a6e22e">Middleware</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">UserModel</span>     <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">UserModel</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">UserDataModel</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">UserDataModel</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServiceContext</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">Config</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">ServiceContext</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ServiceContext</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Config</span>:         <span style="color:#a6e22e">c</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">TestMiddleware</span>: <span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">NewTestMiddleware</span>().<span style="color:#a6e22e">Handle</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">UserModel</span>:     <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewUserModel</span>(<span style="color:#a6e22e">sqlx</span>.<span style="color:#a6e22e">NewMysql</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">DB</span>.<span style="color:#a6e22e">DataSource</span>), <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Cache</span>), 
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">UserDataModel</span>: <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewUserDataModel</span>(<span style="color:#a6e22e">sqlx</span>.<span style="color:#a6e22e">NewMysql</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">DB</span>.<span style="color:#a6e22e">DataSource</span>), <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Cache</span>),
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="测试">测试<a hidden class="anchor" aria-hidden="true" href="#测试">#</a></h5>
+<p><img loading="lazy" src="/go-zero.assets/1689572926579.png" alt="1689572926579"  />
+</p>
+<h4 id="全局中间键">全局中间键<a hidden class="anchor" aria-hidden="true" href="#全局中间键">#</a></h4>
+<h5 id="定义全局中间件">定义全局中间件<a hidden class="anchor" aria-hidden="true" href="#定义全局中间件">#</a></h5>
+<p>一般创建于common包下的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GlobalMiddleWare</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewGlobalMiddleWare</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">GlobalMiddleWare</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">GlobalMiddleWare</span>{}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">GlobalMiddleWare</span>) <span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">next</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span>) <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;com in GlobalMiddleWare before&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">next</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;com in GlobalMiddleWare after&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="使用全局中间件">使用全局中间件<a hidden class="anchor" aria-hidden="true" href="#使用全局中间件">#</a></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">c</span> <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">Config</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">MustLoad</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">configFile</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">c</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">server</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rest</span>.<span style="color:#a6e22e">MustNewServer</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">RestConf</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">Stop</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//使用全局中间件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">NewGlobalMiddleWare</span>().<span style="color:#a6e22e">Handle</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">svc</span>.<span style="color:#a6e22e">NewServiceContext</span>(<span style="color:#a6e22e">c</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">handler</span>.<span style="color:#a6e22e">RegisterHandlers</span>(<span style="color:#a6e22e">server</span>, <span style="color:#a6e22e">ctx</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Starting server at %s:%d...\n&#34;</span>, <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Host</span>, <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Port</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">Start</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="测试-1">测试<a hidden class="anchor" aria-hidden="true" href="#测试-1">#</a></h5>
+<p><img loading="lazy" src="/go-zero.assets/1689574426089.png" alt="1689574426089"  />
+</p>
+<h3 id="日志配置">日志配置<a hidden class="anchor" aria-hidden="true" href="#日志配置">#</a></h3>
+<h4 id="配置入口">配置入口<a hidden class="anchor" aria-hidden="true" href="#配置入口">#</a></h4>
+<p><img loading="lazy" src="/go-zero.assets/1689575806575.png" alt="1689575806575"  />
+</p>
+<h4 id="配置属性">配置属性<a hidden class="anchor" aria-hidden="true" href="#配置属性">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">LogConf</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//服务名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ServiceName</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;,optional&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//输出类型控制台，文件，或者文件系统
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Mode</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;,default=console,options=[console,file,volume]&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Encoding</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;,default=json,options=[json,plain]&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">TimeFormat</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;,optional&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Path</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;,default=logs&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Level</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;,default=info,options=[debug,info,error,severe]&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">MaxContentLength</span> <span style="color:#66d9ef">uint32</span> <span style="color:#e6db74">`json:&#34;,optional&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Compress</span> <span style="color:#66d9ef">bool</span> <span style="color:#e6db74">`json:&#34;,optional&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Stat</span> <span style="color:#66d9ef">bool</span> <span style="color:#e6db74">`json:&#34;,default=true&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">KeepDays</span> <span style="color:#66d9ef">int</span> <span style="color:#e6db74">`json:&#34;,optional&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">StackCooldownMillis</span> <span style="color:#66d9ef">int</span> <span style="color:#e6db74">`json:&#34;,default=100&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">MaxBackups</span> <span style="color:#66d9ef">int</span> <span style="color:#e6db74">`json:&#34;,default=0&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">MaxSize</span> <span style="color:#66d9ef">int</span> <span style="color:#e6db74">`json:&#34;,default=0&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Rotation</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;,default=daily,options=[daily,size]&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="简单配置">简单配置<a hidden class="anchor" aria-hidden="true" href="#简单配置">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">Log</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ServiceName</span>: <span style="color:#ae81ff">user-api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Mode</span>: <span style="color:#ae81ff">console</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#日志界别，自定义</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Level</span>: <span style="color:#ae81ff">error</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Encoding</span>: <span style="color:#ae81ff">json</span>
+</span></span></code></pre></div><h2 id="rpc服务">RPC服务<a hidden class="anchor" aria-hidden="true" href="#rpc服务">#</a></h2>
+<p><strong>RPC</strong>(Remote Procedure Call Protocol)远程过程调用</p>
+<h3 id="新建rpc服务">新建rpc服务<a hidden class="anchor" aria-hidden="true" href="#新建rpc服务">#</a></h3>
+<h4 id="新建proto文件">新建proto文件<a hidden class="anchor" aria-hidden="true" href="#新建proto文件">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-protobuf" data-lang="protobuf"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>; <span style="color:#75715e">// 协议版本
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">option</span> go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./pb&#34;</span>; <span style="color:#75715e">//生成go的包路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">package</span> pb;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">GetUserInfoReq</span>{<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">int64</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">GetUserInfoResp</span>{<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">int64</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> nickName <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">//service
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">service</span> userCenter{<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> GetUserInfo(GetUserInfoReq) <span style="color:#66d9ef">returns</span>(GetUserInfoResp);<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><h4 id="生成代码">生成代码<a hidden class="anchor" aria-hidden="true" href="#生成代码">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#75715e">#生成项目代码 </span>
+</span></span><span style="display:flex;"><span>goctl rpc protoc .<span style="color:#ae81ff">\p</span>b<span style="color:#ae81ff">\u</span>ser.proto --go_out<span style="color:#f92672">=</span>./ --go-grpc_out<span style="color:#f92672">=</span>./ --zrpc_out<span style="color:#f92672">=</span>. 
+</span></span></code></pre></div><p><img loading="lazy" src="/go-zero.assets/1689643583378.png" alt="1689643583378"  />
+</p>
+<h4 id="启动">启动<a hidden class="anchor" aria-hidden="true" href="#启动">#</a></h4>
+<p><img loading="lazy" src="/go-zero.assets/1689643890688.png" alt="1689643890688"  />
+</p>
+<h4 id="测试grpc服务">测试grpc服务<a hidden class="anchor" aria-hidden="true" href="#测试grpc服务">#</a></h4>
+<p><strong>postman</strong></p>
+<p>版本可能需要升级并且需要登录</p>
+<p>新建服务</p>
+<p><img loading="lazy" src="/go-zero.assets/1689650635803.png" alt="1689650635803"  />
+</p>
+<p><img loading="lazy" src="/go-zero.assets/1689650726630.png" alt="1689650726630"  />
+
+测试结果</p>
+<p><img loading="lazy" src="/go-zero.assets/1689650776979.png" alt="1689650776979"  />
+</p>
+<p><strong>grpci</strong></p>
+<p>安装grpcui</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>go install github.com/fullstorydev/grpcui/cmd/grpcui@latest
+</span></span></code></pre></div><p>连接服务</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>grpcui  -plaintext 0.0.0.0:8080
+</span></span></code></pre></div><p><img loading="lazy" src="/go-zero.assets/1689648424939.png" alt="1689648424939"  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">c</span> <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">Config</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">MustLoad</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">configFile</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">c</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">svc</span>.<span style="color:#a6e22e">NewServiceContext</span>(<span style="color:#a6e22e">c</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">zrpc</span>.<span style="color:#a6e22e">MustNewServer</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">RpcServerConf</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">grpcServer</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">Server</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">RegisterUserCenterServer</span>(<span style="color:#a6e22e">grpcServer</span>, <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">NewUserCenterServer</span>(<span style="color:#a6e22e">ctx</span>))
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Mode</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">service</span>.<span style="color:#a6e22e">DevMode</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Mode</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">service</span>.<span style="color:#a6e22e">TestMode</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 这里注册了反射，但是没有生效是因为
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			<span style="color:#a6e22e">reflection</span>.<span style="color:#a6e22e">Register</span>(<span style="color:#a6e22e">grpcServer</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Stop</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Starting rpc server at %s...\n&#34;</span>, <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">ListenOn</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Start</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>go-zero 要开启 dev 或 test 模式， 才会在主方法中注册到<a href="https://so.csdn.net/so/search?q=%E5%8F%8D%E5%B0%84&amp;spm=1001.2101.3001.7020">反射</a>中 reflection.Register(grpcServer)，否则执行 grpcui 会报错
+配置文件下添加 Mode: dev 即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">Name</span>: <span style="color:#ae81ff">user.rpc</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">ListenOn</span>: <span style="color:#ae81ff">0.0.0.0</span>:<span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Etcd</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Hosts</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">192.168.1.115</span>:<span style="color:#ae81ff">2379</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Key</span>: <span style="color:#ae81ff">user.rpc</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Mode</span>: <span style="color:#ae81ff">dev</span>
+</span></span></code></pre></div><p><img loading="lazy" src="/go-zero.assets/1689650063946.png" alt="1689650063946"  />
+</p>
+<p><img loading="lazy" src="/go-zero.assets/1689650085577.png" alt="1689650085577"  />
+</p>
+<h3 id="api调用rpc">api调用rpc<a hidden class="anchor" aria-hidden="true" href="#api调用rpc">#</a></h3>
+<p>rpc服务默认注册在ectd服务中</p>
+<p><img loading="lazy" src="/go-zero.assets/1689650967730.png" alt="1689650967730"  />
+</p>
+<h4 id="添加etcd注册的grpc配置">添加etcd注册的grpc配置<a hidden class="anchor" aria-hidden="true" href="#添加etcd注册的grpc配置">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#75715e">#UserRpcConf 这个其是自定义的别名</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">UserRpcConf</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Etcd</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Hosts</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">192.168.1.115</span>:<span style="color:#ae81ff">2379</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Key</span>: <span style="color:#ae81ff">user.rpc</span>
+</span></span></code></pre></div><p>配置类</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Config</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">rest</span>.<span style="color:#a6e22e">RestConf</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// grpc客户端配置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">UserRpcConf</span> <span style="color:#a6e22e">zrpc</span>.<span style="color:#a6e22e">RpcClientConf</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">DB</span>          <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">DataSource</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Cache</span> <span style="color:#a6e22e">cache</span>.<span style="color:#a6e22e">CacheConf</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="上下文环境中配置">上下文环境中配置<a hidden class="anchor" aria-hidden="true" href="#上下文环境中配置">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ServiceContext</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Config</span>         <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">Config</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">TestMiddleware</span> <span style="color:#a6e22e">rest</span>.<span style="color:#a6e22e">Middleware</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">UserModel</span>     <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">UserModel</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">UserDataModel</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">UserDataModel</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// rpc客户端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">UserRpcClient</span> <span style="color:#a6e22e">usercenter</span>.<span style="color:#a6e22e">UserCenter</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServiceContext</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">Config</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">ServiceContext</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ServiceContext</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Config</span>:         <span style="color:#a6e22e">c</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">TestMiddleware</span>: <span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">NewTestMiddleware</span>().<span style="color:#a6e22e">Handle</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">UserModel</span>:     <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewUserModel</span>(<span style="color:#a6e22e">sqlx</span>.<span style="color:#a6e22e">NewMysql</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">DB</span>.<span style="color:#a6e22e">DataSource</span>), <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Cache</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">UserDataModel</span>: <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewUserDataModel</span>(<span style="color:#a6e22e">sqlx</span>.<span style="color:#a6e22e">NewMysql</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">DB</span>.<span style="color:#a6e22e">DataSource</span>), <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Cache</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// rpc客户端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#a6e22e">UserRpcClient</span>: <span style="color:#a6e22e">usercenter</span>.<span style="color:#a6e22e">NewUserCenter</span>(<span style="color:#a6e22e">zrpc</span>.<span style="color:#a6e22e">MustNewClient</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">UserRpcConf</span>)),
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="逻辑代码调用">逻辑代码调用<a hidden class="anchor" aria-hidden="true" href="#逻辑代码调用">#</a></h4>
+<h4 id="测试-2">测试<a hidden class="anchor" aria-hidden="true" href="#测试-2">#</a></h4>
+<p><img loading="lazy" src="/go-zero.assets/1689652408926.png" alt="1689652408926"  />
+</p>
+<h4 id="直连的方式访问">直连的方式访问<a hidden class="anchor" aria-hidden="true" href="#直连的方式访问">#</a></h4>
+<ol>
+<li>
+<p>rpc服务不注册到etcd，采用直接启动</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">Name</span>: <span style="color:#ae81ff">user.rpc</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">ListenOn</span>: <span style="color:#ae81ff">0.0.0.0</span>:<span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Mode</span>: <span style="color:#ae81ff">dev</span>
+</span></span></code></pre></div></li>
+<li>
+<p>api服务直连</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">UserRpcConf</span>:
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Endpoints 采用直连方式</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Endpoints</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">127.0.0.1</span>:<span style="color:#ae81ff">8080</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="rpc调用rpc">rpc调用rpc<a hidden class="anchor" aria-hidden="true" href="#rpc调用rpc">#</a></h3>
+<h4 id="类似api调用rpc">类似api调用rpc<a hidden class="anchor" aria-hidden="true" href="#类似api调用rpc">#</a></h4>
+<ol>
+<li>修改配置文件</li>
+<li>将rpc客户端添加到上下文中</li>
+<li>逻辑代码编写</li>
+</ol>
+<h3 id="protobuf注意点">ProtoBuf注意点<a hidden class="anchor" aria-hidden="true" href="#protobuf注意点">#</a></h3>
+<p>go-zero中protobuf的注意点</p>
+<h4 id="时间类型">时间类型<a hidden class="anchor" aria-hidden="true" href="#时间类型">#</a></h4>
+<p>时间类型采用<code>int64</code>类型，通过<code>time.unix（）</code>转换</p>
+<h4 id="any属性">any属性<a hidden class="anchor" aria-hidden="true" href="#any属性">#</a></h4>
+<p>当需要传递类型不确定可以使用该配置</p>
+<h4 id="protp文件拆分">protp文件拆分<a hidden class="anchor" aria-hidden="true" href="#protp文件拆分">#</a></h4>
+<p>通过<code>import</code>关键字来导入将其他文件合并到一起</p>
+<h3 id="api与rpc使用k8s服务发现部署">api与rpc使用k8s服务发现部署<a hidden class="anchor" aria-hidden="true" href="#api与rpc使用k8s服务发现部署">#</a></h3>
+<h4 id="配置文件修改">配置文件修改<a hidden class="anchor" aria-hidden="true" href="#配置文件修改">#</a></h4>
+<p><strong>api</strong>服务修改</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#75715e"># 自定义的名称</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">UserRpcConf</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#go-zero代表的k8s中的命名空间，basic-rpc-svc代表的是k8s部署yml的service名称</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Target</span>: <span style="color:#ae81ff">k8s://go-zero/basic-rpc-svc:9001</span>
+</span></span></code></pre></div><p><strong>rpc服务</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#75715e">#只包含服务名信心</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Name</span>: <span style="color:#ae81ff">user.rpc</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">ListenOn</span>: <span style="color:#ae81ff">0.0.0.0</span>:<span style="color:#ae81ff">8080</span>
+</span></span></code></pre></div><h4 id="生成dockerfile文件">生成dockerfile文件<a hidden class="anchor" aria-hidden="true" href="#生成dockerfile文件">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>goctl 
+</span></span></code></pre></div><h4 id="生成镜像推送到仓库">生成镜像推送到仓库<a hidden class="anchor" aria-hidden="true" href="#生成镜像推送到仓库">#</a></h4>
+<h4 id="使用goctl生成rpcapi的yml文件">使用goctl生成rpc、api的yml文件<a hidden class="anchor" aria-hidden="true" href="#使用goctl生成rpcapi的yml文件">#</a></h4>
+<h4 id="部署">部署<a hidden class="anchor" aria-hidden="true" href="#部署">#</a></h4>
+<h4 id="访问">访问<a hidden class="anchor" aria-hidden="true" href="#访问">#</a></h4>
+<h3 id="go-zero拦截器">go-zero拦截器<a hidden class="anchor" aria-hidden="true" href="#go-zero拦截器">#</a></h3>
+<p>拦截器，可以做日志，认证，限流等操作。</p>
+<h4 id="客户端拦截器">客户端拦截器<a hidden class="anchor" aria-hidden="true" href="#客户端拦截器">#</a></h4>
+<h4 id="服务端拦截器">服务端拦截器<a hidden class="anchor" aria-hidden="true" href="#服务端拦截器">#</a></h4>
+<h3 id="不同服务间通过metadata传值">不同服务间通过metadata传值<a hidden class="anchor" aria-hidden="true" href="#不同服务间通过metadata传值">#</a></h3>
+<h2 id="开启https服务">开启https服务<a hidden class="anchor" aria-hidden="true" href="#开启https服务">#</a></h2>
+<h3 id="生成证书">生成证书<a hidden class="anchor" aria-hidden="true" href="#生成证书">#</a></h3>
+<h4 id="openssl生成证书">openssl生成证书<a hidden class="anchor" aria-hidden="true" href="#openssl生成证书">#</a></h4>
+<h4 id="cfssl生成证书">cfssl生成证书<a hidden class="anchor" aria-hidden="true" href="#cfssl生成证书">#</a></h4>
+<h3 id="配置证书">配置证书<a hidden class="anchor" aria-hidden="true" href="#配置证书">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">Name</span>: <span style="color:#ae81ff">user-api</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Host</span>: <span style="color:#ae81ff">0.0.0.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Port</span>: <span style="color:#ae81ff">8888</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Timeout</span>: <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">CertFile</span>: <span style="color:#ae81ff">./crt/harbor.pem</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">KeyFile</span>: <span style="color:#ae81ff">./crt/harbor-key.pem</span>
+</span></span></code></pre></div><h3 id="原理">原理<a hidden class="anchor" aria-hidden="true" href="#原理">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">ng</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">engine</span>) <span style="color:#a6e22e">start</span>(<span style="color:#a6e22e">router</span> <span style="color:#a6e22e">httpx</span>.<span style="color:#a6e22e">Router</span>, <span style="color:#a6e22e">opts</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">StartOption</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">bindRoutes</span>(<span style="color:#a6e22e">router</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">opts</span> = append([]<span style="color:#a6e22e">StartOption</span>{<span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">withTimeout</span>()}, <span style="color:#a6e22e">opts</span><span style="color:#f92672">...</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 启动的时候根据是否配置证书信息来启动http服务或者https服务
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">CertFile</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> len(<span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">KeyFile</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">internal</span>.<span style="color:#a6e22e">StartHttp</span>(<span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">Host</span>, <span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">Port</span>, <span style="color:#a6e22e">router</span>, <span style="color:#a6e22e">opts</span><span style="color:#f92672">...</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">opts</span> = append([]<span style="color:#a6e22e">StartOption</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">svr</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Server</span>) {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">tlsConfig</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">svr</span>.<span style="color:#a6e22e">TLSConfig</span> = <span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">tlsConfig</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		},
+</span></span><span style="display:flex;"><span>	}, <span style="color:#a6e22e">opts</span><span style="color:#f92672">...</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">internal</span>.<span style="color:#a6e22e">StartHttps</span>(<span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">Host</span>, <span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">Port</span>, <span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">CertFile</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">ng</span>.<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">KeyFile</span>, <span style="color:#a6e22e">router</span>, <span style="color:#a6e22e">opts</span><span style="color:#f92672">...</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>测试</strong></p>
+<p><img loading="lazy" src="/go-zero.assets/1689730936598.png" alt="1689730936598"  />
+</p>
+
 
   </div>
 
