@@ -6,7 +6,22 @@
     <description>Recent content in Posts on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Jul 2023 17:13:45 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jul 2023 10:48:37 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Casbin</title>
+      <link>http://slgjy.github.io/post/casbin/</link>
+      <pubDate>Mon, 24 Jul 2023 10:48:37 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/casbin/</guid>
+      <description>Casbin 官网地址
+基础 工作原理 Casbin中，访问控制模型被抽象为PERM(pocicy,effect,request,matcher)的一个配置文件
+Policy的存储 权限策略通常采用数据库存储，而不是在csv文件中固定。一般采用适配器组件实现。
+文档地址
+中间件github地址
+GORM-ADAPTER go get github.com/casbin/gorm-adapter/v3 测试编码
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;github.com/casbin/casbin/v2&amp;#34; gormadapter &amp;#34;github.com/casbin/gorm-adapter/v3&amp;#34; _ &amp;#34;github.com/go-sql-driver/mysql&amp;#34; ) func main() { // 添加参数为true会自动创建casbin_rule表 a, _ := gormadapter.NewAdapter(&amp;#34;mysql&amp;#34;, &amp;#34;root:root@tcp(192.168.1.115:3306)/casbin&amp;#34;, true) e, _ := casbin.NewEnforcer(&amp;#34;D:\\code\\go_code\\go_zero_source_code\\http\\demo\\casbin\\model.conf&amp;#34;, a) sub := &amp;#34;alice1&amp;#34; // 想要访问资源的用户。 obj := &amp;#34;data1&amp;#34; // 将被访问的资源。 act := &amp;#34;read&amp;#34; // 用户对资源执行的操作。 ok, err := e.</description>
+    </item>
+    
     <item>
       <title>Go Zero</title>
       <link>http://slgjy.github.io/post/go-zero/</link>

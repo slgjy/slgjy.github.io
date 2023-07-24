@@ -128,15 +128,20 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Start_containe
+    <h2>Casbin
     </h2>
   </header>
   <div class="entry-content">
-    <p>Etec容器启动 1.镜像拉取 docker pull bitnami/etcd docker pull evildecay/etcdkeeper 2.单节点启动 创建挂载目录 #自定义容器挂载的路径 mkdir -p /home/slg/etcd/single/data mkdir -p /home/slg/etcd/single/conf 编写配置文件 vim /home/slg/etcd/single/conf/etcd.yml #name 节点的名字,在集群中必须唯一 name: s1 #data-dir 存储数据的路径,注意这是容器内部路径 data-dir: /etcd-data listen-client-urls: http://0.0.0.0:2379 advertise-client-urls: http://0.0.0.0:2379 listen-peer-urls: http://0.0.0.0:2380 initial-advertise-peer-urls: http://0.0.0.0:2380 initial-cluster: s1=http://0.0.0.0:2380 initial-cluster-token: etcd-cluster-token initial-cluster-state: new log-level: info logger: zap log-outputs: stderr 参数介绍
-listen-client-urls：这个参数用于指定 etcd 服务监听客户端请求的地址和端口。客户端（如 etcdctl 命令行工具、其他使用 etcd 客户端库的应用程序）将通过这些地址与 etcd 服务进行通信，以执行各种操作，如读取、写入和修改键值对....</p>
+    <p>Casbin 官网地址
+基础 工作原理 Casbin中，访问控制模型被抽象为PERM(pocicy,effect,request,matcher)的一个配置文件
+Policy的存储 权限策略通常采用数据库存储，而不是在csv文件中固定。一般采用适配器组件实现。
+文档地址
+中间件github地址
+GORM-ADAPTER go get github.com/casbin/gorm-adapter/v3 测试编码
+package main import ( &#34;fmt&#34; &#34;github.com/casbin/casbin/v2&#34; gormadapter &#34;github.com/casbin/gorm-adapter/v3&#34; _ &#34;github.com/go-sql-driver/mysql&#34; ) func main() { // 添加参数为true会自动创建casbin_rule表 a, _ := gormadapter.NewAdapter(&#34;mysql&#34;, &#34;root:root@tcp(192.168.1.115:3306)/casbin&#34;, true) e, _ := casbin.NewEnforcer(&#34;D:\\code\\go_code\\go_zero_source_code\\http\\demo\\casbin\\model.conf&#34;, a) sub := &#34;alice1&#34; // 想要访问资源的用户。 obj := &#34;data1&#34; // 将被访问的资源。 act := &#34;read&#34; // 用户对资源执行的操作。 ok, err := e....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-07-14 17:13:17 +0800 CST'>July 14, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Start_containe" href="http://slgjy.github.io/post/start_containe/"></a>
+  <footer class="entry-footer"><span title='2023-07-24 10:48:37 +0800 CST'>July 24, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Casbin" href="http://slgjy.github.io/post/casbin/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 

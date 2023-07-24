@@ -128,6 +128,19 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Start_containe
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Etec容器启动 1.镜像拉取 docker pull bitnami/etcd docker pull evildecay/etcdkeeper 2.单节点启动 创建挂载目录 #自定义容器挂载的路径 mkdir -p /home/slg/etcd/single/data mkdir -p /home/slg/etcd/single/conf 编写配置文件 vim /home/slg/etcd/single/conf/etcd.yml #name 节点的名字,在集群中必须唯一 name: s1 #data-dir 存储数据的路径,注意这是容器内部路径 data-dir: /etcd-data listen-client-urls: http://0.0.0.0:2379 advertise-client-urls: http://0.0.0.0:2379 listen-peer-urls: http://0.0.0.0:2380 initial-advertise-peer-urls: http://0.0.0.0:2380 initial-cluster: s1=http://0.0.0.0:2380 initial-cluster-token: etcd-cluster-token initial-cluster-state: new log-level: info logger: zap log-outputs: stderr 参数介绍
+listen-client-urls：这个参数用于指定 etcd 服务监听客户端请求的地址和端口。客户端（如 etcdctl 命令行工具、其他使用 etcd 客户端库的应用程序）将通过这些地址与 etcd 服务进行通信，以执行各种操作，如读取、写入和修改键值对....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-07-14 17:13:17 +0800 CST'>July 14, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Start_containe" href="http://slgjy.github.io/post/start_containe/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>docker镜像
     </h2>
   </header>

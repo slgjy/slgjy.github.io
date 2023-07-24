@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Casbin | 小石头博客</title>
+<meta name="keywords" content="go">
+<meta name="description" content="Casbin 官网地址
+基础 工作原理 Casbin中，访问控制模型被抽象为PERM(pocicy,effect,request,matcher)的一个配置文件
+Policy的存储 权限策略通常采用数据库存储，而不是在csv文件中固定。一般采用适配器组件实现。
+文档地址
+中间件github地址
+GORM-ADAPTER go get github.com/casbin/gorm-adapter/v3 测试编码
+package main import ( &#34;fmt&#34; &#34;github.com/casbin/casbin/v2&#34; gormadapter &#34;github.com/casbin/gorm-adapter/v3&#34; _ &#34;github.com/go-sql-driver/mysql&#34; ) func main() { // 添加参数为true会自动创建casbin_rule表 a, _ := gormadapter.NewAdapter(&#34;mysql&#34;, &#34;root:root@tcp(192.168.1.115:3306)/casbin&#34;, true) e, _ := casbin.NewEnforcer(&#34;D:\\code\\go_code\\go_zero_source_code\\http\\demo\\casbin\\model.conf&#34;, a) sub := &#34;alice1&#34; // 想要访问资源的用户。 obj := &#34;data1&#34; // 将被访问的资源。 act := &#34;read&#34; // 用户对资源执行的操作。 ok, err := e.">
+<meta name="author" content="">
+<link rel="canonical" href="http://slgjy.github.io/post/casbin/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://slgjy.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://slgjy.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://slgjy.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Casbin" />
+<meta property="og:description" content="Casbin 官网地址
+基础 工作原理 Casbin中，访问控制模型被抽象为PERM(pocicy,effect,request,matcher)的一个配置文件
+Policy的存储 权限策略通常采用数据库存储，而不是在csv文件中固定。一般采用适配器组件实现。
+文档地址
+中间件github地址
+GORM-ADAPTER go get github.com/casbin/gorm-adapter/v3 测试编码
+package main import ( &#34;fmt&#34; &#34;github.com/casbin/casbin/v2&#34; gormadapter &#34;github.com/casbin/gorm-adapter/v3&#34; _ &#34;github.com/go-sql-driver/mysql&#34; ) func main() { // 添加参数为true会自动创建casbin_rule表 a, _ := gormadapter.NewAdapter(&#34;mysql&#34;, &#34;root:root@tcp(192.168.1.115:3306)/casbin&#34;, true) e, _ := casbin.NewEnforcer(&#34;D:\\code\\go_code\\go_zero_source_code\\http\\demo\\casbin\\model.conf&#34;, a) sub := &#34;alice1&#34; // 想要访问资源的用户。 obj := &#34;data1&#34; // 将被访问的资源。 act := &#34;read&#34; // 用户对资源执行的操作。 ok, err := e." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://slgjy.github.io/post/casbin/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-24T10:48:37+08:00" />
+<meta property="article:modified_time" content="2023-07-24T10:48:37+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Casbin"/>
+<meta name="twitter:description" content="Casbin 官网地址
+基础 工作原理 Casbin中，访问控制模型被抽象为PERM(pocicy,effect,request,matcher)的一个配置文件
+Policy的存储 权限策略通常采用数据库存储，而不是在csv文件中固定。一般采用适配器组件实现。
+文档地址
+中间件github地址
+GORM-ADAPTER go get github.com/casbin/gorm-adapter/v3 测试编码
+package main import ( &#34;fmt&#34; &#34;github.com/casbin/casbin/v2&#34; gormadapter &#34;github.com/casbin/gorm-adapter/v3&#34; _ &#34;github.com/go-sql-driver/mysql&#34; ) func main() { // 添加参数为true会自动创建casbin_rule表 a, _ := gormadapter.NewAdapter(&#34;mysql&#34;, &#34;root:root@tcp(192.168.1.115:3306)/casbin&#34;, true) e, _ := casbin.NewEnforcer(&#34;D:\\code\\go_code\\go_zero_source_code\\http\\demo\\casbin\\model.conf&#34;, a) sub := &#34;alice1&#34; // 想要访问资源的用户。 obj := &#34;data1&#34; // 将被访问的资源。 act := &#34;read&#34; // 用户对资源执行的操作。 ok, err := e."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "http://slgjy.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Casbin",
+      "item": "http://slgjy.github.io/post/casbin/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Casbin",
+  "name": "Casbin",
+  "description": "Casbin 官网地址\n基础 工作原理 Casbin中，访问控制模型被抽象为PERM(pocicy,effect,request,matcher)的一个配置文件\nPolicy的存储 权限策略通常采用数据库存储，而不是在csv文件中固定。一般采用适配器组件实现。\n文档地址\n中间件github地址\nGORM-ADAPTER go get github.com/casbin/gorm-adapter/v3 测试编码\npackage main import ( \u0026#34;fmt\u0026#34; \u0026#34;github.com/casbin/casbin/v2\u0026#34; gormadapter \u0026#34;github.com/casbin/gorm-adapter/v3\u0026#34; _ \u0026#34;github.com/go-sql-driver/mysql\u0026#34; ) func main() { // 添加参数为true会自动创建casbin_rule表 a, _ := gormadapter.NewAdapter(\u0026#34;mysql\u0026#34;, \u0026#34;root:root@tcp(192.168.1.115:3306)/casbin\u0026#34;, true) e, _ := casbin.NewEnforcer(\u0026#34;D:\\\\code\\\\go_code\\\\go_zero_source_code\\\\http\\\\demo\\\\casbin\\\\model.conf\u0026#34;, a) sub := \u0026#34;alice1\u0026#34; // 想要访问资源的用户。 obj := \u0026#34;data1\u0026#34; // 将被访问的资源。 act := \u0026#34;read\u0026#34; // 用户对资源执行的操作。 ok, err := e.",
+  "keywords": [
+    "go"
+  ],
+  "articleBody": "Casbin 官网地址\n基础 工作原理 Casbin中，访问控制模型被抽象为PERM(pocicy,effect,request,matcher)的一个配置文件\nPolicy的存储 权限策略通常采用数据库存储，而不是在csv文件中固定。一般采用适配器组件实现。\n文档地址\n中间件github地址\nGORM-ADAPTER go get github.com/casbin/gorm-adapter/v3 测试编码\npackage main import ( \"fmt\" \"github.com/casbin/casbin/v2\" gormadapter \"github.com/casbin/gorm-adapter/v3\" _ \"github.com/go-sql-driver/mysql\" ) func main() { // 添加参数为true会自动创建casbin_rule表 a, _ := gormadapter.NewAdapter(\"mysql\", \"root:root@tcp(192.168.1.115:3306)/casbin\", true) e, _ := casbin.NewEnforcer(\"D:\\\\code\\\\go_code\\\\go_zero_source_code\\\\http\\\\demo\\\\casbin\\\\model.conf\", a) sub := \"alice1\" // 想要访问资源的用户。 obj := \"data1\" // 将被访问的资源。 act := \"read\" // 用户对资源执行的操作。 ok, err := e.Enforce(sub, obj, act) if err != nil { // 处理err/ } if ok == true { // 允许alice读取data1 fmt.Printf(\"通过\") } else { // 拒绝请求，抛出异常 fmt.Printf(\"不通过\") } } 添加规则数据(数据库直接添加或者编码添加都可)\n测试权限验证通过\n权限控制模型 ACL ACL（access control list） 访问控制列表。\n最早的权限管理管理模型，原理核心:每一项资源，都有一个资源列表，通过资源列表来判断用户对资源的控制权限 。\nACL通过资源列表就能实现访问控制，非常简单，但其要维护大量的访问权限列表，性能上有缺陷，且当用户量巨大的时候访问列表的维护工作比较繁重。\nRBAC （Role Based Access Control）基于角色的访问控制\n在ACL模型的基础上添加了角色概念，通过用户和角色关联，角色和权限关联做分离。减少权限数据的频繁变更。\nRBAC的三种模型\nRBAC0 基础模型用户和角色多对多，角色和权限多对多 RBAC1 基于RPAC0模型引入了角色继承关系，角色有了上下级关系 RBAC2 基于前两种模型上进行了角色访问控制 ABAC ABAC(Attribute bases access control)基于属性的权限验证\n更细粒度的权限控制(权限系统设计的未来)\nABAC基于==策略==进行访问控制，ABAC通过动态计算一个或一组属性来判断是否满足某个条件来进行授权判断。一般配合RBAC使用. 属性通常分为四类\n用户属性(年龄 性别，职位) 环境属性(时间，内外网) 操作属性(增、删，改，查) 对象属性(文章，也称资源属性) 模型选择 取决于组织规模大小(用户数量，业务大小)，ABAC设计比较复杂，通常在一般系统使用RBAC来替换ABAC。\n**ps：**当满足一下条件就需要使用ABAC\n拥有大量用户 精准细粒度的控制权限 确保隐私和安全 ",
+  "wordCount" : "129",
+  "inLanguage": "en",
+  "datePublished": "2023-07-24T10:48:37+08:00",
+  "dateModified": "2023-07-24T10:48:37+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://slgjy.github.io/post/casbin/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "小石头博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://slgjy.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://slgjy.github.io" accesskey="h" title="小石头博客 (Alt + H)">小石头博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://slgjy.github.io/tags/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://slgjy.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Casbin
+    </h1>
+    <div class="post-meta"><span title='2023-07-24 10:48:37 +0800 CST'>July 24, 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="casbin">Casbin<a hidden class="anchor" aria-hidden="true" href="#casbin">#</a></h1>
+<p><a href="https://casbin.org/zh/">官网地址</a></p>
+<h2 id="基础">基础<a hidden class="anchor" aria-hidden="true" href="#基础">#</a></h2>
+<h3 id="工作原理">工作原理<a hidden class="anchor" aria-hidden="true" href="#工作原理">#</a></h3>
+<p>Casbin中，访问控制模型被抽象为<strong>PERM</strong>(pocicy,effect,request,matcher)的一个配置文件</p>
+<p><img loading="lazy" src="/casbin.assets/1689928179534.png" alt="1689928179534"  />
+</p>
+<p><img loading="lazy" src="/casbin.assets/1689928590781.png" alt="1689928590781"  />
+</p>
+<h3 id="policy的存储">Policy的存储<a hidden class="anchor" aria-hidden="true" href="#policy的存储">#</a></h3>
+<p>权限策略通常采用数据库存储，而不是在csv文件中固定。一般采用适配器组件实现。</p>
+<p><a href="https://casbin.org/zh/docs/adapters">文档地址</a></p>
+<p><a href="https://github.com/casbin/gorm-adapter">中间件github地址</a></p>
+<h4 id="gorm-adapter">GORM-ADAPTER<a hidden class="anchor" aria-hidden="true" href="#gorm-adapter">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SHELL" data-lang="SHELL"><span style="display:flex;"><span>go get github.com/casbin/gorm-adapter/v3
+</span></span></code></pre></div><p><strong>测试编码</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/casbin/casbin/v2&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">gormadapter</span> <span style="color:#e6db74">&#34;github.com/casbin/gorm-adapter/v3&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">_</span> <span style="color:#e6db74">&#34;github.com/go-sql-driver/mysql&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 添加参数为true会自动创建casbin_rule表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gormadapter</span>.<span style="color:#a6e22e">NewAdapter</span>(<span style="color:#e6db74">&#34;mysql&#34;</span>, <span style="color:#e6db74">&#34;root:root@tcp(192.168.1.115:3306)/casbin&#34;</span>, <span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">e</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">casbin</span>.<span style="color:#a6e22e">NewEnforcer</span>(<span style="color:#e6db74">&#34;D:\\code\\go_code\\go_zero_source_code\\http\\demo\\casbin\\model.conf&#34;</span>, <span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">sub</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;alice1&#34;</span> <span style="color:#75715e">// 想要访问资源的用户。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">obj</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;data1&#34;</span>  <span style="color:#75715e">// 将被访问的资源。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">act</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;read&#34;</span>   <span style="color:#75715e">// 用户对资源执行的操作。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ok</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Enforce</span>(<span style="color:#a6e22e">sub</span>, <span style="color:#a6e22e">obj</span>, <span style="color:#a6e22e">act</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 处理err/
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">true</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 允许alice读取data1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;通过&#34;</span>)
+</span></span><span style="display:flex;"><span>	} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 拒绝请求，抛出异常
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;不通过&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img loading="lazy" src="/casbin.assets/1690164645376.png" alt="1690164645376"  />
+</p>
+<p>添加规则数据(数据库直接添加或者编码添加都可)</p>
+<p><img loading="lazy" src="/casbin.assets/1690164857659.png" alt="1690164857659"  />
+</p>
+<p>测试权限验证通过</p>
+<p><img loading="lazy" src="/casbin.assets/1690164996344.png" alt="1690164996344"  />
+</p>
+<h2 id="权限控制模型">权限控制模型<a hidden class="anchor" aria-hidden="true" href="#权限控制模型">#</a></h2>
+<h3 id="acl">ACL<a hidden class="anchor" aria-hidden="true" href="#acl">#</a></h3>
+<p>ACL（access control list） 访问控制列表。</p>
+<p>最早的权限管理管理模型，原理核心:每一项资源，都有一个资源列表，通过资源列表来判断用户对资源的控制权限 。</p>
+<p>ACL通过资源列表就能实现访问控制，非常简单，但其要维护大量的访问权限列表，性能上有缺陷，且当用户量巨大的时候访问列表的维护工作比较繁重。</p>
+<h3 id="rbac">RBAC<a hidden class="anchor" aria-hidden="true" href="#rbac">#</a></h3>
+<p>（Role Based Access Control）<strong>基于角色的访问控制</strong></p>
+<p>在ACL模型的基础上添加了角色概念，通过用户和角色关联，角色和权限关联做分离。减少权限数据的频繁变更。</p>
+<p><strong>RBAC</strong>的三种模型</p>
+<ul>
+<li>RBAC0 基础模型用户和角色多对多，角色和权限多对多</li>
+<li>RBAC1 基于RPAC0模型引入了角色继承关系，角色有了上下级关系</li>
+<li>RBAC2 基于前两种模型上进行了角色访问控制</li>
+</ul>
+<h3 id="abac">ABAC<a hidden class="anchor" aria-hidden="true" href="#abac">#</a></h3>
+<p><strong>ABAC</strong>(Attribute bases access control)基于属性的权限验证</p>
+<p>更细粒度的权限控制(权限系统设计的未来)</p>
+<p>ABAC基于==策略==进行访问控制，ABAC通过动态计算一个或一组属性来判断是否满足某个条件来进行授权判断。一般配合RBAC使用.
+<strong>属性通常分为四类</strong></p>
+<ul>
+<li>用户属性(年龄 性别，职位)</li>
+<li>环境属性(时间，内外网)</li>
+<li>操作属性(增、删，改，查)</li>
+<li>对象属性(文章，也称资源属性)</li>
+</ul>
+<h3 id="模型选择">模型选择<a hidden class="anchor" aria-hidden="true" href="#模型选择">#</a></h3>
+<p>取决于组织规模大小(用户数量，业务大小)，ABAC设计比较复杂，通常在一般系统使用RBAC来替换ABAC。</p>
+<p>**ps：**当满足一下条件就需要使用ABAC</p>
+<ul>
+<li>拥有大量用户</li>
+<li>精准细粒度的控制权限</li>
+<li>确保隐私和安全</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://slgjy.github.io/tags/go/">go</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="http://slgjy.github.io">小石头博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
