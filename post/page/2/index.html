@@ -143,6 +143,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Cobra
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>spf13/cobra库学习 参考引用
+cobra cobra是一个命令行程序库，提供简单的接口来创建CLI接口(Command Line Interface)命令行接口。cobra被应用于很多项目比如k8s,docker,etcd,hugo博客等等
+命令模板 commands argumets flags 例如:
+# server是commands，port是flag hugo server --port=1313 # clone是commands，URL是arguments，brae是flags git clone URL --bare 业务使用 安装 # go库安装 go get github.com/spf13/cobra/cobra@latest # go的命令行脚手架安装 go install github.com/spf13/cobra-cli@latest 创建命令 package cmd import ( &#34;fmt&#34; &#34;github.com/spf13/cobra&#34; &#34;github.com/spf13/cobra/doc&#34; &#34;os&#34; ) var Verbose bool var Source string var Region string var author string var MarkdownDocs bool var rootCmd = &amp;cobra....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-07-10 16:42:14 +0800 CST'>July 10, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Cobra" href="http://slgjy.github.io/post/cobra/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Goland_swag
     </h2>
   </header>
@@ -206,25 +221,6 @@ apiVersion: v1 kind: PersistentVolume metadata: namespace: app-storage name: mys
   </div>
   <footer class="entry-footer"><span title='2023-06-01 15:36:45 +0800 CST'>June 1, 2023</span></footer>
   <a class="entry-link" aria-label="post link to K8s部署实践" href="http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>go打包配置文件和静态文件
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Go打包静态资源和配置文件 场景： 需要将配置文件打包类似和java的application.yml配置文件打包到最终的jar包内。
-打包工具go-bindata 下载 下载
-# 这种下载方式可以使用，go get 方式不行 go install github.com/go-bindata/go-bindata/go-bindata@latest 测试
-go-bindata 常用操作 打包配置文件 测试项目目录层级
-需求：打包storeInfo.yml配置文件
-go-bindata .\config\storeinfo.yml # 修改默认生成的文件名和包名，必须有双引号 go-bindata -o=&#34;.\asset\asset.go&#34; -pkg=&#34;asset&#34; .\config\storeinfo.yml 读取文件
-# 读取文件修改为如下方式 asset.Asset(&#34;config/storeInfo.yml&#34;) 生成的文件的核心方法
-打包工具go-bindata-assetfs 打包静态资源例如css js html</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-06-01 15:31:01 +0800 CST'>June 1, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to go打包配置文件和静态文件" href="http://slgjy.github.io/post/go-bindata/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

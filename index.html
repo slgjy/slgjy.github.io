@@ -137,6 +137,21 @@
 
 <article class="first-entry"> 
   <header class="entry-header">
+    <h2>Captcha
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Captcha 验证码主要用来进行人机校验，鉴别机器人操作防止恶意攻击。
+go语言生成验证码 开源库的github地址
+文档博客地址
+1.下载库 go get -u github.com/mojocn/base64Captcha 2.核心编码 package base64Captcha import &#34;strings&#34; type Captcha struct { // 驱动生成验证码配置 Driver Driver // 存储验证码，通常是使用redis存储(多机器部署) Store Store } func NewCaptcha(driver Driver, store Store) *Captcha { return &amp;Captcha{Driver: driver, Store: store} } // 生成 func (c *Captcha) Generate() (id, b64s string, err error) { } // 验证 func (c *Captcha) Verify(id, answer string, clear bool) (match bool) { } 1....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-07-26 09:40:28 +0800 CST'>July 26, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Captcha" href="http://slgjy.github.io/post/captcha/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Casbin
     </h2>
   </header>
@@ -202,21 +217,6 @@ Cfssl包括
   </div>
   <footer class="entry-footer"><span title='2023-07-11 03:33:49 +0800 CST'>July 11, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Cfssl" href="http://slgjy.github.io/post/cfssl/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cobra
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>spf13/cobra库学习 参考引用
-cobra cobra是一个命令行程序库，提供简单的接口来创建CLI接口(Command Line Interface)命令行接口。cobra被应用于很多项目比如k8s,docker,etcd,hugo博客等等
-命令模板 commands argumets flags 例如:
-# server是commands，port是flag hugo server --port=1313 # clone是commands，URL是arguments，brae是flags git clone URL --bare 业务使用 安装 # go库安装 go get github.com/spf13/cobra/cobra@latest # go的命令行脚手架安装 go install github.com/spf13/cobra-cli@latest 创建命令 package cmd import ( &#34;fmt&#34; &#34;github.com/spf13/cobra&#34; &#34;github.com/spf13/cobra/doc&#34; &#34;os&#34; ) var Verbose bool var Source string var Region string var author string var MarkdownDocs bool var rootCmd = &amp;cobra....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-07-10 16:42:14 +0800 CST'>July 10, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Cobra" href="http://slgjy.github.io/post/cobra/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

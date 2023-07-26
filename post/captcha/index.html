@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Captcha | 小石头博客</title>
+<meta name="keywords" content="go">
+<meta name="description" content="Captcha 验证码主要用来进行人机校验，鉴别机器人操作防止恶意攻击。
+go语言生成验证码 开源库的github地址
+文档博客地址
+1.下载库 go get -u github.com/mojocn/base64Captcha 2.核心编码 package base64Captcha import &#34;strings&#34; type Captcha struct { // 驱动生成验证码配置 Driver Driver // 存储验证码，通常是使用redis存储(多机器部署) Store Store } func NewCaptcha(driver Driver, store Store) *Captcha { return &amp;Captcha{Driver: driver, Store: store} } // 生成 func (c *Captcha) Generate() (id, b64s string, err error) { } // 验证 func (c *Captcha) Verify(id, answer string, clear bool) (match bool) { } 1.">
+<meta name="author" content="">
+<link rel="canonical" href="http://slgjy.github.io/post/captcha/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://slgjy.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://slgjy.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://slgjy.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Captcha" />
+<meta property="og:description" content="Captcha 验证码主要用来进行人机校验，鉴别机器人操作防止恶意攻击。
+go语言生成验证码 开源库的github地址
+文档博客地址
+1.下载库 go get -u github.com/mojocn/base64Captcha 2.核心编码 package base64Captcha import &#34;strings&#34; type Captcha struct { // 驱动生成验证码配置 Driver Driver // 存储验证码，通常是使用redis存储(多机器部署) Store Store } func NewCaptcha(driver Driver, store Store) *Captcha { return &amp;Captcha{Driver: driver, Store: store} } // 生成 func (c *Captcha) Generate() (id, b64s string, err error) { } // 验证 func (c *Captcha) Verify(id, answer string, clear bool) (match bool) { } 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://slgjy.github.io/post/captcha/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-26T09:40:28+08:00" />
+<meta property="article:modified_time" content="2023-07-26T09:40:28+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Captcha"/>
+<meta name="twitter:description" content="Captcha 验证码主要用来进行人机校验，鉴别机器人操作防止恶意攻击。
+go语言生成验证码 开源库的github地址
+文档博客地址
+1.下载库 go get -u github.com/mojocn/base64Captcha 2.核心编码 package base64Captcha import &#34;strings&#34; type Captcha struct { // 驱动生成验证码配置 Driver Driver // 存储验证码，通常是使用redis存储(多机器部署) Store Store } func NewCaptcha(driver Driver, store Store) *Captcha { return &amp;Captcha{Driver: driver, Store: store} } // 生成 func (c *Captcha) Generate() (id, b64s string, err error) { } // 验证 func (c *Captcha) Verify(id, answer string, clear bool) (match bool) { } 1."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "http://slgjy.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Captcha",
+      "item": "http://slgjy.github.io/post/captcha/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Captcha",
+  "name": "Captcha",
+  "description": "Captcha 验证码主要用来进行人机校验，鉴别机器人操作防止恶意攻击。\ngo语言生成验证码 开源库的github地址\n文档博客地址\n1.下载库 go get -u github.com/mojocn/base64Captcha 2.核心编码 package base64Captcha import \u0026#34;strings\u0026#34; type Captcha struct { // 驱动生成验证码配置 Driver Driver // 存储验证码，通常是使用redis存储(多机器部署) Store Store } func NewCaptcha(driver Driver, store Store) *Captcha { return \u0026amp;Captcha{Driver: driver, Store: store} } // 生成 func (c *Captcha) Generate() (id, b64s string, err error) { } // 验证 func (c *Captcha) Verify(id, answer string, clear bool) (match bool) { } 1.",
+  "keywords": [
+    "go"
+  ],
+  "articleBody": "Captcha 验证码主要用来进行人机校验，鉴别机器人操作防止恶意攻击。\ngo语言生成验证码 开源库的github地址\n文档博客地址\n1.下载库 go get -u github.com/mojocn/base64Captcha 2.核心编码 package base64Captcha import \"strings\" type Captcha struct { // 驱动生成验证码配置 Driver Driver // 存储验证码，通常是使用redis存储(多机器部署) Store Store } func NewCaptcha(driver Driver, store Store) *Captcha { return \u0026Captcha{Driver: driver, Store: store} } // 生成 func (c *Captcha) Generate() (id, b64s string, err error) { } // 验证 func (c *Captcha) Verify(id, answer string, clear bool) (match bool) { } 1. 实现Driver 实现Driver自定义验证码,简单的一般采取自带的就可。\n2.实现Store 实现Store来自定义验证码存储。\ntype Store interface { // Set sets the digits for the captcha id. Set(id string, value string) // Get returns stored digits for the captcha id. Clear indicates // whether the captcha must be deleted from the store. Get(id string, clear bool) string //Verify captcha's answer directly Verify(id, answer string, clear bool) bool } 实现store存储\npackage captcha import ( \"context\" \"fmt\" \"log\" \"statistical_data/global\" \"time\" ) var ctx = context.Background() const CAPTCHA = \"captcha:\" type RedisStore struct { } // 实现Store接口来自定义验证码存储 // Set set a capt func (r RedisStore) Set(id string, value string) error { key := CAPTCHA + id err := global.Redis.Set(key, value, time.Minute*2).Err() if err != nil { log.Println(err.Error()) panic(err) } return err } // Get get a capt func (r RedisStore) Get(id string, clear bool) string { key := CAPTCHA + id val, err := global.Redis.Get(key).Result() if err != nil { fmt.Println(err) return \"\" } if clear { err := global.Redis.Del(key).Err() if err != nil { fmt.Println(err) return \"\" } } return val } // Verify verify a capt func (r RedisStore) Verify(id, answer string, clear bool) bool { v := RedisStore{}.Get(id, clear) return v == answer } 测试 Data URI scheme 生成验证码的字符串前缀data:image/png;base64，放到前端页面的图片的src属性中。\nData URI scheme是什么 Data URI scheme 是在 RFC2397 中定义的，目的是将一些小的数据，直接嵌入到网页中，从而不用再从外部文件载入。减少对 HTTP 的请求次数。达到优化网页的效果，与之相对的通过http请求直接获取的成为 HTTP URI scheme Data URI scheme 的语法 data 表示取得数据的协定名称；\nimage/png 是数据类型名称；\nbase64 是数据的编码方法，逗号后面就是这个image/png文件base64编码后的数据\n",
+  "wordCount" : "292",
+  "inLanguage": "en",
+  "datePublished": "2023-07-26T09:40:28+08:00",
+  "dateModified": "2023-07-26T09:40:28+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://slgjy.github.io/post/captcha/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "小石头博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://slgjy.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://slgjy.github.io" accesskey="h" title="小石头博客 (Alt + H)">小石头博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://slgjy.github.io/tags/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://slgjy.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Captcha
+    </h1>
+    <div class="post-meta"><span title='2023-07-26 09:40:28 +0800 CST'>July 26, 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="captcha">Captcha<a hidden class="anchor" aria-hidden="true" href="#captcha">#</a></h1>
+<p>验证码主要用来进行人机校验，鉴别机器人操作防止恶意攻击。</p>
+<h2 id="go语言生成验证码">go语言生成验证码<a hidden class="anchor" aria-hidden="true" href="#go语言生成验证码">#</a></h2>
+<p><a href="https://github.com/mojocn/base64Captcha">开源库的github地址</a></p>
+<p><a href="https://mojotv.cn/go/refactor-base64-captcha">文档博客地址</a></p>
+<h3 id="1下载库">1.下载库<a hidden class="anchor" aria-hidden="true" href="#1下载库">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>go get -u github.com/mojocn/base64Captcha
+</span></span></code></pre></div><h3 id="2核心编码">2.核心编码<a hidden class="anchor" aria-hidden="true" href="#2核心编码">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">base64Captcha</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;strings&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Captcha</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 驱动生成验证码配置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Driver</span> <span style="color:#a6e22e">Driver</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 存储验证码，通常是使用redis存储(多机器部署)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Store</span>  <span style="color:#a6e22e">Store</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewCaptcha</span>(<span style="color:#a6e22e">driver</span> <span style="color:#a6e22e">Driver</span>, <span style="color:#a6e22e">store</span> <span style="color:#a6e22e">Store</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Captcha</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Captcha</span>{<span style="color:#a6e22e">Driver</span>: <span style="color:#a6e22e">driver</span>, <span style="color:#a6e22e">Store</span>: <span style="color:#a6e22e">store</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 生成
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Captcha</span>) <span style="color:#a6e22e">Generate</span>() (<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">b64s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 验证
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Captcha</span>) <span style="color:#a6e22e">Verify</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">answer</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">clear</span> <span style="color:#66d9ef">bool</span>) (<span style="color:#a6e22e">match</span> <span style="color:#66d9ef">bool</span>) {
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="1-实现driver">1. 实现Driver<a hidden class="anchor" aria-hidden="true" href="#1-实现driver">#</a></h3>
+<p>实现Driver自定义验证码,简单的一般采取自带的就可。</p>
+<p><img loading="lazy" src="/captcha.assets/1690248793819.png" alt="1690248793819"  />
+</p>
+<h3 id="2实现store">2.实现Store<a hidden class="anchor" aria-hidden="true" href="#2实现store">#</a></h3>
+<p>实现Store来自定义验证码存储。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Store</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Set sets the digits for the captcha id.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Set</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">value</span> <span style="color:#66d9ef">string</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Get returns stored digits for the captcha id. Clear indicates
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// whether the captcha must be deleted from the store.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">clear</span> <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Verify captcha&#39;s answer directly
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Verify</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">answer</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">clear</span> <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">bool</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>实现store存储</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">captcha</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;statistical_data/global&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ctx</span> = <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CAPTCHA</span> = <span style="color:#e6db74">&#34;captcha:&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RedisStore</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 实现Store接口来自定义验证码存储
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Set set a capt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">RedisStore</span>) <span style="color:#a6e22e">Set</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">value</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">key</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">CAPTCHA</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">Redis</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Minute</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">Err</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+</span></span><span style="display:flex;"><span>		panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Get get a capt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">RedisStore</span>) <span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">clear</span> <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">key</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">CAPTCHA</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">val</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">Redis</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">key</span>).<span style="color:#a6e22e">Result</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">clear</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">Redis</span>.<span style="color:#a6e22e">Del</span>(<span style="color:#a6e22e">key</span>).<span style="color:#a6e22e">Err</span>()
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">val</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Verify verify a capt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">RedisStore</span>) <span style="color:#a6e22e">Verify</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">answer</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">clear</span> <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">RedisStore</span>{}.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">clear</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">v</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">answer</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="测试">测试<a hidden class="anchor" aria-hidden="true" href="#测试">#</a></h3>
+<p><img loading="lazy" src="/captcha.assets/1690184493434.png" alt="1690184493434"  />
+</p>
+<h2 id="data-uri-scheme">Data URI scheme<a hidden class="anchor" aria-hidden="true" href="#data-uri-scheme">#</a></h2>
+<p>生成验证码的字符串前缀<code>data:image/png;base64</code>，放到前端页面的图片的<code>src</code>属性中。</p>
+<h3 id="data-uri-scheme是什么">Data URI scheme是什么<a hidden class="anchor" aria-hidden="true" href="#data-uri-scheme是什么">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span>Data URI scheme 是在 RFC2397 中定义的，目的是将一些小的数据，直接嵌入到网页中，从而不用再从外部文件载入。减少对 HTTP 的请求次数。达到优化网页的效果，与之相对的通过http请求直接获取的成为 HTTP URI scheme
+</span></span></code></pre></div><h3 id="data-uri-scheme-的语法">Data URI scheme 的语法<a hidden class="anchor" aria-hidden="true" href="#data-uri-scheme-的语法">#</a></h3>
+<ul>
+<li>
+<p>data 表示取得数据的协定名称；</p>
+</li>
+<li>
+<p>image/png 是数据类型名称；</p>
+</li>
+<li>
+<p>base64 是数据的编码方法，逗号后面就是这个image/png文件base64编码后的数据</p>
+</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://slgjy.github.io/tags/go/">go</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="http://slgjy.github.io">小石头博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
