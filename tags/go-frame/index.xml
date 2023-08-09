@@ -6,7 +6,21 @@
     <description>Recent content in go-frame on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Jul 2023 17:13:45 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go-frame/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Aug 2023 14:00:28 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go-frame/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Goctl_swagger</title>
+      <link>http://slgjy.github.io/post/goctl_swagger/</link>
+      <pubDate>Wed, 09 Aug 2023 14:00:28 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/post/goctl_swagger/</guid>
+      <description>Goctl-swagger goctl-swagger是一个生成文档的插件。
+官网地址
+使用步骤 前置条件具备
+goland环境 goctl环境 docker环境(用于启动swaggerui) 1.下载插件 go install github.com/zeromicro/goctl-swagger@latest 2.生成api文件 #UserApi生成的swagger文件名 #-host后端请求地址和端口 #-api 编写.api文件路径 #-dir 输出目录默认. 当前目录下 goctl api plugin -plugin goctl-swagger=&amp;#34;swagger -filename UserApi.json -host 127.0.0.1:8080&amp;#34; -api user.api -dir . 3.docker启动swaggerui 在linux环境下进行
+将生成的swagger接口文件上传到linux机器上
+1.下载镜像 docker pull swaggerapi/swagger-ui 2.启动并配置生成的api文件 #-e SWAGGER_JSON=/api/userApi.json 配置swaggerUI的接口文档路径(自定义路径，只需要将实际的api文件路径挂载到该配置上) #-v /home/slg/swagger/userApi.json:/api/userApi.json 将实际的api接口文件挂载到配置的路径下即可 sudo docker run -itd --name swaggerUi \ -p 8083:8080 \ -e SWAGGER_JSON=/api/userApi.</description>
+    </item>
+    
     <item>
       <title>Go Zero</title>
       <link>http://slgjy.github.io/post/go-zero/</link>

@@ -137,6 +137,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Jasypt加密操作
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>概述 Jasypt是一个加密库，使用敏感信息数据的加密。比如springboot项目中配置文件的明文密码数据；数据信息中的敏感数据加密。
+使用 依赖引入 &lt;dependency&gt; &lt;groupId&gt;com.github.ulisesbocchio&lt;/groupId&gt; &lt;artifactId&gt;jasypt-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;3.0.5&lt;/version&gt; &lt;/dependency&gt; 简单加密 加密口令 ==秘钥安全：==
+为了安全设置，通常采用启动时添加启动参数(环境变量)的方式来配置秘钥
+-Djasypt.encryptor.password=test
+jasypt: encryptor: # 配置的秘钥(加盐) password: test # 指定界面算法，需要和加密使用的一致 algorithm: PBEWithMD5AndDES # 指定initialization vector类型 iv-generator-classname: org.jasypt.iv.RandomIvGenerator # 配置前后缀默认是&#34;ENC()&#34; property: prefix: &#34;ENC(&#34; suffix: &#34;)&#34; 测试(获取密文) @SpringBootTest @RunWith(SpringRunner.class) public class MainAppTest { @Autowired private StringEncryptor stringEncryptor; @Test public void testJasypt() { // password需要加密的明文密码 String enpassword = stringEncryptor....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-11 11:01:40 +0800 CST'>May 11, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Jasypt加密操作" href="http://slgjy.github.io/post/jasypt/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Mysql
     </h2>
   </header>
@@ -199,21 +215,6 @@ spring: config: activate: on-profile: prod server: port: 9000 spring: profiles: 
   </div>
   <footer class="entry-footer"><span title='2023-05-06 11:08:52 +0800 CST'>May 6, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Nacos" href="http://slgjy.github.io/post/nacos/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Go单元测试
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>go单元测试 go test工具 go test命令是一个执行测试代码的go程序，在包目录内，所有以*_test.go为后缀的源码文件，不会被go build编译到最终的可执行文件。
-示例代码 目录结构
-源码
-func checkName(name string) { if name != &#34;admin&#34; { panic(errors.New(&#34;用户名不正确！！&#34;)) } } package main import &#34;testing&#34; // 函数测试必须是Test开头接收*testing.T参数 func TestCheckName(t *testing.T) { nameStr := &#34;userName&#34; // 被测试的函数可以是小写开头 checkName(nameStr) } // 文档类型测试 func ExampleCheckName() { } // 基准测试(性能测试)以Benchmark开头接收*testing.B参数 func BenchmarkCheckName(t *testing.B) { } go test常用命令 执行单个*_test....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-04 10:46:17 +0800 CST'>May 4, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Go单元测试" href="http://slgjy.github.io/post/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
