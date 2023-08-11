@@ -6,7 +6,19 @@
     <description>Recent content on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Aug 2023 14:00:28 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Aug 2023 11:03:53 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python开发环境搭建</title>
+      <link>http://slgjy.github.io/py/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Fri, 11 Aug 2023 11:03:53 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/py/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>Python安装 下载 官网地址
+安装 测试 pip安装 ps ：一般安装python环境的时候会勾选pip安装选项，不然需要自己安装配置环境变量。
+在线安装 安装并升级 py -m ensurepip --upgrade 离线安装 下载地址
+解压到指定目录 进入到解压目录安装 python setup.py install 测试 常用配置 修改下载源 #设置国内镜像源，例如清华源 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple pycharm </description>
+    </item>
+    
     <item>
       <title>Goctl_swagger</title>
       <link>http://slgjy.github.io/post/goctl_swagger/</link>
