@@ -26,7 +26,12 @@ from flask import Blueprint from flask_restful import Resource, Api bp = Bluepri
       <pubDate>Wed, 16 Aug 2023 15:05:48 +0800</pubDate>
       
       <guid>http://slgjy.github.io/py/flask_restful/</guid>
-      <description></description>
+      <description>FlaskRESTful 官网地址
+flask _restful是flask的一个扩展，添加了快速扩展REST API的支持
+安装 pip install flask-restful 快速入门 目录结构
+user.py
+from flask import Blueprint from flask_restful import Resource, Api bp = Blueprint(&amp;#39;user&amp;#39;, __name__, url_prefix=&amp;#39;/user&amp;#39;) api = Api(bp) class UserView(Resource): def get(self): return {&amp;#34;username&amp;#34;: &amp;#34;slg&amp;#34;} def post(self): return {&amp;#34;username&amp;#34;: &amp;#34;slg_post&amp;#34;} api.add_resource(UserView, &amp;#39;/list&amp;#39;) 测试
+序列化操作 使用装饰器 # 蓝图 from flask import Blueprint from flask_restx import Resource, Api, marshal, fields, marshal_with from models import db, User # 1.</description>
     </item>
     
     <item>
