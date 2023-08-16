@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Tags | 小石头博客</title>
+<title>flask | 小石头博客</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="http://slgjy.github.io/tags/">
+<link rel="canonical" href="http://slgjy.github.io/tags/flask/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://slgjy.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/tags/index.xml">
+<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/tags/flask/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,13 +55,13 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Tags" />
+</noscript><meta property="og:title" content="flask" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://slgjy.github.io/tags/" />
+<meta property="og:url" content="http://slgjy.github.io/tags/flask/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
+<meta name="twitter:title" content="flask"/>
 <meta name="twitter:description" content=""/>
 
 </head>
@@ -108,7 +108,7 @@
         <ul id="menu">
             <li>
                 <a href="http://slgjy.github.io/tags/" title="分类">
-                    <span class="active">分类</span>
+                    <span>分类</span>
                 </a>
             </li>
             <li>
@@ -119,40 +119,58 @@
         </ul>
     </nav>
 </header>
-<main class="main">
+<main class="main"> 
 <header class="page-header">
-    <h1>Tags</h1>
+  <h1>
+    flask
+  </h1>
 </header>
 
-<ul class="terms-tags">
-    <li>
-        <a href="http://slgjy.github.io/tags/docker/">docker <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/flask/">flask <sup><strong><sup>3</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/go/">go <sup><strong><sup>8</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/go-frame/">go-frame <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/k8s/">k8s <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/python/">python <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/springboot/">springboot <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/springcloud/">SpringCloud <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/tools/">tools <sup><strong><sup>8</sup></strong></sup> </a>
-    </li>
-</ul>
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Flasgger
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Flasgger github地址
+实践记录 安装依赖 #安装生成api的swagger库 pip install flasgger #一般配合flask-restful使用，下载插件 pip install flask-restful 基础使用 app.py
+from flask import Flask from apps.machine import bp as machine_bp from flasgger import Swagger from apps.user import bp as user_bp app = Flask(__name__) swagger = Swagger(app) app.register_blueprint(machine_bp) app.register_blueprint(user_bp) if __name__ == &#39;__main__&#39;: app.run() user.py
+采用了最简单的文档注释写法，缺点是会让py文件比较臃肿
+from flask import Blueprint from flask_restful import Resource, Api bp = Blueprint(&#39;user&#39;, __name__, url_prefix=&#39;/user&#39;) api = Api(bp) class UserView(Resource): def get(self, username): &#34;&#34;&#34; 本示例使用FlaskRESTful资源 它也适用于swag_from，schema和spec_dict --- parameters: - in: path name: username type: string required: true responses: 200: description: 单个用户项 schema: id: User properties: username: type: string description: 用户名 default: 匿名用户 &#34;&#34;&#34; return {&#39;username&#39;: username}, 200 api....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-08-16 15:06:01 +0800 CST'>August 16, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Flasgger" href="http://slgjy.github.io/py/flask_swagger/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Flask_restful
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p></p>
+  </div>
+  <footer class="entry-footer"><span title='2023-08-16 15:05:48 +0800 CST'>August 16, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Flask_restful" href="http://slgjy.github.io/py/flask_restful/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Flask
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Flask 中文文档
+基础使用 蓝图 Blueprint是flask程序的模块化处理机制
+当业务越大逻辑越复杂，需要对功能进行模块化分割处理。将不同的业务单元分割成多个文件来实现。是项目结构清洗，易于维护。
+一个项目可以具有多个Blueprint Blueprint可以单独拥有模板，静态文件目录 目录结构
+machine.py
+from flask import Blueprint # 创建蓝图，url_prefix添加统一的路由前缀 bp = Blueprint(&#39;machine&#39;, __name__, url_prefix=&#39;/machine&#39;) @bp.route(&#39;/list&#39;) def machine_list(): return &#39;machine---list&#39; @bp.route(&#39;/add&#39;) def machine_add(): return &#39;machine---add&#39; user.py
+from flask import Blueprint bp = Blueprint(&#39;user&#39;, __name__, url_prefix=&#39;/user&#39;) @bp.route(&#39;/list&#39;) def user_list(): return &#39;user---list&#39; @bp.route(&#39;/add&#39;) def user_add(): return &#39;user---add&#39; app....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-08-16 15:05:20 +0800 CST'>August 16, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Flask" href="http://slgjy.github.io/py/flask/"></a>
+</article>
     </main>
     
 <footer class="footer">

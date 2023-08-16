@@ -6,7 +6,44 @@
     <description>Recent content on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Aug 2023 11:03:53 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Aug 2023 15:06:01 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flasgger</title>
+      <link>http://slgjy.github.io/py/flask_swagger/</link>
+      <pubDate>Wed, 16 Aug 2023 15:06:01 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/py/flask_swagger/</guid>
+      <description>Flasgger github地址
+实践记录 安装依赖 #安装生成api的swagger库 pip install flasgger #一般配合flask-restful使用，下载插件 pip install flask-restful 基础使用 app.py
+from flask import Flask from apps.machine import bp as machine_bp from flasgger import Swagger from apps.user import bp as user_bp app = Flask(__name__) swagger = Swagger(app) app.register_blueprint(machine_bp) app.register_blueprint(user_bp) if __name__ == &amp;#39;__main__&amp;#39;: app.run() user.py
+采用了最简单的文档注释写法，缺点是会让py文件比较臃肿
+from flask import Blueprint from flask_restful import Resource, Api bp = Blueprint(&amp;#39;user&amp;#39;, __name__, url_prefix=&amp;#39;/user&amp;#39;) api = Api(bp) class UserView(Resource): def get(self, username): &amp;#34;&amp;#34;&amp;#34; 本示例使用FlaskRESTful资源 它也适用于swag_from，schema和spec_dict --- parameters: - in: path name: username type: string required: true responses: 200: description: 单个用户项 schema: id: User properties: username: type: string description: 用户名 default: 匿名用户 &amp;#34;&amp;#34;&amp;#34; return {&amp;#39;username&amp;#39;: username}, 200 api.</description>
+    </item>
+    
+    <item>
+      <title>Flask_restful</title>
+      <link>http://slgjy.github.io/py/flask_restful/</link>
+      <pubDate>Wed, 16 Aug 2023 15:05:48 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/py/flask_restful/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Flask</title>
+      <link>http://slgjy.github.io/py/flask/</link>
+      <pubDate>Wed, 16 Aug 2023 15:05:20 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/py/flask/</guid>
+      <description>Flask 中文文档
+基础使用 蓝图 Blueprint是flask程序的模块化处理机制
+当业务越大逻辑越复杂，需要对功能进行模块化分割处理。将不同的业务单元分割成多个文件来实现。是项目结构清洗，易于维护。
+一个项目可以具有多个Blueprint Blueprint可以单独拥有模板，静态文件目录 目录结构
+machine.py
+from flask import Blueprint # 创建蓝图，url_prefix添加统一的路由前缀 bp = Blueprint(&amp;#39;machine&amp;#39;, __name__, url_prefix=&amp;#39;/machine&amp;#39;) @bp.route(&amp;#39;/list&amp;#39;) def machine_list(): return &amp;#39;machine---list&amp;#39; @bp.route(&amp;#39;/add&amp;#39;) def machine_add(): return &amp;#39;machine---add&amp;#39; user.py
+from flask import Blueprint bp = Blueprint(&amp;#39;user&amp;#39;, __name__, url_prefix=&amp;#39;/user&amp;#39;) @bp.route(&amp;#39;/list&amp;#39;) def user_list(): return &amp;#39;user---list&amp;#39; @bp.route(&amp;#39;/add&amp;#39;) def user_add(): return &amp;#39;user---add&amp;#39; app.</description>
+    </item>
+    
     <item>
       <title>Python开发环境搭建</title>
       <link>http://slgjy.github.io/py/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>

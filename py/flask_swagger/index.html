@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Flasgger | 小石头博客</title>
+<meta name="keywords" content="flask">
+<meta name="description" content="Flasgger github地址
+实践记录 安装依赖 #安装生成api的swagger库 pip install flasgger #一般配合flask-restful使用，下载插件 pip install flask-restful 基础使用 app.py
+from flask import Flask from apps.machine import bp as machine_bp from flasgger import Swagger from apps.user import bp as user_bp app = Flask(__name__) swagger = Swagger(app) app.register_blueprint(machine_bp) app.register_blueprint(user_bp) if __name__ == &#39;__main__&#39;: app.run() user.py
+采用了最简单的文档注释写法，缺点是会让py文件比较臃肿
+from flask import Blueprint from flask_restful import Resource, Api bp = Blueprint(&#39;user&#39;, __name__, url_prefix=&#39;/user&#39;) api = Api(bp) class UserView(Resource): def get(self, username): &#34;&#34;&#34; 本示例使用FlaskRESTful资源 它也适用于swag_from，schema和spec_dict --- parameters: - in: path name: username type: string required: true responses: 200: description: 单个用户项 schema: id: User properties: username: type: string description: 用户名 default: 匿名用户 &#34;&#34;&#34; return {&#39;username&#39;: username}, 200 api.">
+<meta name="author" content="">
+<link rel="canonical" href="http://slgjy.github.io/py/flask_swagger/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://slgjy.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://slgjy.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://slgjy.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Flasgger" />
+<meta property="og:description" content="Flasgger github地址
+实践记录 安装依赖 #安装生成api的swagger库 pip install flasgger #一般配合flask-restful使用，下载插件 pip install flask-restful 基础使用 app.py
+from flask import Flask from apps.machine import bp as machine_bp from flasgger import Swagger from apps.user import bp as user_bp app = Flask(__name__) swagger = Swagger(app) app.register_blueprint(machine_bp) app.register_blueprint(user_bp) if __name__ == &#39;__main__&#39;: app.run() user.py
+采用了最简单的文档注释写法，缺点是会让py文件比较臃肿
+from flask import Blueprint from flask_restful import Resource, Api bp = Blueprint(&#39;user&#39;, __name__, url_prefix=&#39;/user&#39;) api = Api(bp) class UserView(Resource): def get(self, username): &#34;&#34;&#34; 本示例使用FlaskRESTful资源 它也适用于swag_from，schema和spec_dict --- parameters: - in: path name: username type: string required: true responses: 200: description: 单个用户项 schema: id: User properties: username: type: string description: 用户名 default: 匿名用户 &#34;&#34;&#34; return {&#39;username&#39;: username}, 200 api." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://slgjy.github.io/py/flask_swagger/" /><meta property="article:section" content="py" />
+<meta property="article:published_time" content="2023-08-16T15:06:01+08:00" />
+<meta property="article:modified_time" content="2023-08-16T15:06:01+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flasgger"/>
+<meta name="twitter:description" content="Flasgger github地址
+实践记录 安装依赖 #安装生成api的swagger库 pip install flasgger #一般配合flask-restful使用，下载插件 pip install flask-restful 基础使用 app.py
+from flask import Flask from apps.machine import bp as machine_bp from flasgger import Swagger from apps.user import bp as user_bp app = Flask(__name__) swagger = Swagger(app) app.register_blueprint(machine_bp) app.register_blueprint(user_bp) if __name__ == &#39;__main__&#39;: app.run() user.py
+采用了最简单的文档注释写法，缺点是会让py文件比较臃肿
+from flask import Blueprint from flask_restful import Resource, Api bp = Blueprint(&#39;user&#39;, __name__, url_prefix=&#39;/user&#39;) api = Api(bp) class UserView(Resource): def get(self, username): &#34;&#34;&#34; 本示例使用FlaskRESTful资源 它也适用于swag_from，schema和spec_dict --- parameters: - in: path name: username type: string required: true responses: 200: description: 单个用户项 schema: id: User properties: username: type: string description: 用户名 default: 匿名用户 &#34;&#34;&#34; return {&#39;username&#39;: username}, 200 api."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "pies",
+      "item": "http://slgjy.github.io/py/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Flasgger",
+      "item": "http://slgjy.github.io/py/flask_swagger/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Flasgger",
+  "name": "Flasgger",
+  "description": "Flasgger github地址\n实践记录 安装依赖 #安装生成api的swagger库 pip install flasgger #一般配合flask-restful使用，下载插件 pip install flask-restful 基础使用 app.py\nfrom flask import Flask from apps.machine import bp as machine_bp from flasgger import Swagger from apps.user import bp as user_bp app = Flask(__name__) swagger = Swagger(app) app.register_blueprint(machine_bp) app.register_blueprint(user_bp) if __name__ == \u0026#39;__main__\u0026#39;: app.run() user.py\n采用了最简单的文档注释写法，缺点是会让py文件比较臃肿\nfrom flask import Blueprint from flask_restful import Resource, Api bp = Blueprint(\u0026#39;user\u0026#39;, __name__, url_prefix=\u0026#39;/user\u0026#39;) api = Api(bp) class UserView(Resource): def get(self, username): \u0026#34;\u0026#34;\u0026#34; 本示例使用FlaskRESTful资源 它也适用于swag_from，schema和spec_dict --- parameters: - in: path name: username type: string required: true responses: 200: description: 单个用户项 schema: id: User properties: username: type: string description: 用户名 default: 匿名用户 \u0026#34;\u0026#34;\u0026#34; return {\u0026#39;username\u0026#39;: username}, 200 api.",
+  "keywords": [
+    "flask"
+  ],
+  "articleBody": "Flasgger github地址\n实践记录 安装依赖 #安装生成api的swagger库 pip install flasgger #一般配合flask-restful使用，下载插件 pip install flask-restful 基础使用 app.py\nfrom flask import Flask from apps.machine import bp as machine_bp from flasgger import Swagger from apps.user import bp as user_bp app = Flask(__name__) swagger = Swagger(app) app.register_blueprint(machine_bp) app.register_blueprint(user_bp) if __name__ == '__main__': app.run() user.py\n采用了最简单的文档注释写法，缺点是会让py文件比较臃肿\nfrom flask import Blueprint from flask_restful import Resource, Api bp = Blueprint('user', __name__, url_prefix='/user') api = Api(bp) class UserView(Resource): def get(self, username): \"\"\" 本示例使用FlaskRESTful资源 它也适用于swag_from，schema和spec_dict --- parameters: - in: path name: username type: string required: true responses: 200: description: 单个用户项 schema: id: User properties: username: type: string description: 用户名 default: 匿名用户 \"\"\" return {'username': username}, 200 api.add_resource(UserView, '/username/') 测试 访问地址http://localhost:5000/apidocs/\n采用模板配置 from flask import Flask from flasgger import Swagger app = Flask(__name__) template = { \"swagger\": \"2.0\", \"info\": { \"title\": \"My API\", \"description\": \"API for my data\", \"version\": \"0.0.1\" }, \"host\": \"localhost:5000\", # 请求的地址 \"basePath\": \"/api\", # 路由前缀 \"schemes\": [ \"http\", \"https\" ], } swagger = Swagger(app, template=template) 通过外部yml文件定义 from flask import Blueprint, jsonify from flask_restful import Resource, Api from flasgger import swag_from bp = Blueprint('color', __name__, url_prefix='/color') api = Api(bp) @bp.route('/colors//') # 这里填写的是yml定义的相对路径 @swag_from('../apidoc/colors.yml') def colors(palette): all_colors = { 'cmyk': ['cyan', 'magenta', 'yellow', 'black'], 'rgb': ['red', 'green', 'blue'] } if palette == 'all': result = all_colors else: result = {palette: all_colors.get(palette)} return jsonify(result) 通过字典实现(可复用) ==推荐使用==\n@bp.route('/colors//') # @swag_from('../apidoc/colors.yml') @swag_from(specs_dict) def colors(palette): \"\"\"使用字典来实现 In this example the specification is taken from specs_dict \"\"\" all_colors = { 'cmyk': ['cyan', 'magenta', 'yellow', 'black'], 'rgb': ['red', 'green', 'blue'] } if palette == 'all': result = all_colors else: result = {palette: all_colors.get(palette)} return jsonify(result) 字典定义\nspecs_dict = { \"parameters\": [ { \"name\": \"palette\", \"in\": \"path\", \"type\": \"string\", \"enum\": [ \"all\", \"rgb\", \"cmyk\" ], \"required\": \"true\", \"default\": \"all\", } ], \"definitions\": { \"Palette\": { \"type\": \"object\", \"properties\": { \"palette_name\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/Color\" } } } }, \"Color\": { \"type\": \"string\" } }, \"responses\": { \"200\": { \"description\": \"A list of colors (may be filtered by palette)\", \"schema\": { \"$ref\": \"#/definitions/Palette\" }, \"examples\": { \"rgb\": [ \"red\", \"green\", \"blue\" ] } } } } 文档分类 通过设置tag标签来实现\n\"\"\" 接口功能描述 --- tags: - 用户数据 \"\"\" Pycharm设置注释模板 path路径模板\n\"\"\" 接口功能描述 --- tags: - 接口分组定义 parameters: - in: path name: param type: string required: true description: 中文描述 default: 默认值 definitions: Response: type: object properties: code: type: integer description: 响应码 msg: type: string description: 响应信息 date: type: object description: 响应数据 responses: 200: description: success schema: $ref: '#/definitions/Response' 400: description: failed schema: $ref: '#/definitions/Response' \"\"\" 疑问？ 通过和flask_restful结合，只能通过注释来实现，不能通过@swag_from装饰器实现\n传参记录 body参数 \"\"\" parameters: - name: body in: body required: true schema: id : toto required: - first - last properties: first: type: string description: Unique identifier representing a First Name last: type: string description: Unique identifier representing a Last Name responses: 200: description: creation OK \"\"\" OpenApi 官方文档\n编写文档需要熟悉OpenAPI的文档规范，这样才能游刃有余编写文档。\nFlask-RestPlus 很久没有更新了,不推荐使用\ngithub地址\n",
+  "wordCount" : "461",
+  "inLanguage": "en",
+  "datePublished": "2023-08-16T15:06:01+08:00",
+  "dateModified": "2023-08-16T15:06:01+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://slgjy.github.io/py/flask_swagger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "小石头博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://slgjy.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://slgjy.github.io" accesskey="h" title="小石头博客 (Alt + H)">小石头博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://slgjy.github.io/tags/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://slgjy.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Flasgger
+    </h1>
+    <div class="post-meta"><span title='2023-08-16 15:06:01 +0800 CST'>August 16, 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="flasgger">Flasgger<a hidden class="anchor" aria-hidden="true" href="#flasgger">#</a></h1>
+<p><a href="https://github.com/flasgger/flasgger">github地址</a></p>
+<h2 id="实践记录">实践记录<a hidden class="anchor" aria-hidden="true" href="#实践记录">#</a></h2>
+<h3 id="安装依赖">安装依赖<a hidden class="anchor" aria-hidden="true" href="#安装依赖">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#安装生成api的swagger库</span>
+</span></span><span style="display:flex;"><span>pip install flasgger
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#一般配合flask-restful使用，下载插件</span>
+</span></span><span style="display:flex;"><span>pip install flask-restful
+</span></span></code></pre></div><h3 id="基础使用">基础使用<a hidden class="anchor" aria-hidden="true" href="#基础使用">#</a></h3>
+<p><img loading="lazy" src="/flask_swagger/image-20230814162435904.png" alt="image-20230814162435904"  />
+</p>
+<p><code>app.py</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> apps.machine <span style="color:#f92672">import</span> bp <span style="color:#66d9ef">as</span> machine_bp
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flasgger <span style="color:#f92672">import</span> Swagger
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> apps.user <span style="color:#f92672">import</span> bp <span style="color:#66d9ef">as</span> user_bp
+</span></span><span style="display:flex;"><span>app <span style="color:#f92672">=</span> Flask(__name__)
+</span></span><span style="display:flex;"><span>swagger <span style="color:#f92672">=</span> Swagger(app)
+</span></span><span style="display:flex;"><span>app<span style="color:#f92672">.</span>register_blueprint(machine_bp)
+</span></span><span style="display:flex;"><span>app<span style="color:#f92672">.</span>register_blueprint(user_bp)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>run()
+</span></span></code></pre></div><p><code>user.py</code></p>
+<p>采用了最简单的文档注释写法，缺点是会让<code>py</code>文件比较臃肿</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Blueprint
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask_restful <span style="color:#f92672">import</span> Resource, Api
+</span></span><span style="display:flex;"><span>bp <span style="color:#f92672">=</span> Blueprint(<span style="color:#e6db74">&#39;user&#39;</span>, __name__, url_prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/user&#39;</span>)
+</span></span><span style="display:flex;"><span>api <span style="color:#f92672">=</span> Api(bp)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserView</span>(Resource):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get</span>(self, username):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        本示例使用FlaskRESTful资源
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        它也适用于swag_from，schema和spec_dict
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        ---
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        parameters:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          - in: path
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            name: username
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            type: string
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        responses:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          200:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            description: 单个用户项
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            schema:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              id: User
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              properties:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                username:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  type: string
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  description: 用户名
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  default: 匿名用户
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#39;username&#39;</span>: username}, <span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>api<span style="color:#f92672">.</span>add_resource(UserView, <span style="color:#e6db74">&#39;/username/&lt;username&gt;&#39;</span>)
+</span></span></code></pre></div><p><strong>测试</strong> 访问地址<code>http://localhost:5000/apidocs/</code></p>
+<p><img loading="lazy" src="/flask_swagger/image-20230814162635329.png" alt="image-20230814162635329"  />
+</p>
+<h3 id="采用模板配置">采用模板配置<a hidden class="anchor" aria-hidden="true" href="#采用模板配置">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flasgger <span style="color:#f92672">import</span> Swagger
+</span></span><span style="display:flex;"><span>app <span style="color:#f92672">=</span> Flask(__name__)
+</span></span><span style="display:flex;"><span>template <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;swagger&#34;</span>: <span style="color:#e6db74">&#34;2.0&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;info&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;My API&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;API for my data&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.0.1&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;host&#34;</span>: <span style="color:#e6db74">&#34;localhost:5000&#34;</span>,  <span style="color:#75715e"># 请求的地址</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;basePath&#34;</span>: <span style="color:#e6db74">&#34;/api&#34;</span>,  <span style="color:#75715e"># 路由前缀</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;schemes&#34;</span>: [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;http&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;https&#34;</span>
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>swagger <span style="color:#f92672">=</span> Swagger(app, template<span style="color:#f92672">=</span>template)
+</span></span></code></pre></div><p><img loading="lazy" src="/flask_swagger/image-20230814163831468.png" alt="image-20230814163831468"  />
+</p>
+<h3 id="通过外部yml文件定义">通过外部yml文件定义<a hidden class="anchor" aria-hidden="true" href="#通过外部yml文件定义">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Blueprint, jsonify
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask_restful <span style="color:#f92672">import</span> Resource, Api
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flasgger <span style="color:#f92672">import</span> swag_from
+</span></span><span style="display:flex;"><span>bp <span style="color:#f92672">=</span> Blueprint(<span style="color:#e6db74">&#39;color&#39;</span>, __name__, url_prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/color&#39;</span>)
+</span></span><span style="display:flex;"><span>api <span style="color:#f92672">=</span> Api(bp)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@bp.route</span>(<span style="color:#e6db74">&#39;/colors/&lt;palette&gt;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这里填写的是yml定义的相对路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@swag_from</span>(<span style="color:#e6db74">&#39;../apidoc/colors.yml&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">colors</span>(palette):
+</span></span><span style="display:flex;"><span>    all_colors <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;cmyk&#39;</span>: [<span style="color:#e6db74">&#39;cyan&#39;</span>, <span style="color:#e6db74">&#39;magenta&#39;</span>, <span style="color:#e6db74">&#39;yellow&#39;</span>, <span style="color:#e6db74">&#39;black&#39;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;rgb&#39;</span>: [<span style="color:#e6db74">&#39;red&#39;</span>, <span style="color:#e6db74">&#39;green&#39;</span>, <span style="color:#e6db74">&#39;blue&#39;</span>]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> palette <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;all&#39;</span>:
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> all_colors
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> {palette: all_colors<span style="color:#f92672">.</span>get(palette)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> jsonify(result)
+</span></span></code></pre></div><h3 id="通过字典实现可复用">通过字典实现(可复用)<a hidden class="anchor" aria-hidden="true" href="#通过字典实现可复用">#</a></h3>
+<p>==推荐使用==</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#a6e22e">@bp.route</span>(<span style="color:#e6db74">&#39;/colors/&lt;palette&gt;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># @swag_from(&#39;../apidoc/colors.yml&#39;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@swag_from</span>(specs_dict)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">colors</span>(palette):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;使用字典来实现
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       In this example the specification is taken from specs_dict
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    all_colors <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;cmyk&#39;</span>: [<span style="color:#e6db74">&#39;cyan&#39;</span>, <span style="color:#e6db74">&#39;magenta&#39;</span>, <span style="color:#e6db74">&#39;yellow&#39;</span>, <span style="color:#e6db74">&#39;black&#39;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;rgb&#39;</span>: [<span style="color:#e6db74">&#39;red&#39;</span>, <span style="color:#e6db74">&#39;green&#39;</span>, <span style="color:#e6db74">&#39;blue&#39;</span>]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> palette <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;all&#39;</span>:
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> all_colors
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> {palette: all_colors<span style="color:#f92672">.</span>get(palette)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> jsonify(result)
+</span></span></code></pre></div><p><strong>字典定义</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>specs_dict <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;parameters&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;palette&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;in&#34;</span>: <span style="color:#e6db74">&#34;path&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;enum&#34;</span>: [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;all&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;rgb&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;cmyk&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;required&#34;</span>: <span style="color:#e6db74">&#34;true&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;default&#34;</span>: <span style="color:#e6db74">&#34;all&#34;</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;definitions&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Palette&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;palette_name&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;array&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;items&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;$ref&#34;</span>: <span style="color:#e6db74">&#34;#/definitions/Color&#34;</span>
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Color&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;responses&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;200&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;A list of colors (may be filtered by palette)&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;schema&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;$ref&#34;</span>: <span style="color:#e6db74">&#34;#/definitions/Palette&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;examples&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;rgb&#34;</span>: [
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;red&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;green&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;blue&#34;</span>
+</span></span><span style="display:flex;"><span>                ]
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="文档分类">文档分类<a hidden class="anchor" aria-hidden="true" href="#文档分类">#</a></h3>
+<p>通过设置tag标签来实现</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> 接口功能描述
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> ---
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> tags:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   - 用户数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> &#34;&#34;&#34;</span>
+</span></span></code></pre></div><h3 id="pycharm设置注释模板">Pycharm设置注释模板<a hidden class="anchor" aria-hidden="true" href="#pycharm设置注释模板">#</a></h3>
+<p><img loading="lazy" src="/flask_swagger/image-20230816140617195.png" alt="image-20230816140617195"  />
+</p>
+<p><strong>path路径模板</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">接口功能描述
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">---
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">tags:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  - 接口分组定义
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">parameters:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  - in: path
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    name: param
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    type: string
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    description: 中文描述
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    default: 默认值
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">definitions:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  Response:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    type: object
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    properties:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      code:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: integer
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        description: 响应码
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      msg:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: string
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        description: 响应信息
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      date:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: object
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        description: 响应数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">responses:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  200:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    description: success
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    schema:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      $ref: &#39;#/definitions/Response&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  400:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    description: failed
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    schema:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      $ref: &#39;#/definitions/Response&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><h3 id="疑问">疑问？<a hidden class="anchor" aria-hidden="true" href="#疑问">#</a></h3>
+<p>通过和<code>flask_restful</code>结合，只能通过注释来实现，不能通过<code>@swag_from</code>装饰器实现</p>
+<h2 id="传参记录">传参记录<a hidden class="anchor" aria-hidden="true" href="#传参记录">#</a></h2>
+<h3 id="body参数">body参数<a hidden class="anchor" aria-hidden="true" href="#body参数">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span> <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     parameters:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - name: body
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          in: body
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          schema:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            id : toto
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            required:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              - first
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              - last
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            properties:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              first:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                type: string
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                description: Unique identifier representing a First Name
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              last:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                type: string
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                description: Unique identifier representing a Last Name
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     responses:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        200:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          description: creation OK
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> &#34;&#34;&#34;</span>
+</span></span></code></pre></div><h2 id="openapi">OpenApi<a hidden class="anchor" aria-hidden="true" href="#openapi">#</a></h2>
+<p><a href="https://openapi.apifox.cn/">官方文档</a></p>
+<p>编写文档需要熟悉OpenAPI的文档规范，这样才能游刃有余编写文档。</p>
+<h1 id="flask-restplus">Flask-RestPlus<a hidden class="anchor" aria-hidden="true" href="#flask-restplus">#</a></h1>
+<p><strong>很久没有更新了,不推荐使用</strong></p>
+<p><a href="https://github.com/noirbizarre/flask-restplus">github地址</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://slgjy.github.io/tags/flask/">flask</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="http://slgjy.github.io">小石头博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

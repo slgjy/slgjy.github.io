@@ -143,6 +143,52 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Flasgger
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Flasgger github地址
+实践记录 安装依赖 #安装生成api的swagger库 pip install flasgger #一般配合flask-restful使用，下载插件 pip install flask-restful 基础使用 app.py
+from flask import Flask from apps.machine import bp as machine_bp from flasgger import Swagger from apps.user import bp as user_bp app = Flask(__name__) swagger = Swagger(app) app.register_blueprint(machine_bp) app.register_blueprint(user_bp) if __name__ == &#39;__main__&#39;: app.run() user.py
+采用了最简单的文档注释写法，缺点是会让py文件比较臃肿
+from flask import Blueprint from flask_restful import Resource, Api bp = Blueprint(&#39;user&#39;, __name__, url_prefix=&#39;/user&#39;) api = Api(bp) class UserView(Resource): def get(self, username): &#34;&#34;&#34; 本示例使用FlaskRESTful资源 它也适用于swag_from，schema和spec_dict --- parameters: - in: path name: username type: string required: true responses: 200: description: 单个用户项 schema: id: User properties: username: type: string description: 用户名 default: 匿名用户 &#34;&#34;&#34; return {&#39;username&#39;: username}, 200 api....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-08-16 15:06:01 +0800 CST'>August 16, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Flasgger" href="http://slgjy.github.io/py/flask_swagger/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Flask_restful
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p></p>
+  </div>
+  <footer class="entry-footer"><span title='2023-08-16 15:05:48 +0800 CST'>August 16, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Flask_restful" href="http://slgjy.github.io/py/flask_restful/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Flask
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Flask 中文文档
+基础使用 蓝图 Blueprint是flask程序的模块化处理机制
+当业务越大逻辑越复杂，需要对功能进行模块化分割处理。将不同的业务单元分割成多个文件来实现。是项目结构清洗，易于维护。
+一个项目可以具有多个Blueprint Blueprint可以单独拥有模板，静态文件目录 目录结构
+machine.py
+from flask import Blueprint # 创建蓝图，url_prefix添加统一的路由前缀 bp = Blueprint(&#39;machine&#39;, __name__, url_prefix=&#39;/machine&#39;) @bp.route(&#39;/list&#39;) def machine_list(): return &#39;machine---list&#39; @bp.route(&#39;/add&#39;) def machine_add(): return &#39;machine---add&#39; user.py
+from flask import Blueprint bp = Blueprint(&#39;user&#39;, __name__, url_prefix=&#39;/user&#39;) @bp.route(&#39;/list&#39;) def user_list(): return &#39;user---list&#39; @bp.route(&#39;/add&#39;) def user_add(): return &#39;user---add&#39; app....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-08-16 15:05:20 +0800 CST'>August 16, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Flask" href="http://slgjy.github.io/py/flask/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Python开发环境搭建
     </h2>
   </header>

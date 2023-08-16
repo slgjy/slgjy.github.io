@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>pies on 小石头博客</title>
-    <link>http://slgjy.github.io/py/</link>
-    <description>Recent content in pies on 小石头博客</description>
+    <title>flask on 小石头博客</title>
+    <link>http://slgjy.github.io/tags/flask/</link>
+    <description>Recent content in flask on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Aug 2023 15:06:01 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/py/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Aug 2023 15:06:01 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/flask/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Flasgger</title>
       <link>http://slgjy.github.io/py/flask_swagger/</link>
@@ -42,18 +42,6 @@ from flask import Blueprint from flask_restful import Resource, Api bp = Bluepri
 machine.py
 from flask import Blueprint # 创建蓝图，url_prefix添加统一的路由前缀 bp = Blueprint(&amp;#39;machine&amp;#39;, __name__, url_prefix=&amp;#39;/machine&amp;#39;) @bp.route(&amp;#39;/list&amp;#39;) def machine_list(): return &amp;#39;machine---list&amp;#39; @bp.route(&amp;#39;/add&amp;#39;) def machine_add(): return &amp;#39;machine---add&amp;#39; user.py
 from flask import Blueprint bp = Blueprint(&amp;#39;user&amp;#39;, __name__, url_prefix=&amp;#39;/user&amp;#39;) @bp.route(&amp;#39;/list&amp;#39;) def user_list(): return &amp;#39;user---list&amp;#39; @bp.route(&amp;#39;/add&amp;#39;) def user_add(): return &amp;#39;user---add&amp;#39; app.</description>
-    </item>
-    
-    <item>
-      <title>Python开发环境搭建</title>
-      <link>http://slgjy.github.io/py/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
-      <pubDate>Fri, 11 Aug 2023 11:03:53 +0800</pubDate>
-      
-      <guid>http://slgjy.github.io/py/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
-      <description>Python安装 下载 官网地址
-安装 测试 pip安装 ps ：一般安装python环境的时候会勾选pip安装选项，不然需要自己安装配置环境变量。
-在线安装 安装并升级 py -m ensurepip --upgrade 离线安装 下载地址
-解压到指定目录 进入到解压目录安装 python setup.py install 测试 常用配置 修改下载源 #设置国内镜像源，例如清华源 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple pycharm </description>
     </item>
     
   </channel>
