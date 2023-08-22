@@ -128,6 +128,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Flask_sqlalchemy
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Flask-SQLAlchemy 官网地址
+#安装 pip install -U Flask-SQLAlchemy 基础使用 安装mysql依赖包
+pip install pymysql 初始化 flask_sqlalchemy通常和flask配合使用，通过flask的配置加载
+class Config: DEBUG = True &#34;&#34;&#34; 使用mysqldb驱动协议名mysql 使用pymysql驱动协议名为mysql&#43;pymysql &#34;&#34;&#34; # 协议名://用户名:密码@主机名:端口/数据库名 SQLALCHEMY_DATABASE_URI = &#39;mysql&#43;pymysql://username:password@x.x.x.x:3306/demo&#39; SQLALCHEMY_TRACK_MODIFICATIONS = False # 追踪数据的修改信号 SQLALCHEMY_ECHO = True # 是否在控制台打印输出sql语句 JSON_AS_ASCII = False # 不转移中文字符 def create_app(config): # 初始化flask实例对象 flask_app = Flask(__name__) # 初始化加载配置 flask_app....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-08-22 09:27:48 +0800 CST'>August 22, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Flask_sqlalchemy" href="http://slgjy.github.io/py/flask_sqlalchemy/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Flasgger
     </h2>
   </header>

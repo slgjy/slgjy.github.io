@@ -6,7 +6,19 @@
     <description>Recent content in pies on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Aug 2023 15:06:01 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/py/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Aug 2023 09:27:48 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/py/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flask_sqlalchemy</title>
+      <link>http://slgjy.github.io/py/flask_sqlalchemy/</link>
+      <pubDate>Tue, 22 Aug 2023 09:27:48 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/py/flask_sqlalchemy/</guid>
+      <description>Flask-SQLAlchemy 官网地址
+#安装 pip install -U Flask-SQLAlchemy 基础使用 安装mysql依赖包
+pip install pymysql 初始化 flask_sqlalchemy通常和flask配合使用，通过flask的配置加载
+class Config: DEBUG = True &amp;#34;&amp;#34;&amp;#34; 使用mysqldb驱动协议名mysql 使用pymysql驱动协议名为mysql+pymysql &amp;#34;&amp;#34;&amp;#34; # 协议名://用户名:密码@主机名:端口/数据库名 SQLALCHEMY_DATABASE_URI = &amp;#39;mysql+pymysql://username:password@x.x.x.x:3306/demo&amp;#39; SQLALCHEMY_TRACK_MODIFICATIONS = False # 追踪数据的修改信号 SQLALCHEMY_ECHO = True # 是否在控制台打印输出sql语句 JSON_AS_ASCII = False # 不转移中文字符 def create_app(config): # 初始化flask实例对象 flask_app = Flask(__name__) # 初始化加载配置 flask_app.</description>
+    </item>
+    
     <item>
       <title>Flasgger</title>
       <link>http://slgjy.github.io/py/flask_swagger/</link>
