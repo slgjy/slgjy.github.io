@@ -6,7 +6,20 @@
     <description>Recent content in docker on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Jul 2023 17:13:17 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Sep 2023 10:40:31 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker_permissions</title>
+      <link>http://slgjy.github.io/docker/docker_permissions/</link>
+      <pubDate>Mon, 18 Sep 2023 10:40:31 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/docker/docker_permissions/</guid>
+      <description>解决执行docker命令权限问题 sudo groupadd docker #添加docker用户组
+sudo gpasswd -a $USER docker #将指定用户添加到docker用户组
+newgrp docker #更新用户组
+测试（执行命令不用在添加sudo指令）
+docker info</description>
+    </item>
+    
     <item>
       <title>Start_containe</title>
       <link>http://slgjy.github.io/post/start_containe/</link>

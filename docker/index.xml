@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Dockers on 小石头博客</title>
+    <link>http://slgjy.github.io/docker/</link>
+    <description>Recent content in Dockers on 小石头博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Sep 2023 10:40:31 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker_permissions</title>
+      <link>http://slgjy.github.io/docker/docker_permissions/</link>
+      <pubDate>Mon, 18 Sep 2023 10:40:31 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/docker/docker_permissions/</guid>
+      <description>解决执行docker命令权限问题 sudo groupadd docker #添加docker用户组
+sudo gpasswd -a $USER docker #将指定用户添加到docker用户组
+newgrp docker #更新用户组
+测试（执行命令不用在添加sudo指令）
+docker info</description>
+    </item>
+    
+  </channel>
+</rss>
