@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linuxes on 小石头博客</title>
+    <link>http://slgjy.github.io/linux/</link>
+    <description>Recent content in Linuxes on 小石头博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 Sep 2023 14:50:15 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux_link</title>
+      <link>http://slgjy.github.io/linux/linux_link/</link>
+      <pubDate>Wed, 20 Sep 2023 14:50:15 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/linux/linux_link/</guid>
+      <description>Linux软硬链接 概述 Linux下方便用户访问文件，Linux提供了链接(link)机制，将一个文件或目录和另一个文件或目录建立链接，类似于windows下的快捷方式。
+硬链接（hard link） 硬链接指在同一个文件系统中，将一个文件名关联到一个已经存在的文件上，使其该文件名也可以访问该文件，硬链接与原文件共享inode，对于硬链接来说，他们的访问权限，所有者，大小属性是一致的。
+硬链接定义 一个文件系统中多个文件名指向同一个数据块(inode)的情况。硬链接是同一个文件不同别名，他们共享相同的内容，属性。硬链接只能在同一分区创建，不能跨越不同的文件系统
+创建方式 为文件file1创建硬链接file2
+# 要保证被链接文件(file1)是存在的 ln file1 file2 硬链接优缺点 节省存储空间，不占用额外的数据块 保护文件免受意外删除，只有所有的指向该数据块的文件名被删除时，该数据库块才会被释放。 不能跨越不同文件系统，不同文件系统可能有不同的inode分配方式 硬链接不能用于目录，这样会导致目录结构混乱和循环引用。 使用场景 给同一个文件创建别名 保护重要文件防止意外删除 提高频繁访问文件的效率。可以使用硬链接 删除硬链接 #通过rm删除命令就可以了 rm -f 软连接（symbolic link） 软链接也称为符号链接，指代在不同文件系统之间，将一个文件名关联到另一个文件上，软链接和原文不共享inode，他们有不同的inode和device，因此访问权限和所有者属性可能不同。
+软连接创建 ln -s file1 file3 特点 可以跨越不同文件系统，只存储路径信息 可以用于目录，不会导致目录结构的混乱和循环引用 会占用额外的空间，需要单独的数据块存储路径信息 软连接可能失效，如果原文出现删除或被移动 使用场景： 为不通位置的文件或者目录创建快捷方式 保留原文件的属性变化时候，使用软链接 查找 根据inode查找
+find / -inum inodeId 其他记录 inode inode是文件系统的概念，称为文件索引节点，包含文件基础信息以及数据块的指针，元信息类似于文件属性，包括文件的创建者、创建日期、文件大小、文件权限等信息，实际信息存储在块中，而存储文件元信息的区域就叫做 inode。一个文件必须占用一个inode，并且至少占用一个block。</description>
+    </item>
+    
+  </channel>
+</rss>

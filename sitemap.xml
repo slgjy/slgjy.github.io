@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://slgjy.github.io/tags/linux/</loc>
+    <lastmod>2023-09-20T14:50:15+08:00</lastmod>
+  </url><url>
+    <loc>http://slgjy.github.io/linux/linux_link/</loc>
+    <lastmod>2023-09-20T14:50:15+08:00</lastmod>
+  </url><url>
+    <loc>http://slgjy.github.io/linux/</loc>
+    <lastmod>2023-09-20T14:50:15+08:00</lastmod>
+  </url><url>
+    <loc>http://slgjy.github.io/tags/</loc>
+    <lastmod>2023-09-20T14:50:15+08:00</lastmod>
+  </url><url>
+    <loc>http://slgjy.github.io/</loc>
+    <lastmod>2023-09-20T14:50:15+08:00</lastmod>
+  </url><url>
     <loc>http://slgjy.github.io/tags/docker/</loc>
     <lastmod>2023-09-18T10:40:31+08:00</lastmod>
   </url><url>
@@ -9,12 +24,6 @@
     <lastmod>2023-09-18T10:40:31+08:00</lastmod>
   </url><url>
     <loc>http://slgjy.github.io/docker/</loc>
-    <lastmod>2023-09-18T10:40:31+08:00</lastmod>
-  </url><url>
-    <loc>http://slgjy.github.io/tags/</loc>
-    <lastmod>2023-09-18T10:40:31+08:00</lastmod>
-  </url><url>
-    <loc>http://slgjy.github.io/</loc>
     <lastmod>2023-09-18T10:40:31+08:00</lastmod>
   </url><url>
     <loc>http://slgjy.github.io/tags/flask/</loc>
