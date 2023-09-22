@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Tags | 小石头博客</title>
+<title>Goes | 小石头博客</title>
 <meta name="keywords" content="">
-<meta name="description" content="">
+<meta name="description" content="Goes - 小石头博客">
 <meta name="author" content="">
-<link rel="canonical" href="http://slgjy.github.io/tags/">
+<link rel="canonical" href="http://slgjy.github.io/go/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://slgjy.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/tags/index.xml">
+<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/go/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,15 +55,30 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Tags" />
+</noscript><meta property="og:title" content="Goes" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://slgjy.github.io/tags/" />
+<meta property="og:url" content="http://slgjy.github.io/go/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
+<meta name="twitter:title" content="Goes"/>
 <meta name="twitter:description" content=""/>
 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Goes",
+      "item": "http://slgjy.github.io/go/"
+    }
+  ]
+}
+</script>
 </head>
 
 <body class="list" id="top">
@@ -108,7 +123,7 @@
         <ul id="menu">
             <li>
                 <a href="http://slgjy.github.io/tags/" title="分类">
-                    <span class="active">分类</span>
+                    <span>分类</span>
                 </a>
             </li>
             <li>
@@ -119,43 +134,33 @@
         </ul>
     </nav>
 </header>
-<main class="main">
+<main class="main"> 
 <header class="page-header">
-    <h1>Tags</h1>
+  <h1>
+    Goes
+  </h1>
 </header>
 
-<ul class="terms-tags">
-    <li>
-        <a href="http://slgjy.github.io/tags/docker/">docker <sup><strong><sup>3</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/flask/">flask <sup><strong><sup>4</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/go/">go <sup><strong><sup>9</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/go-frame/">go-frame <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/k8s/">k8s <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/linux/">linux <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/python/">python <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/springboot/">springboot <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/springcloud/">SpringCloud <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/tools/">tools <sup><strong><sup>8</sup></strong></sup> </a>
-    </li>
-</ul>
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Gomod
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Gomod gomod是一个官方的包依赖管理工具。
+Gomod出现背景 GOPATH Go1.5以前所有依赖只能放到GOPATH下，没有版本控制。
+gopath模式下$GOPATH目录结构如下 – bin 存放编译后生成的二进制可执行文件
+– pkg 存放编译后生成的 .a 文件
+– src 存放项目的源代码，可以是你自己写的代码，也可以是你 go get 下载的包
+将你的包或者别人的包全部放在 $GOPATH/src 目录下进行管理的方式，我们称之为 GOPATH 模式
+go vendor Go1.5版本推出vendor机制，每个项目下可以有一个vendor目录，该目录存放依赖的package。go build先去vendor目录寻找依赖，找不到再去GOPATH查找。
+开启vendor机制go项目必须在GOPATH环境变量配置的某个路径的src目录下
+解决问题
+解决之前依赖第三方包都需要go get下载到GOPATH目录，需要的时候去该目录寻找，当第三方包升级时，不能保证开发者环境的版本依赖版本一致。 解决维护统一本地环境一致的工作 通过go.mod文件记录了依赖的包信息(地址以及版本)解决依赖包的管理问题。 通过go.mod文件配合git仓库记录历史依赖的版本，有助于出现问题回退。 应用 查看go环境 GO111MODULE=off禁用模块支持，编译时会从GOPATH和vendor文件夹中查找包。 GO111MODULE=on启用模块支持，编译时会忽略GOPATH和vendor文件夹，只根据 go.mod下载依赖。 GO111MODULE=auto，当项目在$GOPATH/src外且项目根目录有go.mod文件时，自动开启模块支持。 项目初始化 // project_name对应自己的项目名称 go mod init project_name 当前项目提供第三方使用...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-09-22 11:18:42 +0800 CST'>September 22, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Gomod" href="http://slgjy.github.io/go/gomod/"></a>
+</article>
     </main>
     
 <footer class="footer">

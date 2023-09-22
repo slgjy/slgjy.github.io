@@ -6,7 +6,25 @@
     <description>Recent content in go on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Jul 2023 09:40:28 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Sep 2023 11:18:42 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gomod</title>
+      <link>http://slgjy.github.io/go/gomod/</link>
+      <pubDate>Fri, 22 Sep 2023 11:18:42 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/go/gomod/</guid>
+      <description>Gomod gomod是一个官方的包依赖管理工具。
+Gomod出现背景 GOPATH Go1.5以前所有依赖只能放到GOPATH下，没有版本控制。
+gopath模式下$GOPATH目录结构如下 &amp;ndash; bin 存放编译后生成的二进制可执行文件
+&amp;ndash; pkg 存放编译后生成的 .a 文件
+&amp;ndash; src 存放项目的源代码，可以是你自己写的代码，也可以是你 go get 下载的包
+将你的包或者别人的包全部放在 $GOPATH/src 目录下进行管理的方式，我们称之为 GOPATH 模式
+go vendor Go1.5版本推出vendor机制，每个项目下可以有一个vendor目录，该目录存放依赖的package。go build先去vendor目录寻找依赖，找不到再去GOPATH查找。
+开启vendor机制go项目必须在GOPATH环境变量配置的某个路径的src目录下
+解决问题
+解决之前依赖第三方包都需要go get下载到GOPATH目录，需要的时候去该目录寻找，当第三方包升级时，不能保证开发者环境的版本依赖版本一致。 解决维护统一本地环境一致的工作 通过go.mod文件记录了依赖的包信息(地址以及版本)解决依赖包的管理问题。 通过go.mod文件配合git仓库记录历史依赖的版本，有助于出现问题回退。 应用 查看go环境 GO111MODULE=off禁用模块支持，编译时会从GOPATH和vendor文件夹中查找包。 GO111MODULE=on启用模块支持，编译时会忽略GOPATH和vendor文件夹，只根据 go.mod下载依赖。 GO111MODULE=auto，当项目在$GOPATH/src外且项目根目录有go.mod文件时，自动开启模块支持。 项目初始化 // project_name对应自己的项目名称 go mod init project_name 当前项目提供第三方使用</description>
+    </item>
+    
     <item>
       <title>Captcha</title>
       <link>http://slgjy.github.io/post/captcha/</link>

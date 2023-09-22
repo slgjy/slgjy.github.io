@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Gomod | 小石头博客</title>
+<meta name="keywords" content="go">
+<meta name="description" content="Gomod gomod是一个官方的包依赖管理工具。
+Gomod出现背景 GOPATH Go1.5以前所有依赖只能放到GOPATH下，没有版本控制。
+gopath模式下$GOPATH目录结构如下 &ndash; bin 存放编译后生成的二进制可执行文件
+&ndash; pkg 存放编译后生成的 .a 文件
+&ndash; src 存放项目的源代码，可以是你自己写的代码，也可以是你 go get 下载的包
+将你的包或者别人的包全部放在 $GOPATH/src 目录下进行管理的方式，我们称之为 GOPATH 模式
+go vendor Go1.5版本推出vendor机制，每个项目下可以有一个vendor目录，该目录存放依赖的package。go build先去vendor目录寻找依赖，找不到再去GOPATH查找。
+开启vendor机制go项目必须在GOPATH环境变量配置的某个路径的src目录下
+解决问题
+解决之前依赖第三方包都需要go get下载到GOPATH目录，需要的时候去该目录寻找，当第三方包升级时，不能保证开发者环境的版本依赖版本一致。 解决维护统一本地环境一致的工作 通过go.mod文件记录了依赖的包信息(地址以及版本)解决依赖包的管理问题。 通过go.mod文件配合git仓库记录历史依赖的版本，有助于出现问题回退。 应用 查看go环境 GO111MODULE=off禁用模块支持，编译时会从GOPATH和vendor文件夹中查找包。 GO111MODULE=on启用模块支持，编译时会忽略GOPATH和vendor文件夹，只根据 go.mod下载依赖。 GO111MODULE=auto，当项目在$GOPATH/src外且项目根目录有go.mod文件时，自动开启模块支持。 项目初始化 // project_name对应自己的项目名称 go mod init project_name 当前项目提供第三方使用">
+<meta name="author" content="">
+<link rel="canonical" href="http://slgjy.github.io/go/gomod/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://slgjy.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://slgjy.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://slgjy.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Gomod" />
+<meta property="og:description" content="Gomod gomod是一个官方的包依赖管理工具。
+Gomod出现背景 GOPATH Go1.5以前所有依赖只能放到GOPATH下，没有版本控制。
+gopath模式下$GOPATH目录结构如下 &ndash; bin 存放编译后生成的二进制可执行文件
+&ndash; pkg 存放编译后生成的 .a 文件
+&ndash; src 存放项目的源代码，可以是你自己写的代码，也可以是你 go get 下载的包
+将你的包或者别人的包全部放在 $GOPATH/src 目录下进行管理的方式，我们称之为 GOPATH 模式
+go vendor Go1.5版本推出vendor机制，每个项目下可以有一个vendor目录，该目录存放依赖的package。go build先去vendor目录寻找依赖，找不到再去GOPATH查找。
+开启vendor机制go项目必须在GOPATH环境变量配置的某个路径的src目录下
+解决问题
+解决之前依赖第三方包都需要go get下载到GOPATH目录，需要的时候去该目录寻找，当第三方包升级时，不能保证开发者环境的版本依赖版本一致。 解决维护统一本地环境一致的工作 通过go.mod文件记录了依赖的包信息(地址以及版本)解决依赖包的管理问题。 通过go.mod文件配合git仓库记录历史依赖的版本，有助于出现问题回退。 应用 查看go环境 GO111MODULE=off禁用模块支持，编译时会从GOPATH和vendor文件夹中查找包。 GO111MODULE=on启用模块支持，编译时会忽略GOPATH和vendor文件夹，只根据 go.mod下载依赖。 GO111MODULE=auto，当项目在$GOPATH/src外且项目根目录有go.mod文件时，自动开启模块支持。 项目初始化 // project_name对应自己的项目名称 go mod init project_name 当前项目提供第三方使用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://slgjy.github.io/go/gomod/" /><meta property="article:section" content="go" />
+<meta property="article:published_time" content="2023-09-22T11:18:42+08:00" />
+<meta property="article:modified_time" content="2023-09-22T11:18:42+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gomod"/>
+<meta name="twitter:description" content="Gomod gomod是一个官方的包依赖管理工具。
+Gomod出现背景 GOPATH Go1.5以前所有依赖只能放到GOPATH下，没有版本控制。
+gopath模式下$GOPATH目录结构如下 &ndash; bin 存放编译后生成的二进制可执行文件
+&ndash; pkg 存放编译后生成的 .a 文件
+&ndash; src 存放项目的源代码，可以是你自己写的代码，也可以是你 go get 下载的包
+将你的包或者别人的包全部放在 $GOPATH/src 目录下进行管理的方式，我们称之为 GOPATH 模式
+go vendor Go1.5版本推出vendor机制，每个项目下可以有一个vendor目录，该目录存放依赖的package。go build先去vendor目录寻找依赖，找不到再去GOPATH查找。
+开启vendor机制go项目必须在GOPATH环境变量配置的某个路径的src目录下
+解决问题
+解决之前依赖第三方包都需要go get下载到GOPATH目录，需要的时候去该目录寻找，当第三方包升级时，不能保证开发者环境的版本依赖版本一致。 解决维护统一本地环境一致的工作 通过go.mod文件记录了依赖的包信息(地址以及版本)解决依赖包的管理问题。 通过go.mod文件配合git仓库记录历史依赖的版本，有助于出现问题回退。 应用 查看go环境 GO111MODULE=off禁用模块支持，编译时会从GOPATH和vendor文件夹中查找包。 GO111MODULE=on启用模块支持，编译时会忽略GOPATH和vendor文件夹，只根据 go.mod下载依赖。 GO111MODULE=auto，当项目在$GOPATH/src外且项目根目录有go.mod文件时，自动开启模块支持。 项目初始化 // project_name对应自己的项目名称 go mod init project_name 当前项目提供第三方使用"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Goes",
+      "item": "http://slgjy.github.io/go/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Gomod",
+      "item": "http://slgjy.github.io/go/gomod/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Gomod",
+  "name": "Gomod",
+  "description": "Gomod gomod是一个官方的包依赖管理工具。\nGomod出现背景 GOPATH Go1.5以前所有依赖只能放到GOPATH下，没有版本控制。\ngopath模式下$GOPATH目录结构如下 \u0026ndash; bin 存放编译后生成的二进制可执行文件\n\u0026ndash; pkg 存放编译后生成的 .a 文件\n\u0026ndash; src 存放项目的源代码，可以是你自己写的代码，也可以是你 go get 下载的包\n将你的包或者别人的包全部放在 $GOPATH/src 目录下进行管理的方式，我们称之为 GOPATH 模式\ngo vendor Go1.5版本推出vendor机制，每个项目下可以有一个vendor目录，该目录存放依赖的package。go build先去vendor目录寻找依赖，找不到再去GOPATH查找。\n开启vendor机制go项目必须在GOPATH环境变量配置的某个路径的src目录下\n解决问题\n解决之前依赖第三方包都需要go get下载到GOPATH目录，需要的时候去该目录寻找，当第三方包升级时，不能保证开发者环境的版本依赖版本一致。 解决维护统一本地环境一致的工作 通过go.mod文件记录了依赖的包信息(地址以及版本)解决依赖包的管理问题。 通过go.mod文件配合git仓库记录历史依赖的版本，有助于出现问题回退。 应用 查看go环境 GO111MODULE=off禁用模块支持，编译时会从GOPATH和vendor文件夹中查找包。 GO111MODULE=on启用模块支持，编译时会忽略GOPATH和vendor文件夹，只根据 go.mod下载依赖。 GO111MODULE=auto，当项目在$GOPATH/src外且项目根目录有go.mod文件时，自动开启模块支持。 项目初始化 // project_name对应自己的项目名称 go mod init project_name 当前项目提供第三方使用",
+  "keywords": [
+    "go"
+  ],
+  "articleBody": "Gomod gomod是一个官方的包依赖管理工具。\nGomod出现背景 GOPATH Go1.5以前所有依赖只能放到GOPATH下，没有版本控制。\ngopath模式下$GOPATH目录结构如下 – bin 存放编译后生成的二进制可执行文件\n– pkg 存放编译后生成的 .a 文件\n– src 存放项目的源代码，可以是你自己写的代码，也可以是你 go get 下载的包\n将你的包或者别人的包全部放在 $GOPATH/src 目录下进行管理的方式，我们称之为 GOPATH 模式\ngo vendor Go1.5版本推出vendor机制，每个项目下可以有一个vendor目录，该目录存放依赖的package。go build先去vendor目录寻找依赖，找不到再去GOPATH查找。\n开启vendor机制go项目必须在GOPATH环境变量配置的某个路径的src目录下\n解决问题\n解决之前依赖第三方包都需要go get下载到GOPATH目录，需要的时候去该目录寻找，当第三方包升级时，不能保证开发者环境的版本依赖版本一致。 解决维护统一本地环境一致的工作 通过go.mod文件记录了依赖的包信息(地址以及版本)解决依赖包的管理问题。 通过go.mod文件配合git仓库记录历史依赖的版本，有助于出现问题回退。 应用 查看go环境 GO111MODULE=off禁用模块支持，编译时会从GOPATH和vendor文件夹中查找包。 GO111MODULE=on启用模块支持，编译时会忽略GOPATH和vendor文件夹，只根据 go.mod下载依赖。 GO111MODULE=auto，当项目在$GOPATH/src外且项目根目录有go.mod文件时，自动开启模块支持。 项目初始化 // project_name对应自己的项目名称 go mod init project_name 当前项目提供第三方使用\n// 建议配合git仓库命名 go mod init github.com/xxx/project_name 下载依赖包 //手动触发下载依赖包到本地cache（默认为$GOPATH/pkg/mod目录） go mod download 依赖包版本生成 go mod tidy\n将项目中需要的依赖添加到go.mod文件 去掉go.mod文件中不需要的依赖 // 下载单个包 go get xxxx // 通过go mod tidy 快速下载go.mod文件中的所有包 go mod tidy k8s的源码包中的示例\n引用本地开发的代码 为了直接直接引用本地开发的包，又不频繁提交代码可使用如下命令\n// 将k8s.io/apimachinery替换为../apimachinery（本地项目地址路径） replace k8s.io/apimachinery =\u003e ../apimachinery k8s源码中的示例\n引用分支的包 默认情况下，go mod tidy会拉取主分支的最新代码作为版本记录。如果多个功能同时开发，按照常规操作，需要建立各自的feature分支开发。\n当其他模块需要引用分支代码时，就需要手动修改gomod文件中的版本名称替换对应分支名\n查看历史版本 go list -m -versions github.com/patrickmn/go-cache 执行结果\ngithub.com/patrickmn/go-cache v1.0.0 v2.0.0+incompatible v2.1.0+incompatible 然后当我们想引用v1.0.0时，就可以这样改写了:\nrequire github.com/patrickmn/go-cache v1.0.0 其他命令 //列出当前项目包名以及所有依赖到的包 go list -m -json all // 将引用的包都生成到当前项目的 vendor 包下，这样可以不用每次重新构建时去拉取对应的包，直接加入到自己的 git 代码仓库管理中, 直接 git pull 即可 go mod vendor // 校验模块是否被篡改过 go mod verify //打印项目的模块依赖结构 go mod graph ",
+  "wordCount" : "139",
+  "inLanguage": "en",
+  "datePublished": "2023-09-22T11:18:42+08:00",
+  "dateModified": "2023-09-22T11:18:42+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://slgjy.github.io/go/gomod/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "小石头博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://slgjy.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://slgjy.github.io" accesskey="h" title="小石头博客 (Alt + H)">小石头博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://slgjy.github.io/tags/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://slgjy.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Gomod
+    </h1>
+    <div class="post-meta"><span title='2023-09-22 11:18:42 +0800 CST'>September 22, 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="gomod">Gomod<a hidden class="anchor" aria-hidden="true" href="#gomod">#</a></h1>
+<p>gomod是一个官方的包依赖管理工具。</p>
+<h2 id="gomod出现背景">Gomod出现背景<a hidden class="anchor" aria-hidden="true" href="#gomod出现背景">#</a></h2>
+<h3 id="gopath">GOPATH<a hidden class="anchor" aria-hidden="true" href="#gopath">#</a></h3>
+<p>Go1.5以前所有依赖只能放到<code>GOPATH</code>下，没有版本控制。</p>
+<blockquote>
+<p><code>gopath</code>模式下<code>$GOPATH</code>目录结构如下
+&ndash; bin 存放编译后生成的二进制可执行文件</p>
+<p>&ndash; pkg 存放编译后生成的 .a 文件</p>
+<p>&ndash; <code>src </code>存放项目的源代码，可以是你自己写的代码，也可以是你 go get 下载的包</p>
+<p>将你的包或者别人的包全部放在<code> $GOPATH/src</code> 目录下进行管理的方式，我们称之为 <code>GOPATH </code>模式</p>
+</blockquote>
+<h3 id="go-vendor">go vendor<a hidden class="anchor" aria-hidden="true" href="#go-vendor">#</a></h3>
+<p>Go1.5版本推出vendor机制，每个项目下可以有一个vendor目录，该目录存放依赖的package。go build先去vendor目录寻找依赖，找不到再去<code>GOPATH</code>查找。</p>
+<p><strong>开启vendor</strong>机制go项目必须在<code>GOPATH</code>环境变量配置的某个路径的<code>src</code>目录下</p>
+<p><strong>解决问题</strong></p>
+<ul>
+<li>解决之前依赖第三方包都需要go get下载到<code>GOPATH</code>目录，需要的时候去该目录寻找，当第三方包升级时，不能保证开发者环境的版本依赖版本一致。</li>
+<li>解决维护统一本地环境一致的工作</li>
+<li>通过<code>go.mod</code>文件记录了依赖的包信息(地址以及版本)解决依赖包的管理问题。</li>
+<li>通过<code>go.mod</code>文件配合git仓库记录历史依赖的版本，有助于出现问题回退。</li>
+</ul>
+<h2 id="应用">应用<a hidden class="anchor" aria-hidden="true" href="#应用">#</a></h2>
+<h3 id="查看go环境">查看go环境<a hidden class="anchor" aria-hidden="true" href="#查看go环境">#</a></h3>
+<ol>
+<li><code>GO111MODULE=off</code>禁用模块支持，编译时会从<code>GOPATH</code>和<code>vendor</code>文件夹中查找包。</li>
+<li><code>GO111MODULE=on</code>启用模块支持，编译时会忽略<code>GOPATH</code>和<code>vendor</code>文件夹，只根据 <code>go.mod</code>下载依赖。</li>
+<li><code>GO111MODULE=auto</code>，当项目在<code>$GOPATH/src</code>外且项目根目录有<code>go.mod</code>文件时，自动开启模块支持。</li>
+</ol>
+<p><img loading="lazy" src="/gomod/image-20230922110058850.png" alt="image-20230922110058850"  />
+</p>
+<h3 id="项目初始化">项目初始化<a hidden class="anchor" aria-hidden="true" href="#项目初始化">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// project_name对应自己的项目名称
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">mod</span> <span style="color:#a6e22e">init</span> <span style="color:#a6e22e">project_name</span>
+</span></span></code></pre></div><p><strong>当前项目提供第三方使用</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// 建议配合git仓库命名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">mod</span> <span style="color:#a6e22e">init</span> <span style="color:#a6e22e">github</span>.<span style="color:#a6e22e">com</span><span style="color:#f92672">/</span><span style="color:#a6e22e">xxx</span><span style="color:#f92672">/</span><span style="color:#a6e22e">project_name</span>
+</span></span></code></pre></div><h3 id="下载依赖包">下载依赖包<a hidden class="anchor" aria-hidden="true" href="#下载依赖包">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">//手动触发下载依赖包到本地cache（默认为$GOPATH/pkg/mod目录）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">mod</span> <span style="color:#a6e22e">download</span>
+</span></span></code></pre></div><h3 id="依赖包版本生成">依赖包版本生成<a hidden class="anchor" aria-hidden="true" href="#依赖包版本生成">#</a></h3>
+<p><strong>go mod tidy</strong></p>
+<ul>
+<li>将项目中需要的依赖添加到<code>go.mod</code>文件</li>
+<li>去掉<code>go.mod</code>文件中不需要的依赖</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// 下载单个包
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">xxxx</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过go mod tidy 快速下载go.mod文件中的所有包
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">mod</span> <span style="color:#a6e22e">tidy</span>
+</span></span></code></pre></div><p><strong>k8s的源码包中的示例</strong></p>
+<p><img loading="lazy" src="/gomod/image-20230922100532789.png" alt="image-20230922100532789"  />
+</p>
+<h3 id="引用本地开发的代码">引用本地开发的代码<a hidden class="anchor" aria-hidden="true" href="#引用本地开发的代码">#</a></h3>
+<p>为了直接直接引用本地开发的包，又不频繁提交代码可使用如下命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// 将k8s.io/apimachinery替换为../apimachinery（本地项目地址路径）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">replace</span> <span style="color:#a6e22e">k8s</span>.<span style="color:#a6e22e">io</span><span style="color:#f92672">/</span><span style="color:#a6e22e">apimachinery</span> =&gt; ..<span style="color:#f92672">/</span><span style="color:#a6e22e">apimachinery</span>
+</span></span></code></pre></div><p>k8s源码中的示例</p>
+<p><img loading="lazy" src="/gomod/image-20230922101705578.png" alt="image-20230922101705578"  />
+</p>
+<h3 id="引用分支的包">引用分支的包<a hidden class="anchor" aria-hidden="true" href="#引用分支的包">#</a></h3>
+<p>默认情况下，go mod tidy会拉取主分支的最新代码作为版本记录。如果多个功能同时开发，按照常规操作，需要建立各自的feature分支开发。</p>
+<p>当其他模块需要引用分支代码时，就需要手动修改<code>gomod</code>文件中的版本名称替换对应分支名</p>
+<h3 id="查看历史版本">查看历史版本<a hidden class="anchor" aria-hidden="true" href="#查看历史版本">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">list</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">m</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">versions</span> <span style="color:#a6e22e">github</span>.<span style="color:#a6e22e">com</span><span style="color:#f92672">/</span><span style="color:#a6e22e">patrickmn</span><span style="color:#f92672">/</span><span style="color:#66d9ef">go</span><span style="color:#f92672">-</span><span style="color:#a6e22e">cache</span>
+</span></span></code></pre></div><p>执行结果</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">github</span>.<span style="color:#a6e22e">com</span><span style="color:#f92672">/</span><span style="color:#a6e22e">patrickmn</span><span style="color:#f92672">/</span><span style="color:#66d9ef">go</span><span style="color:#f92672">-</span><span style="color:#a6e22e">cache</span> <span style="color:#a6e22e">v1</span><span style="color:#ae81ff">.0.0</span> <span style="color:#a6e22e">v2</span><span style="color:#ae81ff">.0.0</span><span style="color:#f92672">+</span><span style="color:#a6e22e">incompatible</span> <span style="color:#a6e22e">v2</span><span style="color:#ae81ff">.1.0</span><span style="color:#f92672">+</span><span style="color:#a6e22e">incompatible</span>
+</span></span></code></pre></div><p>然后当我们想引用<code>v1.0.0</code>时，就可以这样改写了:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">require</span> <span style="color:#a6e22e">github</span>.<span style="color:#a6e22e">com</span><span style="color:#f92672">/</span><span style="color:#a6e22e">patrickmn</span><span style="color:#f92672">/</span><span style="color:#66d9ef">go</span><span style="color:#f92672">-</span><span style="color:#a6e22e">cache</span> <span style="color:#a6e22e">v1</span><span style="color:#ae81ff">.0.0</span>
+</span></span></code></pre></div><h3 id="其他命令">其他命令<a hidden class="anchor" aria-hidden="true" href="#其他命令">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">//列出当前项目包名以及所有依赖到的包
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">list</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">m</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">json</span> <span style="color:#a6e22e">all</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//  将引用的包都生成到当前项目的 vendor 包下，这样可以不用每次重新构建时去拉取对应的包，直接加入到自己的 git 代码仓库管理中, 直接 git pull 即可
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">mod</span> <span style="color:#a6e22e">vendor</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 校验模块是否被篡改过
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">mod</span> <span style="color:#a6e22e">verify</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//打印项目的模块依赖结构
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">mod</span> <span style="color:#a6e22e">graph</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://slgjy.github.io/tags/go/">go</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="http://slgjy.github.io">小石头博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
