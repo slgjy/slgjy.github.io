@@ -6,7 +6,20 @@
     <description>Recent content in go on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Sep 2023 11:18:42 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Dec 2023 10:47:48 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang_打包图标</title>
+      <link>http://slgjy.github.io/go/golang_%E6%89%93%E5%8C%85%E5%9B%BE%E6%A0%87/</link>
+      <pubDate>Wed, 13 Dec 2023 10:47:48 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/go/golang_%E6%89%93%E5%8C%85%E5%9B%BE%E6%A0%87/</guid>
+      <description>官网参考
+1.安装依赖 go get github.com/akavel/rsrc 2.编译rsrc 打开安装的rsrc依赖路径进行编译构建
+3. 将生成程序添加环境变量 复制 rsrc.exe 到 %go安装目录%/bin/ 目录下，否则需要使用绝对路径使用
+4.新建app.manifes文件 app.manifes程序描述文件
+&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; standalone=&amp;#34;yes&amp;#34;?&amp;gt; &amp;lt;assembly xmlns=&amp;#34;urn:schemas-microsoft-com:asm.v1&amp;#34; manifestVersion=&amp;#34;1.0&amp;#34; xmlns:asmv3=&amp;#34;urn:schemas-microsoft-com:asm.v3&amp;#34;&amp;gt; &amp;lt;assemblyIdentity version=&amp;#34;1.0.0.0&amp;#34; processorArchitecture=&amp;#34;*&amp;#34; name=&amp;#34;SomeFunkyNameHere&amp;#34; type=&amp;#34;win32&amp;#34;/&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;dependentAssembly&amp;gt; &amp;lt;assemblyIdentity type=&amp;#34;win32&amp;#34; name=&amp;#34;Microsoft.Windows.Common-Controls&amp;#34; version=&amp;#34;6.0.0.0&amp;#34; processorArchitecture=&amp;#34;*&amp;#34; publicKeyToken=&amp;#34;6595b64144ccf1df&amp;#34; language=&amp;#34;*&amp;#34;/&amp;gt; &amp;lt;/dependentAssembly&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;asmv3:application&amp;gt; &amp;lt;asmv3:windowsSettings xmlns=&amp;#34;http://schemas.microsoft.com/SMI/2005/WindowsSettings&amp;#34;&amp;gt; &amp;lt;dpiAware&amp;gt;true&amp;lt;/dpiAware&amp;gt; &amp;lt;/asmv3:windowsSettings&amp;gt; &amp;lt;/asmv3:application&amp;gt; &amp;lt;/assembly&amp;gt; 5.目录结构 6.生成.syso文件 rsrc.exe -manifest app.</description>
+    </item>
+    
     <item>
       <title>Gomod</title>
       <link>http://slgjy.github.io/go/gomod/</link>

@@ -143,6 +143,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Golang_打包图标
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>官网参考
+1.安装依赖 go get github.com/akavel/rsrc 2.编译rsrc 打开安装的rsrc依赖路径进行编译构建
+3. 将生成程序添加环境变量 复制 rsrc.exe 到 %go安装目录%/bin/ 目录下，否则需要使用绝对路径使用
+4.新建app.manifes文件 app.manifes程序描述文件
+&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;yes&#34;?&gt; &lt;assembly xmlns=&#34;urn:schemas-microsoft-com:asm.v1&#34; manifestVersion=&#34;1.0&#34; xmlns:asmv3=&#34;urn:schemas-microsoft-com:asm.v3&#34;&gt; &lt;assemblyIdentity version=&#34;1.0.0.0&#34; processorArchitecture=&#34;*&#34; name=&#34;SomeFunkyNameHere&#34; type=&#34;win32&#34;/&gt; &lt;dependency&gt; &lt;dependentAssembly&gt; &lt;assemblyIdentity type=&#34;win32&#34; name=&#34;Microsoft.Windows.Common-Controls&#34; version=&#34;6.0.0.0&#34; processorArchitecture=&#34;*&#34; publicKeyToken=&#34;6595b64144ccf1df&#34; language=&#34;*&#34;/&gt; &lt;/dependentAssembly&gt; &lt;/dependency&gt; &lt;asmv3:application&gt; &lt;asmv3:windowsSettings xmlns=&#34;http://schemas.microsoft.com/SMI/2005/WindowsSettings&#34;&gt; &lt;dpiAware&gt;true&lt;/dpiAware&gt; &lt;/asmv3:windowsSettings&gt; &lt;/asmv3:application&gt; &lt;/assembly&gt; 5.目录结构 6.生成.syso文件 rsrc.exe -manifest app....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-12-13 10:47:48 +0800 CST'>December 13, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Golang_打包图标" href="http://slgjy.github.io/go/golang_%E6%89%93%E5%8C%85%E5%9B%BE%E6%A0%87/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Gomod
     </h2>
   </header>
