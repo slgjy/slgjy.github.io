@@ -6,7 +6,18 @@
     <description>Recent content in docker on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Sep 2023 10:40:31 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Dec 2023 09:34:15 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker_nacos</title>
+      <link>http://slgjy.github.io/docker/docker_nacos/</link>
+      <pubDate>Tue, 19 Dec 2023 09:34:15 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/docker/docker_nacos/</guid>
+      <description>Docker启动nacos 下载镜像 # 默认下载latest docker pull nacos/nacos-server 启动镜像 启动一个模板镜像 启动模板镜像主要用于获取配置文件。
+#nacos2.0以后的版本需要多开放9848和9849两个端口 docker run -itd --env MODE=standalone --name nacos -d -p 8848:8848 -p 9848:9848 -p 9849:9849 nacos/nacos-server 创建本地目录 mkdir -p /home/slg/nacos/logs &amp;amp;&amp;amp; cd /home/slg/nacos copy模板容器的配置文件 #将naco模板容器中的配置copy到本地 docker cp nacos:/home/nacos/conf ./ 删除模板容器 docker rm -f nacos 添加授权 开启授权
+#在配置文件application.properties添加如下语句开启授权 #默认的nacos用户名密码nacos，nacos # 启用鉴权 nacos.</description>
+    </item>
+    
     <item>
       <title>Docker_permissions</title>
       <link>http://slgjy.github.io/docker/docker_permissions/</link>

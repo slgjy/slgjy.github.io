@@ -128,6 +128,20 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Docker_nacos
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Docker启动nacos 下载镜像 # 默认下载latest docker pull nacos/nacos-server 启动镜像 启动一个模板镜像 启动模板镜像主要用于获取配置文件。
+#nacos2.0以后的版本需要多开放9848和9849两个端口 docker run -itd --env MODE=standalone --name nacos -d -p 8848:8848 -p 9848:9848 -p 9849:9849 nacos/nacos-server 创建本地目录 mkdir -p /home/slg/nacos/logs &amp;&amp; cd /home/slg/nacos copy模板容器的配置文件 #将naco模板容器中的配置copy到本地 docker cp nacos:/home/nacos/conf ./ 删除模板容器 docker rm -f nacos 添加授权 开启授权
+#在配置文件application.properties添加如下语句开启授权 #默认的nacos用户名密码nacos，nacos # 启用鉴权 nacos....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-12-19 09:34:15 +0800 CST'>December 19, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Docker_nacos" href="http://slgjy.github.io/docker/docker_nacos/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Docker_permissions
     </h2>
   </header>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Springboot_跨域 | 小石头博客</title>
+<meta name="keywords" content="springboot">
+<meta name="description" content="跨域处理 跨域 由于
+跨域场景 场景一 业务逻辑
+通过gateway网关管理后端的具体微服务。
+现象
+通过postman访问没有问题，但是通过前端浏览器访问出现跨域报错。
+解决
+通过配置gateway处理跨域
+spring: cloud: gateway: discovery: locator: lowerCaseServiceId: true enabled: true globalcors: cors-configurations: &#39;[/**]&#39;: allowedOriginPatterns: &#34;*&#34; allowedMethods: &#34;*&#34; allowedHeaders: &#34;*&#34; allowCredentials: true add-to-simple-url-handler-mapping: true 通过编码处理跨域
+@Configuration public class GlobalCorsConfig { @Bean public CorsFilter corsFilter() { //1. 添加 CORS配置信息 CorsConfiguration config = new CorsConfiguration(); //放行哪些原始域 config.">
+<meta name="author" content="">
+<link rel="canonical" href="http://slgjy.github.io/java/springboot_%E8%B7%A8%E5%9F%9F/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://slgjy.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://slgjy.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://slgjy.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Springboot_跨域" />
+<meta property="og:description" content="跨域处理 跨域 由于
+跨域场景 场景一 业务逻辑
+通过gateway网关管理后端的具体微服务。
+现象
+通过postman访问没有问题，但是通过前端浏览器访问出现跨域报错。
+解决
+通过配置gateway处理跨域
+spring: cloud: gateway: discovery: locator: lowerCaseServiceId: true enabled: true globalcors: cors-configurations: &#39;[/**]&#39;: allowedOriginPatterns: &#34;*&#34; allowedMethods: &#34;*&#34; allowedHeaders: &#34;*&#34; allowCredentials: true add-to-simple-url-handler-mapping: true 通过编码处理跨域
+@Configuration public class GlobalCorsConfig { @Bean public CorsFilter corsFilter() { //1. 添加 CORS配置信息 CorsConfiguration config = new CorsConfiguration(); //放行哪些原始域 config." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://slgjy.github.io/java/springboot_%E8%B7%A8%E5%9F%9F/" /><meta property="article:section" content="java" />
+<meta property="article:published_time" content="2023-12-19T09:32:38+08:00" />
+<meta property="article:modified_time" content="2023-12-19T09:32:38+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Springboot_跨域"/>
+<meta name="twitter:description" content="跨域处理 跨域 由于
+跨域场景 场景一 业务逻辑
+通过gateway网关管理后端的具体微服务。
+现象
+通过postman访问没有问题，但是通过前端浏览器访问出现跨域报错。
+解决
+通过配置gateway处理跨域
+spring: cloud: gateway: discovery: locator: lowerCaseServiceId: true enabled: true globalcors: cors-configurations: &#39;[/**]&#39;: allowedOriginPatterns: &#34;*&#34; allowedMethods: &#34;*&#34; allowedHeaders: &#34;*&#34; allowCredentials: true add-to-simple-url-handler-mapping: true 通过编码处理跨域
+@Configuration public class GlobalCorsConfig { @Bean public CorsFilter corsFilter() { //1. 添加 CORS配置信息 CorsConfiguration config = new CorsConfiguration(); //放行哪些原始域 config."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Javae",
+      "item": "http://slgjy.github.io/java/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Springboot_跨域",
+      "item": "http://slgjy.github.io/java/springboot_%E8%B7%A8%E5%9F%9F/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Springboot_跨域",
+  "name": "Springboot_跨域",
+  "description": "跨域处理 跨域 由于\n跨域场景 场景一 业务逻辑\n通过gateway网关管理后端的具体微服务。\n现象\n通过postman访问没有问题，但是通过前端浏览器访问出现跨域报错。\n解决\n通过配置gateway处理跨域\nspring: cloud: gateway: discovery: locator: lowerCaseServiceId: true enabled: true globalcors: cors-configurations: \u0026#39;[/**]\u0026#39;: allowedOriginPatterns: \u0026#34;*\u0026#34; allowedMethods: \u0026#34;*\u0026#34; allowedHeaders: \u0026#34;*\u0026#34; allowCredentials: true add-to-simple-url-handler-mapping: true 通过编码处理跨域\n@Configuration public class GlobalCorsConfig { @Bean public CorsFilter corsFilter() { //1. 添加 CORS配置信息 CorsConfiguration config = new CorsConfiguration(); //放行哪些原始域 config.",
+  "keywords": [
+    "springboot"
+  ],
+  "articleBody": "跨域处理 跨域 由于\n跨域场景 场景一 业务逻辑\n通过gateway网关管理后端的具体微服务。\n现象\n通过postman访问没有问题，但是通过前端浏览器访问出现跨域报错。\n解决\n通过配置gateway处理跨域\nspring: cloud: gateway: discovery: locator: lowerCaseServiceId: true enabled: true globalcors: cors-configurations: '[/**]': allowedOriginPatterns: \"*\" allowedMethods: \"*\" allowedHeaders: \"*\" allowCredentials: true add-to-simple-url-handler-mapping: true 通过编码处理跨域\n@Configuration public class GlobalCorsConfig { @Bean public CorsFilter corsFilter() { //1. 添加 CORS配置信息 CorsConfiguration config = new CorsConfiguration(); //放行哪些原始域 config.addAllowedOrigin(\"*\");//2.4以后版本使用allowedOriginPatterns参数 //是否发送 Cookie config.setAllowCredentials(true); //放行哪些请求方式 config.addAllowedMethod(\"*\"); //放行哪些原始请求头部信息 config.addAllowedHeader(\"*\"); //暴露哪些头部信息 config.addExposedHeader(\"*\"); //2. 添加映射路径 UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource(); corsConfigurationSource.registerCorsConfiguration(\"/**\",config); //3. 返回新的CorsFilter return new CorsFilter(corsConfigurationSource); } } 场景二 双重跨域\n浏览器控制台\nAccess to XMLHttpRequest at ‘XXX from origin xxx has been blocked by CORS policy: The ‘Access-Control-Allow-Origin’ header contains multiple values ‘xxx’, but only one is allowed.\n原因\n核心原因是可能在多个层面上重复进行了跨域访问处理。\nngxin配置了跨域,业务逻辑同时添加了跨域逻辑处理\n在gateway网关中添加了跨域处理，在具体的微服务中也添加了跨域处理逻辑\n解决\n只在一个方面处理跨域逻辑。\n",
+  "wordCount" : "113",
+  "inLanguage": "en",
+  "datePublished": "2023-12-19T09:32:38+08:00",
+  "dateModified": "2023-12-19T09:32:38+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://slgjy.github.io/java/springboot_%E8%B7%A8%E5%9F%9F/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "小石头博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://slgjy.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://slgjy.github.io" accesskey="h" title="小石头博客 (Alt + H)">小石头博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://slgjy.github.io/tags/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://slgjy.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Springboot_跨域
+    </h1>
+    <div class="post-meta"><span title='2023-12-19 09:32:38 +0800 CST'>December 19, 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="跨域处理">跨域处理<a hidden class="anchor" aria-hidden="true" href="#跨域处理">#</a></h2>
+<h3 id="跨域">跨域<a hidden class="anchor" aria-hidden="true" href="#跨域">#</a></h3>
+<p>由于</p>
+<h3 id="跨域场景">跨域场景<a hidden class="anchor" aria-hidden="true" href="#跨域场景">#</a></h3>
+<h4 id="场景一">场景一<a hidden class="anchor" aria-hidden="true" href="#场景一">#</a></h4>
+<p><strong>业务逻辑</strong></p>
+<p>通过<code>gateway</code>网关管理后端的具体微服务。</p>
+<p><strong>现象</strong></p>
+<p>通过<code>postman</code>访问没有问题，但是通过前端浏览器访问出现跨域报错。</p>
+<p><strong>解决</strong></p>
+<p>通过配置<code>gateway</code>处理跨域</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">spring</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">cloud</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">gateway</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">discovery</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">locator</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">lowerCaseServiceId</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">globalcors</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">cors-configurations</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#39;[/**]&#39;</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">allowedOriginPatterns</span>: <span style="color:#e6db74">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">allowedMethods</span>: <span style="color:#e6db74">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">allowedHeaders</span>: <span style="color:#e6db74">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">allowCredentials</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">add-to-simple-url-handler-mapping</span>: <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><p>通过编码处理跨域</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GlobalCorsConfig</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> CorsFilter <span style="color:#a6e22e">corsFilter</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//1. 添加 CORS配置信息
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        CorsConfiguration config <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CorsConfiguration<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//放行哪些原始域
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        config<span style="color:#f92672">.</span><span style="color:#a6e22e">addAllowedOrigin</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">);</span><span style="color:#75715e">//2.4以后版本使用allowedOriginPatterns参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">//是否发送 Cookie
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        config<span style="color:#f92672">.</span><span style="color:#a6e22e">setAllowCredentials</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//放行哪些请求方式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        config<span style="color:#f92672">.</span><span style="color:#a6e22e">addAllowedMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//放行哪些原始请求头部信息
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        config<span style="color:#f92672">.</span><span style="color:#a6e22e">addAllowedHeader</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//暴露哪些头部信息
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        config<span style="color:#f92672">.</span><span style="color:#a6e22e">addExposedHeader</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//2. 添加映射路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        UrlBasedCorsConfigurationSource corsConfigurationSource <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UrlBasedCorsConfigurationSource<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        corsConfigurationSource<span style="color:#f92672">.</span><span style="color:#a6e22e">registerCorsConfiguration</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/**&#34;</span><span style="color:#f92672">,</span>config<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//3. 返回新的CorsFilter
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> CorsFilter<span style="color:#f92672">(</span>corsConfigurationSource<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h4 id="场景二">场景二<a hidden class="anchor" aria-hidden="true" href="#场景二">#</a></h4>
+<p><strong>双重跨域</strong></p>
+<p>浏览器控制台</p>
+<blockquote>
+<p>Access to XMLHttpRequest at &lsquo;XXX from origin xxx has been blocked by CORS policy: The &lsquo;Access-Control-Allow-Origin&rsquo; header contains multiple values &lsquo;xxx&rsquo;, but only one is allowed.</p>
+</blockquote>
+<p><strong>原因</strong></p>
+<p>核心原因是可能在多个层面上<strong>重复</strong>进行了跨域访问处理。</p>
+<ul>
+<li>
+<p><code>ngxin</code>配置了跨域,业务逻辑同时添加了跨域逻辑处理</p>
+</li>
+<li>
+<p>在<code>gateway</code>网关中添加了跨域处理，在具体的微服务中也添加了跨域处理逻辑</p>
+</li>
+</ul>
+<p><strong>解决</strong></p>
+<p>只在一个方面处理跨域逻辑。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://slgjy.github.io/tags/springboot/">springboot</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="http://slgjy.github.io">小石头博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
