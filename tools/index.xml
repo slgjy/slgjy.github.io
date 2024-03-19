@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tools on 小石头博客</title>
+    <link>http://slgjy.github.io/tools/</link>
+    <description>Recent content in Tools on 小石头博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Mar 2024 11:47:36 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vscode搭建c环境</title>
+      <link>http://slgjy.github.io/tools/vscode_c/</link>
+      <pubDate>Tue, 19 Mar 2024 11:47:36 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/tools/vscode_c/</guid>
+      <description>VsCode搭建C语言的环境 windows平台 1.下载编译器 下载地址
+解压设置环境变量 测试
+2.下载编辑器 1.vscode安装 2.插件安装 C/C++ Code Runner C/C++ Themes Error Lens 3.配置环境 解决中文乱码 settings.json添加如下配置
+&amp;#34;[cpp]&amp;#34;: { &amp;#34;files.encoding&amp;#34;: &amp;#34;gbk&amp;#34; }, &amp;#34;[c]&amp;#34;: { &amp;#34;files.encoding&amp;#34;: &amp;#34;gbk&amp;#34; }, 代码调试 代码目录下.vsocde文件新增launch.json
+launch.json
+{ &amp;#34;version&amp;#34;: &amp;#34;0.2.0&amp;#34;, &amp;#34;configurations&amp;#34;: [ { &amp;#34;name&amp;#34;: &amp;#34;C/C++&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;cppdbg&amp;#34;, &amp;#34;request&amp;#34;: &amp;#34;launch&amp;#34;, &amp;#34;program&amp;#34;: &amp;#34;${fileDirname}/${fileBasenameNoExtension}.exe&amp;#34;, &amp;#34;args&amp;#34;: [], &amp;#34;stopAtEntry&amp;#34;: false, &amp;#34;cwd&amp;#34;: &amp;#34;${workspaceFolder}&amp;#34;, &amp;#34;environment&amp;#34;: [], // &amp;#34;externalConsole&amp;#34;: false, //控制是否在vscode中使用系统终端框 &amp;#34;externalConsole&amp;#34;: true, &amp;#34;MIMode&amp;#34;: &amp;#34;gdb&amp;#34;, &amp;#34;miDebuggerPath&amp;#34;: &amp;#34;D:/download/x86_64-8.</description>
+    </item>
+    
+  </channel>
+</rss>

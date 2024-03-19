@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>python | 小石头博客</title>
+<title>Tools | 小石头博客</title>
 <meta name="keywords" content="">
-<meta name="description" content="">
+<meta name="description" content="Tools - 小石头博客">
 <meta name="author" content="">
-<link rel="canonical" href="http://slgjy.github.io/tags/python/">
+<link rel="canonical" href="http://slgjy.github.io/tools/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://slgjy.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/tags/python/index.xml">
+<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/tools/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,15 +55,30 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="python" />
+</noscript><meta property="og:title" content="Tools" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://slgjy.github.io/tags/python/" />
+<meta property="og:url" content="http://slgjy.github.io/tools/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="python"/>
+<meta name="twitter:title" content="Tools"/>
 <meta name="twitter:description" content=""/>
 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Tools",
+      "item": "http://slgjy.github.io/tools/"
+    }
+  ]
+}
+</script>
 </head>
 
 <body class="list" id="top">
@@ -122,23 +137,25 @@
 <main class="main"> 
 <header class="page-header">
   <h1>
-    python
+    Tools
   </h1>
 </header>
 
-<article class="post-entry tag-entry"> 
+<article class="post-entry"> 
   <header class="entry-header">
-    <h2>Python开发环境搭建
+    <h2>Vscode搭建c环境
     </h2>
   </header>
   <div class="entry-content">
-    <p>Python安装 下载 官网地址
-安装 测试 pip安装 ps ：一般安装python环境的时候会勾选pip安装选项，不然需要自己安装配置环境变量。
-在线安装 安装并升级 py -m ensurepip --upgrade 离线安装 下载地址
-解压到指定目录 进入到解压目录安装 python setup.py install 测试 常用配置 修改下载源 #设置国内镜像源，例如清华源 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple pycharm </p>
+    <p>VsCode搭建C语言的环境 windows平台 1.下载编译器 下载地址
+解压设置环境变量 测试
+2.下载编辑器 1.vscode安装 2.插件安装 C/C&#43;&#43; Code Runner C/C&#43;&#43; Themes Error Lens 3.配置环境 解决中文乱码 settings.json添加如下配置
+&#34;[cpp]&#34;: { &#34;files.encoding&#34;: &#34;gbk&#34; }, &#34;[c]&#34;: { &#34;files.encoding&#34;: &#34;gbk&#34; }, 代码调试 代码目录下.vsocde文件新增launch.json
+launch.json
+{ &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;C/C&#43;&#43;&#34;, &#34;type&#34;: &#34;cppdbg&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;program&#34;: &#34;${fileDirname}/${fileBasenameNoExtension}.exe&#34;, &#34;args&#34;: [], &#34;stopAtEntry&#34;: false, &#34;cwd&#34;: &#34;${workspaceFolder}&#34;, &#34;environment&#34;: [], // &#34;externalConsole&#34;: false, //控制是否在vscode中使用系统终端框 &#34;externalConsole&#34;: true, &#34;MIMode&#34;: &#34;gdb&#34;, &#34;miDebuggerPath&#34;: &#34;D:/download/x86_64-8....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-08-11 11:03:53 +0800 CST'>August 11, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to Python开发环境搭建" href="http://slgjy.github.io/py/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"></a>
+  <footer class="entry-footer"><span title='2024-03-19 11:47:36 +0800 CST'>March 19, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to Vscode搭建c环境" href="http://slgjy.github.io/tools/vscode_c/"></a>
 </article>
     </main>
     

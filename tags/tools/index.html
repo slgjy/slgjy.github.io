@@ -128,6 +128,23 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Vscode搭建c环境
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>VsCode搭建C语言的环境 windows平台 1.下载编译器 下载地址
+解压设置环境变量 测试
+2.下载编辑器 1.vscode安装 2.插件安装 C/C&#43;&#43; Code Runner C/C&#43;&#43; Themes Error Lens 3.配置环境 解决中文乱码 settings.json添加如下配置
+&#34;[cpp]&#34;: { &#34;files.encoding&#34;: &#34;gbk&#34; }, &#34;[c]&#34;: { &#34;files.encoding&#34;: &#34;gbk&#34; }, 代码调试 代码目录下.vsocde文件新增launch.json
+launch.json
+{ &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;C/C&#43;&#43;&#34;, &#34;type&#34;: &#34;cppdbg&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;program&#34;: &#34;${fileDirname}/${fileBasenameNoExtension}.exe&#34;, &#34;args&#34;: [], &#34;stopAtEntry&#34;: false, &#34;cwd&#34;: &#34;${workspaceFolder}&#34;, &#34;environment&#34;: [], // &#34;externalConsole&#34;: false, //控制是否在vscode中使用系统终端框 &#34;externalConsole&#34;: true, &#34;MIMode&#34;: &#34;gdb&#34;, &#34;miDebuggerPath&#34;: &#34;D:/download/x86_64-8....</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-03-19 11:47:36 +0800 CST'>March 19, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to Vscode搭建c环境" href="http://slgjy.github.io/tools/vscode_c/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Cfssl
     </h2>
   </header>
@@ -201,19 +218,6 @@ grep &#39;temporary password&#39; /var/log/mysqld.log 使用默认密码登录..
   <footer class="entry-footer"><span title='2023-05-09 14:21:07 +0800 CST'>May 9, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Mysql" href="http://slgjy.github.io/post/mysql/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>CloudNative
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Cloud Native 阿里云 云概念 安全组 给云服务器配置了安全组，添加规则，暴露端口协议,外网才能访问到。
-专有网络 网络隔离作用，一个VPC下的子网是可以互通的，不同VPC下不能互通(即使网段一致)，它们是物理隔离的。</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-05-06 17:21:19 +0800 CST'>May 6, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to CloudNative" href="http://slgjy.github.io/post/cloudnative/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="next" href="http://slgjy.github.io/tags/tools/page/2/">Next&nbsp;&nbsp;»
@@ -223,7 +227,7 @@ grep &#39;temporary password&#39; /var/log/mysqld.log 使用默认密码登录..
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="http://slgjy.github.io">小石头博客</a></span>
+    <span>&copy; 2024 <a href="http://slgjy.github.io">小石头博客</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
