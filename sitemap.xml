@@ -2,8 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://slgjy.github.io/tags/k8s/</loc>
+    <lastmod>2024-04-13T10:14:52+08:00</lastmod>
+  </url><url>
+    <loc>http://slgjy.github.io/k8s/</loc>
+    <lastmod>2024-04-13T10:14:52+08:00</lastmod>
+  </url><url>
+    <loc>http://slgjy.github.io/k8s/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2024-04-13T10:14:52+08:00</lastmod>
+  </url><url>
     <loc>http://slgjy.github.io/tags/</loc>
-    <lastmod>2024-03-19T11:47:36+08:00</lastmod>
+    <lastmod>2024-04-13T10:14:52+08:00</lastmod>
+  </url><url>
+    <loc>http://slgjy.github.io/</loc>
+    <lastmod>2024-04-13T10:14:52+08:00</lastmod>
   </url><url>
     <loc>http://slgjy.github.io/tags/tools/</loc>
     <lastmod>2024-03-19T11:47:36+08:00</lastmod>
@@ -12,9 +24,6 @@
     <lastmod>2024-03-19T11:47:36+08:00</lastmod>
   </url><url>
     <loc>http://slgjy.github.io/tools/vscode_c/</loc>
-    <lastmod>2024-03-19T11:47:36+08:00</lastmod>
-  </url><url>
-    <loc>http://slgjy.github.io/</loc>
     <lastmod>2024-03-19T11:47:36+08:00</lastmod>
   </url><url>
     <loc>http://slgjy.github.io/tags/docker/</loc>
@@ -118,9 +127,6 @@
   </url><url>
     <loc>http://slgjy.github.io/post/nexus/</loc>
     <lastmod>2023-06-26T11:49:32+08:00</lastmod>
-  </url><url>
-    <loc>http://slgjy.github.io/tags/k8s/</loc>
-    <lastmod>2023-06-01T15:36:45+08:00</lastmod>
   </url><url>
     <loc>http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2023-06-01T15:36:45+08:00</lastmod>

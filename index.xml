@@ -6,7 +6,24 @@
     <description>Recent content on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Mar 2024 11:47:36 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 13 Apr 2024 10:14:52 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>K8s集群搭建</title>
+      <link>http://slgjy.github.io/k8s/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Sat, 13 Apr 2024 10:14:52 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/k8s/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</guid>
+      <description>kubeadm搭建K8s集群 参考地址
+参考地址2
+环境信息 基本环境信息 采用linux虚拟机形式安装，由于是本地笔记本资源性能不够，简单搭建集群。没有实现高可用。
+主机名 ip地址 角色 k8s-master 192.168.1.115 master节点 k8s-node1 192.168.1.118 node节点 k8s-node2 192.168.1.119 node节点 网段规划
+根据业务情况，提前规划号网络分配。
+网段名称 网段划分 宿主机网段 192.168.1.0/24 Pod网段 172.16.0.0/12 Service网段 10.0.0.0/16 配置信息
+配置信息 备注 系统版本 7.9 Docker版本 20.10x Kubeadm v1.26.8 #查看系统版本 cat /etc/redhat-release 基本环境配置 ==该章节的操作每个节点都执行==
+修改主机名 在规划机器上执行对应命令
+$ hostnamectl set-hostname k8s-master $ hostnamectl set-hostname k8s-node1 $ hostnamectl set-hostname k8s-node2 修改hosts文件 每台机器上都执行</description>
+    </item>
+    
     <item>
       <title>Vscode搭建c环境</title>
       <link>http://slgjy.github.io/tools/vscode_c/</link>

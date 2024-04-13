@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Tags | 小石头博客</title>
+<title>K8s | 小石头博客</title>
 <meta name="keywords" content="">
-<meta name="description" content="">
+<meta name="description" content="K8s - 小石头博客">
 <meta name="author" content="">
-<link rel="canonical" href="http://slgjy.github.io/tags/">
+<link rel="canonical" href="http://slgjy.github.io/k8s/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://slgjy.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/tags/index.xml">
+<link rel="alternate" type="application/rss+xml" href="http://slgjy.github.io/k8s/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,15 +55,30 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Tags" />
+</noscript><meta property="og:title" content="K8s" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://slgjy.github.io/tags/" />
+<meta property="og:url" content="http://slgjy.github.io/k8s/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
+<meta name="twitter:title" content="K8s"/>
 <meta name="twitter:description" content=""/>
 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "K8s",
+      "item": "http://slgjy.github.io/k8s/"
+    }
+  ]
+}
+</script>
 </head>
 
 <body class="list" id="top">
@@ -108,7 +123,7 @@
         <ul id="menu">
             <li>
                 <a href="http://slgjy.github.io/tags/" title="分类">
-                    <span class="active">分类</span>
+                    <span>分类</span>
                 </a>
             </li>
             <li>
@@ -119,43 +134,32 @@
         </ul>
     </nav>
 </header>
-<main class="main">
+<main class="main"> 
 <header class="page-header">
-    <h1>Tags</h1>
+  <h1>
+    K8s
+  </h1>
 </header>
 
-<ul class="terms-tags">
-    <li>
-        <a href="http://slgjy.github.io/tags/docker/">docker <sup><strong><sup>4</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/flask/">flask <sup><strong><sup>4</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/go/">go <sup><strong><sup>10</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/go-frame/">go-frame <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/k8s/">k8s <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/linux/">linux <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/python/">python <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/springboot/">springboot <sup><strong><sup>3</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/springcloud/">SpringCloud <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://slgjy.github.io/tags/tools/">tools <sup><strong><sup>9</sup></strong></sup> </a>
-    </li>
-</ul>
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>K8s集群搭建
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>kubeadm搭建K8s集群 参考地址
+参考地址2
+环境信息 基本环境信息 采用linux虚拟机形式安装，由于是本地笔记本资源性能不够，简单搭建集群。没有实现高可用。
+主机名 ip地址 角色 k8s-master 192.168.1.115 master节点 k8s-node1 192.168.1.118 node节点 k8s-node2 192.168.1.119 node节点 网段规划
+根据业务情况，提前规划号网络分配。
+网段名称 网段划分 宿主机网段 192.168.1.0/24 Pod网段 172.16.0.0/12 Service网段 10.0.0.0/16 配置信息
+配置信息 备注 系统版本 7.9 Docker版本 20.10x Kubeadm v1.26.8 #查看系统版本 cat /etc/redhat-release 基本环境配置 ==该章节的操作每个节点都执行==
+修改主机名 在规划机器上执行对应命令
+$ hostnamectl set-hostname k8s-master $ hostnamectl set-hostname k8s-node1 $ hostnamectl set-hostname k8s-node2 修改hosts文件 每台机器上都执行...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-04-13 10:14:52 +0800 CST'>April 13, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to K8s集群搭建" href="http://slgjy.github.io/k8s/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/"></a>
+</article>
     </main>
     
 <footer class="footer">
