@@ -6,7 +6,18 @@
     <description>Recent content in k8s on 小石头博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Apr 2024 10:14:52 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Apr 2024 15:09:02 +0800</lastBuildDate><atom:link href="http://slgjy.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deploy_nginx_on_k8s</title>
+      <link>http://slgjy.github.io/k8s/deploy_nginx_on_k8s/</link>
+      <pubDate>Fri, 26 Apr 2024 15:09:02 +0800</pubDate>
+      
+      <guid>http://slgjy.github.io/k8s/deploy_nginx_on_k8s/</guid>
+      <description>K8s部署nginx实践 准备工作 K8s环境已具备 runtime采用containerd 私有容器仓库harbor 部署操作 containerd配置harbor 当前harbor私库没有开启https协议
+[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.registry.configs] # 内部私有仓库认证信息 [plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.registry.configs.&amp;#34;192.168.1.200:8066&amp;#34;.tls] insecure_skip_verify = true # 是否跳过证书认证 [plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.registry.configs.&amp;#34;192.168.1.200:8066&amp;#34;.auth] username = &amp;#34;admin&amp;#34; # 在harbor里单独创建的用户，授权访问指定项目 password = &amp;#34;Harbor12345&amp;#34; [plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.registry.headers] [plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.registry.mirrors] [plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.registry.mirrors.&amp;#34;192.168.1.200:8066&amp;#34;] endpoint = [&amp;#34;http://192.168.1.200:8066&amp;#34;] #harbor私库的ip端口 # 测试下载镜像 crictl pull 192.168.1.200:8066/library/mynginx:v100 # 查看镜像列表 crictl images Kubesperer部署操作 创建项目 等价于k8s创建一个命名空间
+创建保密字典配置harbor信息 创建工作负载 创建服务供外部访问 测试 #测试访问，节点ip+服务端口 http://192.</description>
+    </item>
+    
     <item>
       <title>K8s集群搭建</title>
       <link>http://slgjy.github.io/k8s/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</link>

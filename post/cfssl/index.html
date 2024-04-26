@@ -113,8 +113,8 @@ Cfssl包括
   "keywords": [
     "tools"
   ],
-  "articleBody": "Cfssl 官网地址\nCFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。\nCfssl包括\n一组用于构建自定义的TLS PKI工具 TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。 cfssl程序，命令行操作 multirootca程序，使用多个签名秘钥的证书颁发机构服务器 multirootca程序构建证书池捆绑包 cfssl json程序 安装 下载地址\n##通过wget或者curl命令都可以下载 # curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl # curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson # curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo 移动文件修改权限\n# 移动文件到/usr/local/bin/ [root@k8s-worker1 cfssl]# mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl [root@k8s-worker1 cfssl]# mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo [root@k8s-worker1 cfssl]# mv cfssljson_1.6.4_linux_amd64 /usr/local/bin/cfssljson #修改权限 chmod +x /usr/local/bin/cfss* 使用 常用子命令 No command is given. Usage: Available commands: sign:签名一个客户端证书，通过给定的CA和CA密钥，和主机名 gencert：生成新的key(密钥)和签名证书 certinfo：输出给定证书的证书信息， 跟cfssl-certinfo 工具作用一样 ocspsign:为给定的CA、Cert和状态签署OCSP响应。返回一个base64编码的OCSP响应 bundle：创建包含客户端证书的证书包 crl serve：启动一个HTTP API服务 genkey：生成一个key(私钥)和CSR(证书签名请求) gencrl ocspdump： 从cert db 中的所有 OCSP 响应中生成一系列连贯的 OCSP 响应，供 ocspserve 使用 selfsign：生成一个新的自签名密钥和 签名证书 scan：扫描主机问题 print-defaults：打印默认配置，这个默认配置可以用作模板 version gencsr ocsprefresh:用所有已知未过期证书的新OCSP响应刷新ocsp_responses表。 ocspserve:设置一个HTTP服务器，处理来自文件或直接来自数据库的OCSP请求。 info:获取有关远程签名者的信息 revoke：吊销证书 Top-level flags:\n常用命令 cfssl gencert -initca ca-csr.json | cfssljson -bare ca ## 初始化ca cfssl gencert -initca -ca-key key.pem ca-csr.json | cfssljson -bare ca ## 使用现有私钥, 重新生成 cfssl certinfo -cert ca.pem cfssl certinfo -csr ca.csr\nCfssl创建CA认证 创建认证中心(CA) cfssl可以创建获取和操作证书的内部认证中心，运行认证中心需要一个CA证书和响应的CA私钥。任何知道私钥的人都可以充当CA来颁发证书，因此私钥需要保密。\nk8s和harbor都需要证书，这里以k8s所需证书实践\ncfssl print-defaults config \u003e ca-config.json # 默认证书策略配置模板 cfssl print-defaults csr \u003e ca-csr.json #默认csr请求模板\n结合自身需求，修改证书请求文件ca-csr.json，证书有效期10年\n{ \"CN\":\"kubernetes\", \"key\": { \"algo\":\"rsa\", \"size\": 2048 }, \"names\": [ { \"C\":\"CN\", \"ST\":\"BeiJing\", \"L\":\"BeiJing\", \"O\":\"k8s\", \"OU\":\"System\" } ], \"ca\": { \"expiry\":\"87600h\" } } \"CN\"：Common Name，kube-apiserver 从证书中提取该字段作为请求的用户名 (User Name) \"O\"：Organization，kube-apiserver从证书中提取该字段作为请求用户所属的组 (Group) C: Country， 国家 L: Locality，地区，城市 O: Organization Name，组织名称，公司名称 OU: Organization Unit Name，组织单位名称，公司部门 ST: State，州，省 证书配置模板文件ca-config.json\n{ \"signing\": { \"default\": { \"expiry\":\"87600h\" }, \"profiles\": { \"kubernetes\": { \"usages\": [ \"signing\", \"key encipherment\", \"server auth\", \"client auth\" ], \"expiry\":\"87600h\" } } } } 知识点：\nconfig.json：可以定义多个 profiles，分别指定不同的过期时间、使用场景等参数；后续在签名证书时使用某个 profile；此实例只有一个kubernetes模板。 signing：表示该证书可用于签名其它证书；生成的 ca.pem 证书中CA=TRUE server auth：表示client可以用该 CA 对server提供的证书进行验证； client auth：表示server可以用该CA对client提供的证书进行验证； 注意标点符号，最后一个字段一般是没有逗号的。 初始化创建CA认证中心，将会生成ca-key.pem（私钥）和ca.pem（公钥）\ncfssl gencert -initca ca-csr.json | cfssljson -bare ca\n创建k8s证书 创建kubernetes-csr.json证书请求文件\n{ \"CN\":\"kubernetes\", \"hosts\": [ \"127.0.0.1\", \"10.1.20.129\", \"10.1.20.128\", \"10.1.20.126\", \"10.1.20.127\", \"10.254.0.1\", \"*.kubernetes.master\", \"localhost\", \"kubernetes\", \"kubernetes.default\", \"kubernetes.default.svc\", \"kubernetes.default.svc.cluster\", \"kubernetes.default.svc.cluster.local\" ], \"key\": { \"algo\":\"rsa\", \"size\": 2048 }, \"names\": [ { \"C\":\"CN\", \"ST\":\"BeiJing\", \"L\":\"BeiJing\", \"O\":\"k8s\", \"OU\":\"System\" } ] } 这个证书目前专属于 apiserver，加了一个 *.kubernetes.master域名以便内部私有 DNS 解析使用(可删除)；kubernetes 这几个能不能删掉，答案是不可以的；因为当集群创建好后，default namespace 下会创建一个叫 kubenretes 的svc，有一些组件会直接连接这个 svc 来跟 api 通信的，证书如果不包含可能会出现无法连接的情况；其他几个 kubernetes 开头的域名作用相同 hosts包含的是授权范围，不在此范围的的节点或者服务使用此证书就会报证书不匹配错误。10.254.0.1是指kube-apiserver 指定的 service-cluster-ip-range 网段的第一个IP。 生成kubernetes证书和私钥\ncfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kubernetes-csr.json | cfssljson -bare kubernetes\n-config 引用的是模板中的默认配置文件，\n-profiles是指定特定的使用场景，比如config.json中的kubernetes区域\n创建admin证书 创建admin证书请求文件admin-csr.json\n{ \"CN\":\"admin\", \"hosts\": [], \"key\": { \"algo\":\"rsa\", \"size\": 2048 }, \"names\": [ { \"C\":\"CN\", \"ST\":\"BeiJing\", \"L\":\"BeiJing\", \"O\":\"system:masters\", \"OU\":\"System\" } ] } 生成admin证书和私钥\ncfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes admin-csr.json | cfssljson -bare admin\n这个admin 证书，是将来生成管理员用的kubeconfig 配置文件用的，现在一般建议使用RBAC 来对kubernetes 进行角色权限控制， kubernetes 将证书中的CN字段作为User， O 字段作为 Group\n同样，我们也可以按照同样的方式来创建kubernetes中etcd集群的证书。\n其他记录 wget和curl命令 curl curl ",
-  "wordCount" : "369",
+  "articleBody": "Cfssl 官网地址\nCFSSL是CloudFlare的PKI/TLS瑞士军刀。它既是一个命令行工具，又是一个HTTP API服务器，用于签署、验证和绑定TLS证书.使用GO语言开发。\nCfssl包括\n一组用于构建自定义的TLS PKI工具 TLS(传输安全层，Transport layer security)网络通信安全及数据完整性的一种安全协议。PKI(Public Key infrastructure)公钥基础设施。 cfssl程序，命令行操作 multirootca程序，使用多个签名秘钥的证书颁发机构服务器 multirootca程序构建证书池捆绑包 cfssl json程序 安装 下载地址\n##通过wget或者curl命令都可以下载 # curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl # curl -L https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson # curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o /usr/local/bin/cfssl-certinfo 移动文件修改权限\n# 移动文件到/usr/local/bin/ [root@k8s-worker1 cfssl]# mv cfssl_1.6.4_linux_amd64 /usr/local/bin/cfssl [root@k8s-worker1 cfssl]# mv cfssl-certinfo_1.6.4_linux_amd64 /usr/local/bin/cfssl-certinfo [root@k8s-worker1 cfssl]# mv cfssljson_1.6.4_linux_amd64 /usr/local/bin/cfssljson #修改权限 chmod +x /usr/local/bin/cfss* 使用 帮助文档 常用命令 cfssl gencert -initca ca-csr.json | cfssljson -bare ca ## 初始化ca cfssl gencert -initca -ca-key key.pem ca-csr.json | cfssljson -bare ca ## 使用现有私钥, 重新生成 cfssl certinfo -cert ca.pem cfssl certinfo -csr ca.csr Cfssl创建CA认证 创建认证中心(CA) cfssl可以创建获取和操作证书的内部认证中心，运行认证中心需要一个CA证书和响应的CA私钥。任何知道私钥的人都可以充当CA来颁发证书，因此私钥需要保密。\nk8s和harbor都需要证书，这里以k8s所需证书实践\ncfssl print-defaults config \u003e ca-config.json # 默认证书策略配置模板\ncfssl print-defaults csr \u003e ca-csr.json #默认csr请求模板\n结合自身需求，修改证书请求文件ca-csr.json，证书有效期10年\n{ \"CN\":\"kubernetes\", \"key\": { \"algo\":\"rsa\", \"size\": 2048 }, \"names\": [ { \"C\":\"CN\", \"ST\":\"BeiJing\", \"L\":\"BeiJing\", \"O\":\"k8s\", \"OU\":\"System\" } ], \"ca\": { \"expiry\":\"87600h\" } } \"CN\"：Common Name，kube-apiserver 从证书中提取该字段作为请求的用户名 (User Name) \"O\"：Organization，kube-apiserver从证书中提取该字段作为请求用户所属的组 (Group) C: Country， 国家 L: Locality，地区，城市 O: Organization Name，组织名称，公司名称 OU: Organization Unit Name，组织单位名称，公司部门 ST: State，州，省 证书配置模板文件ca-config.json\n{ \"signing\": { \"default\": { \"expiry\":\"87600h\" }, \"profiles\": { \"kubernetes\": { \"usages\": [ \"signing\", \"key encipherment\", \"server auth\", \"client auth\" ], \"expiry\":\"87600h\" } } } } 知识点：\nconfig.json：可以定义多个 profiles，分别指定不同的过期时间、使用场景等参数；后续在签名证书时使用某个 profile；此实例只有一个kubernetes模板。 signing：表示该证书可用于签名其它证书；生成的 ca.pem 证书中CA=TRUE server auth：表示client可以用该 CA 对server提供的证书进行验证； client auth：表示server可以用该CA对client提供的证书进行验证； 注意标点符号，最后一个字段一般是没有逗号的。 初始化创建CA认证中心\ncfssl gencert -initca ca-csr.json | cfssljson -bare ca [root@k8s-master cfssl]# ls ca-config.json ca.csr ca-csr.json ca-key.pem ca.pem ca-csr.json: CSR的JSON设定文件 ca.csr: 证书签名请求文件 ca-key.pem：CA私钥 ca.pem: CA证书 创建k8s证书 创建kubernetes-csr.json证书请求文件\n{ \"CN\":\"kubernetes\", \"hosts\": [ \"127.0.0.1\", \"10.1.20.129\", \"10.1.20.128\", \"10.1.20.126\", \"10.1.20.127\", \"10.254.0.1\", \"*.kubernetes.master\", \"localhost\", \"kubernetes\", \"kubernetes.default\", \"kubernetes.default.svc\", \"kubernetes.default.svc.cluster\", \"kubernetes.default.svc.cluster.local\" ], \"key\": { \"algo\":\"rsa\", \"size\": 2048 }, \"names\": [ { \"C\":\"CN\", \"ST\":\"BeiJing\", \"L\":\"BeiJing\", \"O\":\"k8s\", \"OU\":\"System\" } ] } 这个证书目前专属于 apiserver，加了一个 *.kubernetes.master域名以便内部私有 DNS 解析使用(可删除)；kubernetes 这几个能不能删掉，答案是不可以的；因为当集群创建好后，default namespace 下会创建一个叫 kubenretes 的svc，有一些组件会直接连接这个 svc 来跟 api 通信的，证书如果不包含可能会出现无法连接的情况；其他几个 kubernetes 开头的域名作用相同 hosts包含的是授权范围，不在此范围的的节点或者服务使用此证书就会报证书不匹配错误。10.254.0.1是指kube-apiserver 指定的 service-cluster-ip-range 网段的第一个IP。 生成kubernetes证书和私钥\ncfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kubernetes-csr.json | cfssljson -bare kubernetes\n-config 引用的是模板中的默认配置文件，\n-profiles是指定特定的使用场景，比如config.json中的kubernetes区域\n创建admin证书 创建admin证书请求文件admin-csr.json\n{ \"CN\":\"admin\", \"hosts\": [], \"key\": { \"algo\":\"rsa\", \"size\": 2048 }, \"names\": [ { \"C\":\"CN\", \"ST\":\"BeiJing\", \"L\":\"BeiJing\", \"O\":\"system:masters\", \"OU\":\"System\" } ] } 生成admin证书和私钥\ncfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes admin-csr.json | cfssljson -bare admin\n这个admin 证书，是将来生成管理员用的kubeconfig 配置文件用的，现在一般建议使用RBAC 来对kubernetes 进行角色权限控制， kubernetes 将证书中的CN字段作为User， O 字段作为 Group\n同样，我们也可以按照同样的方式来创建kubernetes中etcd集群的证书。\n其他记录 wget和curl命令 curl curl ",
+  "wordCount" : "343",
   "inLanguage": "en",
   "datePublished": "2023-07-11T03:33:49+08:00",
   "dateModified": "2023-07-11T03:33:49+08:00",
@@ -230,47 +230,30 @@ Cfssl包括
 </span></span></code></pre></div><p><img loading="lazy" src="/cfssl.assets/image-20230627171942319.png" alt="image-20230627171942319"  />
 </p>
 <h2 id="使用">使用<a hidden class="anchor" aria-hidden="true" href="#使用">#</a></h2>
-<h3 id="常用子命令">常用子命令<a hidden class="anchor" aria-hidden="true" href="#常用子命令">#</a></h3>
-<blockquote>
-<p>No command is given.
-Usage:
-Available commands:
-sign:签名一个客户端证书，通过给定的CA和CA密钥，和主机名
-gencert：生成新的key(密钥)和签名证书
-certinfo：输出给定证书的证书信息， 跟cfssl-certinfo 工具作用一样
-ocspsign:为给定的CA、Cert和状态签署OCSP响应。返回一个base64编码的OCSP响应
-bundle：创建包含客户端证书的证书包
-crl
-serve：启动一个HTTP API服务
-genkey：生成一个key(私钥)和CSR(证书签名请求)
-gencrl
-ocspdump： 从cert db 中的所有 OCSP 响应中生成一系列连贯的 OCSP 响应，供 ocspserve 使用
-selfsign：生成一个新的自签名密钥和 签名证书
-scan：扫描主机问题
-print-defaults：打印默认配置，这个默认配置可以用作模板
-version
-gencsr
-ocsprefresh:用所有已知未过期证书的新OCSP响应刷新ocsp_responses表。
-ocspserve:设置一个HTTP服务器，处理来自文件或直接来自数据库的OCSP请求。
-info:获取有关远程签名者的信息
-revoke：吊销证书
-Top-level flags:</p>
-</blockquote>
+<h3 id="帮助文档">帮助文档<a hidden class="anchor" aria-hidden="true" href="#帮助文档">#</a></h3>
+<p><img loading="lazy" src="/cfssl.assets/1713775676010.png" alt="1713775676010"  />
+</p>
 <h3 id="常用命令">常用命令<a hidden class="anchor" aria-hidden="true" href="#常用命令">#</a></h3>
-<blockquote>
-<p>cfssl gencert -initca ca-csr.json | cfssljson -bare ca ## 初始化ca
-cfssl gencert -initca -ca-key key.pem ca-csr.json | cfssljson -bare ca ## 使用现有私钥, 重新生成
-cfssl certinfo -cert ca.pem
-cfssl certinfo -csr ca.csr</p>
-</blockquote>
+<ul>
+<li><code>cfssl gencert -initca ca-csr.json | cfssljson -bare ca ## 初始化ca</code></li>
+<li><code>cfssl gencert -initca -ca-key key.pem ca-csr.json | cfssljson -bare ca ## 使用现有私钥, 重新生成</code></li>
+<li><code>cfssl certinfo -cert ca.pem</code></li>
+<li><code>cfssl certinfo -csr ca.csr</code></li>
+</ul>
 <h3 id="cfssl创建ca认证">Cfssl创建CA认证<a hidden class="anchor" aria-hidden="true" href="#cfssl创建ca认证">#</a></h3>
 <h4 id="创建认证中心ca">创建认证中心(CA)<a hidden class="anchor" aria-hidden="true" href="#创建认证中心ca">#</a></h4>
 <p>cfssl可以创建获取和操作证书的内部认证中心，运行认证中心需要一个CA证书和响应的CA私钥。任何知道私钥的人都可以充当CA来颁发证书，因此私钥需要保密。</p>
 <p>k8s和harbor都需要证书，这里以k8s所需证书实践</p>
-<blockquote>
-<p>cfssl print-defaults config &gt; ca-config.json # 默认证书策略配置模板
-cfssl print-defaults csr &gt; ca-csr.json #默认csr请求模板</p>
-</blockquote>
+<ul>
+<li>
+<p>cfssl print-defaults config &gt; ca-config.json # 默认证书策略配置模板</p>
+</li>
+<li>
+<p>cfssl print-defaults csr &gt; ca-csr.json #默认csr请求模板</p>
+</li>
+</ul>
+<p><img loading="lazy" src="/cfssl.assets/1713776315987.png" alt="1713776315987"  />
+</p>
 <p>结合自身需求，修改证书请求文件ca-<code>csr.json</code>，证书有效期10年</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;CN&#34;</span>:<span style="color:#e6db74">&#34;kubernetes&#34;</span>,
@@ -327,10 +310,16 @@ cfssl print-defaults csr &gt; ca-csr.json #默认csr请求模板</p>
 <li><code>client auth</code>：表示server可以用该CA对client提供的证书进行验证；</li>
 <li>注意标点符号，最后一个字段一般是没有<code>逗号</code>的。</li>
 </ul>
-<p>初始化创建CA认证中心，将会生成<code>ca-key.pem</code>（私钥）和<code>ca.pem</code>（公钥）</p>
-<blockquote>
-<p>cfssl gencert -initca ca-csr.json | cfssljson -bare ca</p>
-</blockquote>
+<p><strong>初始化创建CA认证中心</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cfssl gencert -initca ca-csr.json | cfssljson -bare ca
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@k8s-master cfssl<span style="color:#f92672">]</span><span style="color:#75715e"># ls</span>
+</span></span><span style="display:flex;"><span>ca-config.json  ca.csr  ca-csr.json  ca-key.pem  ca.pem
+</span></span></code></pre></div><ul>
+<li>ca-csr.json: CSR的JSON设定文件</li>
+<li>ca.csr: 证书签名请求文件</li>
+<li>ca-key.pem：CA私钥</li>
+<li>ca.pem: CA证书</li>
+</ul>
 <h4 id="创建k8s证书">创建k8s证书<a hidden class="anchor" aria-hidden="true" href="#创建k8s证书">#</a></h4>
 <p>创建<code>kubernetes-csr.json</code>证书请求文件</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Deploy_nginx_on_k8s | 小石头博客</title>
+<meta name="keywords" content="k8s">
+<meta name="description" content="K8s部署nginx实践 准备工作 K8s环境已具备 runtime采用containerd 私有容器仓库harbor 部署操作 containerd配置harbor 当前harbor私库没有开启https协议
+[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.configs] # 内部私有仓库认证信息 [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.configs.&#34;192.168.1.200:8066&#34;.tls] insecure_skip_verify = true # 是否跳过证书认证 [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.configs.&#34;192.168.1.200:8066&#34;.auth] username = &#34;admin&#34; # 在harbor里单独创建的用户，授权访问指定项目 password = &#34;Harbor12345&#34; [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.headers] [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.mirrors] [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.mirrors.&#34;192.168.1.200:8066&#34;] endpoint = [&#34;http://192.168.1.200:8066&#34;] #harbor私库的ip端口 # 测试下载镜像 crictl pull 192.168.1.200:8066/library/mynginx:v100 # 查看镜像列表 crictl images Kubesperer部署操作 创建项目 等价于k8s创建一个命名空间
+创建保密字典配置harbor信息 创建工作负载 创建服务供外部访问 测试 #测试访问，节点ip&#43;服务端口 http://192.">
+<meta name="author" content="">
+<link rel="canonical" href="http://slgjy.github.io/k8s/deploy_nginx_on_k8s/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://slgjy.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://slgjy.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://slgjy.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://slgjy.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="http://slgjy.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Deploy_nginx_on_k8s" />
+<meta property="og:description" content="K8s部署nginx实践 准备工作 K8s环境已具备 runtime采用containerd 私有容器仓库harbor 部署操作 containerd配置harbor 当前harbor私库没有开启https协议
+[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.configs] # 内部私有仓库认证信息 [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.configs.&#34;192.168.1.200:8066&#34;.tls] insecure_skip_verify = true # 是否跳过证书认证 [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.configs.&#34;192.168.1.200:8066&#34;.auth] username = &#34;admin&#34; # 在harbor里单独创建的用户，授权访问指定项目 password = &#34;Harbor12345&#34; [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.headers] [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.mirrors] [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.mirrors.&#34;192.168.1.200:8066&#34;] endpoint = [&#34;http://192.168.1.200:8066&#34;] #harbor私库的ip端口 # 测试下载镜像 crictl pull 192.168.1.200:8066/library/mynginx:v100 # 查看镜像列表 crictl images Kubesperer部署操作 创建项目 等价于k8s创建一个命名空间
+创建保密字典配置harbor信息 创建工作负载 创建服务供外部访问 测试 #测试访问，节点ip&#43;服务端口 http://192." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://slgjy.github.io/k8s/deploy_nginx_on_k8s/" /><meta property="article:section" content="k8s" />
+<meta property="article:published_time" content="2024-04-26T15:09:02+08:00" />
+<meta property="article:modified_time" content="2024-04-26T15:09:02+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Deploy_nginx_on_k8s"/>
+<meta name="twitter:description" content="K8s部署nginx实践 准备工作 K8s环境已具备 runtime采用containerd 私有容器仓库harbor 部署操作 containerd配置harbor 当前harbor私库没有开启https协议
+[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.configs] # 内部私有仓库认证信息 [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.configs.&#34;192.168.1.200:8066&#34;.tls] insecure_skip_verify = true # 是否跳过证书认证 [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.configs.&#34;192.168.1.200:8066&#34;.auth] username = &#34;admin&#34; # 在harbor里单独创建的用户，授权访问指定项目 password = &#34;Harbor12345&#34; [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.headers] [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.mirrors] [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.mirrors.&#34;192.168.1.200:8066&#34;] endpoint = [&#34;http://192.168.1.200:8066&#34;] #harbor私库的ip端口 # 测试下载镜像 crictl pull 192.168.1.200:8066/library/mynginx:v100 # 查看镜像列表 crictl images Kubesperer部署操作 创建项目 等价于k8s创建一个命名空间
+创建保密字典配置harbor信息 创建工作负载 创建服务供外部访问 测试 #测试访问，节点ip&#43;服务端口 http://192."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "K8s",
+      "item": "http://slgjy.github.io/k8s/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Deploy_nginx_on_k8s",
+      "item": "http://slgjy.github.io/k8s/deploy_nginx_on_k8s/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Deploy_nginx_on_k8s",
+  "name": "Deploy_nginx_on_k8s",
+  "description": "K8s部署nginx实践 准备工作 K8s环境已具备 runtime采用containerd 私有容器仓库harbor 部署操作 containerd配置harbor 当前harbor私库没有开启https协议\n[plugins.\u0026#34;io.containerd.grpc.v1.cri\u0026#34;.registry.configs] # 内部私有仓库认证信息 [plugins.\u0026#34;io.containerd.grpc.v1.cri\u0026#34;.registry.configs.\u0026#34;192.168.1.200:8066\u0026#34;.tls] insecure_skip_verify = true # 是否跳过证书认证 [plugins.\u0026#34;io.containerd.grpc.v1.cri\u0026#34;.registry.configs.\u0026#34;192.168.1.200:8066\u0026#34;.auth] username = \u0026#34;admin\u0026#34; # 在harbor里单独创建的用户，授权访问指定项目 password = \u0026#34;Harbor12345\u0026#34; [plugins.\u0026#34;io.containerd.grpc.v1.cri\u0026#34;.registry.headers] [plugins.\u0026#34;io.containerd.grpc.v1.cri\u0026#34;.registry.mirrors] [plugins.\u0026#34;io.containerd.grpc.v1.cri\u0026#34;.registry.mirrors.\u0026#34;192.168.1.200:8066\u0026#34;] endpoint = [\u0026#34;http://192.168.1.200:8066\u0026#34;] #harbor私库的ip端口 # 测试下载镜像 crictl pull 192.168.1.200:8066/library/mynginx:v100 # 查看镜像列表 crictl images Kubesperer部署操作 创建项目 等价于k8s创建一个命名空间\n创建保密字典配置harbor信息 创建工作负载 创建服务供外部访问 测试 #测试访问，节点ip+服务端口 http://192.",
+  "keywords": [
+    "k8s"
+  ],
+  "articleBody": "K8s部署nginx实践 准备工作 K8s环境已具备 runtime采用containerd 私有容器仓库harbor 部署操作 containerd配置harbor 当前harbor私库没有开启https协议\n[plugins.\"io.containerd.grpc.v1.cri\".registry.configs] # 内部私有仓库认证信息 [plugins.\"io.containerd.grpc.v1.cri\".registry.configs.\"192.168.1.200:8066\".tls] insecure_skip_verify = true # 是否跳过证书认证 [plugins.\"io.containerd.grpc.v1.cri\".registry.configs.\"192.168.1.200:8066\".auth] username = \"admin\" # 在harbor里单独创建的用户，授权访问指定项目 password = \"Harbor12345\" [plugins.\"io.containerd.grpc.v1.cri\".registry.headers] [plugins.\"io.containerd.grpc.v1.cri\".registry.mirrors] [plugins.\"io.containerd.grpc.v1.cri\".registry.mirrors.\"192.168.1.200:8066\"] endpoint = [\"http://192.168.1.200:8066\"] #harbor私库的ip端口 # 测试下载镜像 crictl pull 192.168.1.200:8066/library/mynginx:v100 # 查看镜像列表 crictl images Kubesperer部署操作 创建项目 等价于k8s创建一个命名空间\n创建保密字典配置harbor信息 创建工作负载 创建服务供外部访问 测试 #测试访问，节点ip+服务端口 http://192.168.1.115:32086/ ",
+  "wordCount" : "51",
+  "inLanguage": "en",
+  "datePublished": "2024-04-26T15:09:02+08:00",
+  "dateModified": "2024-04-26T15:09:02+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://slgjy.github.io/k8s/deploy_nginx_on_k8s/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "小石头博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://slgjy.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://slgjy.github.io" accesskey="h" title="小石头博客 (Alt + H)">小石头博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://slgjy.github.io/tags/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://slgjy.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Deploy_nginx_on_k8s
+    </h1>
+    <div class="post-meta"><span title='2024-04-26 15:09:02 +0800 CST'>April 26, 2024</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="k8s部署nginx实践">K8s部署nginx实践<a hidden class="anchor" aria-hidden="true" href="#k8s部署nginx实践">#</a></h1>
+<h2 id="准备工作">准备工作<a hidden class="anchor" aria-hidden="true" href="#准备工作">#</a></h2>
+<ol>
+<li>K8s环境已具备</li>
+<li>runtime采用containerd</li>
+<li>私有容器仓库harbor</li>
+</ol>
+<h2 id="部署操作">部署操作<a hidden class="anchor" aria-hidden="true" href="#部署操作">#</a></h2>
+<h3 id="containerd配置harbor">containerd配置harbor<a hidden class="anchor" aria-hidden="true" href="#containerd配置harbor">#</a></h3>
+<p>当前harbor私库没有开启https协议</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">plugins</span>.<span style="color:#e6db74">&#34;io.containerd.grpc.v1.cri&#34;</span>.<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">configs</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 内部私有仓库认证信息</span>
+</span></span><span style="display:flex;"><span>          [<span style="color:#a6e22e">plugins</span>.<span style="color:#e6db74">&#34;io.containerd.grpc.v1.cri&#34;</span>.<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">configs</span>.<span style="color:#e6db74">&#34;192.168.1.200:8066&#34;</span>.<span style="color:#a6e22e">tls</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">insecure_skip_verify</span> = <span style="color:#66d9ef">true</span> <span style="color:#75715e"># 是否跳过证书认证</span>
+</span></span><span style="display:flex;"><span>          [<span style="color:#a6e22e">plugins</span>.<span style="color:#e6db74">&#34;io.containerd.grpc.v1.cri&#34;</span>.<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">configs</span>.<span style="color:#e6db74">&#34;192.168.1.200:8066&#34;</span>.<span style="color:#a6e22e">auth</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">username</span> = <span style="color:#e6db74">&#34;admin&#34;</span> <span style="color:#75715e"># 在harbor里单独创建的用户，授权访问指定项目</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">password</span> = <span style="color:#e6db74">&#34;Harbor12345&#34;</span>
+</span></span><span style="display:flex;"><span>      [<span style="color:#a6e22e">plugins</span>.<span style="color:#e6db74">&#34;io.containerd.grpc.v1.cri&#34;</span>.<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">headers</span>]
+</span></span><span style="display:flex;"><span>      [<span style="color:#a6e22e">plugins</span>.<span style="color:#e6db74">&#34;io.containerd.grpc.v1.cri&#34;</span>.<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">mirrors</span>]
+</span></span><span style="display:flex;"><span>        [<span style="color:#a6e22e">plugins</span>.<span style="color:#e6db74">&#34;io.containerd.grpc.v1.cri&#34;</span>.<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">mirrors</span>.<span style="color:#e6db74">&#34;192.168.1.200:8066&#34;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">endpoint</span> = [<span style="color:#e6db74">&#34;http://192.168.1.200:8066&#34;</span>] <span style="color:#75715e">#harbor私库的ip端口</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 测试下载镜像</span>
+</span></span><span style="display:flex;"><span>crictl pull 192.168.1.200:8066/library/mynginx:v100
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看镜像列表</span>
+</span></span><span style="display:flex;"><span>crictl images
+</span></span></code></pre></div><p><img loading="lazy" src="/deploy_nginx_on_k8s/1714033074717.png" alt="1714033074717"  />
+</p>
+<h3 id="kubesperer部署操作">Kubesperer部署操作<a hidden class="anchor" aria-hidden="true" href="#kubesperer部署操作">#</a></h3>
+<h4 id="创建项目">创建项目<a hidden class="anchor" aria-hidden="true" href="#创建项目">#</a></h4>
+<p>等价于k8s创建一个命名空间</p>
+<p><img loading="lazy" src="/deploy_nginx_on_k8s/1713934939601.png" alt="1713934939601"  />
+</p>
+<h4 id="创建保密字典配置harbor信息">创建保密字典配置harbor信息<a hidden class="anchor" aria-hidden="true" href="#创建保密字典配置harbor信息">#</a></h4>
+<p><img loading="lazy" src="/deploy_nginx_on_k8s/1713936325722.png" alt="1713936325722"  />
+</p>
+<h4 id="创建工作负载">创建工作负载<a hidden class="anchor" aria-hidden="true" href="#创建工作负载">#</a></h4>
+<p><img loading="lazy" src="/deploy_nginx_on_k8s/1713936419548.png" alt="1713936419548"  />
+</p>
+<p><img loading="lazy" src="/deploy_nginx_on_k8s/1713936595943.png" alt="1713936595943"  />
+</p>
+<p><img loading="lazy" src="/deploy_nginx_on_k8s/1714038129042.png" alt="1714038129042"  />
+</p>
+<h4 id="创建服务供外部访问">创建服务供外部访问<a hidden class="anchor" aria-hidden="true" href="#创建服务供外部访问">#</a></h4>
+<p><img loading="lazy" src="/deploy_nginx_on_k8s/1714035954700.png" alt="1714035954700"  />
+</p>
+<p><img loading="lazy" src="/deploy_nginx_on_k8s/1714037962369.png" alt="1714037962369"  />
+</p>
+<p><img loading="lazy" src="/deploy_nginx_on_k8s/1714038024163.png" alt="1714038024163"  />
+</p>
+<p><img loading="lazy" src="/deploy_nginx_on_k8s/1714038109950.png" alt="1714038109950"  />
+</p>
+<h3 id="测试">测试<a hidden class="anchor" aria-hidden="true" href="#测试">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#测试访问，节点ip+服务端口</span>
+</span></span><span style="display:flex;"><span>http://192.168.1.115:32086/
+</span></span></code></pre></div><p><img loading="lazy" src="/deploy_nginx_on_k8s/1714038059760.png" alt="1714038059760"  />
+</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://slgjy.github.io/tags/k8s/">k8s</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="http://slgjy.github.io">小石头博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
