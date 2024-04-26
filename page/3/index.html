@@ -137,21 +137,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>K8s部署实践
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>K8s部署实践 准备工作 K8s环境已具备 Docker引擎已部署 容器镜像仓库已存在(私有库harbor) 部署服务 创建命名空间 # 以下的部署都基于该命名空间 kubectl create namespace app-storage 后端项目 依赖mysql数据库
-部署Mysql服务 创建pv PersistentVolume(简称pv)持久卷，也是一种集群资源，他的声明周期和使用他的pod项目独立
-新建mysql-pv.yaml
-apiVersion: v1 kind: PersistentVolume metadata: namespace: app-storage name: mysql-pv labels: pv: mysql-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain hostPath: path: /root/data # 创建PV kubectl create -f mysql-pv.yaml # 检验 kubectl get pv 创建pvc PersistentVolumeClaim（持久卷声明，简称PVC）是用户的一种存储请求。它和Pod类似，Pod消耗Node资源，而PVC消耗PV资源。Pod能够请求特定的资源（如CPU和内存）。PVC能够请求指定的大小和访问的模式（可以被映射为一次读写或者多次只读）。...</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-06-01 15:36:45 +0800 CST'>June 1, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to K8s部署实践" href="http://slgjy.github.io/post/k8s%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2>go打包配置文件和静态文件
     </h2>
   </header>
@@ -217,6 +202,22 @@ docker是CS架构。客户端是docker-cli服务端docker daemon组成，docker 
   </div>
   <footer class="entry-footer"><span title='2023-05-15 15:28:59 +0800 CST'>May 15, 2023</span></footer>
   <a class="entry-link" aria-label="post link to docker镜像" href="http://slgjy.github.io/post/docker01/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Jasypt加密操作
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>概述 Jasypt是一个加密库，使用敏感信息数据的加密。比如springboot项目中配置文件的明文密码数据；数据信息中的敏感数据加密。
+使用 依赖引入 &lt;dependency&gt; &lt;groupId&gt;com.github.ulisesbocchio&lt;/groupId&gt; &lt;artifactId&gt;jasypt-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;3.0.5&lt;/version&gt; &lt;/dependency&gt; 简单加密 加密口令 ==秘钥安全：==
+为了安全设置，通常采用启动时添加启动参数(环境变量)的方式来配置秘钥
+-Djasypt.encryptor.password=test
+jasypt: encryptor: # 配置的秘钥(加盐) password: test # 指定界面算法，需要和加密使用的一致 algorithm: PBEWithMD5AndDES # 指定initialization vector类型 iv-generator-classname: org.jasypt.iv.RandomIvGenerator # 配置前后缀默认是&#34;ENC()&#34; property: prefix: &#34;ENC(&#34; suffix: &#34;)&#34; 测试(获取密文) @SpringBootTest @RunWith(SpringRunner.class) public class MainAppTest { @Autowired private StringEncryptor stringEncryptor; @Test public void testJasypt() { // password需要加密的明文密码 String enpassword = stringEncryptor....</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-11 11:01:40 +0800 CST'>May 11, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Jasypt加密操作" href="http://slgjy.github.io/post/jasypt/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

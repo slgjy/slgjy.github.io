@@ -14,8 +14,8 @@ Docker Hub的速度比较慢
 docker registry没有操作界面，不直观就使用了Harbor
 Harbor部署 部署方式
 离线安装：资源包带offline包含需要安装的镜像文件，容量比较大，适用生产环境。 在线安装：资源包带online需要保证主机可以联通互联网，适用于搭建私有仓库，用于学习和研究。 Docker-Ce安装 harbor是基于docker环境运行的，所以先安装docker环境
-Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF net.ipv4.ip_forward = 1 net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF sysctl -p net.ipv4.ip_forward = 1: 开启路由转发，不配置该参数，主机重启后，服务状态正常，却无法访问到服务器。
-使用cfssl工具配置Harbor证书 默认的Harbor不附带证书，生产环境为了安全需要使用HTTPS,如果启用Content Trust with Notary 以正确签署所有图像，则必须使用 HTTPS。要配置 HTTPS，必须创建 SSL 证书。您可以使用受信任的第三方 CA 签署的证书，也可以使用自签名证书。本节介绍如何使用cfssl创建 CA，以及如何使用您的 CA 签署服务器证书和客户端证书。官方使用的是openssl工具来生成证书。">
+Docker-compose安装 docker-compose地址
+# 下载版本 curl -L &#34;https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)&#34; -o /usr/local/bin/docker-compose # 添加可执行权限 sudo chmod &#43;x /usr/local/bin/docker-compose # 添加快捷启动连接，这里必须用绝对路径 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose # 测试安装结果 docker-compose --version 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF net.ipv4.ip_forward = 1 net.">
 <meta name="author" content="">
 <link rel="canonical" href="http://slgjy.github.io/post/harbor/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
@@ -72,8 +72,8 @@ Docker Hub的速度比较慢
 docker registry没有操作界面，不直观就使用了Harbor
 Harbor部署 部署方式
 离线安装：资源包带offline包含需要安装的镜像文件，容量比较大，适用生产环境。 在线安装：资源包带online需要保证主机可以联通互联网，适用于搭建私有仓库，用于学习和研究。 Docker-Ce安装 harbor是基于docker环境运行的，所以先安装docker环境
-Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF net.ipv4.ip_forward = 1 net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF sysctl -p net.ipv4.ip_forward = 1: 开启路由转发，不配置该参数，主机重启后，服务状态正常，却无法访问到服务器。
-使用cfssl工具配置Harbor证书 默认的Harbor不附带证书，生产环境为了安全需要使用HTTPS,如果启用Content Trust with Notary 以正确签署所有图像，则必须使用 HTTPS。要配置 HTTPS，必须创建 SSL 证书。您可以使用受信任的第三方 CA 签署的证书，也可以使用自签名证书。本节介绍如何使用cfssl创建 CA，以及如何使用您的 CA 签署服务器证书和客户端证书。官方使用的是openssl工具来生成证书。" />
+Docker-compose安装 docker-compose地址
+# 下载版本 curl -L &#34;https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)&#34; -o /usr/local/bin/docker-compose # 添加可执行权限 sudo chmod &#43;x /usr/local/bin/docker-compose # 添加快捷启动连接，这里必须用绝对路径 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose # 测试安装结果 docker-compose --version 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF net.ipv4.ip_forward = 1 net." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://slgjy.github.io/post/harbor/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-06-29T13:10:04+08:00" />
@@ -88,8 +88,8 @@ Docker Hub的速度比较慢
 docker registry没有操作界面，不直观就使用了Harbor
 Harbor部署 部署方式
 离线安装：资源包带offline包含需要安装的镜像文件，容量比较大，适用生产环境。 在线安装：资源包带online需要保证主机可以联通互联网，适用于搭建私有仓库，用于学习和研究。 Docker-Ce安装 harbor是基于docker环境运行的，所以先安装docker环境
-Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF net.ipv4.ip_forward = 1 net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF sysctl -p net.ipv4.ip_forward = 1: 开启路由转发，不配置该参数，主机重启后，服务状态正常，却无法访问到服务器。
-使用cfssl工具配置Harbor证书 默认的Harbor不附带证书，生产环境为了安全需要使用HTTPS,如果启用Content Trust with Notary 以正确签署所有图像，则必须使用 HTTPS。要配置 HTTPS，必须创建 SSL 证书。您可以使用受信任的第三方 CA 签署的证书，也可以使用自签名证书。本节介绍如何使用cfssl创建 CA，以及如何使用您的 CA 签署服务器证书和客户端证书。官方使用的是openssl工具来生成证书。"/>
+Docker-compose安装 docker-compose地址
+# 下载版本 curl -L &#34;https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)&#34; -o /usr/local/bin/docker-compose # 添加可执行权限 sudo chmod &#43;x /usr/local/bin/docker-compose # 添加快捷启动连接，这里必须用绝对路径 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose # 测试安装结果 docker-compose --version 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF net.ipv4.ip_forward = 1 net."/>
 
 
 <script type="application/ld+json">
@@ -118,12 +118,12 @@ Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF
   "@type": "BlogPosting",
   "headline": "Harbor",
   "name": "Harbor",
-  "description": "Harbor 官网地址\nDocker Hub的速度比较慢\n使用公有云自带的容器仓库\n构建私有仓库\ndocker registry没有操作界面，不直观就使用了Harbor\nHarbor部署 部署方式\n离线安装：资源包带offline包含需要安装的镜像文件，容量比较大，适用生产环境。 在线安装：资源包带online需要保证主机可以联通互联网，适用于搭建私有仓库，用于学习和研究。 Docker-Ce安装 harbor是基于docker环境运行的，所以先安装docker环境\nDocker-compose安装 配置内核参数 # cat \u0026gt; /etc/sysctl.conf \u0026lt;\u0026lt; EOF net.ipv4.ip_forward = 1 net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF sysctl -p net.ipv4.ip_forward = 1: 开启路由转发，不配置该参数，主机重启后，服务状态正常，却无法访问到服务器。\n使用cfssl工具配置Harbor证书 默认的Harbor不附带证书，生产环境为了安全需要使用HTTPS,如果启用Content Trust with Notary 以正确签署所有图像，则必须使用 HTTPS。要配置 HTTPS，必须创建 SSL 证书。您可以使用受信任的第三方 CA 签署的证书，也可以使用自签名证书。本节介绍如何使用cfssl创建 CA，以及如何使用您的 CA 签署服务器证书和客户端证书。官方使用的是openssl工具来生成证书。",
+  "description": "Harbor 官网地址\nDocker Hub的速度比较慢\n使用公有云自带的容器仓库\n构建私有仓库\ndocker registry没有操作界面，不直观就使用了Harbor\nHarbor部署 部署方式\n离线安装：资源包带offline包含需要安装的镜像文件，容量比较大，适用生产环境。 在线安装：资源包带online需要保证主机可以联通互联网，适用于搭建私有仓库，用于学习和研究。 Docker-Ce安装 harbor是基于docker环境运行的，所以先安装docker环境\nDocker-compose安装 docker-compose地址\n# 下载版本 curl -L \u0026#34;https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)\u0026#34; -o /usr/local/bin/docker-compose # 添加可执行权限 sudo chmod +x /usr/local/bin/docker-compose # 添加快捷启动连接，这里必须用绝对路径 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose # 测试安装结果 docker-compose --version 配置内核参数 # cat \u0026gt; /etc/sysctl.conf \u0026lt;\u0026lt; EOF net.ipv4.ip_forward = 1 net.",
   "keywords": [
     "tools"
   ],
-  "articleBody": "Harbor 官网地址\nDocker Hub的速度比较慢\n使用公有云自带的容器仓库\n构建私有仓库\ndocker registry没有操作界面，不直观就使用了Harbor\nHarbor部署 部署方式\n离线安装：资源包带offline包含需要安装的镜像文件，容量比较大，适用生产环境。 在线安装：资源包带online需要保证主机可以联通互联网，适用于搭建私有仓库，用于学习和研究。 Docker-Ce安装 harbor是基于docker环境运行的，所以先安装docker环境\nDocker-compose安装 配置内核参数 # cat \u003e /etc/sysctl.conf \u003c\u003c EOF net.ipv4.ip_forward = 1 net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF sysctl -p net.ipv4.ip_forward = 1: 开启路由转发，不配置该参数，主机重启后，服务状态正常，却无法访问到服务器。\n使用cfssl工具配置Harbor证书 默认的Harbor不附带证书，生产环境为了安全需要使用HTTPS,如果启用Content Trust with Notary 以正确签署所有图像，则必须使用 HTTPS。要配置 HTTPS，必须创建 SSL 证书。您可以使用受信任的第三方 CA 签署的证书，也可以使用自签名证书。本节介绍如何使用cfssl创建 CA，以及如何使用您的 CA 签署服务器证书和客户端证书。官方使用的是openssl工具来生成证书。\n安装cfssl工具 安装步骤已经记录在其他文档\n生成默认的配置 # 通过cfssl命令生成的默认配置写入ca-config.json文件 cfssl print-defaults config \u003e ca-config.json 修改生成的ca-config.json文件\n{ \"signing\": { \"default\": { \"expiry\": \"87600h\" }, \"profiles\": { \"harbor\": { \"expiry\": \"87600h\", \"usages\": [ \"signing\", \"key encipherment\", \"server auth\", \"client auth\" ] } } } } 生成csr请求文件 cfssl print-defaults csr \u003e ca-csr.json 修改生成的ca-csr.json文件\n{ \"CN\": \"harbor\", \"hosts\": [ \"10.62.131.1\" ], \"key\": { \"algo\": \"rsa\", \"size\": 2048 }, \"names\": [ { \"C\": \"CN\", \"ST\": \"Beijing\", \"L\": \"Beijing\" } ] } hosts：包含授权范围，不在此范围的节点或者服务使用此证书会报证书不匹配错误，\nkey： 指代加密算法，一般使用ras非对称加密算法\n初始化CA cfssl gencert -initca ca-csr.json | cfssljson -bare ca 生成服务器证书 创建并修改服务器证书请求文件 cfssl print-defaults csr \u003e harbor-csr.json 修改harbor-csr.json\n疑问:这里的CN是？ 为什么hosts是空\n{ \"CN\": \"muli.harbor.json\", \"hosts\": [ ], \"key\": { \"algo\": \"rsa\", \"size\": 2048 }, \"names\": [ { \"C\": \"CN\", \"ST\": \"Beijing\", \"L\": \"Beijing\" } ] } 使用请求文件根据CA配置颁发证书 切换到证书所在目录执行\ncfssl gencert -ca=ca.pem -ca-key=ca-key.pem \\ -config=ca-config.json \\ -profile=harbor harbor-csr.json | cfssljson -bare harbor -config 指定 CA证书机构的配置文件\n-profile 指定使用CA配置文件中那个模块\nharbor配置文件指定使用证书 vim harbor.yml https: port: 443 certificate: /etc/docker/CA/harbor.pem private_key: /etc/docker/CA/harbor-key.pem 部署harbor 下载地址\n下载并解压 harbor.v2.5.6.tar.gz 镜像包\ninstall.sh会自动导入该镜像，这里也就是为什么需要docker了\n使用模板文件创建配置文件 [root@IT4ITothers005 harbor]# cp harbor.yml.tmpl harbor.yml.tmpl.bak [root@IT4ITothers005 harbor]# mv harbor.yml.tmpl harbor.yml #修改配置文件 vim harbor.yml hostname: 10.62.131.1 http: port: 8082 https: port: 443 #这里配置的就是cfssl生成的秘钥证书信息 certificate: /home/cfssl/harbor.pem private_key: /home/cfssl/harbor-key.pem # 初始的harbor密码不能修改 harbor_admin_password: Harbor12345 database: #数据库密码(暂时不知道何用,没有看见数据库链接信息) password: xxxxx max_idle_conns: 100 max_open_conns: 900 # 数据挂载地址 data_volume: /data 运行脚本prepare脚本启用https # harbor解压目录执行 ./prepare 运行install.sh安装harbor # 将镜像加载到docker引擎 ./install.sh 验证服务是否正常 docker-compose ps Harbor启停 #关闭 docker-compose down -v #启动,需要在harbor解压目录下执行，该目录下有docker-compose.yml文件 docker-compose up -d 登录harbor管理控制台 浏览器输入访问地址： https模式：https://10.62.131.1:443 http 模式： c 用户：admin 密码：harbor.cfg文件中harbor_admin_password的值。 访问不到页面\n发现有个镜像一直处于重启状态\n没有找到原因在另一台机器上安装成功了，疑惑\n",
-  "wordCount" : "282",
+  "articleBody": "Harbor 官网地址\nDocker Hub的速度比较慢\n使用公有云自带的容器仓库\n构建私有仓库\ndocker registry没有操作界面，不直观就使用了Harbor\nHarbor部署 部署方式\n离线安装：资源包带offline包含需要安装的镜像文件，容量比较大，适用生产环境。 在线安装：资源包带online需要保证主机可以联通互联网，适用于搭建私有仓库，用于学习和研究。 Docker-Ce安装 harbor是基于docker环境运行的，所以先安装docker环境\nDocker-compose安装 docker-compose地址\n# 下载版本 curl -L \"https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose # 添加可执行权限 sudo chmod +x /usr/local/bin/docker-compose # 添加快捷启动连接，这里必须用绝对路径 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose # 测试安装结果 docker-compose --version 配置内核参数 # cat \u003e /etc/sysctl.conf \u003c\u003c EOF net.ipv4.ip_forward = 1 net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF sysctl -p net.ipv4.ip_forward = 1: 开启路由转发，不配置该参数，主机重启后，服务状态正常，却无法访问到服务器。\n使用cfssl工具配置Harbor证书 默认的Harbor不附带证书，生产环境为了安全需要使用HTTPS,如果启用Content Trust with Notary 以正确签署所有图像，则必须使用 HTTPS。要配置 HTTPS，必须创建 SSL 证书。您可以使用受信任的第三方 CA 签署的证书，也可以使用自签名证书。本节介绍如何使用cfssl创建 CA，以及如何使用您的 CA 签署服务器证书和客户端证书。官方使用的是openssl工具来生成证书。\n安装cfssl工具 安装步骤已经记录在其他文档\n生成默认的配置 # 通过cfssl命令生成的默认配置写入ca-config.json文件 cfssl print-defaults config \u003e ca-config.json 修改生成的ca-config.json文件\n{ \"signing\": { \"default\": { \"expiry\": \"87600h\" }, \"profiles\": { \"harbor\": { \"expiry\": \"87600h\", \"usages\": [ \"signing\", \"key encipherment\", \"server auth\", \"client auth\" ] } } } } 生成csr请求文件 cfssl print-defaults csr \u003e ca-csr.json 修改生成的ca-csr.json文件\n{ \"CN\": \"harbor\", \"hosts\": [ \"10.62.131.1\" ], \"key\": { \"algo\": \"rsa\", \"size\": 2048 }, \"names\": [ { \"C\": \"CN\", \"ST\": \"Beijing\", \"L\": \"Beijing\" } ] } hosts：包含授权范围，不在此范围的节点或者服务使用此证书会报证书不匹配错误，\nkey： 指代加密算法，一般使用ras非对称加密算法\n初始化CA cfssl gencert -initca ca-csr.json | cfssljson -bare ca 生成服务器证书 创建并修改服务器证书请求文件 cfssl print-defaults csr \u003e harbor-csr.json 修改harbor-csr.json\n疑问:这里的CN是？ 为什么hosts是空\n{ \"CN\": \"muli.harbor.json\", \"hosts\": [ ], \"key\": { \"algo\": \"rsa\", \"size\": 2048 }, \"names\": [ { \"C\": \"CN\", \"ST\": \"Beijing\", \"L\": \"Beijing\" } ] } 使用请求文件根据CA配置颁发证书 切换到证书所在目录执行\ncfssl gencert -ca=ca.pem -ca-key=ca-key.pem \\ -config=ca-config.json \\ -profile=harbor harbor-csr.json | cfssljson -bare harbor -config 指定 CA证书机构的配置文件\n-profile 指定使用CA配置文件中那个模块\n部署harbor 下载地址\n下载并解压 harbor.v2.5.6.tar.gz 镜像包\ninstall.sh会自动导入该镜像，这里也就是为什么需要docker了\n使用模板文件创建配置文件 [root@IT4ITothers005 harbor]# cp harbor.yml.tmpl harbor.yml.tmpl.bak [root@IT4ITothers005 harbor]# mv harbor.yml.tmpl harbor.yml #修改配置文件 vim harbor.yml hostname: 10.62.131.1 http: port: 8082 https: port: 443 #这里配置的就是cfssl生成的秘钥证书信息 certificate: /home/cfssl/harbor.pem private_key: /home/cfssl/harbor-key.pem # 初始的harbor密码不能修改 harbor_admin_password: Harbor12345 database: #数据库密码(暂时不知道何用,没有看见数据库链接信息) password: xxxxx max_idle_conns: 100 max_open_conns: 900 # 数据挂载地址 data_volume: /data 如果不需要开启https协议，不需要配置证书信息，直接注释掉https配置模块\n运行脚本prepare脚本启用https # harbor解压目录执行 ./prepare 运行install.sh安装harbor # 将镜像加载到docker引擎 ./install.sh 验证服务是否正常 docker-compose ps Harbor启停 #关闭 docker-compose down -v #启动,需要在harbor解压目录下执行，该目录下有docker-compose.yml文件 docker-compose up -d 如果页面上访问不到，但harbor容器状态正常，则可能是由于linux没有开启ip转发内核参数\n登录harbor管理控制台 浏览器输入访问地址： https模式：https://192.168.1.115:443 http 模式： c 用户：admin # 在harbor.yml文件中配置harbor_admin_password: Harbor12345 默认密码：Harbor12345 访问不到页面\n发现有个镜像一直处于重启状态\n没有找到原因在另一台机器上安装成功了，疑惑\nHarbor使用 推送镜像到仓库中 docker配置仓库地址 # 若没有则新建 vim etc/docker daemon.json { \"insecure-registries\": [\"192.168.1.115\"]} # 加载配置并重启 systemctl daemon-reload systemctl restart docker 登录仓库 # 登录，账号密码就是harbor的登录账号密码 docker login 192.168.1.115 推送镜像 用nginx镜像来测试\n#将本地nginx:latest打上标签 docker tag nginx:latest 192.168.1.115/library/mynginx:v100 #推送镜像 docker push 192.168.1.115/library/mynginx:v100 ",
+  "wordCount" : "339",
   "inLanguage": "en",
   "datePublished": "2023-06-29T13:10:04+08:00",
   "dateModified": "2023-06-29T13:10:04+08:00",
@@ -223,7 +223,16 @@ Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF
 <h3 id="docker-ce安装">Docker-Ce安装<a hidden class="anchor" aria-hidden="true" href="#docker-ce安装">#</a></h3>
 <p>harbor是基于docker环境运行的，所以先安装docker环境</p>
 <h3 id="docker-compose安装">Docker-compose安装<a hidden class="anchor" aria-hidden="true" href="#docker-compose安装">#</a></h3>
-<h3 id="配置内核参数">配置内核参数<a hidden class="anchor" aria-hidden="true" href="#配置内核参数">#</a></h3>
+<p><a href="https://github.com/docker/compose/">docker-compose地址</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 下载版本</span>
+</span></span><span style="display:flex;"><span>curl -L <span style="color:#e6db74">&#34;https://github.com/docker/compose/releases/download/1.28.5/docker-compose-</span><span style="color:#66d9ef">$(</span>uname -s<span style="color:#66d9ef">)</span><span style="color:#e6db74">-</span><span style="color:#66d9ef">$(</span>uname -m<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> -o /usr/local/bin/docker-compose
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加可执行权限</span>
+</span></span><span style="display:flex;"><span>sudo chmod +x /usr/local/bin/docker-compose
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加快捷启动连接，这里必须用绝对路径</span>
+</span></span><span style="display:flex;"><span>sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试安装结果</span>
+</span></span><span style="display:flex;"><span>docker-compose --version
+</span></span></code></pre></div><h3 id="配置内核参数">配置内核参数<a hidden class="anchor" aria-hidden="true" href="#配置内核参数">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># cat &gt; /etc/sysctl.conf &lt;&lt; EOF</span>
 </span></span><span style="display:flex;"><span>net.ipv4.ip_forward <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
 </span></span><span style="display:flex;"><span>net.bridge.bridge-nf-call-ip6tables <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
@@ -323,13 +332,7 @@ Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF
 </p>
 <p><img loading="lazy" src="/harbor.assets/image-20230630143339474.png" alt="image-20230630143339474"  />
 </p>
-<h4 id="harbor配置文件指定使用证书">harbor配置文件指定使用证书<a hidden class="anchor" aria-hidden="true" href="#harbor配置文件指定使用证书">#</a></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vim harbor.yml
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">https</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">port</span>: <span style="color:#ae81ff">443</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">certificate</span>: <span style="color:#ae81ff">/etc/docker/CA/harbor.pem</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">private_key</span>: <span style="color:#ae81ff">/etc/docker/CA/harbor-key.pem</span>
-</span></span></code></pre></div><h4 id="部署harbor">部署harbor<a hidden class="anchor" aria-hidden="true" href="#部署harbor">#</a></h4>
+<h3 id="部署harbor">部署harbor<a hidden class="anchor" aria-hidden="true" href="#部署harbor">#</a></h3>
 <p><a href="https://github.com/goharbor/harbor/releases">下载地址</a></p>
 <p><img loading="lazy" src="/harbor.assets/image-20230710194023648.png" alt="image-20230710194023648"  />
 </p>
@@ -362,13 +365,18 @@ Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">max_open_conns</span>: <span style="color:#ae81ff">900</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 数据挂载地址</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">data_volume</span>: <span style="color:#ae81ff">/data</span>
-</span></span></code></pre></div><h5 id="运行脚本prepare脚本启用https">运行脚本prepare脚本启用https<a hidden class="anchor" aria-hidden="true" href="#运行脚本prepare脚本启用https">#</a></h5>
+</span></span></code></pre></div><p><img loading="lazy" src="/harbor.assets/1713838387809.png" alt="1713838387809"  />
+</p>
+<p><strong>如果不需要开启https协议，不需要配置证书信息，直接注释掉https配置模块</strong></p>
+<h5 id="运行脚本prepare脚本启用https">运行脚本prepare脚本启用https<a hidden class="anchor" aria-hidden="true" href="#运行脚本prepare脚本启用https">#</a></h5>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># harbor解压目录执行</span>
 </span></span><span style="display:flex;"><span>./prepare
 </span></span></code></pre></div><h5 id="运行installsh安装harbor">运行install.sh安装harbor<a hidden class="anchor" aria-hidden="true" href="#运行installsh安装harbor">#</a></h5>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 将镜像加载到docker引擎</span>
 </span></span><span style="display:flex;"><span>./install.sh
-</span></span></code></pre></div><p><img loading="lazy" src="/harbor.assets/image-20230710223928080.png" alt="image-20230710223928080"  />
+</span></span></code></pre></div><p><img loading="lazy" src="/harbor.assets/1713845639671.png" alt="1713845639671"  />
+</p>
+<p><img loading="lazy" src="/harbor.assets/image-20230710223928080.png" alt="image-20230710223928080"  />
 </p>
 <h5 id="验证服务是否正常">验证服务是否正常<a hidden class="anchor" aria-hidden="true" href="#验证服务是否正常">#</a></h5>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker-compose ps
@@ -377,12 +385,14 @@ Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF
 </span></span><span style="display:flex;"><span>docker-compose down -v
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#启动,需要在harbor解压目录下执行，该目录下有docker-compose.yml文件</span>
 </span></span><span style="display:flex;"><span>docker-compose up -d
-</span></span></code></pre></div><h4 id="登录harbor管理控制台">登录harbor管理控制台<a hidden class="anchor" aria-hidden="true" href="#登录harbor管理控制台">#</a></h4>
+</span></span></code></pre></div><p><strong>如果页面上访问不到，但harbor容器状态正常，则可能是由于linux没有开启ip转发内核参数</strong></p>
+<h4 id="登录harbor管理控制台">登录harbor管理控制台<a hidden class="anchor" aria-hidden="true" href="#登录harbor管理控制台">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>浏览器输入访问地址：
-</span></span><span style="display:flex;"><span>https模式：https://10.62.131.1:443
+</span></span><span style="display:flex;"><span>https模式：https://192.168.1.115:443
 </span></span><span style="display:flex;"><span>http 模式： c
 </span></span><span style="display:flex;"><span>用户：admin
-</span></span><span style="display:flex;"><span>密码：harbor.cfg文件中harbor_admin_password的值。
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 在harbor.yml文件中配置harbor_admin_password: Harbor12345</span>
+</span></span><span style="display:flex;"><span>默认密码：Harbor12345
 </span></span></code></pre></div><p><strong>访问不到页面</strong></p>
 <p>发现有个镜像一直处于重启状态</p>
 <p><img loading="lazy" src="/harbor.assets/image-20230711005204704.png" alt="image-20230711005204704"  />
@@ -391,6 +401,34 @@ Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF
 </p>
 <p><strong>没有找到原因在另一台机器上安装成功了，疑惑</strong></p>
 <p><img loading="lazy" src="/harbor.assets/image-20230711032332955.png" alt="image-20230711032332955"  />
+</p>
+<h2 id="harbor使用">Harbor使用<a hidden class="anchor" aria-hidden="true" href="#harbor使用">#</a></h2>
+<h3 id="推送镜像到仓库中">推送镜像到仓库中<a hidden class="anchor" aria-hidden="true" href="#推送镜像到仓库中">#</a></h3>
+<h4 id="docker配置仓库地址">docker配置仓库地址<a hidden class="anchor" aria-hidden="true" href="#docker配置仓库地址">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 若没有则新建</span>
+</span></span><span style="display:flex;"><span>vim etc/docker daemon.json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span> <span style="color:#e6db74">&#34;insecure-registries&#34;</span>: <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;192.168.1.115&#34;</span><span style="color:#f92672">]}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 加载配置并重启</span>
+</span></span><span style="display:flex;"><span>systemctl daemon-reload
+</span></span><span style="display:flex;"><span>systemctl restart docker
+</span></span></code></pre></div><h4 id="登录仓库">登录仓库<a hidden class="anchor" aria-hidden="true" href="#登录仓库">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 登录，账号密码就是harbor的登录账号密码</span>
+</span></span><span style="display:flex;"><span>docker login 192.168.1.115
+</span></span></code></pre></div><p><img loading="lazy" src="/harbor.assets/1713848303879.png" alt="1713848303879"  />
+</p>
+<h4 id="推送镜像">推送镜像<a hidden class="anchor" aria-hidden="true" href="#推送镜像">#</a></h4>
+<p>用nginx镜像来测试</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#将本地nginx:latest打上标签</span>
+</span></span><span style="display:flex;"><span>docker tag nginx:latest 192.168.1.115/library/mynginx:v100
+</span></span></code></pre></div><p><img loading="lazy" src="/harbor.assets/1713847541825.png" alt="1713847541825"  />
+</p>
+<p><img loading="lazy" src="/harbor.assets/1713846751983.png" alt="1713846751983"  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#推送镜像</span>
+</span></span><span style="display:flex;"><span>docker push 192.168.1.115/library/mynginx:v100
+</span></span></code></pre></div><p><img loading="lazy" src="/harbor.assets/1713848256794.png" alt="1713848256794"  />
+</p>
+<p><img loading="lazy" src="/harbor.assets/1713848381493.png" alt="1713848381493"  />
 </p>
 
 

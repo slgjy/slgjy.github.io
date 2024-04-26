@@ -173,8 +173,8 @@ Docker Hub的速度比较慢
 docker registry没有操作界面，不直观就使用了Harbor
 Harbor部署 部署方式
 离线安装：资源包带offline包含需要安装的镜像文件，容量比较大，适用生产环境。 在线安装：资源包带online需要保证主机可以联通互联网，适用于搭建私有仓库，用于学习和研究。 Docker-Ce安装 harbor是基于docker环境运行的，所以先安装docker环境
-Docker-compose安装 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF net.ipv4.ip_forward = 1 net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF sysctl -p net.ipv4.ip_forward = 1: 开启路由转发，不配置该参数，主机重启后，服务状态正常，却无法访问到服务器。
-使用cfssl工具配置Harbor证书 默认的Harbor不附带证书，生产环境为了安全需要使用HTTPS,如果启用Content Trust with Notary 以正确签署所有图像，则必须使用 HTTPS。要配置 HTTPS，必须创建 SSL 证书。您可以使用受信任的第三方 CA 签署的证书，也可以使用自签名证书。本节介绍如何使用cfssl创建 CA，以及如何使用您的 CA 签署服务器证书和客户端证书。官方使用的是openssl工具来生成证书。...</p>
+Docker-compose安装 docker-compose地址
+# 下载版本 curl -L &#34;https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)&#34; -o /usr/local/bin/docker-compose # 添加可执行权限 sudo chmod &#43;x /usr/local/bin/docker-compose # 添加快捷启动连接，这里必须用绝对路径 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose # 测试安装结果 docker-compose --version 配置内核参数 # cat &gt; /etc/sysctl.conf &lt;&lt; EOF net.ipv4.ip_forward = 1 net....</p>
   </div>
   <footer class="entry-footer"><span title='2023-06-29 13:10:04 +0800 CST'>June 29, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Harbor" href="http://slgjy.github.io/post/harbor/"></a>
