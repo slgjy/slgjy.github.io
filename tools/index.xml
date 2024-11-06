@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tools on 小石头博客</title>
-    <link>http://localhost:1313/tools/</link>
+    <link>https://slgjy.github.io/tools/</link>
     <description>Recent content in Tools on 小石头博客</description>
     <image>
       <title>小石头博客</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://slgjy.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://slgjy.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.137.1</generator>
     <language>en</language>
     <lastBuildDate>Tue, 05 Nov 2024 14:09:28 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tools/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://slgjy.github.io/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hugo</title>
-      <link>http://localhost:1313/tools/hugo/</link>
+      <link>https://slgjy.github.io/tools/hugo/</link>
       <pubDate>Tue, 05 Nov 2024 14:09:28 +0800</pubDate>
-      <guid>http://localhost:1313/tools/hugo/</guid>
+      <guid>https://slgjy.github.io/tools/hugo/</guid>
       <description>&lt;h1 id=&#34;hugo&#34;&gt;HUGO&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://gohugo.io/&#34;&gt;官网地址&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;hugo 是由 go 语言开发的一款博客工具，可以生成静态网页，效率高部署简单。&lt;/p&gt;
@@ -52,7 +52,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; hugo new site MyFreshWebsite --format yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/hugo/1730795690284.png&#34; alt=&#34;1730795690284&#34;  /&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://slgjy.github.io/hugo/1730795690284.png&#34; alt=&#34;1730795690284&#34;  /&gt;
 &lt;/p&gt;
 &lt;h4 id=&#34;3主题配置&#34;&gt;3.主题配置&lt;/h4&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/adityatelange/hugo-PaperMod&#34;&gt;官网地址&lt;/a&gt;&lt;/p&gt;
