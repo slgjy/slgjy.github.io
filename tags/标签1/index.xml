@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>标签1 on 小石头博客</title>
+    <link>https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE1/</link>
+    <description>Recent content in 标签1 on 小石头博客</description>
+    <image>
+      <title>小石头博客</title>
+      <url>https://slgjy.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://slgjy.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.137.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 Nov 2024 11:41:48 +0800</lastBuildDate>
+    <atom:link href="https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Springboot01</title>
+      <link>https://slgjy.github.io/java/springboot01/</link>
+      <pubDate>Thu, 07 Nov 2024 11:41:48 +0800</pubDate>
+      <guid>https://slgjy.github.io/java/springboot01/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hugo</title>
+      <link>https://slgjy.github.io/tools/hugo/</link>
+      <pubDate>Thu, 07 Nov 2024 11:41:15 +0800</pubDate>
+      <guid>https://slgjy.github.io/tools/hugo/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
