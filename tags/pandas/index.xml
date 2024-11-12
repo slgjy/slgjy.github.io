@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>小石头博客</title>
-    <link>https://slgjy.github.io/</link>
-    <description>Recent content on 小石头博客</description>
+    <title>Pandas on 小石头博客</title>
+    <link>https://slgjy.github.io/tags/pandas/</link>
+    <description>Recent content in Pandas on 小石头博客</description>
     <image>
       <title>小石头博客</title>
       <url>https://slgjy.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
@@ -12,7 +12,7 @@
     <generator>Hugo -- 0.137.1</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 12 Nov 2024 14:35:43 +0800</lastBuildDate>
-    <atom:link href="https://slgjy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://slgjy.github.io/tags/pandas/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pandas_01</title>
       <link>https://slgjy.github.io/py/pandas_01/</link>
@@ -26,20 +26,6 @@
 &lt;h3 id=&#34;数据结构&#34;&gt;数据结构&lt;/h3&gt;
 &lt;h4 id=&#34;series&#34;&gt;Series&lt;/h4&gt;
 &lt;h4 id=&#34;dataframe&#34;&gt;DataFrame&lt;/h4&gt;</description>
-    </item>
-    <item>
-      <title>Springboot01</title>
-      <link>https://slgjy.github.io/java/springboot01/</link>
-      <pubDate>Thu, 07 Nov 2024 11:41:48 +0800</pubDate>
-      <guid>https://slgjy.github.io/java/springboot01/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Hugo</title>
-      <link>https://slgjy.github.io/tools/hugo/</link>
-      <pubDate>Thu, 07 Nov 2024 11:41:15 +0800</pubDate>
-      <guid>https://slgjy.github.io/tools/hugo/</guid>
-      <description></description>
     </item>
   </channel>
 </rss>
