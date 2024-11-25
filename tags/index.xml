@@ -11,8 +11,29 @@
     </image>
     <generator>Hugo -- 0.137.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Nov 2024 14:35:43 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 25 Nov 2024 11:01:08 +0800</lastBuildDate>
     <atom:link href="https://slgjy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux</title>
+      <link>https://slgjy.github.io/tags/linux/</link>
+      <pubDate>Mon, 25 Nov 2024 11:01:08 +0800</pubDate>
+      <guid>https://slgjy.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>标签1</title>
+      <link>https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE1/</link>
+      <pubDate>Mon, 25 Nov 2024 11:00:47 +0800</pubDate>
+      <guid>https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>标签2</title>
+      <link>https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE2/</link>
+      <pubDate>Mon, 25 Nov 2024 11:00:47 +0800</pubDate>
+      <guid>https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE2/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Pandas</title>
       <link>https://slgjy.github.io/tags/pandas/</link>
@@ -25,20 +46,6 @@
       <link>https://slgjy.github.io/tags/python/</link>
       <pubDate>Tue, 12 Nov 2024 14:35:43 +0800</pubDate>
       <guid>https://slgjy.github.io/tags/python/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>标签1</title>
-      <link>https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE1/</link>
-      <pubDate>Thu, 07 Nov 2024 11:41:48 +0800</pubDate>
-      <guid>https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE1/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>标签2</title>
-      <link>https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE2/</link>
-      <pubDate>Thu, 07 Nov 2024 11:41:48 +0800</pubDate>
-      <guid>https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE2/</guid>
       <description></description>
     </item>
     <item>
