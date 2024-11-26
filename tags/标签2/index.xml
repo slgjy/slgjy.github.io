@@ -94,7 +94,7 @@
 &lt;h3 id=&#34;实践操作&#34;&gt;实践操作&lt;/h3&gt;
 &lt;h4 id=&#34;1创建分区&#34;&gt;1.创建分区&lt;/h4&gt;
 &lt;p&gt;通过&lt;code&gt;fdisk&lt;/code&gt;或者parted命令创建**==&lt;code&gt;lvm&lt;/code&gt;==**类型分区&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://slgjy.github.io/vm/1732589576341.png&#34; alt=&#34;1732589576341&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://slgjy.github.io/lvm/1732589576341.png&#34; alt=&#34;1732589576341&#34;  /&gt;
 &lt;/p&gt;
 &lt;h5 id=&#34;通过parted创建lvm分区&#34;&gt;通过parted创建lvm分区&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -118,7 +118,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pvcreate /dev/sdb2
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://slgjy.github.io/vm/1732590948295.png&#34; alt=&#34;1732590948295&#34;  /&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://slgjy.github.io/lvm/1732590948295.png&#34; alt=&#34;1732590948295&#34;  /&gt;
 &lt;/p&gt;</description>
     </item>
     <item>
