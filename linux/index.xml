@@ -11,8 +11,116 @@
     </image>
     <generator>Hugo -- 0.137.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Nov 2024 11:01:08 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 Nov 2024 09:17:38 +0800</lastBuildDate>
     <atom:link href="https://slgjy.github.io/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lvm</title>
+      <link>https://slgjy.github.io/linux/lvm/</link>
+      <pubDate>Tue, 26 Nov 2024 09:17:38 +0800</pubDate>
+      <guid>https://slgjy.github.io/linux/lvm/</guid>
+      <description>&lt;h1 id=&#34;lvm&#34;&gt;LVM&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;LVM&lt;/code&gt;(Logic Volume Manager)逻辑卷管理,是一种将一个或多个硬盘的分区在逻辑上的集合。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;传统文件系统&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不同分区相互独立，分区空间和容易利用率不平衡。&lt;/li&gt;
+&lt;li&gt;当分区满时，扩容麻烦。需重建分区或使用符号链接的方式使用其他盘&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;LVM&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;硬盘的多个分区由&lt;code&gt;LVM&lt;/code&gt;统一为卷管理，可以动态的加入或移走分区扩大或减少容量。&lt;/li&gt;
+&lt;li&gt;文件系统建立在逻辑卷上，可以动态改变大小&lt;/li&gt;
+&lt;li&gt;文件系统建立在&lt;code&gt;lvm&lt;/code&gt;上可以跨分区使用。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;lvm基本概念&#34;&gt;&lt;code&gt;LVM&lt;/code&gt;基本概念&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PV&lt;/code&gt; (Physical Volume 物理卷) 可以是整个物理磁盘也可以是磁盘的某个分区&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;VG&lt;/code&gt;(Volume Group 卷组) 建立在&lt;code&gt;pv&lt;/code&gt;之上，是&lt;code&gt;pv&lt;/code&gt;的组合&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LV&lt;/code&gt;(Logic Volume 逻辑卷) 类似物理分区，在逻辑卷上创建，可以动态进行扩展和缩小。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PE&lt;/code&gt; (Physical Extent) 物理区域是物理卷中可用于分配的最小存储单元，物理区域可根据创建物理卷时指定。且确定后不能修改。&lt;code&gt;LVM&lt;/code&gt;会在所有的&lt;code&gt;pv&lt;/code&gt;上做格式化操作，将每个&lt;code&gt;pv&lt;/code&gt;切成一块块空间，这一块块空间称之为&lt;code&gt;PE&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;逻辑卷管理步骤&#34;&gt;逻辑卷管理步骤&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;创建顺序&lt;code&gt;pv-&amp;gt;vg-lv&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;lvm管理命令&#34;&gt;LVM管理命令&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;功能&lt;/th&gt;
+          &lt;th&gt;pv&lt;/th&gt;
+          &lt;th&gt;vg&lt;/th&gt;
+          &lt;th&gt;lv&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Scan&lt;/td&gt;
+          &lt;td&gt;pvscan&lt;/td&gt;
+          &lt;td&gt;vgscan&lt;/td&gt;
+          &lt;td&gt;lvscan&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Create&lt;/td&gt;
+          &lt;td&gt;pvcreate&lt;/td&gt;
+          &lt;td&gt;vgcreate&lt;/td&gt;
+          &lt;td&gt;lvcreate&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Display&lt;/td&gt;
+          &lt;td&gt;pvdisplay&lt;/td&gt;
+          &lt;td&gt;vgdisplay&lt;/td&gt;
+          &lt;td&gt;lvdisplay&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Remove&lt;/td&gt;
+          &lt;td&gt;pvremove&lt;/td&gt;
+          &lt;td&gt;vgremove&lt;/td&gt;
+          &lt;td&gt;lvremove&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Reduce&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;vgreduce&lt;/td&gt;
+          &lt;td&gt;lvreduce&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Extend&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;vgextend&lt;/td&gt;
+          &lt;td&gt;lvextend&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;实践操作&#34;&gt;实践操作&lt;/h3&gt;
+&lt;h4 id=&#34;1创建分区&#34;&gt;1.创建分区&lt;/h4&gt;
+&lt;p&gt;通过&lt;code&gt;fdisk&lt;/code&gt;或者parted命令创建**==&lt;code&gt;lvm&lt;/code&gt;==**类型分区&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://slgjy.github.io/vm/1732589576341.png&#34; alt=&#34;1732589576341&#34;  /&gt;
+&lt;/p&gt;
+&lt;h5 id=&#34;通过parted创建lvm分区&#34;&gt;通过parted创建lvm分区&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#修改为lvm类型  &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;toggle &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;分区号&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; lvm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;2创建pv&#34;&gt;2.创建pv&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 该命令会删除磁盘上的所有数据,默认生成的4MB的物理范围Pe&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pvcreate /dev/sdb2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://slgjy.github.io/vm/1732590948295.png&#34; alt=&#34;1732590948295&#34;  /&gt;
+&lt;/p&gt;</description>
+    </item>
     <item>
       <title>磁盘分区</title>
       <link>https://slgjy.github.io/linux/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/</link>

@@ -1,0 +1,347 @@
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Lvm | 小石头博客</title>
+<meta name=keywords content="标签1,标签2"><meta name=description content="LVM
+LVM(Logic Volume Manager)逻辑卷管理,是一种将一个或多个硬盘的分区在逻辑上的集合。
+传统文件系统
+
+不同分区相互独立，分区空间和容易利用率不平衡。
+当分区满时，扩容麻烦。需重建分区或使用符号链接的方式使用其他盘
+
+LVM
+
+硬盘的多个分区由LVM统一为卷管理，可以动态的加入或移走分区扩大或减少容量。
+文件系统建立在逻辑卷上，可以动态改变大小
+文件系统建立在lvm上可以跨分区使用。
+
+LVM基本概念
+
+PV (Physical Volume 物理卷) 可以是整个物理磁盘也可以是磁盘的某个分区
+VG(Volume Group 卷组) 建立在pv之上，是pv的组合
+LV(Logic Volume 逻辑卷) 类似物理分区，在逻辑卷上创建，可以动态进行扩展和缩小。
+PE (Physical Extent) 物理区域是物理卷中可用于分配的最小存储单元，物理区域可根据创建物理卷时指定。且确定后不能修改。LVM会在所有的pv上做格式化操作，将每个pv切成一块块空间，这一块块空间称之为PE
+
+逻辑卷管理步骤
+
+创建顺序pv->vg-lv
+
+LVM管理命令
+
+  
+      
+          功能
+          pv
+          vg
+          lv
+      
+  
+  
+      
+          Scan
+          pvscan
+          vgscan
+          lvscan
+      
+      
+          Create
+          pvcreate
+          vgcreate
+          lvcreate
+      
+      
+          Display
+          pvdisplay
+          vgdisplay
+          lvdisplay
+      
+      
+          Remove
+          pvremove
+          vgremove
+          lvremove
+      
+      
+          Reduce
+          
+          vgreduce
+          lvreduce
+      
+      
+          Extend
+          
+          vgextend
+          lvextend
+      
+  
+
+实践操作
+1.创建分区
+通过fdisk或者parted命令创建**==lvm==**类型分区
+
+
+通过parted创建lvm分区
+
+
+1
+2
+
+
+#修改为lvm类型  
+toggle [分区号] lvm
+
+
+2.创建pv
+
+
+1
+2
+
+
+# 该命令会删除磁盘上的所有数据,默认生成的4MB的物理范围Pe
+pvcreate /dev/sdb2
+
+
+
+"><meta name=author content="小石头"><link rel=canonical href=https://slgjy.github.io/linux/lvm/><link crossorigin=anonymous href=/assets/css/stylesheet.b2233f4c3fc2449ebb783dfc40f173ac148c015a2116d82fa2c132788e8c69c6.css integrity="sha256-siM/TD/CRJ67eD38QPFzrBSMAVohFtgvosEyeI6MacY=" rel="preload stylesheet" as=style><link rel=icon href=https://slgjy.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://slgjy.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://slgjy.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://slgjy.github.io/apple-touch-icon.png><link rel=mask-icon href=https://slgjy.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://slgjy.github.io/linux/lvm/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="Lvm"><meta property="og:description" content="LVM
+LVM(Logic Volume Manager)逻辑卷管理,是一种将一个或多个硬盘的分区在逻辑上的集合。
+传统文件系统
+
+不同分区相互独立，分区空间和容易利用率不平衡。
+当分区满时，扩容麻烦。需重建分区或使用符号链接的方式使用其他盘
+
+LVM
+
+硬盘的多个分区由LVM统一为卷管理，可以动态的加入或移走分区扩大或减少容量。
+文件系统建立在逻辑卷上，可以动态改变大小
+文件系统建立在lvm上可以跨分区使用。
+
+LVM基本概念
+
+PV (Physical Volume 物理卷) 可以是整个物理磁盘也可以是磁盘的某个分区
+VG(Volume Group 卷组) 建立在pv之上，是pv的组合
+LV(Logic Volume 逻辑卷) 类似物理分区，在逻辑卷上创建，可以动态进行扩展和缩小。
+PE (Physical Extent) 物理区域是物理卷中可用于分配的最小存储单元，物理区域可根据创建物理卷时指定。且确定后不能修改。LVM会在所有的pv上做格式化操作，将每个pv切成一块块空间，这一块块空间称之为PE
+
+逻辑卷管理步骤
+
+创建顺序pv->vg-lv
+
+LVM管理命令
+
+  
+      
+          功能
+          pv
+          vg
+          lv
+      
+  
+  
+      
+          Scan
+          pvscan
+          vgscan
+          lvscan
+      
+      
+          Create
+          pvcreate
+          vgcreate
+          lvcreate
+      
+      
+          Display
+          pvdisplay
+          vgdisplay
+          lvdisplay
+      
+      
+          Remove
+          pvremove
+          vgremove
+          lvremove
+      
+      
+          Reduce
+          
+          vgreduce
+          lvreduce
+      
+      
+          Extend
+          
+          vgextend
+          lvextend
+      
+  
+
+实践操作
+1.创建分区
+通过fdisk或者parted命令创建**==lvm==**类型分区
+
+
+通过parted创建lvm分区
+
+
+1
+2
+
+
+#修改为lvm类型  
+toggle [分区号] lvm
+
+
+2.创建pv
+
+
+1
+2
+
+
+# 该命令会删除磁盘上的所有数据,默认生成的4MB的物理范围Pe
+pvcreate /dev/sdb2
+
+
+
+"><meta property="og:type" content="article"><meta property="og:url" content="https://slgjy.github.io/linux/lvm/"><meta property="og:image" content="https://slgjy.github.io/vm/1732597390100.png"><meta property="article:section" content="linux"><meta property="article:published_time" content="2024-11-26T09:17:38+08:00"><meta property="article:modified_time" content="2024-11-26T09:17:38+08:00"><meta property="og:site_name" content="ExampleSite"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://slgjy.github.io/vm/1732597390100.png"><meta name=twitter:title content="Lvm"><meta name=twitter:description content="LVM
+LVM(Logic Volume Manager)逻辑卷管理,是一种将一个或多个硬盘的分区在逻辑上的集合。
+传统文件系统
+
+不同分区相互独立，分区空间和容易利用率不平衡。
+当分区满时，扩容麻烦。需重建分区或使用符号链接的方式使用其他盘
+
+LVM
+
+硬盘的多个分区由LVM统一为卷管理，可以动态的加入或移走分区扩大或减少容量。
+文件系统建立在逻辑卷上，可以动态改变大小
+文件系统建立在lvm上可以跨分区使用。
+
+LVM基本概念
+
+PV (Physical Volume 物理卷) 可以是整个物理磁盘也可以是磁盘的某个分区
+VG(Volume Group 卷组) 建立在pv之上，是pv的组合
+LV(Logic Volume 逻辑卷) 类似物理分区，在逻辑卷上创建，可以动态进行扩展和缩小。
+PE (Physical Extent) 物理区域是物理卷中可用于分配的最小存储单元，物理区域可根据创建物理卷时指定。且确定后不能修改。LVM会在所有的pv上做格式化操作，将每个pv切成一块块空间，这一块块空间称之为PE
+
+逻辑卷管理步骤
+
+创建顺序pv->vg-lv
+
+LVM管理命令
+
+  
+      
+          功能
+          pv
+          vg
+          lv
+      
+  
+  
+      
+          Scan
+          pvscan
+          vgscan
+          lvscan
+      
+      
+          Create
+          pvcreate
+          vgcreate
+          lvcreate
+      
+      
+          Display
+          pvdisplay
+          vgdisplay
+          lvdisplay
+      
+      
+          Remove
+          pvremove
+          vgremove
+          lvremove
+      
+      
+          Reduce
+          
+          vgreduce
+          lvreduce
+      
+      
+          Extend
+          
+          vgextend
+          lvextend
+      
+  
+
+实践操作
+1.创建分区
+通过fdisk或者parted命令创建**==lvm==**类型分区
+
+
+通过parted创建lvm分区
+
+
+1
+2
+
+
+#修改为lvm类型  
+toggle [分区号] lvm
+
+
+2.创建pv
+
+
+1
+2
+
+
+# 该命令会删除磁盘上的所有数据,默认生成的4MB的物理范围Pe
+pvcreate /dev/sdb2
+
+
+
+"><meta name=twitter:site content="@https://twitter.com/yourusername"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Linuxes","item":"https://slgjy.github.io/linux/"},{"@type":"ListItem","position":2,"name":"Lvm","item":"https://slgjy.github.io/linux/lvm/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Lvm","name":"Lvm","description":"LVM LVM(Logic Volume Manager)逻辑卷管理,是一种将一个或多个硬盘的分区在逻辑上的集合。\n传统文件系统\n不同分区相互独立，分区空间和容易利用率不平衡。 当分区满时，扩容麻烦。需重建分区或使用符号链接的方式使用其他盘 LVM\n硬盘的多个分区由LVM统一为卷管理，可以动态的加入或移走分区扩大或减少容量。 文件系统建立在逻辑卷上，可以动态改变大小 文件系统建立在lvm上可以跨分区使用。 LVM基本概念 PV (Physical Volume 物理卷) 可以是整个物理磁盘也可以是磁盘的某个分区 VG(Volume Group 卷组) 建立在pv之上，是pv的组合 LV(Logic Volume 逻辑卷) 类似物理分区，在逻辑卷上创建，可以动态进行扩展和缩小。 PE (Physical Extent) 物理区域是物理卷中可用于分配的最小存储单元，物理区域可根据创建物理卷时指定。且确定后不能修改。LVM会在所有的pv上做格式化操作，将每个pv切成一块块空间，这一块块空间称之为PE 逻辑卷管理步骤 创建顺序pv-\u0026gt;vg-lv\nLVM管理命令 功能 pv vg lv Scan pvscan vgscan lvscan Create pvcreate vgcreate lvcreate Display pvdisplay vgdisplay lvdisplay Remove pvremove vgremove lvremove Reduce vgreduce lvreduce Extend vgextend lvextend 实践操作 1.创建分区 通过fdisk或者parted命令创建**==lvm==**类型分区\n通过parted创建lvm分区 1 2 #修改为lvm类型 toggle [分区号] lvm 2.创建pv 1 2 # 该命令会删除磁盘上的所有数据,默认生成的4MB的物理范围Pe pvcreate /dev/sdb2 ","keywords":["标签1","标签2"],"articleBody":"LVM LVM(Logic Volume Manager)逻辑卷管理,是一种将一个或多个硬盘的分区在逻辑上的集合。\n传统文件系统\n不同分区相互独立，分区空间和容易利用率不平衡。 当分区满时，扩容麻烦。需重建分区或使用符号链接的方式使用其他盘 LVM\n硬盘的多个分区由LVM统一为卷管理，可以动态的加入或移走分区扩大或减少容量。 文件系统建立在逻辑卷上，可以动态改变大小 文件系统建立在lvm上可以跨分区使用。 LVM基本概念 PV (Physical Volume 物理卷) 可以是整个物理磁盘也可以是磁盘的某个分区 VG(Volume Group 卷组) 建立在pv之上，是pv的组合 LV(Logic Volume 逻辑卷) 类似物理分区，在逻辑卷上创建，可以动态进行扩展和缩小。 PE (Physical Extent) 物理区域是物理卷中可用于分配的最小存储单元，物理区域可根据创建物理卷时指定。且确定后不能修改。LVM会在所有的pv上做格式化操作，将每个pv切成一块块空间，这一块块空间称之为PE 逻辑卷管理步骤 创建顺序pv-\u003evg-lv\nLVM管理命令 功能 pv vg lv Scan pvscan vgscan lvscan Create pvcreate vgcreate lvcreate Display pvdisplay vgdisplay lvdisplay Remove pvremove vgremove lvremove Reduce vgreduce lvreduce Extend vgextend lvextend 实践操作 1.创建分区 通过fdisk或者parted命令创建**==lvm==**类型分区\n通过parted创建lvm分区 1 2 #修改为lvm类型 toggle [分区号] lvm 2.创建pv 1 2 # 该命令会删除磁盘上的所有数据,默认生成的4MB的物理范围Pe pvcreate /dev/sdb2 1 2 3 #查看pv，pvs查看摘要，pvdisplay查看详细输出 pvs pvdisplay 3.创建vg 1 vgcreate [卷组名] [物理卷名] 将/dev/sdb2 和/dev/sdc1两个pv组合成一个vg\n1 2 3 #查看vg信息 vgs vgdisplay 扩展卷组 1 vgextend [卷组名] [物理卷名] 4.创建逻辑卷 1 lvcreate –n [逻辑卷名] –L [逻辑卷大小] [要创建的 LV 所在的卷组名称] 1 2 3 4 #用pe大小创建逻辑卷。默认pe为4mb，10Gb=2560pe 10GB = 10240MB / 4MB （PE 大小） = 2560 PE #则使用pe大小创建10gb的逻辑卷用如下命令 lvcreate -n lv001 -l 2560 vg01 5.创建文件系统 1 2 # mkfs –t [文件系统类型] /dev/[LV 所在的卷组名称]/[LV 名称] mkfs -t ext4 /dev/vg01/lv001 6.挂载 ","wordCount":"146","inLanguage":"en","image":"https://slgjy.github.io/vm/1732597390100.png","datePublished":"2024-11-26T09:17:38+08:00","dateModified":"2024-11-26T09:17:38+08:00","author":[{"@type":"Person","name":"小石头"}],"mainEntityOfPage":{"@type":"WebPage","@id":"https://slgjy.github.io/linux/lvm/"},"publisher":{"@type":"Organization","name":"小石头博客","logo":{"@type":"ImageObject","url":"https://slgjy.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://slgjy.github.io/ accesskey=h title="Home (Alt + H)"><img src=https://slgjy.github.io/apple-touch-icon.png alt aria-label=logo height=35>Home</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://slgjy.github.io/search title="🔍搜索 (Alt + /)" accesskey=/><span>🔍搜索</span></a></li><li><a href=https://slgjy.github.io/ title=🏠主页><span>🏠主页</span></a></li><li><a href=https://slgjy.github.io/archives/ title=⏱时间轴><span>⏱时间轴</span></a></li><li><a href=https://slgjy.github.io/tags title=🔖标签><span>🔖标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://slgjy.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://slgjy.github.io/linux/>Linuxes</a></div><h1 class="post-title entry-hint-parent">Lvm</h1><div class=post-meta><span title='2024-11-26 09:17:38 +0800 +0800'>November 26, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;146 words&nbsp;·&nbsp;小石头</div></header><figure class=entry-cover><img loading=eager src=https://slgjy.github.io/vm/1732597390100.png alt></figure><aside id=toc-container class="toc-container wide"><div class=toc><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#lvm aria-label=LVM>LVM</a><ul><li><a href=#lvm%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5 aria-label=LVM基本概念><code>LVM</code>基本概念</a></li><li><a href=#%e9%80%bb%e8%be%91%e5%8d%b7%e7%ae%a1%e7%90%86%e6%ad%a5%e9%aa%a4 aria-label=逻辑卷管理步骤>逻辑卷管理步骤</a><ul><li><a href=#lvm%e7%ae%a1%e7%90%86%e5%91%bd%e4%bb%a4 aria-label=LVM管理命令>LVM管理命令</a></li><li><a href=#%e5%ae%9e%e8%b7%b5%e6%93%8d%e4%bd%9c aria-label=实践操作>实践操作</a><ul><li><a href=#1%e5%88%9b%e5%bb%ba%e5%88%86%e5%8c%ba aria-label=1.创建分区>1.创建分区</a><ul><li><a href=#%e9%80%9a%e8%bf%87parted%e5%88%9b%e5%bb%balvm%e5%88%86%e5%8c%ba aria-label=通过parted创建lvm分区>通过parted创建lvm分区</a></li></ul></li><li><a href=#2%e5%88%9b%e5%bb%bapv aria-label=2.创建pv>2.创建pv</a></li><li><a href=#3%e5%88%9b%e5%bb%bavg aria-label=3.创建vg>3.创建vg</a><ul><li><a href=#%e6%89%a9%e5%b1%95%e5%8d%b7%e7%bb%84 aria-label=扩展卷组>扩展卷组</a></li></ul></li><li><a href=#4%e5%88%9b%e5%bb%ba%e9%80%bb%e8%be%91%e5%8d%b7 aria-label=4.创建逻辑卷>4.创建逻辑卷</a></li><li><a href=#5%e5%88%9b%e5%bb%ba%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f aria-label=5.创建文件系统>5.创建文件系统</a></li><li><a href=#6%e6%8c%82%e8%bd%bd aria-label=6.挂载>6.挂载</a></li></ul></li></ul></li></ul></li></ul></div></details></div></aside><script>let activeElement,elements;window.addEventListener("DOMContentLoaded",function(){checkTocPosition(),elements=document.querySelectorAll("h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]"),activeElement=elements[0];const t=encodeURI(activeElement.getAttribute("id")).toLowerCase();document.querySelector(`.inner ul li a[href="#${t}"]`).classList.add("active")},!1),window.addEventListener("resize",function(){checkTocPosition()},!1),window.addEventListener("scroll",()=>{activeElement=Array.from(elements).find(e=>{if(getOffsetTop(e)-window.pageYOffset>0&&getOffsetTop(e)-window.pageYOffset<window.innerHeight/2)return e})||activeElement,elements.forEach(e=>{const t=encodeURI(e.getAttribute("id")).toLowerCase();e===activeElement?document.querySelector(`.inner ul li a[href="#${t}"]`).classList.add("active"):document.querySelector(`.inner ul li a[href="#${t}"]`).classList.remove("active")})},!1);const main=parseInt(getComputedStyle(document.body).getPropertyValue("--article-width"),10),toc=parseInt(getComputedStyle(document.body).getPropertyValue("--toc-width"),10),gap=parseInt(getComputedStyle(document.body).getPropertyValue("--gap"),10);function checkTocPosition(){const e=document.body.scrollWidth;e-main-toc*2-gap*4>0?document.getElementById("toc-container").classList.add("wide"):document.getElementById("toc-container").classList.remove("wide")}function getOffsetTop(e){if(!e.getClientRects().length)return 0;let t=e.getBoundingClientRect(),n=e.ownerDocument.defaultView;return t.top+n.pageYOffset}</script><div class=post-content><h1 id=lvm>LVM<a hidden class=anchor aria-hidden=true href=#lvm>#</a></h1><p><code>LVM</code>(Logic Volume Manager)逻辑卷管理,是一种将一个或多个硬盘的分区在逻辑上的集合。</p><p><strong>传统文件系统</strong></p><ol><li>不同分区相互独立，分区空间和容易利用率不平衡。</li><li>当分区满时，扩容麻烦。需重建分区或使用符号链接的方式使用其他盘</li></ol><p><strong><code>LVM</code></strong></p><ol><li>硬盘的多个分区由<code>LVM</code>统一为卷管理，可以动态的加入或移走分区扩大或减少容量。</li><li>文件系统建立在逻辑卷上，可以动态改变大小</li><li>文件系统建立在<code>lvm</code>上可以跨分区使用。</li></ol><h2 id=lvm基本概念><code>LVM</code>基本概念<a hidden class=anchor aria-hidden=true href=#lvm基本概念>#</a></h2><ul><li><code>PV</code> (Physical Volume 物理卷) 可以是整个物理磁盘也可以是磁盘的某个分区</li><li><code>VG</code>(Volume Group 卷组) 建立在<code>pv</code>之上，是<code>pv</code>的组合</li><li><code>LV</code>(Logic Volume 逻辑卷) 类似物理分区，在逻辑卷上创建，可以动态进行扩展和缩小。</li><li><code>PE</code> (Physical Extent) 物理区域是物理卷中可用于分配的最小存储单元，物理区域可根据创建物理卷时指定。且确定后不能修改。<code>LVM</code>会在所有的<code>pv</code>上做格式化操作，将每个<code>pv</code>切成一块块空间，这一块块空间称之为<code>PE</code></li></ul><h2 id=逻辑卷管理步骤>逻辑卷管理步骤<a hidden class=anchor aria-hidden=true href=#逻辑卷管理步骤>#</a></h2><blockquote><p>创建顺序<code>pv->vg-lv</code></p></blockquote><h3 id=lvm管理命令>LVM管理命令<a hidden class=anchor aria-hidden=true href=#lvm管理命令>#</a></h3><table><thead><tr><th>功能</th><th>pv</th><th>vg</th><th>lv</th></tr></thead><tbody><tr><td>Scan</td><td>pvscan</td><td>vgscan</td><td>lvscan</td></tr><tr><td>Create</td><td>pvcreate</td><td>vgcreate</td><td>lvcreate</td></tr><tr><td>Display</td><td>pvdisplay</td><td>vgdisplay</td><td>lvdisplay</td></tr><tr><td>Remove</td><td>pvremove</td><td>vgremove</td><td>lvremove</td></tr><tr><td>Reduce</td><td></td><td>vgreduce</td><td>lvreduce</td></tr><tr><td>Extend</td><td></td><td>vgextend</td><td>lvextend</td></tr></tbody></table><h3 id=实践操作>实践操作<a hidden class=anchor aria-hidden=true href=#实践操作>#</a></h3><h4 id=1创建分区>1.创建分区<a hidden class=anchor aria-hidden=true href=#1创建分区>#</a></h4><p>通过<code>fdisk</code>或者parted命令创建**==<code>lvm</code>==**类型分区</p><p><img loading=lazy src=/vm/1732589576341.png alt=1732589576341></p><h5 id=通过parted创建lvm分区>通过parted创建lvm分区<a hidden class=anchor aria-hidden=true href=#通过parted创建lvm分区>#</a></h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#修改为lvm类型  </span>
+</span></span><span class=line><span class=cl>toggle <span class=o>[</span>分区号<span class=o>]</span> lvm
+</span></span></code></pre></td></tr></table></div></div><h4 id=2创建pv>2.创建pv<a hidden class=anchor aria-hidden=true href=#2创建pv>#</a></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 该命令会删除磁盘上的所有数据,默认生成的4MB的物理范围Pe</span>
+</span></span><span class=line><span class=cl>pvcreate /dev/sdb2
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=/vm/1732590948295.png alt=1732590948295></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#查看pv，pvs查看摘要，pvdisplay查看详细输出</span>
+</span></span><span class=line><span class=cl>pvs
+</span></span><span class=line><span class=cl>pvdisplay
+</span></span></code></pre></td></tr></table></div></div><h4 id=3创建vg>3.创建vg<a hidden class=anchor aria-hidden=true href=#3创建vg>#</a></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>vgcreate <span class=o>[</span>卷组名<span class=o>]</span> <span class=o>[</span>物理卷名<span class=o>]</span>
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=/vm/1732591254902.png alt=1732591254902></p><p>将<code>/dev/sdb2</code> 和<code>/dev/sdc1</code>两个<code>pv</code>组合成一个<code>vg</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#查看vg信息</span>
+</span></span><span class=line><span class=cl>vgs
+</span></span><span class=line><span class=cl>vgdisplay
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=/vm/1732591432279.png alt=1732591432279></p><h5 id=扩展卷组>扩展卷组<a hidden class=anchor aria-hidden=true href=#扩展卷组>#</a></h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>vgextend <span class=o>[</span>卷组名<span class=o>]</span> <span class=o>[</span>物理卷名<span class=o>]</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=4创建逻辑卷>4.创建逻辑卷<a hidden class=anchor aria-hidden=true href=#4创建逻辑卷>#</a></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>lvcreate –n <span class=o>[</span>逻辑卷名<span class=o>]</span> –L <span class=o>[</span>逻辑卷大小<span class=o>]</span> <span class=o>[</span>要创建的 LV 所在的卷组名称<span class=o>]</span>
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=/vm/1732591592919.png alt=1732591592919></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#用pe大小创建逻辑卷。默认pe为4mb，10Gb=2560pe</span>
+</span></span><span class=line><span class=cl><span class=nv>10GB</span> <span class=o>=</span> 10240MB / 4MB （PE 大小） <span class=o>=</span> <span class=m>2560</span> PE
+</span></span><span class=line><span class=cl><span class=c1>#则使用pe大小创建10gb的逻辑卷用如下命令</span>
+</span></span><span class=line><span class=cl>lvcreate -n lv001 -l <span class=m>2560</span> vg01
+</span></span></code></pre></td></tr></table></div></div><h4 id=5创建文件系统>5.创建文件系统<a hidden class=anchor aria-hidden=true href=#5创建文件系统>#</a></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># mkfs –t [文件系统类型] /dev/[LV 所在的卷组名称]/[LV 名称]</span>
+</span></span><span class=line><span class=cl>mkfs -t ext4 /dev/vg01/lv001
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=/vm/1732592056513.png alt=1732592056513></p><h4 id=6挂载>6.挂载<a hidden class=anchor aria-hidden=true href=#6挂载>#</a></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell></code></pre></td></tr></table></div></div><p><img loading=lazy src=/vm/1732592120283.png alt=1732592120283></p></div><footer class=post-footer><ul class=post-tags><li><a href=https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE1/>标签1</a></li><li><a href=https://slgjy.github.io/tags/%E6%A0%87%E7%AD%BE2/>标签2</a></li></ul><nav class=paginav><a class=next href=https://slgjy.github.io/linux/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/><span class=title>Next »</span><br><span>磁盘分区</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2024 <a href=https://slgjy.github.io/>小石头博客</a></span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
